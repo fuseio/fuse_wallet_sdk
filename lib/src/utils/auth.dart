@@ -6,7 +6,6 @@ import 'package:web3dart/crypto.dart';
 
 import 'package:charge_smart_wallets_sdk/src/models/auth/auth.dto.dart';
 
-
 class SmartWalletAuth {
   static AuthDto signer(EthPrivateKey credentials) {
     final String ownerAddress = credentials.address.hexEip55;

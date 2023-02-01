@@ -11,5 +11,6 @@ class AuthDto with _$AuthDto {
     required String hash,
   }) = _AuthDto;
 
-  factory AuthDto.fromJson(Map<String, dynamic> json) => _$AuthDtoFromJson(json);
+  factory AuthDto.fromJson(Map<String, dynamic> json) =>
+      _$AuthDtoFromJson(json);
 }

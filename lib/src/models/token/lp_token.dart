@@ -1,7 +1,6 @@
 import 'package:charge_smart_wallets_sdk/src/models/models.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
 part 'lp_token.freezed.dart';
 part 'lp_token.g.dart';
 
