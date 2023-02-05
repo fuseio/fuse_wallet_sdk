@@ -14,7 +14,7 @@ class Relay with _$Relay {
     @Default({}) Map<String, dynamic>? transactionBody,
     required String walletAddress,
     required String walletModuleAddress,
-    required String methodData,
+    required String data,
     required String nonce,
     required String methodName,
     required String signature,

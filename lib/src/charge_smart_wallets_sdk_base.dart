@@ -17,12 +17,26 @@ import 'package:charge_smart_wallets_sdk/src/utils/crypto.dart';
 import 'package:charge_smart_wallets_sdk/src/utils/format.dart';
 
 class SmartWalletsSDK {
+  /// The public API key used to access the Charge API.
   final String publicApiKey;
+
+  /// The smart wallet associated with the API key.
   late SmartWallet _smartWallet;
+
+  /// The JWT token returned after authentication.
   late String _jwtToken;
+
+  /// The Dio client used for API calls.
   final Dio _dio;
+
+  /// The Web3 client used for Ethereum related operations.
   final Web3Client web3client;
 
+  /// Constructs a new instance of [SmartWalletsSDK].
+  ///
+  /// [publicApiKey] is the public API key used to access the Charge API.
+  /// [baseUrl] is the base URL of the Charge API. Default value is taken from [Variables.CHARGE_API].
+  /// [rpcUrl] is the URL of the Ethereum JSON-RPC endpoint. Default value is taken from [Variables.FUSE_RPC_URL].
   SmartWalletsSDK(
     this.publicApiKey, {
     String baseUrl = Variables.CHARGE_API,
@@ -73,6 +87,16 @@ class SmartWalletsSDK {
         },
       );
 
+  /// This function authenticates the provided credentials by sending a request to the server.
+  ///
+  /// It takes in an [EthPrivateKey] as an argument and returns a [Future] that resolves to a [DC]
+  /// object with an [Exception] as the first type parameter and a [String] as the second type parameter.
+  ///
+  /// If the authentication process is successful, the [Future] will contain the JWT token returned by the
+  /// server, wrapped in a [DC.data] object.
+  ///
+  /// If an error occurs during the authentication process, the [Future] will contain an [Exception] object
+  /// wrapped in a [DC.error] object.
   Future<DC<Exception, String>> authenticate(EthPrivateKey credentials) async {
     try {
       final AuthDto auth = SmartWalletAuth.signer(credentials);
@@ -88,6 +112,9 @@ class SmartWalletsSDK {
     }
   }
 
+  /// This function is used to fetch the user's smart wallet details from the API.
+  ///
+  /// Returns a [DC] object that contains either the [SmartWallet] data or an [Exception] in case of an error.
   Future<DC<Exception, SmartWallet>> fetchWallet() async {
     try {
       final Response response = await _dio.get(
@@ -105,6 +132,14 @@ class SmartWalletsSDK {
     }
   }
 
+  /// This method is used to create a new smart wallet.
+  ///
+  /// If the response status code is `201`, it extracts the `transactionId` and `connectionUrl` from the response data.
+  /// Then, it creates a new `Socket` instance using the `io` function, with the specified options and a `onConnect` listener.
+  /// The `onConnect` listener is used to emit a `subscribe` event with the `transactionId`.
+  /// If everything goes well, the created `Socket` instance is returned as a `DC.data` value.
+  /// If the response status code is not `201`, the method returns a `DC.error` with an `Exception` instance with message `Failed to create wallet`.
+  /// If an error occurs while making the request, the method returns a `DC.error` with an `Exception` instance with the error message.
   Future<DC<Exception, Socket>> createWallet() async {
     try {
       final Response response = await _dio.post(
@@ -134,7 +169,7 @@ class SmartWalletsSDK {
       final Response response = await _dio.post(
         '/v1/smart-wallets/relay',
         options: options,
-        data: relay,
+        data: relay.toJson(),
       );
       if (response.statusCode == 201) {
         final String transactionId = response.data['transactionId'];
@@ -234,7 +269,7 @@ class SmartWalletsSDK {
     final EthereumAddress receiver = EthereumAddress.fromHex(receiverAddress);
     final BigInt id = BigInt.from(tokenId);
     final String walletModuleAddress = _smartWallet.walletModules.nftTransfer!;
-    final String methodData = ContractsHelper.getEncodedDataForContractCall(
+    final String data = ContractsHelper.getEncodedDataForContractCall(
       walletModule,
       _smartWallet.walletModules.nftTransfer!,
       methodName,
@@ -255,7 +290,7 @@ class SmartWalletsSDK {
       walletModuleAddress,
       walletAddress,
       BigInt.from(0),
-      methodData,
+      data,
       nonce,
       BigInt.from(0),
       BigInt.from(Variables.DEFAULT_GAS_LIMIT),
@@ -264,7 +299,7 @@ class SmartWalletsSDK {
     final Relay replayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
-      methodData: methodData,
+      data: data,
       nonce: nonce,
       methodName: methodName,
       signature: signature,
@@ -289,7 +324,7 @@ class SmartWalletsSDK {
     final EthereumAddress newModule =
         EthereumAddress.fromHex(enableModuleAddress);
 
-    String methodData = ContractsHelper.getEncodedDataForContractCall(
+    final String data = ContractsHelper.getEncodedDataForContractCall(
       disableModuleName,
       disableModuleAddress,
       methodName,
@@ -305,7 +340,7 @@ class SmartWalletsSDK {
       disableModuleAddress,
       _smartWallet.smartWalletAddress,
       BigInt.from(0),
-      methodData,
+      data,
       nonce,
       BigInt.from(0),
       BigInt.from(Variables.DEFAULT_GAS_LIMIT),
@@ -314,7 +349,7 @@ class SmartWalletsSDK {
     final Relay replayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
-      methodData: methodData,
+      data: data,
       nonce: nonce,
       methodName: methodName,
       signature: signature,
@@ -343,7 +378,7 @@ class SmartWalletsSDK {
     final BigInt amount =
         AmountFormat.toBigInt(value, tokenDetailsRes.data?.decimals ?? 18);
 
-    final String encodedData = ContractsHelper.getEncodedDataForContractCall(
+    final String data = ContractsHelper.getEncodedDataForContractCall(
       contractName,
       _smartWallet.walletModules.transferManager,
       methodName,
@@ -362,7 +397,7 @@ class SmartWalletsSDK {
       _smartWallet.walletModules.transferManager,
       _smartWallet.smartWalletAddress,
       BigInt.from(0),
-      encodedData,
+      data,
       nonce,
       BigInt.from(0),
       BigInt.from(Variables.DEFAULT_GAS_LIMIT),
@@ -385,7 +420,7 @@ class SmartWalletsSDK {
     final Relay replayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
-      methodData: encodedData,
+      data: data,
       nonce: nonce,
       methodName: methodName,
       signature: signature,
@@ -419,7 +454,7 @@ class SmartWalletsSDK {
     final BigInt amount =
         AmountFormat.toBigInt(value, tokenDetailsRes.data?.decimals ?? 18);
 
-    final String encodedData = ContractsHelper.getEncodedDataForContractCall(
+    final String data = ContractsHelper.getEncodedDataForContractCall(
       contractName,
       _smartWallet.walletModules.transferManager,
       methodName,
@@ -438,7 +473,7 @@ class SmartWalletsSDK {
       _smartWallet.walletModules.transferManager,
       _smartWallet.smartWalletAddress,
       BigInt.from(0),
-      encodedData,
+      data,
       nonce,
       BigInt.from(0),
       BigInt.from(Variables.DEFAULT_GAS_LIMIT),
@@ -447,7 +482,7 @@ class SmartWalletsSDK {
     final Relay relayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
-      methodData: encodedData,
+      data: data,
       nonce: nonce,
       methodName: methodName,
       signature: signature,
@@ -477,7 +512,7 @@ class SmartWalletsSDK {
             18,
           )
         : BigInt.zero;
-    String encodedData = ContractsHelper.getEncodedDataForContractCall(
+    final String _data = ContractsHelper.getEncodedDataForContractCall(
       contractName,
       _smartWallet.walletModules.transferManager,
       methodName,
@@ -496,7 +531,7 @@ class SmartWalletsSDK {
       _smartWallet.walletModules.transferManager,
       _smartWallet.smartWalletAddress,
       BigInt.from(0),
-      encodedData,
+      data,
       nonce,
       BigInt.from(0),
       BigInt.from(Variables.DEFAULT_GAS_LIMIT),
@@ -505,7 +540,7 @@ class SmartWalletsSDK {
     final Relay relayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
-      methodData: encodedData,
+      data: _data,
       nonce: nonce,
       methodName: methodName,
       signature: signature,
@@ -536,7 +571,7 @@ class SmartWalletsSDK {
 
     final BigInt amount =
         AmountFormat.toBigInt(value, tokenDetailsRes.data?.decimals ?? 18);
-    final String encodedData = ContractsHelper.getEncodedDataForContractCall(
+    final String _data = ContractsHelper.getEncodedDataForContractCall(
       contractName,
       _smartWallet.walletModules.transferManager,
       methodName,
@@ -556,7 +591,7 @@ class SmartWalletsSDK {
       _smartWallet.walletModules.transferManager,
       _smartWallet.smartWalletAddress,
       BigInt.from(0),
-      encodedData,
+      _data,
       nonce,
       BigInt.from(0),
       BigInt.from(Variables.DEFAULT_GAS_LIMIT),
@@ -564,7 +599,7 @@ class SmartWalletsSDK {
     final Relay relayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
-      methodData: encodedData,
+      data: _data,
       nonce: nonce,
       methodName: methodName,
       signature: signature,
@@ -585,7 +620,7 @@ class SmartWalletsSDK {
       swapRequestBody,
     );
 
-    String swapData = swapCallParameters.data?.rawTxn['data'].replaceFirst(
+    final String data = swapCallParameters.data?.rawTxn['data'].replaceFirst(
       '0x',
       '',
     );
@@ -594,14 +629,14 @@ class SmartWalletsSDK {
       return callContract(
         cred,
         swapCallParameters.data!.rawTxn['to'],
-        swapData,
+        data,
       );
     } else {
       return approveTokenAndCallContract(
         cred,
         swapRequestBody.currencyIn,
         swapCallParameters.data?.rawTxn['to'],
-        swapData,
+        data,
         BigInt.parse(swapCallParameters.data?.args.first).toString(),
       );
     }
@@ -629,14 +664,16 @@ class SmartWalletsSDK {
     final BigInt amount =
         AmountFormat.toBigInt(value, tokenDetailsRes.data?.decimals ?? 18);
 
+    final String data = response.data!.encodedABI.replaceFirst(
+      '0x',
+      '',
+    );
+
     return approveTokenAndCallContract(
       cred,
       tokenAddress,
       response.data!.contractAddress,
-      response.data!.encodedABI.replaceFirst(
-        '0x',
-        '',
-      ),
+      data,
       amount.toString(),
     );
   }
@@ -667,15 +704,16 @@ class SmartWalletsSDK {
       "from": _smartWallet.smartWalletAddress,
       'value': amount.toString(),
     };
+    final String data = response.data!.encodedABI.replaceFirst(
+      '0x',
+      '',
+    );
 
     return approveTokenAndCallContract(
       cred,
       tokenAddress,
       response.data!.contractAddress,
-      response.data!.encodedABI.replaceFirst(
-        '0x',
-        '',
-      ),
+      data,
       amount.toString(),
       transactionBody: transactionBody,
     );

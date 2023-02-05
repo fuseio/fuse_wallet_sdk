@@ -29,7 +29,7 @@ mixin _$Relay {
       throw _privateConstructorUsedError;
   String get walletAddress => throw _privateConstructorUsedError;
   String get walletModuleAddress => throw _privateConstructorUsedError;
-  String get methodData => throw _privateConstructorUsedError;
+  String get data => throw _privateConstructorUsedError;
   String get nonce => throw _privateConstructorUsedError;
   String get methodName => throw _privateConstructorUsedError;
   String get signature => throw _privateConstructorUsedError;
@@ -55,7 +55,7 @@ abstract class $RelayCopyWith<$Res> {
       Map<String, dynamic>? transactionBody,
       String walletAddress,
       String walletModuleAddress,
-      String methodData,
+      String data,
       String nonce,
       String methodName,
       String signature,
@@ -84,7 +84,7 @@ class _$RelayCopyWithImpl<$Res, $Val extends Relay>
     Object? transactionBody = freezed,
     Object? walletAddress = null,
     Object? walletModuleAddress = null,
-    Object? methodData = null,
+    Object? data = null,
     Object? nonce = null,
     Object? methodName = null,
     Object? signature = null,
@@ -124,9 +124,9 @@ class _$RelayCopyWithImpl<$Res, $Val extends Relay>
           ? _value.walletModuleAddress
           : walletModuleAddress // ignore: cast_nullable_to_non_nullable
               as String,
-      methodData: null == methodData
-          ? _value.methodData
-          : methodData // ignore: cast_nullable_to_non_nullable
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
               as String,
       nonce: null == nonce
           ? _value.nonce
@@ -167,7 +167,7 @@ abstract class _$$_RelayCopyWith<$Res> implements $RelayCopyWith<$Res> {
       Map<String, dynamic>? transactionBody,
       String walletAddress,
       String walletModuleAddress,
-      String methodData,
+      String data,
       String nonce,
       String methodName,
       String signature,
@@ -192,7 +192,7 @@ class __$$_RelayCopyWithImpl<$Res> extends _$RelayCopyWithImpl<$Res, _$_Relay>
     Object? transactionBody = freezed,
     Object? walletAddress = null,
     Object? walletModuleAddress = null,
-    Object? methodData = null,
+    Object? data = null,
     Object? nonce = null,
     Object? methodName = null,
     Object? signature = null,
@@ -232,9 +232,9 @@ class __$$_RelayCopyWithImpl<$Res> extends _$RelayCopyWithImpl<$Res, _$_Relay>
           ? _value.walletModuleAddress
           : walletModuleAddress // ignore: cast_nullable_to_non_nullable
               as String,
-      methodData: null == methodData
-          ? _value.methodData
-          : methodData // ignore: cast_nullable_to_non_nullable
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
               as String,
       nonce: null == nonce
           ? _value.nonce
@@ -272,7 +272,7 @@ class _$_Relay implements _Relay {
       this.transactionBody = const {},
       required this.walletAddress,
       required this.walletModuleAddress,
-      required this.methodData,
+      required this.data,
       required this.nonce,
       required this.methodName,
       required this.signature,
@@ -303,7 +303,7 @@ class _$_Relay implements _Relay {
   @override
   final String walletModuleAddress;
   @override
-  final String methodData;
+  final String data;
   @override
   final String nonce;
   @override
@@ -317,7 +317,7 @@ class _$_Relay implements _Relay {
 
   @override
   String toString() {
-    return 'Relay(network: $network, gasPrice: $gasPrice, gasLimit: $gasLimit, relayBody: $relayBody, txMetadata: $txMetadata, transactionBody: $transactionBody, walletAddress: $walletAddress, walletModuleAddress: $walletModuleAddress, methodData: $methodData, nonce: $nonce, methodName: $methodName, signature: $signature, walletModule: $walletModule, externalId: $externalId)';
+    return 'Relay(network: $network, gasPrice: $gasPrice, gasLimit: $gasLimit, relayBody: $relayBody, txMetadata: $txMetadata, transactionBody: $transactionBody, walletAddress: $walletAddress, walletModuleAddress: $walletModuleAddress, data: $data, nonce: $nonce, methodName: $methodName, signature: $signature, walletModule: $walletModule, externalId: $externalId)';
   }
 
   @override
@@ -339,8 +339,7 @@ class _$_Relay implements _Relay {
                 other.walletAddress == walletAddress) &&
             (identical(other.walletModuleAddress, walletModuleAddress) ||
                 other.walletModuleAddress == walletModuleAddress) &&
-            (identical(other.methodData, methodData) ||
-                other.methodData == methodData) &&
+            (identical(other.data, data) || other.data == data) &&
             (identical(other.nonce, nonce) || other.nonce == nonce) &&
             (identical(other.methodName, methodName) ||
                 other.methodName == methodName) &&
@@ -364,7 +363,7 @@ class _$_Relay implements _Relay {
       const DeepCollectionEquality().hash(transactionBody),
       walletAddress,
       walletModuleAddress,
-      methodData,
+      data,
       nonce,
       methodName,
       signature,
@@ -395,7 +394,7 @@ abstract class _Relay implements Relay {
       final Map<String, dynamic>? transactionBody,
       required final String walletAddress,
       required final String walletModuleAddress,
-      required final String methodData,
+      required final String data,
       required final String nonce,
       required final String methodName,
       required final String signature,
@@ -421,7 +420,7 @@ abstract class _Relay implements Relay {
   @override
   String get walletModuleAddress;
   @override
-  String get methodData;
+  String get data;
   @override
   String get nonce;
   @override
