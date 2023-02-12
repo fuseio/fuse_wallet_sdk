@@ -234,6 +234,7 @@ class SmartWalletsSDK {
               break;
           }
         });
+        await webSocket.connect();
         return DC.data(true);
       }
       return DC.error(Exception('Failed to relay'));
