@@ -1,8 +1,10 @@
+import 'dart:convert';
+
+import 'package:centrifuge/centrifuge.dart' as centrifuge;
 import 'package:data_channel/data_channel.dart';
 import 'package:dio/dio.dart';
 import 'package:hex/hex.dart';
 import 'package:http/http.dart' show Client;
-import 'package:socket_io_client/socket_io_client.dart';
 import 'package:web3dart/crypto.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -75,10 +77,11 @@ class SmartWalletsSDK {
     final BigInt timestamp = BigInt.from(DateTime.now().millisecondsSinceEpoch);
     final String blockHex = hexZeroPad(hexlify(block), 16);
     final String timestampHex = hexZeroPad(hexlify(timestamp), 16);
-    return '0x${blockHex.substring(2, blockHex.length)}${timestampHex.substring(
-      2,
-      timestampHex.length,
-    )}';
+
+    final String combinedHex =
+        '${blockHex.substring(2, blockHex.length)}${timestampHex.substring(2, timestampHex.length)}';
+
+    return '0x$combinedHex';
   }
 
   Options get options => Options(
@@ -132,15 +135,21 @@ class SmartWalletsSDK {
     }
   }
 
-  /// This method is used to create a new smart wallet.
+  /// This function attempts to create a new wallet by performing a POST request to an endpoint and listening for events associated with creating a wallet.
+  /// The optional parameter functions provided allow for custom logic to be executed on different event types (e.g., onStarted, onSucceeded, onFailed).
+  /// It returns a DC instance with either the result of a successful creation or an Exception if the operation fails.
+  /// This function is used to create a smart wallet by sending a POST request to the server.
+  /// The function returns a [DC] of [Exception] and [bool] which indicates the success of the wallet creation process.
   ///
-  /// If the response status code is `201`, it extracts the `transactionId` and `connectionUrl` from the response data.
-  /// Then, it creates a new `Socket` instance using the `io` function, with the specified options and a `onConnect` listener.
-  /// The `onConnect` listener is used to emit a `subscribe` event with the `transactionId`.
-  /// If everything goes well, the created `Socket` instance is returned as a `DC.data` value.
-  /// If the response status code is not `201`, the method returns a `DC.error` with an `Exception` instance with message `Failed to create wallet`.
-  /// If an error occurs while making the request, the method returns a `DC.error` with an `Exception` instance with the error message.
-  Future<DC<Exception, Socket>> createWallet() async {
+  /// The following callbacks can be provided to listen to specific events during the wallet creation process:
+  /// * [onStarted] is called when the smart wallet creation process starts.
+  /// * [onSucceeded] is called when the smart wallet creation process succeeds.
+  /// * [onFailed] is called when the smart wallet creation process fails.
+  Future<DC<Exception, bool>> createWallet({
+    Function(Map<String, dynamic> eventData)? onStarted,
+    Function(Map<String, dynamic> eventData)? onSucceeded,
+    Function(Map<String, dynamic> eventData)? onFailed,
+  }) async {
     try {
       final Response response = await _dio.post(
         '/v1/smart-wallets/create',
@@ -149,14 +158,34 @@ class SmartWalletsSDK {
       if (response.statusCode == 201) {
         final String transactionId = response.data['transactionId'];
         final String connectionUrl = response.data['connectionUrl'];
-        Socket socket = io(connectionUrl, <String, dynamic>{
-          "transports": ['websocket'],
-          "upgrade": false
+        final centrifuge.Client webSocket = centrifuge.createClient(
+          connectionUrl,
+          centrifuge.ClientConfig(
+            name: _smartWallet.ownerAddress,
+            token: _jwtToken,
+            headers: <String, dynamic>{'X-Example-Header': 'example'},
+          ),
+        );
+        final centrifuge.Subscription subscription = webSocket.newSubscription(
+          'transaction:#$transactionId',
+        );
+        subscription.publication.listen((event) {
+          final map = utf8.decode(event.data, allowMalformed: true);
+          final Map data = jsonDecode(map);
+          switch (data['eventName']) {
+            case 'smartWalletCreationStarted':
+              onStarted?.call(data['eventData']);
+              break;
+            case 'smartWalletCreationSucceeded':
+              onSucceeded?.call(data['eventData']);
+              break;
+            case 'smartWalletCreationFailed':
+              onFailed?.call(data['eventData']);
+              break;
+          }
         });
-        socket.onConnect((_) {
-          socket.emit('subscribe', transactionId);
-        });
-        return DC.data(socket);
+        await webSocket.connect();
+        return DC.data(true);
       }
       return DC.error(Exception('Failed to create wallet'));
     } catch (e) {
@@ -164,7 +193,12 @@ class SmartWalletsSDK {
     }
   }
 
-  Future<DC<Exception, Socket>> relay(Relay relay) async {
+  Future<DC<Exception, bool>> relay(
+    Relay relay, {
+    Function(Map<String, dynamic> eventData)? onTransactionStarted,
+    Function(Map<String, dynamic> eventData)? onTransactionSucceeded,
+    Function(Map<String, dynamic> eventData)? onTransactionFailed,
+  }) async {
     try {
       final Response response = await _dio.post(
         '/v1/smart-wallets/relay',
@@ -174,14 +208,33 @@ class SmartWalletsSDK {
       if (response.statusCode == 201) {
         final String transactionId = response.data['transactionId'];
         final String connectionUrl = response.data['connectionUrl'];
-        Socket socket = io(connectionUrl, <String, dynamic>{
-          "transports": ['websocket'],
-          "upgrade": false
+        final centrifuge.Client webSocket = centrifuge.createClient(
+          connectionUrl,
+          centrifuge.ClientConfig(
+            name: _smartWallet.ownerAddress,
+            token: _jwtToken,
+            headers: <String, dynamic>{'X-Example-Header': 'example'},
+          ),
+        );
+        final centrifuge.Subscription subscription = webSocket.newSubscription(
+          'transaction:#$transactionId',
+        );
+        subscription.publication.listen((event) {
+          final map = utf8.decode(event.data, allowMalformed: true);
+          final Map data = jsonDecode(map);
+          switch (data['eventName']) {
+            case 'transactionStarted':
+              onTransactionStarted?.call(data['eventData']);
+              break;
+            case 'transactionSucceeded':
+              onTransactionSucceeded?.call(data['eventData']);
+              break;
+            case 'transactionFailed':
+              onTransactionFailed?.call(data['eventData']);
+              break;
+          }
         });
-        socket.onConnect((_) {
-          socket.emit('subscribe', transactionId);
-        });
-        return DC.data(socket);
+        return DC.data(true);
       }
       return DC.error(Exception('Failed to relay'));
     } catch (e) {
@@ -189,7 +242,7 @@ class SmartWalletsSDK {
     }
   }
 
-  Future<DC<Exception, Socket>> encodeDataAndApproveTokenAndCallContract(
+  Future<DC<Exception, bool>> encodeDataAndApproveTokenAndCallContract(
     EthPrivateKey cred,
     String jsonInterface,
     String contractAddress,
@@ -217,7 +270,7 @@ class SmartWalletsSDK {
     );
   }
 
-  Future<DC<Exception, Socket>> encodeDataAndCallContract(
+  Future<DC<Exception, bool>> encodeDataAndCallContract(
     EthPrivateKey cred,
     String jsonInterface,
     String contractAddress,
@@ -245,7 +298,7 @@ class SmartWalletsSDK {
     );
   }
 
-  Future<DC<Exception, Socket>> nftTransfer(
+  Future<DC<Exception, bool>> nftTransfer(
     EthPrivateKey cred,
     String walletAddress,
     String contractAddress,
@@ -253,6 +306,9 @@ class SmartWalletsSDK {
     num tokenId, {
     bool? safe = false,
     Map<String, dynamic>? transactionBody = const {},
+    Function(Map<String, dynamic> eventData)? onTransactionStarted,
+    Function(Map<String, dynamic> eventData)? onTransactionSucceeded,
+    Function(Map<String, dynamic> eventData)? onTransactionFailed,
   }) async {
     final Map<String, dynamic> txBody = Map.from({
       "from": walletAddress,
@@ -296,7 +352,7 @@ class SmartWalletsSDK {
       BigInt.from(Variables.DEFAULT_GAS_LIMIT),
     );
 
-    final Relay replayDto = Relay(
+    final Relay relayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
       data: data,
@@ -307,16 +363,24 @@ class SmartWalletsSDK {
       transactionBody: txBody,
     );
 
-    return relay(replayDto);
+    return relay(
+      relayDto,
+      onTransactionStarted: onTransactionStarted,
+      onTransactionSucceeded: onTransactionSucceeded,
+      onTransactionFailed: onTransactionFailed,
+    );
   }
 
-  Future<DC<Exception, Socket>> addModule(
+  Future<DC<Exception, bool>> addModule(
     EthPrivateKey cred,
     String disableModuleName,
     String disableModuleAddress,
     String enableModuleAddress, {
     String methodName = 'addModule',
     Map<String, dynamic>? transactionBody,
+    Function(Map<String, dynamic> eventData)? onTransactionStarted,
+    Function(Map<String, dynamic> eventData)? onTransactionSucceeded,
+    Function(Map<String, dynamic> eventData)? onTransactionFailed,
   }) async {
     final EthereumAddress wallet = EthereumAddress.fromHex(
       _smartWallet.smartWalletAddress,
@@ -346,7 +410,7 @@ class SmartWalletsSDK {
       BigInt.from(Variables.DEFAULT_GAS_LIMIT),
     );
 
-    final Relay replayDto = Relay(
+    final Relay relayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
       data: data,
@@ -357,15 +421,23 @@ class SmartWalletsSDK {
       transactionBody: transactionBody,
     );
 
-    return relay(replayDto);
+    return relay(
+      relayDto,
+      onTransactionStarted: onTransactionStarted,
+      onTransactionSucceeded: onTransactionSucceeded,
+      onTransactionFailed: onTransactionFailed,
+    );
   }
 
-  Future<DC<Exception, Socket>> transfer(
+  Future<DC<Exception, bool>> transfer(
     EthPrivateKey cred,
     String tokenAddress,
     String receiverAddress,
     String value, {
     Map<String, dynamic>? transactionBody,
+    Function(Map<String, dynamic> eventData)? onTransactionStarted,
+    Function(Map<String, dynamic> eventData)? onTransactionSucceeded,
+    Function(Map<String, dynamic> eventData)? onTransactionFailed,
   }) async {
     final String contractName = 'TransferManager';
     final String methodName = 'transferToken';
@@ -417,7 +489,7 @@ class SmartWalletsSDK {
       ...?transactionBody,
     });
 
-    final Relay replayDto = Relay(
+    final Relay relayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
       data: data,
@@ -428,10 +500,15 @@ class SmartWalletsSDK {
       transactionBody: txBody,
     );
 
-    return relay(replayDto);
+    return relay(
+      relayDto,
+      onTransactionStarted: onTransactionStarted,
+      onTransactionSucceeded: onTransactionSucceeded,
+      onTransactionFailed: onTransactionFailed,
+    );
   }
 
-  Future<DC<Exception, Socket>> approveToken(
+  Future<DC<Exception, bool>> approveToken(
     EthPrivateKey cred,
     String tokenAddress,
     int tokenDecimals,
@@ -439,6 +516,9 @@ class SmartWalletsSDK {
     String? spenderContract,
     Map<String, dynamic>? transactionBody,
     Map<String, dynamic>? txMetadata,
+    Function(Map<String, dynamic> eventData)? onTransactionStarted,
+    Function(Map<String, dynamic> eventData)? onTransactionSucceeded,
+    Function(Map<String, dynamic> eventData)? onTransactionFailed,
   }) async {
     final String contractName = 'TransferManager';
     final String methodName = 'approveToken';
@@ -491,15 +571,23 @@ class SmartWalletsSDK {
       txMetadata: txMetadata,
     );
 
-    return relay(relayDto);
+    return relay(
+      relayDto,
+      onTransactionStarted: onTransactionStarted,
+      onTransactionSucceeded: onTransactionSucceeded,
+      onTransactionFailed: onTransactionFailed,
+    );
   }
 
-  Future<DC<Exception, Socket>> callContract(
+  Future<DC<Exception, bool>> callContract(
     EthPrivateKey cred,
     String contractAddress,
     String data, {
     String? value,
     Map<String, dynamic>? transactionBody,
+    Function(Map<String, dynamic> eventData)? onTransactionStarted,
+    Function(Map<String, dynamic> eventData)? onTransactionSucceeded,
+    Function(Map<String, dynamic> eventData)? onTransactionFailed,
   }) async {
     final String contractName = 'TransferManager';
     final String methodName = 'callContract';
@@ -512,7 +600,7 @@ class SmartWalletsSDK {
             18,
           )
         : BigInt.zero;
-    final String _data = ContractsHelper.getEncodedDataForContractCall(
+    final String encodedData = ContractsHelper.getEncodedDataForContractCall(
       contractName,
       _smartWallet.walletModules.transferManager,
       methodName,
@@ -540,7 +628,7 @@ class SmartWalletsSDK {
     final Relay relayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
-      data: _data,
+      data: encodedData,
       nonce: nonce,
       methodName: methodName,
       signature: signature,
@@ -548,10 +636,15 @@ class SmartWalletsSDK {
       transactionBody: transactionBody,
     );
 
-    return relay(relayDto);
+    return relay(
+      relayDto,
+      onTransactionStarted: onTransactionStarted,
+      onTransactionSucceeded: onTransactionSucceeded,
+      onTransactionFailed: onTransactionFailed,
+    );
   }
 
-  Future<DC<Exception, Socket>> approveTokenAndCallContract(
+  Future<DC<Exception, bool>> approveTokenAndCallContract(
     EthPrivateKey cred,
     String tokenAddress,
     String contractAddress,
@@ -559,6 +652,9 @@ class SmartWalletsSDK {
     String data, {
     Map<String, dynamic>? transactionBody,
     Map<String, dynamic>? txMetadata,
+    Function(Map<String, dynamic> eventData)? onTransactionStarted,
+    Function(Map<String, dynamic> eventData)? onTransactionSucceeded,
+    Function(Map<String, dynamic> eventData)? onTransactionFailed,
   }) async {
     final String contractName = 'TransferManager';
     final String methodName = 'approveTokenAndCallContract';
@@ -571,7 +667,7 @@ class SmartWalletsSDK {
 
     final BigInt amount =
         AmountFormat.toBigInt(value, tokenDetailsRes.data?.decimals ?? 18);
-    final String _data = ContractsHelper.getEncodedDataForContractCall(
+    final String encodedData = ContractsHelper.getEncodedDataForContractCall(
       contractName,
       _smartWallet.walletModules.transferManager,
       methodName,
@@ -591,7 +687,7 @@ class SmartWalletsSDK {
       _smartWallet.walletModules.transferManager,
       _smartWallet.smartWalletAddress,
       BigInt.from(0),
-      _data,
+      encodedData,
       nonce,
       BigInt.from(0),
       BigInt.from(Variables.DEFAULT_GAS_LIMIT),
@@ -599,7 +695,7 @@ class SmartWalletsSDK {
     final Relay relayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
-      data: _data,
+      data: encodedData,
       nonce: nonce,
       methodName: methodName,
       signature: signature,
@@ -608,13 +704,21 @@ class SmartWalletsSDK {
       txMetadata: txMetadata,
     );
 
-    return relay(relayDto);
+    return relay(
+      relayDto,
+      onTransactionStarted: onTransactionStarted,
+      onTransactionSucceeded: onTransactionSucceeded,
+      onTransactionFailed: onTransactionFailed,
+    );
   }
 
-  Future<DC<Exception, Socket>> swapTokens(
+  Future<DC<Exception, bool>> swapTokens(
     EthPrivateKey cred,
-    TradeRequestBody swapRequestBody,
-  ) async {
+    TradeRequestBody swapRequestBody, {
+    Function(Map<String, dynamic> eventData)? onTransactionStarted,
+    Function(Map<String, dynamic> eventData)? onTransactionSucceeded,
+    Function(Map<String, dynamic> eventData)? onTransactionFailed,
+  }) async {
     DC<Exception, TradeCallParameters> swapCallParameters =
         await _tradeSection.requestParameters(
       swapRequestBody,
@@ -630,6 +734,9 @@ class SmartWalletsSDK {
         cred,
         swapCallParameters.data!.rawTxn['to'],
         data,
+        onTransactionStarted: onTransactionStarted,
+        onTransactionSucceeded: onTransactionSucceeded,
+        onTransactionFailed: onTransactionFailed,
       );
     } else {
       return approveTokenAndCallContract(
@@ -638,15 +745,21 @@ class SmartWalletsSDK {
         swapCallParameters.data?.rawTxn['to'],
         data,
         BigInt.parse(swapCallParameters.data?.args.first).toString(),
+        onTransactionStarted: onTransactionStarted,
+        onTransactionSucceeded: onTransactionSucceeded,
+        onTransactionFailed: onTransactionFailed,
       );
     }
   }
 
-  Future<DC<Exception, Socket>> stakeToken(
+  Future<DC<Exception, bool>> stakeToken(
     EthPrivateKey cred,
     String tokenAddress,
-    String value,
-  ) async {
+    String value, {
+    Function(Map<String, dynamic> eventData)? onTransactionStarted,
+    Function(Map<String, dynamic> eventData)? onTransactionSucceeded,
+    Function(Map<String, dynamic> eventData)? onTransactionFailed,
+  }) async {
     final DC<Exception, StakeResponseBody> response =
         await _stakingSection.stake(
       StakeRequestBody(
@@ -675,14 +788,20 @@ class SmartWalletsSDK {
       response.data!.contractAddress,
       data,
       amount.toString(),
+      onTransactionStarted: onTransactionStarted,
+      onTransactionSucceeded: onTransactionSucceeded,
+      onTransactionFailed: onTransactionFailed,
     );
   }
 
-  Future<DC<Exception, Socket>> unstakeToken(
+  Future<DC<Exception, bool>> unstakeToken(
     EthPrivateKey cred,
     String tokenAddress,
-    String value,
-  ) async {
+    String value, {
+    Function(Map<String, dynamic> eventData)? onTransactionStarted,
+    Function(Map<String, dynamic> eventData)? onTransactionSucceeded,
+    Function(Map<String, dynamic> eventData)? onTransactionFailed,
+  }) async {
     final DC<Exception, UnstakeResponseBody> response =
         await _stakingSection.unstake(
       UnstakeRequestBody(
@@ -716,6 +835,9 @@ class SmartWalletsSDK {
       data,
       amount.toString(),
       transactionBody: transactionBody,
+      onTransactionStarted: onTransactionStarted,
+      onTransactionSucceeded: onTransactionSucceeded,
+      onTransactionFailed: onTransactionFailed,
     );
   }
 }
