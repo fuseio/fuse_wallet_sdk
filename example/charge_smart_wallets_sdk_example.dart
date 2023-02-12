@@ -31,16 +31,18 @@ void main() async {
         tokenAddress,
         receiverAddress,
         '0.001',
-        onTransactionStarted: (eventData) {
-          print('onTransactionStarted ${eventData.toString()}');
-        },
-        onTransactionSucceeded: (eventData) {
-          print('onTransactionSucceeded ${eventData.toString()}');
-        },
-        onTransactionFailed: (eventData) {
-          print('onTransactionFailed ${eventData.toString()}');
-        },
       );
+      smartWalletsSDK.on('transactionStarted', (eventData) {
+        print('transactionStarted ${eventData.toString()}');
+      });
+      smartWalletsSDK.on('transactionSucceeded', (eventData) {
+        print('transactionSucceeded ${eventData.toString()}');
+        exit(1);
+      });
+      smartWalletsSDK.on('transactionFailed', (eventData) {
+        print('transactionFailed ${eventData.toString()}');
+        exit(1);
+      });
     }
   }
 
@@ -50,18 +52,19 @@ void main() async {
   if (authRes.hasError) {
     print(authRes.error);
   } else {
-    final DC<Exception, bool> response = await smartWalletsSDK.createWallet(
-      onStarted: (eventData) {
-        print('onStarted ${eventData.toString()}');
-      },
-      onSucceeded: (eventData) {
-        print('onSucceeded ${eventData.toString()}');
-        fetchWallet(smartWalletsSDK);
-      },
-      onFailed: (eventData) {
-        print('onFailed ${eventData.toString()}');
-      },
-    );
+    final DC<Exception, bool> response = await smartWalletsSDK.createWallet();
+    smartWalletsSDK.on('smartWalletCreationStarted', (eventData) {
+      print('onStarted ${eventData.toString()}');
+    });
+    smartWalletsSDK.on('smartWalletCreationSucceeded', (eventData) {
+      print('smartWalletCreationSucceeded ${eventData.toString()}');
+      fetchWallet(smartWalletsSDK);
+      exit(1);
+    });
+    smartWalletsSDK.on('smartWalletCreationFailed', (eventData) {
+      print('smartWalletCreationFailed ${eventData.toString()}');
+      exit(1);
+    });
     if (response.hasError) {
       print('Wallet probably already created, trying to fetch it.');
       fetchWallet(smartWalletsSDK);
