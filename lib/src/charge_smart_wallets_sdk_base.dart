@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:centrifuge/centrifuge.dart' as centrifuge;
+import 'package:charge_smart_wallets_sdk/src/utils/jwt.dart';
 import 'package:data_channel/data_channel.dart';
 import 'package:dio/dio.dart';
 import 'package:events_emitter/emitters/event_emitter.dart';
@@ -78,14 +79,26 @@ class SmartWalletsSDK extends EventEmitter {
 
   _initWebsocket() async {
     try {
+      final Map<String, dynamic> data = JwtParser().parseJwt(_jwtToken);
       socketClient = centrifuge.createClient(
         Variables.SOCKET_SERVER_URL,
         centrifuge.ClientConfig(
-          name: _smartWallet.ownerAddress,
+          name: data['sub'],
           token: _jwtToken,
           headers: <String, dynamic>{'X-Example-Header': 'example'},
         ),
       );
+      socketClient.publication.listen((
+        centrifuge.ServerPublicationEvent event,
+      ) {
+        final Map data = jsonDecode(
+          utf8.decode(
+            event.data,
+            allowMalformed: true,
+          ),
+        );
+        emit(data['eventName'], data['eventData']);
+      });
       await socketClient.connect();
     } catch (e) {}
   }
@@ -127,6 +140,7 @@ class SmartWalletsSDK extends EventEmitter {
       );
       final String jwt = response.data['jwt'];
       jwtToken = jwt;
+      _initWebsocket();
       return DC.data(jwt);
     } catch (e) {
       return DC.error(Exception(e.toString()));
@@ -147,18 +161,13 @@ class SmartWalletsSDK extends EventEmitter {
       }
       final SmartWallet account = SmartWallet.fromJson(response.data);
       smartWallet = account;
-      _initWebsocket();
       return DC.data(account);
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
   }
 
-  /// This function attempts to create a new wallet by performing a POST request to an endpoint and listening for events associated with creating a wallet.
-  /// The optional parameter functions provided allow for custom logic to be executed on different event types (e.g., onStarted, onSucceeded, onFailed).
-  /// It returns a DC instance with either the result of a successful creation or an Exception if the operation fails.
-  /// This function is used to create a smart wallet by sending a POST request to the server.
-  /// The function returns a [DC] of [Exception] and [bool] which indicates the success of the wallet creation process.
+  /// This method is used to create a new smart wallet.
   Future<DC<Exception, bool>> createWallet() async {
     try {
       final Response response = await _dio.post(
@@ -166,15 +175,6 @@ class SmartWalletsSDK extends EventEmitter {
         options: options,
       );
       if (response.statusCode == 201) {
-        final String transactionId = response.data['transactionId'];
-        final centrifuge.Subscription subscription =
-            socketClient.newSubscription(
-          'transaction:#$transactionId',
-        );
-        subscription.publication.listen((event) {
-          final Map data = jsonDecode(utf8.decode(event.data));
-          emit(data['eventName'], data['eventData']);
-        });
         return DC.data(true);
       }
       return DC.error(Exception('Failed to create wallet'));
@@ -191,15 +191,6 @@ class SmartWalletsSDK extends EventEmitter {
         data: relay.toJson(),
       );
       if (response.statusCode == 201) {
-        final String transactionId = response.data['transactionId'];
-        final centrifuge.Subscription subscription =
-            socketClient.newSubscription(
-          'transaction:#$transactionId',
-        );
-        subscription.publication.listen((event) {
-          final Map data = jsonDecode(utf8.decode(event.data));
-          emit(data['eventName'], data['eventData']);
-        });
         return DC.data(true);
       }
       return DC.error(Exception('Failed to relay'));
