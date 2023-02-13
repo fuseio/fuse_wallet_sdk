@@ -24,30 +24,30 @@ void main() async {
       final tokenAddress = Variables.NATIVE_TOKEN_ADDRESS;
       print(
           'Fund your smart wallet: ${smartWallet.smartWalletAddress} with Fuse testnet to test transfer, and press any key.');
-      String temp = stdin.readLineSync(encoding: Encoding.getByName('utf-8')!)!;
-      // final tokenAddress = '0xa11d8a7F4ce086572Be0b86D08138b86a03F5522';
-      final DC<Exception, Socket> transferResp = await smartWalletsSDK.transfer(
+      stdin.readLineSync(encoding: Encoding.getByName('utf-8')!)!;
+
+      // Relay subscriptions
+      smartWalletsSDK.on('transactionStarted', (eventData) {
+        print('transactionStarted ${eventData.toString()}');
+      });
+      smartWalletsSDK.on('transactionHash', (eventData) {
+        print('transactionHash ${eventData.toString()}');
+      });
+      smartWalletsSDK.on('transactionSucceeded', (eventData) {
+        print('transactionSucceeded ${eventData.toString()}');
+      });
+      smartWalletsSDK.on('transactionFailed', (eventData) {
+        print('transactionFailed ${eventData.toString()}');
+        exit(1);
+      });
+
+      // Sending gasless transaction
+      await smartWalletsSDK.transfer(
         credentials,
         tokenAddress,
         receiverAddress,
         '0.001',
       );
-      if (transferResp.hasError) {
-        print('Failed to transfer');
-      } else {
-        Socket socket = transferResp.data!;
-        socket.on(WebSocketEventsNames.transactionSucceeded.name, (data) {
-          print(WebSocketEventsNames.transactionSucceeded.name);
-          socket.close();
-        });
-        socket.on(WebSocketEventsNames.transactionFailed.name, (data) {
-          print(WebSocketEventsNames.transactionFailed.name);
-          socket.close();
-        });
-        socket.on(WebSocketEventsNames.transactionStarted.name, (data) {
-          print(WebSocketEventsNames.transactionStarted.name);
-        });
-      }
     }
   }
 
@@ -57,26 +57,26 @@ void main() async {
   if (authRes.hasError) {
     print(authRes.error);
   } else {
-    final DC<Exception, Socket> response = await smartWalletsSDK.createWallet();
-    if (response.hasError) {
-      print('WALLET ALREADY CREATED');
+    // Create Wallet subscriptions
+    smartWalletsSDK.on('smartWalletCreationStarted', (eventData) {
+      print('smartWalletCreationStarted ${eventData.toString()}');
+    });
+    smartWalletsSDK.on('transactionHash', (eventData) {
+      print('transactionHash ${eventData.toString()}');
+    });
+    smartWalletsSDK.on('smartWalletCreationSucceeded', (eventData) {
+      print('smartWalletCreationSucceeded ${eventData.toString()}');
       fetchWallet(smartWalletsSDK);
-    } else {
-      Socket socket = response.data!;
-      socket.on(WebSocketEventsNames.smartWalletCreationSucceeded.name, (data) {
-        socket.close();
-        print(WebSocketEventsNames.smartWalletCreationSucceeded.name);
-        final SmartWallet account = SmartWallet.fromJson(data);
-        smartWalletsSDK.smartWallet = account;
-        fetchWallet(smartWalletsSDK);
-      });
-      socket.on(WebSocketEventsNames.smartWalletCreationFailed.name, (data) {
-        print(WebSocketEventsNames.smartWalletCreationFailed.name);
-        socket.close();
-      });
-      socket.on(WebSocketEventsNames.smartWalletCreationStarted.name, (data) {
-        print(WebSocketEventsNames.smartWalletCreationStarted.name);
-      });
+    });
+    smartWalletsSDK.on('smartWalletCreationFailed', (eventData) {
+      print('smartWalletCreationFailed ${eventData.toString()}');
+      exit(1);
+    });
+    // Create Wallet
+    final DC<Exception, bool> response = await smartWalletsSDK.createWallet();
+    if (response.hasError) {
+      print('Wallet probably already created, trying to fetch it.');
+      fetchWallet(smartWalletsSDK);
     }
   }
 }

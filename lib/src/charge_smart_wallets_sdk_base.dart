@@ -1,8 +1,13 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:centrifuge/centrifuge.dart' as centrifuge;
+import 'package:charge_smart_wallets_sdk/src/utils/jwt.dart';
 import 'package:data_channel/data_channel.dart';
 import 'package:dio/dio.dart';
+import 'package:events_emitter/emitters/event_emitter.dart';
 import 'package:hex/hex.dart';
 import 'package:http/http.dart' show Client;
-import 'package:socket_io_client/socket_io_client.dart';
 import 'package:web3dart/crypto.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -16,7 +21,7 @@ import 'package:charge_smart_wallets_sdk/src/utils/contracts.dart';
 import 'package:charge_smart_wallets_sdk/src/utils/crypto.dart';
 import 'package:charge_smart_wallets_sdk/src/utils/format.dart';
 
-class SmartWalletsSDK {
+class SmartWalletsSDK extends EventEmitter {
   /// The public API key used to access the Charge API.
   final String publicApiKey;
 
@@ -31,6 +36,8 @@ class SmartWalletsSDK {
 
   /// The Web3 client used for Ethereum related operations.
   final Web3Client web3client;
+
+  late final centrifuge.Client socketClient;
 
   /// Constructs a new instance of [SmartWalletsSDK].
   ///
@@ -70,15 +77,42 @@ class SmartWalletsSDK {
 
   set smartWallet(SmartWallet value) => _smartWallet = value;
 
+  _initWebsocket() async {
+    try {
+      final Map<String, dynamic> data = JwtParser().parseJwt(_jwtToken);
+      socketClient = centrifuge.createClient(
+        Variables.SOCKET_SERVER_URL,
+        centrifuge.ClientConfig(
+          name: data['sub'],
+          token: _jwtToken,
+          headers: <String, dynamic>{'X-Example-Header': 'example'},
+        ),
+      );
+      socketClient.publication.listen((
+        centrifuge.ServerPublicationEvent event,
+      ) {
+        final Map data = jsonDecode(
+          utf8.decode(
+            event.data,
+            allowMalformed: true,
+          ),
+        );
+        emit(data['eventName'], data['eventData']);
+      });
+      await socketClient.connect();
+    } catch (e) {}
+  }
+
   Future<String> getNonceForRelay() async {
     final BigInt block = BigInt.from(await web3client.getBlockNumber());
     final BigInt timestamp = BigInt.from(DateTime.now().millisecondsSinceEpoch);
     final String blockHex = hexZeroPad(hexlify(block), 16);
     final String timestampHex = hexZeroPad(hexlify(timestamp), 16);
-    return '0x${blockHex.substring(2, blockHex.length)}${timestampHex.substring(
-      2,
-      timestampHex.length,
-    )}';
+
+    final String combinedHex =
+        '${blockHex.substring(2, blockHex.length)}${timestampHex.substring(2, timestampHex.length)}';
+
+    return '0x$combinedHex';
   }
 
   Options get options => Options(
@@ -106,6 +140,7 @@ class SmartWalletsSDK {
       );
       final String jwt = response.data['jwt'];
       jwtToken = jwt;
+      _initWebsocket();
       return DC.data(jwt);
     } catch (e) {
       return DC.error(Exception(e.toString()));
@@ -121,42 +156,26 @@ class SmartWalletsSDK {
         '/v1/smart-wallets',
         options: options,
       );
-      if (response.statusCode == 200) {
-        final SmartWallet account = SmartWallet.fromJson(response.data);
-        smartWallet = account;
-        return DC.data(account);
+      if (response.statusCode != 200) {
+        return DC.error(Exception('Failed to fetch wallet'));
       }
-      return DC.error(Exception('Failed to fetch wallet'));
+      final SmartWallet account = SmartWallet.fromJson(response.data);
+      smartWallet = account;
+      return DC.data(account);
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
   }
 
   /// This method is used to create a new smart wallet.
-  ///
-  /// If the response status code is `201`, it extracts the `transactionId` and `connectionUrl` from the response data.
-  /// Then, it creates a new `Socket` instance using the `io` function, with the specified options and a `onConnect` listener.
-  /// The `onConnect` listener is used to emit a `subscribe` event with the `transactionId`.
-  /// If everything goes well, the created `Socket` instance is returned as a `DC.data` value.
-  /// If the response status code is not `201`, the method returns a `DC.error` with an `Exception` instance with message `Failed to create wallet`.
-  /// If an error occurs while making the request, the method returns a `DC.error` with an `Exception` instance with the error message.
-  Future<DC<Exception, Socket>> createWallet() async {
+  Future<DC<Exception, bool>> createWallet() async {
     try {
       final Response response = await _dio.post(
         '/v1/smart-wallets/create',
         options: options,
       );
       if (response.statusCode == 201) {
-        final String transactionId = response.data['transactionId'];
-        final String connectionUrl = response.data['connectionUrl'];
-        Socket socket = io(connectionUrl, <String, dynamic>{
-          "transports": ['websocket'],
-          "upgrade": false
-        });
-        socket.onConnect((_) {
-          socket.emit('subscribe', transactionId);
-        });
-        return DC.data(socket);
+        return DC.data(true);
       }
       return DC.error(Exception('Failed to create wallet'));
     } catch (e) {
@@ -164,7 +183,7 @@ class SmartWalletsSDK {
     }
   }
 
-  Future<DC<Exception, Socket>> relay(Relay relay) async {
+  Future<DC<Exception, bool>> relay(Relay relay) async {
     try {
       final Response response = await _dio.post(
         '/v1/smart-wallets/relay',
@@ -172,16 +191,7 @@ class SmartWalletsSDK {
         data: relay.toJson(),
       );
       if (response.statusCode == 201) {
-        final String transactionId = response.data['transactionId'];
-        final String connectionUrl = response.data['connectionUrl'];
-        Socket socket = io(connectionUrl, <String, dynamic>{
-          "transports": ['websocket'],
-          "upgrade": false
-        });
-        socket.onConnect((_) {
-          socket.emit('subscribe', transactionId);
-        });
-        return DC.data(socket);
+        return DC.data(true);
       }
       return DC.error(Exception('Failed to relay'));
     } catch (e) {
@@ -189,7 +199,7 @@ class SmartWalletsSDK {
     }
   }
 
-  Future<DC<Exception, Socket>> encodeDataAndApproveTokenAndCallContract(
+  Future<DC<Exception, bool>> encodeDataAndApproveTokenAndCallContract(
     EthPrivateKey cred,
     String jsonInterface,
     String contractAddress,
@@ -217,7 +227,7 @@ class SmartWalletsSDK {
     );
   }
 
-  Future<DC<Exception, Socket>> encodeDataAndCallContract(
+  Future<DC<Exception, bool>> encodeDataAndCallContract(
     EthPrivateKey cred,
     String jsonInterface,
     String contractAddress,
@@ -245,7 +255,7 @@ class SmartWalletsSDK {
     );
   }
 
-  Future<DC<Exception, Socket>> nftTransfer(
+  Future<DC<Exception, bool>> nftTransfer(
     EthPrivateKey cred,
     String walletAddress,
     String contractAddress,
@@ -296,7 +306,7 @@ class SmartWalletsSDK {
       BigInt.from(Variables.DEFAULT_GAS_LIMIT),
     );
 
-    final Relay replayDto = Relay(
+    final Relay relayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
       data: data,
@@ -307,10 +317,10 @@ class SmartWalletsSDK {
       transactionBody: txBody,
     );
 
-    return relay(replayDto);
+    return relay(relayDto);
   }
 
-  Future<DC<Exception, Socket>> addModule(
+  Future<DC<Exception, bool>> addModule(
     EthPrivateKey cred,
     String disableModuleName,
     String disableModuleAddress,
@@ -346,7 +356,7 @@ class SmartWalletsSDK {
       BigInt.from(Variables.DEFAULT_GAS_LIMIT),
     );
 
-    final Relay replayDto = Relay(
+    final Relay relayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
       data: data,
@@ -357,10 +367,10 @@ class SmartWalletsSDK {
       transactionBody: transactionBody,
     );
 
-    return relay(replayDto);
+    return relay(relayDto);
   }
 
-  Future<DC<Exception, Socket>> transfer(
+  Future<DC<Exception, bool>> transfer(
     EthPrivateKey cred,
     String tokenAddress,
     String receiverAddress,
@@ -417,7 +427,7 @@ class SmartWalletsSDK {
       ...?transactionBody,
     });
 
-    final Relay replayDto = Relay(
+    final Relay relayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
       data: data,
@@ -428,10 +438,10 @@ class SmartWalletsSDK {
       transactionBody: txBody,
     );
 
-    return relay(replayDto);
+    return relay(relayDto);
   }
 
-  Future<DC<Exception, Socket>> approveToken(
+  Future<DC<Exception, bool>> approveToken(
     EthPrivateKey cred,
     String tokenAddress,
     int tokenDecimals,
@@ -494,7 +504,7 @@ class SmartWalletsSDK {
     return relay(relayDto);
   }
 
-  Future<DC<Exception, Socket>> callContract(
+  Future<DC<Exception, bool>> callContract(
     EthPrivateKey cred,
     String contractAddress,
     String data, {
@@ -512,7 +522,7 @@ class SmartWalletsSDK {
             18,
           )
         : BigInt.zero;
-    final String _data = ContractsHelper.getEncodedDataForContractCall(
+    final String encodedData = ContractsHelper.getEncodedDataForContractCall(
       contractName,
       _smartWallet.walletModules.transferManager,
       methodName,
@@ -540,7 +550,7 @@ class SmartWalletsSDK {
     final Relay relayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
-      data: _data,
+      data: encodedData,
       nonce: nonce,
       methodName: methodName,
       signature: signature,
@@ -551,7 +561,7 @@ class SmartWalletsSDK {
     return relay(relayDto);
   }
 
-  Future<DC<Exception, Socket>> approveTokenAndCallContract(
+  Future<DC<Exception, bool>> approveTokenAndCallContract(
     EthPrivateKey cred,
     String tokenAddress,
     String contractAddress,
@@ -571,7 +581,7 @@ class SmartWalletsSDK {
 
     final BigInt amount =
         AmountFormat.toBigInt(value, tokenDetailsRes.data?.decimals ?? 18);
-    final String _data = ContractsHelper.getEncodedDataForContractCall(
+    final String encodedData = ContractsHelper.getEncodedDataForContractCall(
       contractName,
       _smartWallet.walletModules.transferManager,
       methodName,
@@ -591,7 +601,7 @@ class SmartWalletsSDK {
       _smartWallet.walletModules.transferManager,
       _smartWallet.smartWalletAddress,
       BigInt.from(0),
-      _data,
+      encodedData,
       nonce,
       BigInt.from(0),
       BigInt.from(Variables.DEFAULT_GAS_LIMIT),
@@ -599,7 +609,7 @@ class SmartWalletsSDK {
     final Relay relayDto = Relay(
       walletModuleAddress: _smartWallet.walletModules.transferManager,
       walletAddress: _smartWallet.smartWalletAddress,
-      data: _data,
+      data: encodedData,
       nonce: nonce,
       methodName: methodName,
       signature: signature,
@@ -611,7 +621,7 @@ class SmartWalletsSDK {
     return relay(relayDto);
   }
 
-  Future<DC<Exception, Socket>> swapTokens(
+  Future<DC<Exception, bool>> swapTokens(
     EthPrivateKey cred,
     TradeRequestBody swapRequestBody,
   ) async {
@@ -642,7 +652,7 @@ class SmartWalletsSDK {
     }
   }
 
-  Future<DC<Exception, Socket>> stakeToken(
+  Future<DC<Exception, bool>> stakeToken(
     EthPrivateKey cred,
     String tokenAddress,
     String value,
@@ -678,7 +688,7 @@ class SmartWalletsSDK {
     );
   }
 
-  Future<DC<Exception, Socket>> unstakeToken(
+  Future<DC<Exception, bool>> unstakeToken(
     EthPrivateKey cred,
     String tokenAddress,
     String value,

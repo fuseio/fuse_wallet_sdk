@@ -12,15 +12,14 @@ class SmartWalletAuth {
     final Uint8List input = Uint8List.fromList(HEX.decode(
       ownerAddress.replaceFirst('0x', ''),
     ));
-    final hash = keccak256(input);
-    final Uint8List signature = credentials.signPersonalMessageToUint8List(
-      Uint8List.fromList(hash),
-    );
-    final AuthDto authDto = AuthDto(
+    final Uint8List hash = keccak256(input);
+    final Uint8List signature =
+        credentials.signPersonalMessageToUint8List(hash);
+
+    return AuthDto(
       hash: bytesToHex(hash, include0x: true),
       ownerAddress: ownerAddress,
       signature: bytesToHex(signature.toList(), include0x: true),
     );
-    return authDto;
   }
 }

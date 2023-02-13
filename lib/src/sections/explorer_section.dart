@@ -37,8 +37,10 @@ class ExplorerSection {
         '/v0/explorer?module=token&action=getToken&contractaddress=$contractAddress',
       );
       if (response.data['status'] == '1') {
-        return DC.data(TokenDetails.fromJson(
-            {...response.data['result'], 'balance': '0'}));
+        return DC.data(TokenDetails.fromJson({
+          ...response.data['result'],
+          'balance': '0',
+        }));
       }
       return DC.error(Exception(response.data['message']));
     } catch (e) {
