@@ -45,7 +45,7 @@ class ContractsHelper {
     String contractName,
     String contractAddress,
     String functionName,
-    List params, {
+    List<dynamic> params, {
     String? jsonInterface,
     bool include0x = false,
     int? forcePadLength,

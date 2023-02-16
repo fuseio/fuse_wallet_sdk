@@ -31,7 +31,5 @@ void main() async {
     exit(1);
   });
 
-  Future.delayed(Duration(seconds: 1), () async {
-    await smartWalletsSDK.createWallet();
-  });
+  await smartWalletsSDK.createWallet();
 }

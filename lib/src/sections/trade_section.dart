@@ -8,42 +8,66 @@ class TradeSection {
   final Dio _dio;
 
   const TradeSection(this._dio);
+
+  /// Fetches the parameters required for a trade request.
+  ///
+  /// Parameters:
+  /// - [tradeRequestBody]: A [TradeRequestBody] object that contains the required parameters for a trade request.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [TradeCallParameters] object.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, TradeCallParameters>> requestParameters(
-    TradeRequestBody swapRequestBody,
+    TradeRequestBody tradeRequestBody,
   ) async {
     try {
       final Response response = await _dio.post(
         '/v0/trade/swap/requestparameters',
-        data: swapRequestBody.toJson(),
+        data: tradeRequestBody.toJson(),
       );
       if (response.statusCode == 200) {
         return DC.data(TradeCallParameters.fromJson(response.data));
       }
       return DC.error(Exception(
-          'Request Parameters failed for ${swapRequestBody.toString()}'));
+          'Request Parameters failed for ${tradeRequestBody.toString()}'));
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
   }
 
+  /// Get a quote for a trade request.
+  ///
+  /// [tradeRequestBody] is a [TradeRequestBody] object containing the parameters for the trade request.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [Trade] object.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, Trade>> quote(
-    TradeRequestBody swapRequestBody,
+    TradeRequestBody tradeRequestBody,
   ) async {
     try {
       final Response response = await _dio.post(
         '/v0/trade/swap/quote',
-        data: swapRequestBody.toJson(),
+        data: tradeRequestBody.toJson(),
       );
       if (response.statusCode == 200) {
         return DC.data(Trade.fromJson(response.data['data']['info']));
       }
       return DC.error(
-          Exception('Failed to get quote for ${swapRequestBody.toString()}'));
+          Exception('Failed to get quote for ${tradeRequestBody.toString()}'));
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
   }
 
+  /// Retrieves the current price for the given token address.
+  ///
+  /// Parameters:
+  /// - [tokenAddress]: A `String` representing the token address.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [String] object.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, String>> price(
     String tokenAddress,
   ) async {
@@ -60,6 +84,13 @@ class TradeSection {
     }
   }
 
+  /// Fetches the price change for a given token address.
+  ///
+  /// [tokenAddress] is the address of the token to fetch the price change for.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [String] object.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, String>> priceChange(
     String tokenAddress,
   ) async {
@@ -77,6 +108,11 @@ class TradeSection {
     }
   }
 
+  /// Retrieves interval statistics for the specified [tokenAddress] and [timeFrame].
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [List<IntervalStats>] object.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, List<IntervalStats>>> interval(
     String tokenAddress,
     TimeFrame timeFrame,
@@ -97,6 +133,11 @@ class TradeSection {
     }
   }
 
+  /// Fetches a list of token details
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [List<TokenDetails>] object.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, List<TokenDetails>>> fetchTokens() async {
     try {
       final Response response = await _dio.get(

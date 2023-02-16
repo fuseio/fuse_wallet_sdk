@@ -25,7 +25,7 @@ class SmartWalletsSDK extends EventEmitter {
   /// The public API key used to access the Charge API.
   final String publicApiKey;
 
-  /// The smart wallet associated with the API key.
+  /// The smart wallet associated with the authenticated user.
   late SmartWallet _smartWallet;
 
   /// The JWT token returned after authentication.
@@ -34,9 +34,10 @@ class SmartWalletsSDK extends EventEmitter {
   /// The Dio client used for API calls.
   final Dio _dio;
 
-  /// The Web3 client used for Ethereum related operations.
+  /// The Web3 client used for sending requests over an HTTP JSON-RPC API endpoint to Ethereum clients.
   final Web3Client web3client;
 
+  /// socketClient is a centrifuge client used to manage WebSocket connection to Centrifugo server and subscribe on channels.
   late final centrifuge.Client socketClient;
 
   /// Constructs a new instance of [SmartWalletsSDK].
@@ -77,30 +78,17 @@ class SmartWalletsSDK extends EventEmitter {
 
   set smartWallet(SmartWallet value) => _smartWallet = value;
 
-  _initWebsocket() async {
-    try {
-      final Map<String, dynamic> data = JwtParser().parseJwt(_jwtToken);
-      socketClient = centrifuge.createClient(
-        Variables.SOCKET_SERVER_URL,
-        centrifuge.ClientConfig(
-          name: data['sub'],
-          token: _jwtToken,
-          headers: <String, dynamic>{'X-Example-Header': 'example'},
-        ),
-      );
-      socketClient.publication.listen((
-        centrifuge.ServerPublicationEvent event,
-      ) {
-        final Map data = jsonDecode(
-          utf8.decode(
-            event.data,
-            allowMalformed: true,
-          ),
-        );
-        emit(data['eventName'], data['eventData']);
-      });
-      await socketClient.connect();
-    } catch (e) {}
+  Future<void> _initWebsocket() async {
+    final Map<String, dynamic> data = JwtParser().parseJwt(_jwtToken);
+    socketClient = centrifuge.createClient(
+      Variables.SOCKET_SERVER_URL,
+      centrifuge.ClientConfig(
+        name: data['sub'],
+        token: _jwtToken,
+      ),
+    );
+    await socketClient.connect();
+    await socketClient.ready();
   }
 
   Future<String> getNonceForRelay() async {
@@ -140,7 +128,6 @@ class SmartWalletsSDK extends EventEmitter {
       );
       final String jwt = response.data['jwt'];
       jwtToken = jwt;
-      _initWebsocket();
       return DC.data(jwt);
     } catch (e) {
       return DC.error(Exception(e.toString()));
@@ -170,11 +157,26 @@ class SmartWalletsSDK extends EventEmitter {
   /// This method is used to create a new smart wallet.
   Future<DC<Exception, bool>> createWallet() async {
     try {
+      await _initWebsocket();
       final Response response = await _dio.post(
         '/v1/smart-wallets/create',
         options: options,
       );
       if (response.statusCode == 201) {
+        final String transactionId = response.data['transactionId'];
+        final centrifuge.Subscription subscription =
+            socketClient.newSubscription(
+          'transaction:#$transactionId',
+        );
+        subscription.publication.listen((event) {
+          final Map data = jsonDecode(
+            utf8.decode(
+              event.data,
+              allowMalformed: true,
+            ),
+          );
+          emit(data['eventName'], data['eventData']);
+        });
         return DC.data(true);
       }
       return DC.error(Exception('Failed to create wallet'));
@@ -185,12 +187,28 @@ class SmartWalletsSDK extends EventEmitter {
 
   Future<DC<Exception, bool>> relay(Relay relay) async {
     try {
+      await _initWebsocket();
       final Response response = await _dio.post(
         '/v1/smart-wallets/relay',
         options: options,
         data: relay.toJson(),
       );
       if (response.statusCode == 201) {
+        final String transactionId = response.data['transactionId'];
+        final centrifuge.Subscription subscription =
+            socketClient.newSubscription(
+          'transaction:#$transactionId',
+        );
+        subscription.publication.listen((event) {
+          final Map data = jsonDecode(
+            utf8.decode(
+              event.data,
+              allowMalformed: true,
+            ),
+          );
+          emit(data['eventName'], data['eventData']);
+        });
+
         return DC.data(true);
       }
       return DC.error(Exception('Failed to relay'));
@@ -623,18 +641,18 @@ class SmartWalletsSDK extends EventEmitter {
 
   Future<DC<Exception, bool>> swapTokens(
     EthPrivateKey cred,
-    TradeRequestBody swapRequestBody,
+    TradeRequestBody tradeRequestBody,
   ) async {
     DC<Exception, TradeCallParameters> swapCallParameters =
         await _tradeSection.requestParameters(
-      swapRequestBody,
+      tradeRequestBody,
     );
 
     final String data = swapCallParameters.data?.rawTxn['data'].replaceFirst(
       '0x',
       '',
     );
-    if (swapRequestBody.currencyIn ==
+    if (tradeRequestBody.currencyIn ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
       return callContract(
         cred,
@@ -644,7 +662,7 @@ class SmartWalletsSDK extends EventEmitter {
     } else {
       return approveTokenAndCallContract(
         cred,
-        swapRequestBody.currencyIn,
+        tradeRequestBody.currencyIn,
         swapCallParameters.data?.rawTxn['to'],
         data,
         BigInt.parse(swapCallParameters.data?.args.first).toString(),
@@ -679,13 +697,23 @@ class SmartWalletsSDK extends EventEmitter {
       '',
     );
 
-    return approveTokenAndCallContract(
-      cred,
-      tokenAddress,
-      response.data!.contractAddress,
-      data,
-      amount.toString(),
-    );
+    if (tokenAddress.toLowerCase() ==
+        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
+      return callContract(
+        cred,
+        response.data!.contractAddress,
+        data,
+        value: amount.toString(),
+      );
+    } else {
+      return approveTokenAndCallContract(
+        cred,
+        tokenAddress,
+        response.data!.contractAddress,
+        data,
+        amount.toString(),
+      );
+    }
   }
 
   Future<DC<Exception, bool>> unstakeToken(
@@ -718,14 +746,24 @@ class SmartWalletsSDK extends EventEmitter {
       '0x',
       '',
     );
-
-    return approveTokenAndCallContract(
-      cred,
-      tokenAddress,
-      response.data!.contractAddress,
-      data,
-      amount.toString(),
-      transactionBody: transactionBody,
-    );
+    if (tokenAddress.toLowerCase() ==
+        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
+      return callContract(
+        cred,
+        response.data!.contractAddress,
+        data,
+        value: amount.toString(),
+        transactionBody: transactionBody,
+      );
+    } else {
+      return approveTokenAndCallContract(
+        cred,
+        tokenAddress,
+        response.data!.contractAddress,
+        data,
+        amount.toString(),
+        transactionBody: transactionBody,
+      );
+    }
   }
 }
