@@ -10,5 +10,5 @@ class Variables {
       '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'; // For sending native (ETH/FUSE) using TransferManager
   static const CHARGE_API = 'https://api.chargeweb3.com/api';
   static const SOCKET_SERVER_URL =
-      'https://ws.chargeweb3.com/connection/websocket';
+      'wss://ws.chargeweb3.com/connection/websocket';
 }
