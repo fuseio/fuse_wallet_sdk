@@ -6,11 +6,12 @@ enum TimeFrame {
   all,
 }
 
-enum WebSocketEventsNames {
+enum WebSocketEvents {
   smartWalletCreationStarted,
   smartWalletCreationFailed,
   smartWalletCreationSucceeded,
   transactionStarted,
+  transactionHash,
   transactionFailed,
   transactionSucceeded,
 }
