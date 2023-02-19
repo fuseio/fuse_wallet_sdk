@@ -4,17 +4,19 @@ import 'package:dio/dio.dart';
 import 'package:charge_smart_wallets_sdk/src/constants/variables.dart';
 import 'package:charge_smart_wallets_sdk/src/models/models.dart';
 
-/// Class for accessing Explorer of Charge APIs
 class ExplorerSection {
   final Dio _dio;
 
   const ExplorerSection(this._dio);
 
-  /// Method to get the list of tokens for a given wallet address.
+  /// Fetches the token list associated with a particular wallet address.
   ///
-  /// This method takes [walletAddress] as a required parameter. The method makes a
-  /// GET request to the server and returns the list of tokens as [TokenList] wrapped
-  /// in [DC]. If there is any error, it returns [Exception] wrapped in [DC].
+  /// Parameters:
+  /// - [walletAddress] – The wallet address whose token list is to be retrieved.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [TokenList] object.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, TokenList>> getTokenList(
     String walletAddress,
   ) async {
@@ -31,11 +33,17 @@ class ExplorerSection {
     }
   }
 
-  /// Method to get the details of a given token address.
+  /// Retrieves the token details related to a given contract address.
   ///
-  /// This method takes [contractAddress] as a required parameter. The method makes a
-  /// GET request to the server and returns the token details as [TokenDetails] wrapped
-  /// in [DC]. If there is any error, it returns [Exception] wrapped in [DC].
+  /// If the given contract address is the native token address, then the result
+  /// will contain [Native] token with 0 amount.
+  ///
+  /// Parameters:
+  /// - [contractAddress] - Contract address of the token.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [TokenDetails] object.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, TokenDetails>> getTokenDetails(
     String contractAddress,
   ) async {
@@ -59,13 +67,16 @@ class ExplorerSection {
     }
   }
 
-  /// Method to get the token balance of a wallet.
+  /// Retrieves the token balance for a given contract address
+  /// and wallet address from the blockchain explorer API
   ///
-  /// `contractAddress` is the Contract address of the token.
+  /// Parameters:
+  /// - [contractAddress] the contract address
+  /// - [walletAddress] the wallet address
   ///
-  /// `walletAddress` is the Address of the wallet.
-  ///
-  /// Returns a [Future] of [DC<Exception, BigInt>].
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [BigInt] the token balance of the given addresses
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, BigInt>> getTokenBalance(
     String contractAddress,
     String walletAddress,

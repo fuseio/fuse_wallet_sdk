@@ -6,6 +6,7 @@ import 'package:charge_smart_wallets_sdk/charge_smart_wallets_sdk.dart';
 void main() async {
   final String privateKey = await Mnemonic.generatePrivateKey();
   final EthPrivateKey credentials = EthPrivateKey.fromHex(privateKey);
+  // Create a project: https://chargeweb3.com
   final String publicApiKey = '';
   print('privateKey: $privateKey');
   print('address: ${credentials.address.hexEip55}');
@@ -72,8 +73,9 @@ void main() async {
       print('smartWalletCreationFailed ${eventData.toString()}');
       exit(1);
     });
+
     // Create Wallet
-    final DC<Exception, bool> response = await smartWalletsSDK.createWallet();
+    final DC<Exception, String> response = await smartWalletsSDK.createWallet();
     if (response.hasError) {
       print('Wallet probably already created, trying to fetch it.');
       fetchWallet(smartWalletsSDK);

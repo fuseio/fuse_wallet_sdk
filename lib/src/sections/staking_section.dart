@@ -8,6 +8,11 @@ class StakingSection {
 
   const StakingSection(this._dio);
 
+  /// Retrieves the staking options available on the platform.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a list of [StakingOption] object.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, List<StakingOption>>> getStakingOptions() async {
     try {
       final Response response = await _dio.get(
@@ -22,6 +27,11 @@ class StakingSection {
     }
   }
 
+  /// A function that returns encoded data for the staking contract call.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [StakeResponseBody] object.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, StakeResponseBody>> stake(
     StakeRequestBody stakeRequestBody,
   ) async {
@@ -45,6 +55,11 @@ class StakingSection {
     }
   }
 
+  /// A function that returns encoded data for unstake contract call.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [StakeResponseBody] object.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, UnstakeResponseBody>> unstake(
     UnstakeRequestBody unstakeRequestBody,
   ) async {
@@ -63,6 +78,11 @@ class StakingSection {
     }
   }
 
+  /// Retrieves the staked tokens of a given smart wallet address on the platform.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [StakedTokenResponse] object.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, StakedTokenResponse>> getStakedTokens(
     String walletAddress,
   ) async {

@@ -1,7 +1,15 @@
 import 'dart:convert';
 
+/// A utility class for parsing JWT tokens.
 class JwtParser {
-  Map<String, dynamic> parseJwt(String token) {
+  /// Parses a JWT token and returns its payload as a map.
+  ///
+  /// [token] - The JWT token to parse.
+  ///
+  /// Throws an exception if the token is invalid or its payload is not a valid JSON object.
+  ///
+  /// Returns a map representing the token's payload.
+  static Map<String, dynamic> parseJwt(String token) {
     final parts = token.split('.');
     if (parts.length != 3) {
       throw Exception('invalid token');
@@ -16,7 +24,14 @@ class JwtParser {
     return payloadMap;
   }
 
-  String _decodeBase64(String str) {
+  /// Decodes a base64url-encoded string.
+  ///
+  /// [str] - The base64url-encoded string to decode.
+  ///
+  /// Throws an exception if the string is not a valid base64url-encoded string.
+  ///
+  /// Returns the decoded string as a UTF-8 string.
+  static String _decodeBase64(String str) {
     String output = str.replaceAll('-', '+').replaceAll('_', '/');
 
     switch (output.length % 4) {
