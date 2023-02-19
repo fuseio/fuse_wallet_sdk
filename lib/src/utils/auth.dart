@@ -6,7 +6,13 @@ import 'package:web3dart/crypto.dart';
 
 import 'package:charge_smart_wallets_sdk/src/models/auth/auth.dto.dart';
 
+/// Class for handling authentication processes for Charge Smart Wallets.
 class SmartWalletAuth {
+  /// This method returns the authentication token of a wallet given its [credentials].
+  ///
+  /// The [credentials] should be type of [EthPrivateKey], and contains the address of the wallet to authenticate.
+  ///
+  /// It returns a [AuthDto], containing the [hash], [ownerAddress] and [signature] of the authenticated wallet.
   static AuthDto signer(EthPrivateKey credentials) {
     final String ownerAddress = credentials.address.hexEip55;
     final Uint8List input = Uint8List.fromList(HEX.decode(
