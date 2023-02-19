@@ -28,16 +28,16 @@ void main() async {
       stdin.readLineSync(encoding: Encoding.getByName('utf-8')!)!;
 
       // Relay subscriptions
-      smartWalletsSDK.on('transactionStarted', (eventData) {
+      smartWalletsSDK.on(WebSocketEvents.transactionStarted.name, (eventData) {
         print('transactionStarted ${eventData.toString()}');
       });
-      smartWalletsSDK.on('transactionHash', (eventData) {
+      smartWalletsSDK.on(WebSocketEvents.transactionHash.name, (eventData) {
         print('transactionHash ${eventData.toString()}');
       });
-      smartWalletsSDK.on('transactionSucceeded', (eventData) {
+      smartWalletsSDK.on(WebSocketEvents.transactionSucceeded.name, (eventData) {
         print('transactionSucceeded ${eventData.toString()}');
       });
-      smartWalletsSDK.on('transactionFailed', (eventData) {
+      smartWalletsSDK.on(WebSocketEvents.transactionFailed.name, (eventData) {
         print('transactionFailed ${eventData.toString()}');
         exit(1);
       });
@@ -59,17 +59,17 @@ void main() async {
     print(authRes.error);
   } else {
     // Create Wallet subscriptions
-    smartWalletsSDK.on('smartWalletCreationStarted', (eventData) {
+    smartWalletsSDK.on(WebSocketEvents.smartWalletCreationStarted.name, (eventData) {
       print('smartWalletCreationStarted ${eventData.toString()}');
     });
-    smartWalletsSDK.on('transactionHash', (eventData) {
+    smartWalletsSDK.on(WebSocketEvents.transactionHash.name, (eventData) {
       print('transactionHash ${eventData.toString()}');
     });
-    smartWalletsSDK.on('smartWalletCreationSucceeded', (eventData) {
+    smartWalletsSDK.on(WebSocketEvents.smartWalletCreationSucceeded.name, (eventData) {
       print('smartWalletCreationSucceeded ${eventData.toString()}');
       fetchWallet(smartWalletsSDK);
     });
-    smartWalletsSDK.on('smartWalletCreationFailed', (eventData) {
+    smartWalletsSDK.on(WebSocketEvents.smartWalletCreationFailed.name, (eventData) {
       print('smartWalletCreationFailed ${eventData.toString()}');
       exit(1);
     });
