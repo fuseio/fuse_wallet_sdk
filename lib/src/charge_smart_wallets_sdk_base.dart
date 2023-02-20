@@ -394,6 +394,7 @@ class SmartWalletsSDK extends EventEmitter {
     String to,
     String value, {
     String txData = '0x',
+    String? externalId,
   }) async {
     final String walletModule = 'TransferManager';
     final String methodName = 'transferToken';
@@ -456,6 +457,7 @@ class SmartWalletsSDK extends EventEmitter {
       signature: signature,
       walletModule: walletModule,
       transactionBody: txBody,
+      externalId: externalId,
     );
 
     return _relay(relayDto);
