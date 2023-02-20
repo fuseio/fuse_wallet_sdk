@@ -21,10 +21,6 @@ Relay _$RelayFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Relay {
   String get network => throw _privateConstructorUsedError;
-  int get gasPrice => throw _privateConstructorUsedError;
-  int get gasLimit => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get relayBody => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get txMetadata => throw _privateConstructorUsedError;
   Map<String, dynamic>? get transactionBody =>
       throw _privateConstructorUsedError;
   String get walletAddress => throw _privateConstructorUsedError;
@@ -48,10 +44,6 @@ abstract class $RelayCopyWith<$Res> {
   @useResult
   $Res call(
       {String network,
-      int gasPrice,
-      int gasLimit,
-      Map<String, dynamic>? relayBody,
-      Map<String, dynamic>? txMetadata,
       Map<String, dynamic>? transactionBody,
       String walletAddress,
       String walletModuleAddress,
@@ -77,10 +69,6 @@ class _$RelayCopyWithImpl<$Res, $Val extends Relay>
   @override
   $Res call({
     Object? network = null,
-    Object? gasPrice = null,
-    Object? gasLimit = null,
-    Object? relayBody = freezed,
-    Object? txMetadata = freezed,
     Object? transactionBody = freezed,
     Object? walletAddress = null,
     Object? walletModuleAddress = null,
@@ -96,22 +84,6 @@ class _$RelayCopyWithImpl<$Res, $Val extends Relay>
           ? _value.network
           : network // ignore: cast_nullable_to_non_nullable
               as String,
-      gasPrice: null == gasPrice
-          ? _value.gasPrice
-          : gasPrice // ignore: cast_nullable_to_non_nullable
-              as int,
-      gasLimit: null == gasLimit
-          ? _value.gasLimit
-          : gasLimit // ignore: cast_nullable_to_non_nullable
-              as int,
-      relayBody: freezed == relayBody
-          ? _value.relayBody
-          : relayBody // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      txMetadata: freezed == txMetadata
-          ? _value.txMetadata
-          : txMetadata // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
       transactionBody: freezed == transactionBody
           ? _value.transactionBody
           : transactionBody // ignore: cast_nullable_to_non_nullable
@@ -160,10 +132,6 @@ abstract class _$$_RelayCopyWith<$Res> implements $RelayCopyWith<$Res> {
   @useResult
   $Res call(
       {String network,
-      int gasPrice,
-      int gasLimit,
-      Map<String, dynamic>? relayBody,
-      Map<String, dynamic>? txMetadata,
       Map<String, dynamic>? transactionBody,
       String walletAddress,
       String walletModuleAddress,
@@ -185,10 +153,6 @@ class __$$_RelayCopyWithImpl<$Res> extends _$RelayCopyWithImpl<$Res, _$_Relay>
   @override
   $Res call({
     Object? network = null,
-    Object? gasPrice = null,
-    Object? gasLimit = null,
-    Object? relayBody = freezed,
-    Object? txMetadata = freezed,
     Object? transactionBody = freezed,
     Object? walletAddress = null,
     Object? walletModuleAddress = null,
@@ -204,22 +168,6 @@ class __$$_RelayCopyWithImpl<$Res> extends _$RelayCopyWithImpl<$Res, _$_Relay>
           ? _value.network
           : network // ignore: cast_nullable_to_non_nullable
               as String,
-      gasPrice: null == gasPrice
-          ? _value.gasPrice
-          : gasPrice // ignore: cast_nullable_to_non_nullable
-              as int,
-      gasLimit: null == gasLimit
-          ? _value.gasLimit
-          : gasLimit // ignore: cast_nullable_to_non_nullable
-              as int,
-      relayBody: freezed == relayBody
-          ? _value.relayBody
-          : relayBody // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      txMetadata: freezed == txMetadata
-          ? _value.txMetadata
-          : txMetadata // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
       transactionBody: freezed == transactionBody
           ? _value.transactionBody
           : transactionBody // ignore: cast_nullable_to_non_nullable
@@ -265,10 +213,6 @@ class __$$_RelayCopyWithImpl<$Res> extends _$RelayCopyWithImpl<$Res, _$_Relay>
 class _$_Relay implements _Relay {
   _$_Relay(
       {this.network = 'fuse',
-      this.gasPrice = 0,
-      this.gasLimit = 700000,
-      this.relayBody,
-      this.txMetadata,
       this.transactionBody = const {},
       required this.walletAddress,
       required this.walletModuleAddress,
@@ -285,16 +229,6 @@ class _$_Relay implements _Relay {
   @override
   @JsonKey()
   final String network;
-  @override
-  @JsonKey()
-  final int gasPrice;
-  @override
-  @JsonKey()
-  final int gasLimit;
-  @override
-  final Map<String, dynamic>? relayBody;
-  @override
-  final Map<String, dynamic>? txMetadata;
   @override
   @JsonKey()
   final Map<String, dynamic>? transactionBody;
@@ -317,7 +251,7 @@ class _$_Relay implements _Relay {
 
   @override
   String toString() {
-    return 'Relay(network: $network, gasPrice: $gasPrice, gasLimit: $gasLimit, relayBody: $relayBody, txMetadata: $txMetadata, transactionBody: $transactionBody, walletAddress: $walletAddress, walletModuleAddress: $walletModuleAddress, data: $data, nonce: $nonce, methodName: $methodName, signature: $signature, walletModule: $walletModule, externalId: $externalId)';
+    return 'Relay(network: $network, transactionBody: $transactionBody, walletAddress: $walletAddress, walletModuleAddress: $walletModuleAddress, data: $data, nonce: $nonce, methodName: $methodName, signature: $signature, walletModule: $walletModule, externalId: $externalId)';
   }
 
   @override
@@ -326,13 +260,6 @@ class _$_Relay implements _Relay {
         (other.runtimeType == runtimeType &&
             other is _$_Relay &&
             (identical(other.network, network) || other.network == network) &&
-            (identical(other.gasPrice, gasPrice) ||
-                other.gasPrice == gasPrice) &&
-            (identical(other.gasLimit, gasLimit) ||
-                other.gasLimit == gasLimit) &&
-            const DeepCollectionEquality().equals(other.relayBody, relayBody) &&
-            const DeepCollectionEquality()
-                .equals(other.txMetadata, txMetadata) &&
             const DeepCollectionEquality()
                 .equals(other.transactionBody, transactionBody) &&
             (identical(other.walletAddress, walletAddress) ||
@@ -356,10 +283,6 @@ class _$_Relay implements _Relay {
   int get hashCode => Object.hash(
       runtimeType,
       network,
-      gasPrice,
-      gasLimit,
-      const DeepCollectionEquality().hash(relayBody),
-      const DeepCollectionEquality().hash(txMetadata),
       const DeepCollectionEquality().hash(transactionBody),
       walletAddress,
       walletModuleAddress,
@@ -387,10 +310,6 @@ class _$_Relay implements _Relay {
 abstract class _Relay implements Relay {
   factory _Relay(
       {final String network,
-      final int gasPrice,
-      final int gasLimit,
-      final Map<String, dynamic>? relayBody,
-      final Map<String, dynamic>? txMetadata,
       final Map<String, dynamic>? transactionBody,
       required final String walletAddress,
       required final String walletModuleAddress,
@@ -405,14 +324,6 @@ abstract class _Relay implements Relay {
 
   @override
   String get network;
-  @override
-  int get gasPrice;
-  @override
-  int get gasLimit;
-  @override
-  Map<String, dynamic>? get relayBody;
-  @override
-  Map<String, dynamic>? get txMetadata;
   @override
   Map<String, dynamic>? get transactionBody;
   @override
