@@ -43,7 +43,7 @@ void main() async {
       });
 
       // Sending gasless transaction
-      await smartWalletsSDK.transfer(
+      await smartWalletsSDK.transferToken(
         credentials,
         tokenAddress,
         receiverAddress,

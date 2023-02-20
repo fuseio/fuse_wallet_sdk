@@ -9,8 +9,6 @@ class Relay with _$Relay {
     @Default('fuse') String network,
     @Default(0) int gasPrice,
     @Default(700000) int gasLimit,
-    Map<String, dynamic>? relayBody,
-    Map<String, dynamic>? txMetadata,
     @Default({}) Map<String, dynamic>? transactionBody,
     required String walletAddress,
     required String walletModuleAddress,
