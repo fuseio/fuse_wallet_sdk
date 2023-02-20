@@ -88,9 +88,7 @@ class SmartWalletsSDK extends EventEmitter {
         '${blockHex.substring(2, blockHex.length)}${timestampHex.substring(2, timestampHex.length)}';
 
     return bytesToHex(
-      Uint8List.fromList(
-        HEX.decode(combinedHex),
-      ),
+      HEX.decode(combinedHex),
       include0x: true,
     );
   }
