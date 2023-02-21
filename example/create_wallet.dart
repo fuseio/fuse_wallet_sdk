@@ -12,20 +12,20 @@ void main() async {
   final SmartWalletsSDK smartWalletsSDK = SmartWalletsSDK(publicApiKey);
   await smartWalletsSDK.authenticate(credentials);
 
-  smartWalletsSDK.on(WebSocketEvents.smartWalletCreationStarted.name, (eventData) {
+  smartWalletsSDK.on('smartWalletCreationStarted', (eventData) {
     print('smartWalletCreationStarted ${eventData.toString()}');
   });
 
-  smartWalletsSDK.on(WebSocketEvents.transactionHash.name, (eventData) {
+  smartWalletsSDK.on('transactionHash', (eventData) {
     print('transactionHash ${eventData.toString()}');
   });
 
-  smartWalletsSDK.on(WebSocketEvents.smartWalletCreationSucceeded.name, (eventData) {
+  smartWalletsSDK.on('smartWalletCreationSucceeded', (eventData) {
     print('smartWalletCreationSucceeded ${eventData.toString()}');
     exit(1);
   });
 
-  smartWalletsSDK.on(WebSocketEvents.smartWalletCreationFailed.name, (eventData) {
+  smartWalletsSDK.on('smartWalletCreationFailed', (eventData) {
     print('smartWalletCreationFailed ${eventData.toString()}');
     exit(1);
   });

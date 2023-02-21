@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:centrifuge/centrifuge.dart';
 import 'package:data_channel/data_channel.dart';

@@ -5,13 +5,3 @@ enum TimeFrame {
   month,
   all,
 }
-
-enum WebSocketEvents {
-  smartWalletCreationStarted,
-  smartWalletCreationFailed,
-  smartWalletCreationSucceeded,
-  transactionStarted,
-  transactionHash,
-  transactionFailed,
-  transactionSucceeded,
-}
