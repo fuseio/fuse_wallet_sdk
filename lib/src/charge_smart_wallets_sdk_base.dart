@@ -289,7 +289,7 @@ class SmartWalletsSDK extends EventEmitter {
 
     final String data = ContractsHelper.getEncodedDataForContractCall(
       walletModule,
-      _smartWallet.walletModules.nftTransfer!,
+      walletModuleAddress,
       methodName,
       [
         wallet,
@@ -323,7 +323,7 @@ class SmartWalletsSDK extends EventEmitter {
     );
 
     final Relay relayDto = Relay(
-      walletModuleAddress: _smartWallet.walletModules.transferManager,
+      walletModuleAddress: walletModuleAddress,
       walletAddress: _smartWallet.smartWalletAddress,
       data: data,
       nonce: nonce,
