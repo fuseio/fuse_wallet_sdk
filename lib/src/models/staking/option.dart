@@ -12,6 +12,7 @@ class StakingOption with _$StakingOption {
     required String tokenSymbol,
     required String tokenName,
     required String tokenLogoURI,
+    required String unStakeTokenAddress,
     required double stakingApr,
   }) = _StakingOption;
 

@@ -246,7 +246,7 @@ class SmartWalletsSDK extends EventEmitter {
     String contractAddress,
     String contractName,
     String methodName,
-    String value,
+    BigInt value,
     List<dynamic> params, {
     Map<String, dynamic>? transactionBody,
   }) async {
@@ -271,7 +271,7 @@ class SmartWalletsSDK extends EventEmitter {
   Future<DC<Exception, String>> transferNFT(
     EthPrivateKey cred,
     String nftContract,
-    String to,
+    String toAddress,
     num tokenId, {
     bool? safe = false,
     String txData = '0x',
@@ -283,7 +283,7 @@ class SmartWalletsSDK extends EventEmitter {
       _smartWallet.smartWalletAddress,
     );
     final EthereumAddress contract = EthereumAddress.fromHex(nftContract);
-    final EthereumAddress receiver = EthereumAddress.fromHex(to);
+    final EthereumAddress receiver = EthereumAddress.fromHex(toAddress);
     final BigInt id = BigInt.from(tokenId);
     final String walletModuleAddress = _smartWallet.walletModules.nftTransfer!;
 
@@ -304,7 +304,7 @@ class SmartWalletsSDK extends EventEmitter {
 
     final Map<String, dynamic> txBody = Map.from({
       "from": _smartWallet.smartWalletAddress,
-      "to": to,
+      "to": toAddress,
       'tokenAddress': nftContract,
       "status": 'pending',
       ...?transactionBody,
@@ -390,7 +390,7 @@ class SmartWalletsSDK extends EventEmitter {
   Future<DC<Exception, String>> transferToken(
     EthPrivateKey cred,
     String tokenAddress,
-    String to,
+    String toAddress,
     String value, {
     String txData = '0x',
     String? externalId,
@@ -400,7 +400,7 @@ class SmartWalletsSDK extends EventEmitter {
     final EthereumAddress wallet =
         EthereumAddress.fromHex(_smartWallet.smartWalletAddress);
     final EthereumAddress token = EthereumAddress.fromHex(tokenAddress);
-    final EthereumAddress receiver = EthereumAddress.fromHex(to);
+    final EthereumAddress receiver = EthereumAddress.fromHex(toAddress);
     final DC<Exception, TokenDetails> tokenDetailsRes =
         await _explorerSection.getTokenDetails(tokenAddress);
 
@@ -437,7 +437,7 @@ class SmartWalletsSDK extends EventEmitter {
     final Map<String, dynamic> txBody = Map.from({
       "status": 'pending',
       "from": _smartWallet.smartWalletAddress,
-      "to": to,
+      "to": toAddress,
       "value": amount.toString(),
       'type': 'SEND',
       "asset": tokenDetailsRes.data?.symbol,
@@ -530,7 +530,7 @@ class SmartWalletsSDK extends EventEmitter {
     EthPrivateKey cred,
     String contractAddress,
     String data, {
-    String? value,
+    BigInt? value,
     Map<String, dynamic>? transactionBody,
   }) async {
     final String walletModule = 'TransferManager';
@@ -539,12 +539,6 @@ class SmartWalletsSDK extends EventEmitter {
       _smartWallet.smartWalletAddress,
     );
     final EthereumAddress contract = EthereumAddress.fromHex(contractAddress);
-    BigInt amount = value != null
-        ? AmountFormat.toBigInt(
-            value,
-            18,
-          )
-        : BigInt.zero;
 
     final String encodedData = ContractsHelper.getEncodedDataForContractCall(
       walletModule,
@@ -553,7 +547,7 @@ class SmartWalletsSDK extends EventEmitter {
       [
         wallet,
         contract,
-        amount,
+        value ?? BigInt.zero,
         HEX.decode(data),
       ],
       include0x: true,
@@ -565,7 +559,7 @@ class SmartWalletsSDK extends EventEmitter {
       _smartWallet.walletModules.transferManager,
       _smartWallet.smartWalletAddress,
       BigInt.from(0),
-      data,
+      encodedData,
       nonce,
       BigInt.from(0),
       BigInt.from(Variables.DEFAULT_GAS_LIMIT),
@@ -660,20 +654,29 @@ class SmartWalletsSDK extends EventEmitter {
 
     final String data = strip0x(swapCallParameters.data?.rawTxn['data']);
 
-    if (tradeRequestBody.currencyIn ==
+    if (tradeRequestBody.currencyIn.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
       return callContract(
         cred,
         swapCallParameters.data!.rawTxn['to'],
         data,
+        value: BigInt.parse(swapCallParameters.data!.value),
       );
     } else {
+      final DC<Exception, TokenDetails> tokenDetailsRes =
+          await _explorerSection.getTokenDetails(
+        tradeRequestBody.currencyIn,
+      );
+
       return approveTokenAndCallContract(
         cred,
         tradeRequestBody.currencyIn,
         swapCallParameters.data?.rawTxn['to'],
+        AmountFormat.formatValue(
+          BigInt.parse(swapCallParameters.data!.args.first),
+          tokenDetailsRes.data?.decimals ?? 18,
+        ),
         data,
-        BigInt.parse(swapCallParameters.data?.args.first).toString(),
       );
     }
   }
@@ -712,7 +715,7 @@ class SmartWalletsSDK extends EventEmitter {
         cred,
         response.data!.contractAddress,
         data,
-        value: amount.toString(),
+        value: amount,
       );
     } else {
       return approveTokenAndCallContract(
@@ -763,7 +766,7 @@ class SmartWalletsSDK extends EventEmitter {
         cred,
         response.data!.contractAddress,
         data,
-        value: amount.toString(),
+        value: amount,
         transactionBody: transactionBody,
       );
     } else {
