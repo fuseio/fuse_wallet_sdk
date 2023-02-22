@@ -9,6 +9,20 @@ class ExplorerSection {
 
   const ExplorerSection(this._dio);
 
+  // Get the native balance for an wallet address
+  Future<DC<Exception, BigInt>> getNativeBalance(
+    String walletAddress,
+  ) async {
+    try {
+      final Response response = await _dio.get(
+        '/v0/explorer?module=account&action=eth_get_balance&address=$walletAddress',
+      );
+      return DC.data(BigInt.from(int.parse(response.data['result'])));
+    } catch (e) {
+      return DC.error(Exception(e.toString()));
+    }
+  }
+
   /// Fetches the token list associated with a particular wallet address.
   ///
   /// Parameters:
@@ -81,6 +95,10 @@ class ExplorerSection {
     String contractAddress,
     String walletAddress,
   ) async {
+    if (contractAddress.toLowerCase() ==
+        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
+      return getNativeBalance(walletAddress);
+    }
     try {
       final Response response = await _dio.get(
         '?module=account&action=tokenbalance&contractaddress=$contractAddress&address=$walletAddress',

@@ -13,6 +13,7 @@ _$_StakedToken _$$_StakedTokenFromJson(Map<String, dynamic> json) =>
       tokenName: json['tokenName'] as String,
       tokenLogoURI: json['tokenLogoURI'] as String,
       stakedAmount: (json['stakedAmount'] as num).toDouble(),
+      unStakeTokenAddress: json['unStakeTokenAddress'] as String,
       stakedAmountUSD: (json['stakedAmountUSD'] as num).toDouble(),
       earnedAmountUSD: (json['earnedAmountUSD'] as num).toDouble(),
     );
@@ -24,6 +25,7 @@ Map<String, dynamic> _$$_StakedTokenToJson(_$_StakedToken instance) =>
       'tokenName': instance.tokenName,
       'tokenLogoURI': instance.tokenLogoURI,
       'stakedAmount': instance.stakedAmount,
+      'unStakeTokenAddress': instance.unStakeTokenAddress,
       'stakedAmountUSD': instance.stakedAmountUSD,
       'earnedAmountUSD': instance.earnedAmountUSD,
     };

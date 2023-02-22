@@ -25,6 +25,7 @@ mixin _$StakedToken {
   String get tokenName => throw _privateConstructorUsedError;
   String get tokenLogoURI => throw _privateConstructorUsedError;
   double get stakedAmount => throw _privateConstructorUsedError;
+  String get unStakeTokenAddress => throw _privateConstructorUsedError;
   double get stakedAmountUSD => throw _privateConstructorUsedError;
   double get earnedAmountUSD => throw _privateConstructorUsedError;
 
@@ -46,6 +47,7 @@ abstract class $StakedTokenCopyWith<$Res> {
       String tokenName,
       String tokenLogoURI,
       double stakedAmount,
+      String unStakeTokenAddress,
       double stakedAmountUSD,
       double earnedAmountUSD});
 }
@@ -68,6 +70,7 @@ class _$StakedTokenCopyWithImpl<$Res, $Val extends StakedToken>
     Object? tokenName = null,
     Object? tokenLogoURI = null,
     Object? stakedAmount = null,
+    Object? unStakeTokenAddress = null,
     Object? stakedAmountUSD = null,
     Object? earnedAmountUSD = null,
   }) {
@@ -92,6 +95,10 @@ class _$StakedTokenCopyWithImpl<$Res, $Val extends StakedToken>
           ? _value.stakedAmount
           : stakedAmount // ignore: cast_nullable_to_non_nullable
               as double,
+      unStakeTokenAddress: null == unStakeTokenAddress
+          ? _value.unStakeTokenAddress
+          : unStakeTokenAddress // ignore: cast_nullable_to_non_nullable
+              as String,
       stakedAmountUSD: null == stakedAmountUSD
           ? _value.stakedAmountUSD
           : stakedAmountUSD // ignore: cast_nullable_to_non_nullable
@@ -118,6 +125,7 @@ abstract class _$$_StakedTokenCopyWith<$Res>
       String tokenName,
       String tokenLogoURI,
       double stakedAmount,
+      String unStakeTokenAddress,
       double stakedAmountUSD,
       double earnedAmountUSD});
 }
@@ -138,6 +146,7 @@ class __$$_StakedTokenCopyWithImpl<$Res>
     Object? tokenName = null,
     Object? tokenLogoURI = null,
     Object? stakedAmount = null,
+    Object? unStakeTokenAddress = null,
     Object? stakedAmountUSD = null,
     Object? earnedAmountUSD = null,
   }) {
@@ -162,6 +171,10 @@ class __$$_StakedTokenCopyWithImpl<$Res>
           ? _value.stakedAmount
           : stakedAmount // ignore: cast_nullable_to_non_nullable
               as double,
+      unStakeTokenAddress: null == unStakeTokenAddress
+          ? _value.unStakeTokenAddress
+          : unStakeTokenAddress // ignore: cast_nullable_to_non_nullable
+              as String,
       stakedAmountUSD: null == stakedAmountUSD
           ? _value.stakedAmountUSD
           : stakedAmountUSD // ignore: cast_nullable_to_non_nullable
@@ -183,6 +196,7 @@ class _$_StakedToken implements _StakedToken {
       required this.tokenName,
       required this.tokenLogoURI,
       required this.stakedAmount,
+      required this.unStakeTokenAddress,
       required this.stakedAmountUSD,
       required this.earnedAmountUSD});
 
@@ -200,13 +214,15 @@ class _$_StakedToken implements _StakedToken {
   @override
   final double stakedAmount;
   @override
+  final String unStakeTokenAddress;
+  @override
   final double stakedAmountUSD;
   @override
   final double earnedAmountUSD;
 
   @override
   String toString() {
-    return 'StakedToken(tokenAddress: $tokenAddress, tokenSymbol: $tokenSymbol, tokenName: $tokenName, tokenLogoURI: $tokenLogoURI, stakedAmount: $stakedAmount, stakedAmountUSD: $stakedAmountUSD, earnedAmountUSD: $earnedAmountUSD)';
+    return 'StakedToken(tokenAddress: $tokenAddress, tokenSymbol: $tokenSymbol, tokenName: $tokenName, tokenLogoURI: $tokenLogoURI, stakedAmount: $stakedAmount, unStakeTokenAddress: $unStakeTokenAddress, stakedAmountUSD: $stakedAmountUSD, earnedAmountUSD: $earnedAmountUSD)';
   }
 
   @override
@@ -224,6 +240,8 @@ class _$_StakedToken implements _StakedToken {
                 other.tokenLogoURI == tokenLogoURI) &&
             (identical(other.stakedAmount, stakedAmount) ||
                 other.stakedAmount == stakedAmount) &&
+            (identical(other.unStakeTokenAddress, unStakeTokenAddress) ||
+                other.unStakeTokenAddress == unStakeTokenAddress) &&
             (identical(other.stakedAmountUSD, stakedAmountUSD) ||
                 other.stakedAmountUSD == stakedAmountUSD) &&
             (identical(other.earnedAmountUSD, earnedAmountUSD) ||
@@ -232,8 +250,16 @@ class _$_StakedToken implements _StakedToken {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, tokenAddress, tokenSymbol,
-      tokenName, tokenLogoURI, stakedAmount, stakedAmountUSD, earnedAmountUSD);
+  int get hashCode => Object.hash(
+      runtimeType,
+      tokenAddress,
+      tokenSymbol,
+      tokenName,
+      tokenLogoURI,
+      stakedAmount,
+      unStakeTokenAddress,
+      stakedAmountUSD,
+      earnedAmountUSD);
 
   @JsonKey(ignore: true)
   @override
@@ -256,6 +282,7 @@ abstract class _StakedToken implements StakedToken {
       required final String tokenName,
       required final String tokenLogoURI,
       required final double stakedAmount,
+      required final String unStakeTokenAddress,
       required final double stakedAmountUSD,
       required final double earnedAmountUSD}) = _$_StakedToken;
 
@@ -272,6 +299,8 @@ abstract class _StakedToken implements StakedToken {
   String get tokenLogoURI;
   @override
   double get stakedAmount;
+  @override
+  String get unStakeTokenAddress;
   @override
   double get stakedAmountUSD;
   @override

@@ -25,7 +25,7 @@ class TradeSection {
         '/v0/trade/swap/requestparameters',
         data: tradeRequestBody.toJson(),
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         return DC.data(TradeCallParameters.fromJson(response.data));
       }
       return DC.error(Exception(
@@ -50,7 +50,7 @@ class TradeSection {
         '/v0/trade/swap/quote',
         data: tradeRequestBody.toJson(),
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         return DC.data(Trade.fromJson(response.data['data']['info']));
       }
       return DC.error(

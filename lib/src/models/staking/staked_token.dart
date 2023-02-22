@@ -11,6 +11,7 @@ class StakedToken with _$StakedToken {
     required String tokenName,
     required String tokenLogoURI,
     required double stakedAmount,
+    required String unStakeTokenAddress,
     required double stakedAmountUSD,
     required double earnedAmountUSD,
   }) = _StakedToken;
