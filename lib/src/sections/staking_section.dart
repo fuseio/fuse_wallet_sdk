@@ -40,7 +40,7 @@ class StakingSection {
         '/v0/staking/stake',
         data: stakeRequestBody.toJson(),
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         return DC.data(
           StakeResponseBody.fromJson(
             response.data,
@@ -68,7 +68,7 @@ class StakingSection {
         '/v0/staking/unstake',
         data: unstakeRequestBody.toJson(),
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         return DC.data(UnstakeResponseBody.fromJson(response.data));
       }
       return DC.error(
