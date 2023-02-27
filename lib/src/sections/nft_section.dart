@@ -14,7 +14,8 @@ class NftSection {
           cache: GraphQLCache(),
         );
 
-  Future<Map<String, Map<int, Collectible>>> getCollectiblesByOwner(
+  Future<DC<OperationException?, Map<String, Map<int, Collectible>>>>
+      getCollectiblesByOwner(
     String owner,
   ) async {
     QueryResult result = await _graphQLClient.query(
@@ -28,7 +29,7 @@ class NftSection {
       ),
     );
     if (result.hasException) {
-      throw 'Error! Get Collectibles By Owner request failed - owner: $owner ${result.exception.toString()}';
+      return DC.error(result.exception);
     } else {
       List<dynamic> fetchedCollectibles = result.data?['collectibles'];
       Map<String, Map<int, Collectible>> collectibles =
@@ -52,7 +53,7 @@ class NftSection {
           },
         ),
       );
-      return collectibles;
+      return DC.data(collectibles);
     }
   }
 }
