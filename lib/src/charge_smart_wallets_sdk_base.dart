@@ -13,6 +13,7 @@ import 'package:web3dart/web3dart.dart';
 import 'package:charge_smart_wallets_sdk/src/constants/variables.dart';
 import 'package:charge_smart_wallets_sdk/src/models/models.dart';
 import 'package:charge_smart_wallets_sdk/src/sections/explorer_section.dart';
+import 'package:charge_smart_wallets_sdk/src/sections/nft_section.dart';
 import 'package:charge_smart_wallets_sdk/src/sections/staking_section.dart';
 import 'package:charge_smart_wallets_sdk/src/sections/trade_section.dart';
 import 'package:charge_smart_wallets_sdk/src/utils/auth.dart';
@@ -63,15 +64,18 @@ class SmartWalletsSDK extends EventEmitter {
     _tradeSection = TradeSection(_dio);
     _explorerSection = ExplorerSection(_dio);
     _stakingSection = StakingSection(_dio);
+    _nftSection = NftSection();
   }
 
   late ExplorerSection _explorerSection;
   late TradeSection _tradeSection;
   late StakingSection _stakingSection;
+  late NftSection _nftSection;
 
   ExplorerSection get explorerSection => _explorerSection;
   TradeSection get tradeSection => _tradeSection;
   StakingSection get stakingSection => _stakingSection;
+  NftSection get nftSection => _nftSection;
 
   set jwtToken(String value) => _jwtToken = value;
 
@@ -211,61 +215,79 @@ class SmartWalletsSDK extends EventEmitter {
     }
   }
 
-  Future<DC<Exception, String>> encodeDataAndApproveTokenAndCallContract(
+  Future<DC<Exception, String>> transferToken(
     EthPrivateKey cred,
-    String jsonInterface,
-    String contractAddress,
-    String contractName,
-    String methodName,
     String tokenAddress,
-    String value,
-    List<dynamic> params, {
-    Map<String, dynamic>? transactionBody,
+    String toAddress,
+    String value, {
+    String txData = '0x',
+    String? externalId,
   }) async {
-    final String data = ContractsHelper.getEncodedDataForContractCall(
-      contractName,
-      contractAddress,
-      methodName,
-      params,
-      jsonInterface: jsonInterface,
-    );
+    final String walletModule = 'TransferManager';
+    final String methodName = 'transferToken';
+    final EthereumAddress wallet =
+        EthereumAddress.fromHex(_smartWallet.smartWalletAddress);
+    final EthereumAddress token = EthereumAddress.fromHex(tokenAddress);
+    final EthereumAddress receiver = EthereumAddress.fromHex(toAddress);
+    final DC<Exception, TokenDetails> tokenDetailsRes =
+        await _explorerSection.getTokenDetails(tokenAddress);
 
-    return approveTokenAndCallContract(
-      cred,
-      tokenAddress,
-      contractAddress,
+    final BigInt amount = AmountFormat.toBigInt(
       value,
-      data,
-      transactionBody: transactionBody,
+      tokenDetailsRes.data?.decimals ?? 18,
     );
-  }
 
-  Future<DC<Exception, String>> encodeDataAndCallContract(
-    EthPrivateKey cred,
-    String jsonInterface,
-    String contractAddress,
-    String contractName,
-    String methodName,
-    BigInt value,
-    List<dynamic> params, {
-    Map<String, dynamic>? transactionBody,
-  }) async {
     final String data = ContractsHelper.getEncodedDataForContractCall(
-      contractName,
-      contractAddress,
+      walletModule,
+      _smartWallet.walletModules.transferManager,
       methodName,
-      params,
-      jsonInterface: jsonInterface,
+      [
+        wallet,
+        token,
+        receiver,
+        amount,
+        hexToBytes(txData),
+      ],
       include0x: true,
     );
-
-    return callContract(
+    String nonce = await getNonceForRelay();
+    final String signature = ContractsHelper.signOffChain(
       cred,
-      contractAddress,
+      _smartWallet.walletModules.transferManager,
+      _smartWallet.smartWalletAddress,
+      BigInt.from(0),
       data,
-      value: value,
-      transactionBody: transactionBody,
+      nonce,
+      BigInt.from(0),
+      BigInt.from(Variables.DEFAULT_GAS_LIMIT),
     );
+
+    final Map<String, dynamic> txBody = Map.from({
+      "status": 'pending',
+      "from": _smartWallet.smartWalletAddress,
+      "to": toAddress,
+      "value": amount.toString(),
+      'type': 'SEND',
+      "asset": tokenDetailsRes.data?.symbol,
+      'tokenName': tokenDetailsRes.data?.name,
+      "tokenSymbol": tokenDetailsRes.data?.symbol,
+      'tokenDecimal': tokenDetailsRes.data?.decimals,
+      'tokenAddress': tokenDetailsRes.data?.address,
+    });
+
+    final Relay relayDto = Relay(
+      walletModuleAddress: _smartWallet.walletModules.transferManager,
+      walletAddress: _smartWallet.smartWalletAddress,
+      data: data,
+      nonce: nonce,
+      methodName: methodName,
+      signature: signature,
+      walletModule: walletModule,
+      transactionBody: txBody,
+      externalId: externalId,
+    );
+
+    return _relay(relayDto);
   }
 
   Future<DC<Exception, String>> transferNFT(
@@ -382,81 +404,6 @@ class SmartWalletsSDK extends EventEmitter {
       signature: signature,
       walletModule: disableModuleName,
       transactionBody: transactionBody,
-    );
-
-    return _relay(relayDto);
-  }
-
-  Future<DC<Exception, String>> transferToken(
-    EthPrivateKey cred,
-    String tokenAddress,
-    String toAddress,
-    String value, {
-    String txData = '0x',
-    String? externalId,
-  }) async {
-    final String walletModule = 'TransferManager';
-    final String methodName = 'transferToken';
-    final EthereumAddress wallet =
-        EthereumAddress.fromHex(_smartWallet.smartWalletAddress);
-    final EthereumAddress token = EthereumAddress.fromHex(tokenAddress);
-    final EthereumAddress receiver = EthereumAddress.fromHex(toAddress);
-    final DC<Exception, TokenDetails> tokenDetailsRes =
-        await _explorerSection.getTokenDetails(tokenAddress);
-
-    final BigInt amount = AmountFormat.toBigInt(
-      value,
-      tokenDetailsRes.data?.decimals ?? 18,
-    );
-
-    final String data = ContractsHelper.getEncodedDataForContractCall(
-      walletModule,
-      _smartWallet.walletModules.transferManager,
-      methodName,
-      [
-        wallet,
-        token,
-        receiver,
-        amount,
-        hexToBytes(txData),
-      ],
-      include0x: true,
-    );
-    String nonce = await getNonceForRelay();
-    final String signature = ContractsHelper.signOffChain(
-      cred,
-      _smartWallet.walletModules.transferManager,
-      _smartWallet.smartWalletAddress,
-      BigInt.from(0),
-      data,
-      nonce,
-      BigInt.from(0),
-      BigInt.from(Variables.DEFAULT_GAS_LIMIT),
-    );
-
-    final Map<String, dynamic> txBody = Map.from({
-      "status": 'pending',
-      "from": _smartWallet.smartWalletAddress,
-      "to": toAddress,
-      "value": amount.toString(),
-      'type': 'SEND',
-      "asset": tokenDetailsRes.data?.symbol,
-      'tokenName': tokenDetailsRes.data?.name,
-      "tokenSymbol": tokenDetailsRes.data?.symbol,
-      'tokenDecimal': tokenDetailsRes.data?.decimals,
-      'tokenAddress': tokenDetailsRes.data?.address,
-    });
-
-    final Relay relayDto = Relay(
-      walletModuleAddress: _smartWallet.walletModules.transferManager,
-      walletAddress: _smartWallet.smartWalletAddress,
-      data: data,
-      nonce: nonce,
-      methodName: methodName,
-      signature: signature,
-      walletModule: walletModule,
-      transactionBody: txBody,
-      externalId: externalId,
     );
 
     return _relay(relayDto);
@@ -683,33 +630,28 @@ class SmartWalletsSDK extends EventEmitter {
 
   Future<DC<Exception, String>> stakeToken(
     EthPrivateKey cred,
-    String tokenAddress,
-    String value,
+    StakeRequestBody stakeRequestBody,
   ) async {
     final DC<Exception, StakeResponseBody> response =
         await _stakingSection.stake(
-      StakeRequestBody(
-        tokenAddress: tokenAddress,
-        tokenAmount: value,
-        accountAddress: _smartWallet.smartWalletAddress,
-      ),
+      stakeRequestBody,
     );
     if (response.hasError) {
       return DC.error(response.error!);
     }
     final DC<Exception, TokenDetails> tokenDetailsRes =
         await _explorerSection.getTokenDetails(
-      tokenAddress,
+      stakeRequestBody.tokenAddress,
     );
 
     final BigInt amount = AmountFormat.toBigInt(
-      value,
+      stakeRequestBody.tokenAmount,
       tokenDetailsRes.data?.decimals ?? 18,
     );
 
     final String data = strip0x(response.data!.encodedABI);
 
-    if (tokenAddress.toLowerCase() ==
+    if (stakeRequestBody.tokenAddress.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
       return callContract(
         cred,
@@ -720,37 +662,32 @@ class SmartWalletsSDK extends EventEmitter {
     } else {
       return approveTokenAndCallContract(
         cred,
-        tokenAddress,
+        stakeRequestBody.tokenAddress,
         response.data!.contractAddress,
-        data,
         amount.toString(),
+        data,
       );
     }
   }
 
   Future<DC<Exception, String>> unstakeToken(
     EthPrivateKey cred,
-    String tokenAddress,
-    String value,
+    UnstakeRequestBody unstakeRequestBody,
   ) async {
     final DC<Exception, UnstakeResponseBody> response =
         await _stakingSection.unstake(
-      UnstakeRequestBody(
-        tokenAddress: tokenAddress,
-        tokenAmount: value,
-        accountAddress: _smartWallet.smartWalletAddress,
-      ),
+      unstakeRequestBody,
     );
     if (response.hasError) {
       return DC.error(response.error!);
     }
     final DC<Exception, TokenDetails> tokenDetailsRes =
         await _explorerSection.getTokenDetails(
-      tokenAddress,
+      unstakeRequestBody.tokenAddress,
     );
 
     final BigInt amount = AmountFormat.toBigInt(
-      value,
+      unstakeRequestBody.tokenAmount,
       tokenDetailsRes.data?.decimals ?? 18,
     );
     final Map<String, dynamic> transactionBody = {
@@ -760,7 +697,7 @@ class SmartWalletsSDK extends EventEmitter {
     };
     final String data = strip0x(response.data!.encodedABI);
 
-    if (tokenAddress.toLowerCase() ==
+    if (unstakeRequestBody.tokenAddress.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
       return callContract(
         cred,
@@ -772,12 +709,69 @@ class SmartWalletsSDK extends EventEmitter {
     } else {
       return approveTokenAndCallContract(
         cred,
-        tokenAddress,
+        unstakeRequestBody.tokenAddress,
         response.data!.contractAddress,
-        data,
         amount.toString(),
+        data,
         transactionBody: transactionBody,
       );
     }
+  }
+
+  Future<DC<Exception, String>> encodeDataAndApproveTokenAndCallContract(
+    EthPrivateKey cred,
+    String jsonInterface,
+    String contractAddress,
+    String contractName,
+    String methodName,
+    String tokenAddress,
+    String value,
+    List<dynamic> params, {
+    Map<String, dynamic>? transactionBody,
+  }) async {
+    final String data = ContractsHelper.getEncodedDataForContractCall(
+      contractName,
+      contractAddress,
+      methodName,
+      params,
+      jsonInterface: jsonInterface,
+    );
+
+    return approveTokenAndCallContract(
+      cred,
+      tokenAddress,
+      contractAddress,
+      value,
+      data,
+      transactionBody: transactionBody,
+    );
+  }
+
+  Future<DC<Exception, String>> encodeDataAndCallContract(
+    EthPrivateKey cred,
+    String jsonInterface,
+    String contractAddress,
+    String contractName,
+    String methodName,
+    BigInt value,
+    List<dynamic> params, {
+    Map<String, dynamic>? transactionBody,
+  }) async {
+    final String data = ContractsHelper.getEncodedDataForContractCall(
+      contractName,
+      contractAddress,
+      methodName,
+      params,
+      jsonInterface: jsonInterface,
+      include0x: true,
+    );
+
+    return callContract(
+      cred,
+      contractAddress,
+      data,
+      value: value,
+      transactionBody: transactionBody,
+    );
   }
 }
