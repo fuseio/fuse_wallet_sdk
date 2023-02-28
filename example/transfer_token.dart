@@ -4,10 +4,10 @@ import 'dart:io';
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 
 void main() async {
-  final String privateKey =
-      'df2c458ca5232e535bc975b0b126615ec330d64f33f144281d7f484d07eddf3f'; //await Mnemonic.generatePrivateKey();
+  final String privateKey = await Mnemonic.generatePrivateKey();
   final EthPrivateKey credentials = EthPrivateKey.fromHex(privateKey);
-  final String publicApiKey = 'pk_F7gisUhUTV5LyiNcftikb0UL';
+  // Create a project: https://chargeweb3.com
+  final String publicApiKey = '';
   final FuseWalletSDK fuseWalletSDK = FuseWalletSDK(publicApiKey);
   final DC<Exception, String> authRes = await fuseWalletSDK.authenticate(
     credentials,
