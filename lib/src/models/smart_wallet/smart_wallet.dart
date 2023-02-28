@@ -1,4 +1,4 @@
-import 'package:charge_smart_wallets_sdk/src/models/wallet_modules/wallet_modules.dart';
+import 'package:fuse_wallet_sdk/src/models/wallet_modules/wallet_modules.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'smart_wallet.freezed.dart';

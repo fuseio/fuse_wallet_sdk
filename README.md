@@ -1,39 +1,29 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Fuse Wallet SDK Docs
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+# Introduction
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+The Fuse Wallet SDK is a set of tools for creating, managing, and engaging with Fuse Smart Wallets in client applications. Fuse Smart Wallets are smart contract wallets associated with each user's Externally Owned Account (EOA) that provide added security compared to traditional EOAs with a single private key. With Fuse Smart Wallets, users can deposit funds that no one else can control and withdraw them at any time.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## Purpose of the SDK
 
-## Features
+The Fuse Wallet SDK is designed to make it easy for developers to create, manage, and engage with Fuse Smart Wallets in their Flutter and TypeScript applications. The SDK provides pre-built functions and utilities that allow developers to seamlessly interact with Fuse Smart Wallets in a secure and efficient manner.
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+## **Benefits of using Fuse Smart Wallets**
 
-## Getting started
+Using Fuse Smart Wallets provides several benefits, including:
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+- Enhanced security: Fuse Smart Wallets are non-custodial accounts that allow users to deposit funds that no one else can control and withdraw at any time. Each Fuse Smart Wallet is a smart contract associated with the user's EOA and can only be controlled by that user.
+- Enhanced UX: Fuse Smart Wallets support gasless transactions, improving the user experience and making it more seamless to interact with the blockchain.
+- Better developer experience: The Fuse Wallet SDK abstracts away the complexities of web3 development, such as cryptography, wallet management, and smart contract interactions, making it easier for developers to build blockchain-based applications.
 
-## Usage
+## **Features**
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+The Fuse Wallet SDK provides several features that allow developers to create, manage, and engage with Fuse Smart Wallets in their applications. Some of the key features include:
 
-```dart
-const like = 'sample';
-```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+- **Create a Fuse Smart Wallet**: Create a new Fuse Smart Wallet associated with a user's EOA.
+- **Retrieve an existing Fuse Smart Wallet**: Retrieve an existing Fuse Smart Wallet associated with a user's EOA, if exists.
+- **Send transactions**: Send transactions, including ERC20 and NFT transfers and interaction with arbitrary smart contracts, through the Fuse relayer that will cover the gas fees. This allows the user to interact with the blockchain without worrying about gas fees.
+- **Retrieve transactions history**: Retrieve a user's transaction history for their Fuse Smart Wallet. This makes it easy to keep track of their activity on the blockchain.
+- **Retrieve ERC20 and ERC721 token balances**: Retrieve a user's ERC20 and ERC721 token balances for their Fuse Smart Wallet. This makes it easy to monitor their holdings on the blockchain.
+- **Staking**: Let Smart Wallet owners stake their native FUSE tokens directly in the app and earn rewards.
+- **Trading**: Let Smart Wallet owners swap various assets, as well as get price data for several assets on Fuse network.

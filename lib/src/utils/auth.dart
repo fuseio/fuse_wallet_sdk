@@ -4,7 +4,7 @@ import 'package:hex/hex.dart';
 import 'package:web3dart/credentials.dart';
 import 'package:web3dart/crypto.dart';
 
-import 'package:charge_smart_wallets_sdk/src/models/auth/auth.dto.dart';
+import 'package:fuse_wallet_sdk/src/models/auth/auth.dto.dart';
 
 /// Class for handling authentication processes for Charge Smart Wallets.
 class SmartWalletAuth {

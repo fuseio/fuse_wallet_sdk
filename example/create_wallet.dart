@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:charge_smart_wallets_sdk/charge_smart_wallets_sdk.dart';
+import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 
 void main() async {
   final String privateKey = await Mnemonic.generatePrivateKey();
@@ -9,26 +9,26 @@ void main() async {
   final String publicApiKey = '';
   print('privateKey: $privateKey');
   print('address: ${credentials.address.hexEip55}');
-  final SmartWalletsSDK smartWalletsSDK = SmartWalletsSDK(publicApiKey);
-  await smartWalletsSDK.authenticate(credentials);
+  final FuseWalletSDK fuseWalletSDK = FuseWalletSDK(publicApiKey);
+  await fuseWalletSDK.authenticate(credentials);
 
-  smartWalletsSDK.on('smartWalletCreationStarted', (eventData) {
+  fuseWalletSDK.on('smartWalletCreationStarted', (eventData) {
     print('smartWalletCreationStarted ${eventData.toString()}');
   });
 
-  smartWalletsSDK.on('transactionHash', (eventData) {
+  fuseWalletSDK.on('transactionHash', (eventData) {
     print('transactionHash ${eventData.toString()}');
   });
 
-  smartWalletsSDK.on('smartWalletCreationSucceeded', (eventData) {
+  fuseWalletSDK.on('smartWalletCreationSucceeded', (eventData) {
     print('smartWalletCreationSucceeded ${eventData.toString()}');
     exit(1);
   });
 
-  smartWalletsSDK.on('smartWalletCreationFailed', (eventData) {
+  fuseWalletSDK.on('smartWalletCreationFailed', (eventData) {
     print('smartWalletCreationFailed ${eventData.toString()}');
     exit(1);
   });
 
-  await smartWalletsSDK.createWallet();
+  await fuseWalletSDK.createWallet();
 }

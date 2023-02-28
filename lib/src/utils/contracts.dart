@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:charge_smart_wallets_sdk/src/utils/abis.dart';
-import 'package:charge_smart_wallets_sdk/src/utils/crypto.dart';
+import 'package:fuse_wallet_sdk/src/utils/abis.dart';
+import 'package:fuse_wallet_sdk/src/utils/crypto.dart';
 import 'package:web3dart/crypto.dart';
 import 'package:web3dart/web3dart.dart';
 

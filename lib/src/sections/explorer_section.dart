@@ -1,8 +1,8 @@
 import 'package:data_channel/data_channel.dart';
 import 'package:dio/dio.dart';
 
-import 'package:charge_smart_wallets_sdk/src/constants/variables.dart';
-import 'package:charge_smart_wallets_sdk/src/models/models.dart';
+import 'package:fuse_wallet_sdk/src/constants/variables.dart';
+import 'package:fuse_wallet_sdk/src/models/models.dart';
 
 class ExplorerSection {
   final Dio _dio;

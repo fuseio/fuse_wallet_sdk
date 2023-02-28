@@ -1,6 +1,6 @@
 // import 'package:freezed_annotation/freezed_annotation.dart';
 
-// import 'package:charge_smart_wallets_sdk/models/token/token_details.dart';
+// import 'package:fuse_wallet_sdk/models/token/token_details.dart';
 
 // part 'token_list.freezed.dart';
 // part 'token_list.g.dart';
