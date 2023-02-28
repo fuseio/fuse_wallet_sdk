@@ -1,4 +1,4 @@
-# Fuse Wallet SDK Docs
+# Fuse Wallet SDK
 
 # Introduction
 
