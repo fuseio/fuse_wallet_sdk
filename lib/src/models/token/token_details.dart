@@ -1,7 +1,7 @@
-import 'package:charge_smart_wallets_sdk/src/constants/variables.dart';
+import 'package:fuse_wallet_sdk/src/constants/variables.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:charge_smart_wallets_sdk/src/models/models.dart';
+import 'package:fuse_wallet_sdk/src/models/models.dart';
 
 part 'token_details.freezed.dart';
 part 'token_details.g.dart';

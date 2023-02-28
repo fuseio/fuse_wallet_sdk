@@ -10,19 +10,19 @@ import 'package:http/http.dart' as http;
 import 'package:web3dart/crypto.dart';
 import 'package:web3dart/web3dart.dart';
 
-import 'package:charge_smart_wallets_sdk/src/constants/variables.dart';
-import 'package:charge_smart_wallets_sdk/src/models/models.dart';
-import 'package:charge_smart_wallets_sdk/src/sections/explorer_section.dart';
-import 'package:charge_smart_wallets_sdk/src/sections/nft_section.dart';
-import 'package:charge_smart_wallets_sdk/src/sections/staking_section.dart';
-import 'package:charge_smart_wallets_sdk/src/sections/trade_section.dart';
-import 'package:charge_smart_wallets_sdk/src/utils/auth.dart';
-import 'package:charge_smart_wallets_sdk/src/utils/contracts.dart';
-import 'package:charge_smart_wallets_sdk/src/utils/crypto.dart';
-import 'package:charge_smart_wallets_sdk/src/utils/format.dart';
-import 'package:charge_smart_wallets_sdk/src/utils/websocket.dart';
+import 'package:fuse_wallet_sdk/src/constants/variables.dart';
+import 'package:fuse_wallet_sdk/src/models/models.dart';
+import 'package:fuse_wallet_sdk/src/sections/explorer_section.dart';
+import 'package:fuse_wallet_sdk/src/sections/nft_section.dart';
+import 'package:fuse_wallet_sdk/src/sections/staking_section.dart';
+import 'package:fuse_wallet_sdk/src/sections/trade_section.dart';
+import 'package:fuse_wallet_sdk/src/utils/auth.dart';
+import 'package:fuse_wallet_sdk/src/utils/contracts.dart';
+import 'package:fuse_wallet_sdk/src/utils/crypto.dart';
+import 'package:fuse_wallet_sdk/src/utils/format.dart';
+import 'package:fuse_wallet_sdk/src/utils/websocket.dart';
 
-class SmartWalletsSDK extends EventEmitter {
+class FuseWalletSDK extends EventEmitter {
   /// The public API key used to access the Charge API.
   final String publicApiKey;
 
@@ -40,12 +40,12 @@ class SmartWalletsSDK extends EventEmitter {
 
   late final Websocket websocket;
 
-  /// Constructs a new instance of [SmartWalletsSDK].
+  /// Constructs a new instance of [FuseWalletSDK].
   ///
   /// [publicApiKey] is the public API key used to access the Charge API.
   /// [baseUrl] is the base URL of the Charge API. Default value is taken from [Variables.CHARGE_API].
   /// [rpcUrl] is the URL of the Ethereum JSON-RPC endpoint. Default value is taken from [Variables.FUSE_RPC_URL].
-  SmartWalletsSDK(
+  FuseWalletSDK(
     this.publicApiKey, {
     String baseUrl = Variables.CHARGE_API,
     String rpcUrl = Variables.FUSE_RPC_URL,
@@ -232,9 +232,13 @@ class SmartWalletsSDK extends EventEmitter {
     final DC<Exception, TokenDetails> tokenDetailsRes =
         await _explorerSection.getTokenDetails(tokenAddress);
 
+    if (tokenDetailsRes.hasError) {
+      return DC.error(tokenDetailsRes.error!);
+    }
+
     final BigInt amount = AmountFormat.toBigInt(
       value,
-      tokenDetailsRes.data?.decimals ?? 18,
+      tokenDetailsRes.data!.decimals,
     );
 
     final String data = ContractsHelper.getEncodedDataForContractCall(
@@ -429,9 +433,13 @@ class SmartWalletsSDK extends EventEmitter {
     final DC<Exception, TokenDetails> tokenDetailsRes =
         await _explorerSection.getTokenDetails(tokenAddress);
 
+    if (tokenDetailsRes.hasError) {
+      return DC.error(tokenDetailsRes.error!);
+    }
+
     final BigInt amount = AmountFormat.toBigInt(
       value,
-      tokenDetailsRes.data?.decimals ?? 18,
+      tokenDetailsRes.data!.decimals,
     );
 
     final String data = ContractsHelper.getEncodedDataForContractCall(
@@ -545,9 +553,13 @@ class SmartWalletsSDK extends EventEmitter {
       tokenAddress,
     );
 
+    if (tokenDetailsRes.hasError) {
+      return DC.error(tokenDetailsRes.error!);
+    }
+
     final BigInt amount = AmountFormat.toBigInt(
       value,
-      tokenDetailsRes.data?.decimals ?? 18,
+      tokenDetailsRes.data!.decimals,
     );
 
     final String encodedData = ContractsHelper.getEncodedDataForContractCall(
@@ -615,6 +627,10 @@ class SmartWalletsSDK extends EventEmitter {
         tradeRequestBody.currencyIn,
       );
 
+      if (tokenDetailsRes.hasError) {
+        return DC.error(tokenDetailsRes.error!);
+      }
+
       return approveTokenAndCallContract(
         cred,
         tradeRequestBody.currencyIn,
@@ -636,17 +652,23 @@ class SmartWalletsSDK extends EventEmitter {
         await _stakingSection.stake(
       stakeRequestBody,
     );
+
     if (response.hasError) {
       return DC.error(response.error!);
     }
+
     final DC<Exception, TokenDetails> tokenDetailsRes =
         await _explorerSection.getTokenDetails(
       stakeRequestBody.tokenAddress,
     );
 
+    if (tokenDetailsRes.hasError) {
+      return DC.error(tokenDetailsRes.error!);
+    }
+
     final BigInt amount = AmountFormat.toBigInt(
       stakeRequestBody.tokenAmount,
-      tokenDetailsRes.data?.decimals ?? 18,
+      tokenDetailsRes.data!.decimals,
     );
 
     final String data = strip0x(response.data!.encodedABI);
@@ -686,9 +708,13 @@ class SmartWalletsSDK extends EventEmitter {
       unstakeRequestBody.tokenAddress,
     );
 
+    if (tokenDetailsRes.hasError) {
+      return DC.error(tokenDetailsRes.error!);
+    }
+
     final BigInt amount = AmountFormat.toBigInt(
       unstakeRequestBody.tokenAmount,
-      tokenDetailsRes.data?.decimals ?? 18,
+      tokenDetailsRes.data!.decimals,
     );
     final Map<String, dynamic> transactionBody = {
       "status": 'pending',

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:charge_smart_wallets_sdk/charge_smart_wallets_sdk.dart';
+import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 
 void main() async {
   final String privateKey = await Mnemonic.generatePrivateKey();
@@ -10,15 +10,15 @@ void main() async {
   final String publicApiKey = '';
   print('privateKey: $privateKey');
   print('address: ${credentials.address.hexEip55}');
-  final SmartWalletsSDK smartWalletsSDK = SmartWalletsSDK(publicApiKey);
-  final DC<Exception, String> authRes = await smartWalletsSDK.authenticate(
+  final FuseWalletSDK fuseWalletSDK = FuseWalletSDK(publicApiKey);
+  final DC<Exception, String> authRes = await fuseWalletSDK.authenticate(
     credentials,
   );
   if (authRes.hasError) {
     print("Error occurred in authenticate");
     print(authRes.error);
   } else {
-    final walletData = await smartWalletsSDK.fetchWallet();
+    final walletData = await fuseWalletSDK.fetchWallet();
 
     walletData.pick(
       onData: (SmartWallet smartWallet) async {
@@ -29,26 +29,26 @@ void main() async {
         stdin.readLineSync(encoding: Encoding.getByName('utf-8')!)!;
 
         // Relay subscriptions
-        smartWalletsSDK.on('transactionStarted', (eventData) {
+        fuseWalletSDK.on('transactionStarted', (eventData) {
           print('transactionStarted ${eventData.toString()}');
         });
 
-        smartWalletsSDK.on('transactionHash', (eventData) {
+        fuseWalletSDK.on('transactionHash', (eventData) {
           print('transactionHash ${eventData.toString()}');
         });
 
-        smartWalletsSDK.on('transactionSucceeded', (eventData) {
+        fuseWalletSDK.on('transactionSucceeded', (eventData) {
           print('transactionSucceeded ${eventData.toString()}');
           exit(1);
         });
 
-        smartWalletsSDK.on('transactionFailed', (eventData) {
+        fuseWalletSDK.on('transactionFailed', (eventData) {
           print('transactionFailed ${eventData.toString()}');
           exit(1);
         });
 
         // Sending a gasless transaction
-        await smartWalletsSDK.transferToken(
+        await fuseWalletSDK.transferToken(
           credentials,
           tokenAddress,
           receiverAddress,
@@ -59,26 +59,26 @@ void main() async {
         print('Failed to fetch');
         print('Trying to create...');
         // Create wallet subscriptions
-        smartWalletsSDK.on('smartWalletCreationStarted', (eventData) {
+        fuseWalletSDK.on('smartWalletCreationStarted', (eventData) {
           print('smartWalletCreationStarted ${eventData.toString()}');
         });
 
-        smartWalletsSDK.on('transactionHash', (eventData) {
+        fuseWalletSDK.on('transactionHash', (eventData) {
           print('transactionHash ${eventData.toString()}');
         });
 
-        smartWalletsSDK.on('smartWalletCreationSucceeded', (eventData) {
+        fuseWalletSDK.on('smartWalletCreationSucceeded', (eventData) {
           print('smartWalletCreationSucceeded ${eventData.toString()}');
           exit(1);
         });
 
-        smartWalletsSDK.on('smartWalletCreationFailed', (eventData) {
+        fuseWalletSDK.on('smartWalletCreationFailed', (eventData) {
           print('smartWalletCreationFailed ${eventData.toString()}');
           exit(1);
         });
 
         // Create Wallet
-        await smartWalletsSDK.createWallet();
+        await fuseWalletSDK.createWallet();
       },
     );
   }

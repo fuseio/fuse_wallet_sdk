@@ -1,8 +1,8 @@
 import 'package:gql/language.dart';
 import 'package:graphql/client.dart';
 
-import 'package:charge_smart_wallets_sdk/charge_smart_wallets_sdk.dart';
-import 'package:charge_smart_wallets_sdk/src/utils/queries.dart';
+import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
+import 'package:fuse_wallet_sdk/src/utils/queries.dart';
 
 class NftSection {
   final GraphQLClient _graphQLClient;

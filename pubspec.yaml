@@ -1,11 +1,11 @@
-name: charge_smart_wallets_sdk
-description: SDK for Charge Smart Wallet API
+name: fuse_wallet_sdk
+description: Dart implementation of Fuse Wallet SDK.
 version: 0.0.1
-homepage: https://chargeweb3.com/
-repository: https://github.com/fuseio/charge_wallet_sdk
+homepage: https://fuse.io
+repository: https://github.com/fuseio/fuse_wallet_sdk
 
 environment:
-  sdk: '>=2.19.0 <3.0.0'
+  sdk: ">=2.19.0 <3.0.0"
 
 dependencies:
   bip32: ^2.0.0
