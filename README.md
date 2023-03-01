@@ -6,7 +6,7 @@ The Fuse Wallet SDK is a set of tools for creating, managing, and engaging with 
 
 ## Purpose of the SDK
 
-The Fuse Wallet SDK is designed to make it easy for developers to create, manage, and engage with Fuse Smart Wallets in their Flutter and TypeScript applications. The SDK provides pre-built functions and utilities that allow developers to seamlessly interact with Fuse Smart Wallets in a secure and efficient manner.
+The Fuse Wallet SDK is designed to make it easy for developers to create, manage, and engage with Fuse Smart Wallets in their Flutter applications. The SDK provides pre-built functions and utilities that allow developers to seamlessly interact with Fuse Smart Wallets in a secure and efficient manner.
 
 ## **Benefits of using Fuse Smart Wallets**
 
