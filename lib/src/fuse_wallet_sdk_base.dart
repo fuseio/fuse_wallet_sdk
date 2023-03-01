@@ -177,7 +177,7 @@ class FuseWalletSDK extends EventEmitter {
     }
   }
 
-  /// Get a list of historical transactions based on the provided query parameters.
+  /// Get a list of historical transactions associated with the authenticated user.
   ///
   /// Parameters:
   /// - [int] page - The page of results to return (defaults to 1).

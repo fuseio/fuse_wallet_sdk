@@ -1,6 +1,6 @@
 name: fuse_wallet_sdk
 description: Dart implementation of Fuse Wallet SDK.
-version: 0.0.1
+version: 0.0.2
 homepage: https://fuse.io
 repository: https://github.com/fuseio/fuse_wallet_sdk
 
