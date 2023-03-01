@@ -177,6 +177,45 @@ class FuseWalletSDK extends EventEmitter {
     }
   }
 
+  /// Get a list of historical transactions based on the provided query parameters.
+  ///
+  /// Parameters:
+  /// - [int] page - The page of results to return (defaults to 1).
+  /// - [int] updatedAt - If set, only results with an last update time greater than this timestamp will be returned.
+  /// - [String] tokenAddress - If set, only results related to the given token address will be returned.
+  ///
+  /// Returns A [DC] that contains either an [Exception] in the case of a network error,
+  /// or a [List] of [Action]s associated with the authenticated user.
+  ///
+  Future<DC<Exception, List<Action>>> getHistoricalActions({
+    int page = 1,
+    int? updatedAt,
+    String? tokenAddress,
+  }) async {
+    final Map<String, dynamic> queryParameters = {
+      'page': page,
+    };
+    if (tokenAddress != null) {
+      queryParameters.putIfAbsent('tokenAddress', () => tokenAddress);
+    }
+    if (updatedAt != null) {
+      queryParameters.putIfAbsent('updatedAt', () => updatedAt);
+    }
+    try {
+      final Response response = await _dio.get(
+        '/v1/smart-wallets/historical_txs',
+        queryParameters: queryParameters,
+        options: options,
+      );
+      return DC.data(Action.actionsFromJson(
+        response.data['data']['docs'] ?? [],
+      ));
+    } catch (e) {
+      print(e.toString());
+      return DC.error(Exception(e.toString()));
+    }
+  }
+
   /// A function that send a relay object to the relayer service and allows you to send transactions via a regular HTTP API.
   ///
   /// Parameters:
