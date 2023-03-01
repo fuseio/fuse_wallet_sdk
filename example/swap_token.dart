@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
