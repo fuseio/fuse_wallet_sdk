@@ -1,3 +1,4 @@
+export 'action/action.dart';
 export 'auth/auth.dto.dart';
 export 'collectible/collectible.dart';
 export 'relay/relay.dart';

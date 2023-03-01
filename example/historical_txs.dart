@@ -15,39 +15,20 @@ void main() async {
     print("Error occurred in authenticate");
     print(authRes.error);
   } else {
-    final walletData = await fuseWalletSDK.fetchWallet();
+    final DC<Exception, SmartWallet> walletData =
+        await fuseWalletSDK.fetchWallet();
 
     walletData.pick(
       onData: (SmartWallet smartWallet) async {
-        final usdcAddressOnFuse = '0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5';
-        final nativeFuseAddress = Variables.NATIVE_TOKEN_ADDRESS;
-        final amountIn = 'TOKEN_AMOUNT';
-        final TradeRequestBody tradeRequestBody = TradeRequestBody(
-          currencyIn: usdcAddressOnFuse,
-          currencyOut: nativeFuseAddress,
-          amountIn: amountIn,
-          recipient: smartWallet.smartWalletAddress,
-        );
-        // Relay subscriptions
-        fuseWalletSDK.on('transactionStarted', (eventData) {
-          print('transactionStarted ${eventData.toString()}');
-        });
-        fuseWalletSDK.on('transactionHash', (eventData) {
-          print('transactionHash ${eventData.toString()}');
-        });
-        fuseWalletSDK.on('transactionSucceeded', (eventData) {
-          print('transactionSucceeded ${eventData.toString()}');
-          exit(1);
-        });
-        fuseWalletSDK.on('transactionFailed', (eventData) {
-          print('transactionFailed ${eventData.toString()}');
-          exit(1);
-        });
-
-        // Sending a gasless transaction
-        await fuseWalletSDK.swapTokens(
-          credentials,
-          tradeRequestBody,
+        final historicalActionsData =
+            await fuseWalletSDK.getHistoricalActions();
+        historicalActionsData.pick(
+          onData: (List<Action> actions) {
+            print('actions ${actions.length}');
+          },
+          onError: (err) {
+            print(err);
+          },
         );
       },
       onError: (Exception exception) async {
