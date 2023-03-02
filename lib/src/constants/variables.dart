@@ -8,7 +8,6 @@ class Variables {
   static const int DEFAULT_GAS_LIMIT = 700000;
   static const String NATIVE_TOKEN_ADDRESS =
       '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'; // For sending native (ETH/FUSE) using TransferManager
-  static const CHARGE_API = 'https://api.chargeweb3.com/api';
-  static const SOCKET_SERVER_URL =
-      'wss://ws.chargeweb3.com/connection/websocket';
+  static const BASE_URL = 'https://api.fuse.io/api';
+  static const SOCKET_SERVER_URL = 'wss://ws.fuse.io/connection/websocket';
 }

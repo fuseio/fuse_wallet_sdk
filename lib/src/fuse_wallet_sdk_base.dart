@@ -23,7 +23,7 @@ import 'package:fuse_wallet_sdk/src/utils/format.dart';
 import 'package:fuse_wallet_sdk/src/utils/websocket.dart';
 
 class FuseWalletSDK extends EventEmitter {
-  /// The public API key used to access the Charge API.
+  /// The public API key used to access the Fuse API.
   final String publicApiKey;
 
   /// The smart wallet associated with the authenticated user.
@@ -42,12 +42,12 @@ class FuseWalletSDK extends EventEmitter {
 
   /// Constructs a new instance of [FuseWalletSDK].
   ///
-  /// [publicApiKey] is the public API key used to access the Charge API.
-  /// [baseUrl] is the base URL of the Charge API. Default value is taken from [Variables.CHARGE_API].
+  /// [publicApiKey] is the public API key used to access the Fuse API.
+  /// [baseUrl] is the base URL of the Fuse API. Default value is taken from [Variables.BASE_URL].
   /// [rpcUrl] is the URL of the Ethereum JSON-RPC endpoint. Default value is taken from [Variables.FUSE_RPC_URL].
   FuseWalletSDK(
     this.publicApiKey, {
-    String baseUrl = Variables.CHARGE_API,
+    String baseUrl = Variables.BASE_URL,
     String rpcUrl = Variables.FUSE_RPC_URL,
   })  : _dio = Dio(
           BaseOptions(

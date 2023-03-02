@@ -6,7 +6,7 @@ import 'package:web3dart/crypto.dart';
 
 import 'package:fuse_wallet_sdk/src/models/auth/auth.dto.dart';
 
-/// Class for handling authentication processes for Charge Smart Wallets.
+/// Class for handling authentication processes for Fuse Smart Wallets.
 class SmartWalletAuth {
   /// This method returns the authentication token of a wallet given its [credentials].
   ///
