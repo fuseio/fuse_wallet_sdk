@@ -455,7 +455,6 @@ class FuseWalletSDK extends EventEmitter {
   Future<DC<Exception, String>> approveToken(
     EthPrivateKey cred,
     String tokenAddress,
-    int tokenDecimals,
     String value, {
     String? spenderContract,
     Map<String, dynamic>? transactionBody,
