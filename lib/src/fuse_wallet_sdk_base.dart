@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:centrifuge/centrifuge.dart';
 import 'package:data_channel/data_channel.dart';
 import 'package:dio/dio.dart';
-import 'package:events_emitter/emitters/event_emitter.dart';
+import 'package:fuse_wallet_sdk/src/models/smart_wallet/smart_wallet_event.dart';
 import 'package:hex/hex.dart';
 import 'package:http/http.dart' as http;
 import 'package:web3dart/crypto.dart';
@@ -22,7 +22,7 @@ import 'package:fuse_wallet_sdk/src/utils/crypto.dart';
 import 'package:fuse_wallet_sdk/src/utils/format.dart';
 import 'package:fuse_wallet_sdk/src/utils/websocket.dart';
 
-class FuseWalletSDK extends EventEmitter {
+class FuseWalletSDK {
   /// The public API key used to access the Fuse API.
   final String publicApiKey;
 
@@ -73,8 +73,11 @@ class FuseWalletSDK extends EventEmitter {
   late NftSection _nftSection;
 
   ExplorerSection get explorerSection => _explorerSection;
+
   TradeSection get tradeSection => _tradeSection;
+
   StakingSection get stakingSection => _stakingSection;
+
   NftSection get nftSection => _nftSection;
 
   set jwtToken(String value) => _jwtToken = value;
@@ -149,7 +152,7 @@ class FuseWalletSDK extends EventEmitter {
   }
 
   /// This method is used to create a new smart wallet.
-  Future<DC<Exception, String>> createWallet() async {
+  Future<DC<Exception, Stream<SmartWalletEvent>>> createWallet() async {
     try {
       final Response response = await _dio.post(
         '/v1/smart-wallets/create',
@@ -160,21 +163,24 @@ class FuseWalletSDK extends EventEmitter {
         final Subscription subscription = websocket.client.newSubscription(
           'transaction:#$transactionId',
         );
-        subscription.publication.listen((event) {
-          final Map data = jsonDecode(
-            utf8.decode(
-              event.data,
-              allowMalformed: true,
-            ),
-          );
-          emit(data['eventName'], data['eventData']);
-        });
-        return DC.data(transactionId);
+        final smartWalletEventStream =
+            subscription.publication.map(_toSmartWalletEventStream);
+        return DC.data(smartWalletEventStream);
       }
       return DC.error(Exception('Failed to create wallet'));
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
+  }
+
+  SmartWalletEvent _toSmartWalletEventStream(publicationEvent) {
+    final Map data = jsonDecode(
+      utf8.decode(publicationEvent.data, allowMalformed: true),
+    );
+    return SmartWalletEvent(
+      name: data['eventName'],
+      data: data['eventData'],
+    );
   }
 
   /// Get a list of historical transactions associated with the authenticated user.
@@ -222,7 +228,7 @@ class FuseWalletSDK extends EventEmitter {
   /// - [Relay] relay - The relay object
   ///
   /// Returns a [Future] with a [DC] containing a possible [Exception] or a [String].
-  Future<DC<Exception, String>> _relay(Relay relay) async {
+  Future<DC<Exception, Stream<SmartWalletEvent>>> _relay(Relay relay) async {
     try {
       // Make a post request to get the transaction id
       final Response response = await _dio.post(
@@ -236,17 +242,9 @@ class FuseWalletSDK extends EventEmitter {
         final Subscription subscription = websocket.client.newSubscription(
           'transaction:#$transactionId',
         );
-        subscription.publication.listen((event) {
-          final Map data = jsonDecode(
-            utf8.decode(
-              event.data,
-              allowMalformed: true,
-            ),
-          );
-          emit(data['eventName'], data['eventData']);
-        });
-
-        return DC.data(transactionId);
+        final smartWalletEventStream =
+            subscription.publication.map(_toSmartWalletEventStream);
+        return DC.data(smartWalletEventStream);
       }
       return DC.error(Exception('Failed to relay'));
     } catch (e) {
@@ -254,7 +252,7 @@ class FuseWalletSDK extends EventEmitter {
     }
   }
 
-  Future<DC<Exception, String>> transferToken(
+  Future<DC<Exception, Stream<SmartWalletEvent>>> transferToken(
     EthPrivateKey cred,
     String tokenAddress,
     String toAddress,
@@ -333,7 +331,7 @@ class FuseWalletSDK extends EventEmitter {
     return _relay(relayDto);
   }
 
-  Future<DC<Exception, String>> transferNFT(
+  Future<DC<Exception, Stream<SmartWalletEvent>>> transferNFT(
     EthPrivateKey cred,
     String nftContract,
     String toAddress,
@@ -401,7 +399,7 @@ class FuseWalletSDK extends EventEmitter {
     return _relay(relayDto);
   }
 
-  Future<DC<Exception, String>> addModule(
+  Future<DC<Exception, Stream<SmartWalletEvent>>> addModule(
     EthPrivateKey cred,
     String disableModuleName,
     String disableModuleAddress,
@@ -452,7 +450,7 @@ class FuseWalletSDK extends EventEmitter {
     return _relay(relayDto);
   }
 
-  Future<DC<Exception, String>> approveToken(
+  Future<DC<Exception, Stream<SmartWalletEvent>>> approveToken(
     EthPrivateKey cred,
     String tokenAddress,
     String value, {
@@ -519,7 +517,7 @@ class FuseWalletSDK extends EventEmitter {
     return _relay(relayDto);
   }
 
-  Future<DC<Exception, String>> callContract(
+  Future<DC<Exception, Stream<SmartWalletEvent>>> callContract(
     EthPrivateKey cred,
     String contractAddress,
     String data, {
@@ -572,7 +570,7 @@ class FuseWalletSDK extends EventEmitter {
     return _relay(relayDto);
   }
 
-  Future<DC<Exception, String>> approveTokenAndCallContract(
+  Future<DC<Exception, Stream<SmartWalletEvent>>> approveTokenAndCallContract(
     EthPrivateKey cred,
     String tokenAddress,
     String contractAddress,
@@ -640,7 +638,7 @@ class FuseWalletSDK extends EventEmitter {
     return _relay(relayDto);
   }
 
-  Future<DC<Exception, String>> swapTokens(
+  Future<DC<Exception, Stream<SmartWalletEvent>>> swapTokens(
     EthPrivateKey cred,
     TradeRequestBody tradeRequestBody,
   ) async {
@@ -682,7 +680,7 @@ class FuseWalletSDK extends EventEmitter {
     }
   }
 
-  Future<DC<Exception, String>> stakeToken(
+  Future<DC<Exception, Stream<SmartWalletEvent>>> stakeToken(
     EthPrivateKey cred,
     StakeRequestBody stakeRequestBody,
   ) async {
@@ -730,7 +728,7 @@ class FuseWalletSDK extends EventEmitter {
     }
   }
 
-  Future<DC<Exception, String>> unstakeToken(
+  Future<DC<Exception, Stream<SmartWalletEvent>>> unstakeToken(
     EthPrivateKey cred,
     UnstakeRequestBody unstakeRequestBody,
   ) async {
@@ -782,7 +780,7 @@ class FuseWalletSDK extends EventEmitter {
     }
   }
 
-  Future<DC<Exception, String>> encodeDataAndApproveTokenAndCallContract(
+  Future<DC<Exception, Stream<SmartWalletEvent>>> encodeDataAndApproveTokenAndCallContract(
     EthPrivateKey cred,
     String jsonInterface,
     String contractAddress,
@@ -811,7 +809,7 @@ class FuseWalletSDK extends EventEmitter {
     );
   }
 
-  Future<DC<Exception, String>> encodeDataAndCallContract(
+  Future<DC<Exception, Stream<SmartWalletEvent>>> encodeDataAndCallContract(
     EthPrivateKey cred,
     String jsonInterface,
     String contractAddress,
