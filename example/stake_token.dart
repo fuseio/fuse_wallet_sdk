@@ -1,4 +1,9 @@
+import 'dart:io';
+
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
+import 'package:fuse_wallet_sdk/src/models/smart_wallet/smart_wallet_event.dart';
+
+import 'create_wallet.dart';
 
 void main() async {
   final String privateKey = await Mnemonic.generatePrivateKey();
@@ -17,51 +22,54 @@ void main() async {
 
     walletData.pick(
       onData: (SmartWallet smartWallet) async {
-        // Relay subscriptions
-        fuseWalletSDK.on('transactionStarted', (eventData) {
-          print('transactionStarted ${eventData.toString()}');
-        });
-        fuseWalletSDK.on('transactionHash', (eventData) {
-          print('transactionHash ${eventData.toString()}');
-        });
-        fuseWalletSDK.on('transactionSucceeded', (eventData) {
-          print('transactionSucceeded ${eventData.toString()}');
-        });
-        fuseWalletSDK.on('transactionFailed', (eventData) {
-          print('transactionFailed ${eventData.toString()}');
-        });
-
-        final StakeRequestBody stakeRequestBody = StakeRequestBody(
+        final stakeRequestBody = StakeRequestBody(
           accountAddress: smartWallet.smartWalletAddress,
           tokenAmount: 'TOKEN_AMOUNT',
           tokenAddress: "TOKEN_ADDRESS",
         );
-        // Sending a gasless transaction
-        await fuseWalletSDK.stakeToken(
+
+        final exceptionOrStream = await fuseWalletSDK.stakeToken(
           credentials,
           stakeRequestBody,
         );
+
+        if (exceptionOrStream.hasError) {
+          final defaultException =
+              Exception("An error occurred while staking tokens.");
+          final exception = exceptionOrStream.error ?? defaultException;
+          print(exception.toString());
+          exit(1);
+        }
+
+        final smartWalletEventStream = exceptionOrStream.data!;
+        smartWalletEventStream.listen(
+          _onSmartWalletEventStream,
+          onError: (error) {
+            print('Error occurred: ${error.toString()}');
+            exit(1);
+          },
+        );
       },
       onError: (Exception exception) async {
-        print('Fetch wallet failed, wallet was not created yet');
-        print('creating...');
-        // Create Wallet subscriptions
-        fuseWalletSDK.on('smartWalletCreationStarted', (eventData) {
-          print('smartWalletCreationStarted ${eventData.toString()}');
-        });
-        fuseWalletSDK.on('transactionHash', (eventData) {
-          print('transactionHash ${eventData.toString()}');
-        });
-        fuseWalletSDK.on('smartWalletCreationSucceeded', (eventData) {
-          print('smartWalletCreationSucceeded ${eventData.toString()}');
-        });
-        fuseWalletSDK.on('smartWalletCreationFailed', (eventData) {
-          print('smartWalletCreationFailed ${eventData.toString()}');
-        });
-
-        // Create Wallet
-        await fuseWalletSDK.createWallet();
+        createWalletAndListenToSmartWalletEventStream(fuseWalletSDK);
       },
     );
+  }
+}
+
+void _onSmartWalletEventStream(SmartWalletEvent event) {
+  switch (event.name) {
+    case 'transactionStarted':
+      print('transactionStarted ${event.data.toString()}');
+      break;
+    case 'transactionHash':
+      print('transactionHash ${event.data.toString()}');
+      break;
+    case 'transactionSucceeded':
+      print('transactionSucceeded ${event.data.toString()}');
+      break;
+    case 'transactionFailed':
+      print('transactionFailed ${event.data.toString()}');
+      break;
   }
 }
