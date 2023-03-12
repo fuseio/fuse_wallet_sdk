@@ -105,6 +105,40 @@ class FuseWalletSDK {
         },
       );
 
+  Future<DC<Exception, BigInt>> _getNativeBalance(
+    String address,
+  ) async {
+    try {
+      final EtherAmount etherAmount =
+          await web3client.getBalance(EthereumAddress.fromHex(address));
+      return DC.data(etherAmount.getInWei);
+    } catch (e) {
+      return DC.error(Exception(e.toString()));
+    }
+  }
+
+  Future<DC<Exception, BigInt>> getBalance(
+    String tokenAddress,
+    String address,
+  ) async {
+    if (tokenAddress.toLowerCase() ==
+        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
+      return _getNativeBalance(address);
+    }
+    try {
+      final List<dynamic> response = await ContractsHelper.readFromContract(
+        web3client,
+        'BasicToken',
+        tokenAddress,
+        'balanceOf',
+        [EthereumAddress.fromHex(address)],
+      );
+      return DC.data(response.first);
+    } catch (e) {
+      return DC.error(Exception(e.toString()));
+    }
+  }
+
   /// This function authenticates the provided credentials by sending a request to the server.
   ///
   /// It takes in an [EthPrivateKey] as an argument and returns a [Future] that resolves to a [DC]
