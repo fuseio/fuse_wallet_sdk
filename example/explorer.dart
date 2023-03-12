@@ -15,10 +15,10 @@ void main() async {
     print("Error occurred in authenticate");
     print(authRes.error);
   } else {
-    final DC<Exception, SmartWallet> walletData = await fuseWalletSDK.fetchWallet();
+    final exceptionOrWallet = await fuseWalletSDK.fetchWallet();
 
     final tokenListData = await fuseWalletSDK.explorerSection.getTokenList(
-      walletData.data!.smartWalletAddress,
+      exceptionOrWallet.data!.smartWalletAddress,
     );
     tokenListData.pick(
       onData: (TokenList tokenList) {
@@ -49,7 +49,7 @@ void main() async {
     final tokenBalanceData =
         await fuseWalletSDK.explorerSection.getTokenBalance(
       Variables.NATIVE_TOKEN_ADDRESS,
-      walletData.data!.smartWalletAddress,
+      exceptionOrWallet.data!.smartWalletAddress,
     );
     tokenBalanceData.pick(
       onData: (BigInt value) {

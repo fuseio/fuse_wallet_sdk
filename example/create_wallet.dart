@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
+import 'package:fuse_wallet_sdk/src/models/smart_wallet/smart_wallet_event.dart';
 
 void main() async {
   final String privateKey = await Mnemonic.generatePrivateKey();
@@ -11,24 +12,46 @@ void main() async {
   print('address: ${credentials.address.hexEip55}');
   final FuseWalletSDK fuseWalletSDK = FuseWalletSDK(publicApiKey);
   await fuseWalletSDK.authenticate(credentials);
+  createWalletAndListenToSmartWalletEventStream(fuseWalletSDK);
+}
 
-  fuseWalletSDK.on('smartWalletCreationStarted', (eventData) {
-    print('smartWalletCreationStarted ${eventData.toString()}');
-  });
+Future<void> createWalletAndListenToSmartWalletEventStream(
+  FuseWalletSDK fuseWalletSDK,
+) async {
+  final exceptionOrStream = await fuseWalletSDK.createWallet();
 
-  fuseWalletSDK.on('transactionHash', (eventData) {
-    print('transactionHash ${eventData.toString()}');
-  });
-
-  fuseWalletSDK.on('smartWalletCreationSucceeded', (eventData) {
-    print('smartWalletCreationSucceeded ${eventData.toString()}');
+  if (exceptionOrStream.hasError) {
+    final defaultCreateWalletException =
+        Exception("An error occurred while creating wallet.");
+    final exception = exceptionOrStream.error ?? defaultCreateWalletException;
+    print(exception.toString());
     exit(1);
-  });
+  }
 
-  fuseWalletSDK.on('smartWalletCreationFailed', (eventData) {
-    print('smartWalletCreationFailed ${eventData.toString()}');
-    exit(1);
-  });
+  final smartWalletEventStream = exceptionOrStream.data!;
 
-  await fuseWalletSDK.createWallet();
+  smartWalletEventStream.listen(
+    _onSmartWalletEvent,
+    onError: (error) {
+      print('Error occurred: ${error.toString()}');
+      exit(1);
+    },
+  );
+}
+
+void _onSmartWalletEvent(SmartWalletEvent event) {
+  switch (event.name) {
+    case "smartWalletCreationStarted":
+      print('smartWalletCreationStarted ${event.data.toString()}');
+      break;
+    case "transactionHash":
+      print('transactionHash ${event.data.toString()}');
+      break;
+    case "smartWalletCreationSucceeded":
+      print('smartWalletCreationSucceeded ${event.data.toString()}');
+      exit(1);
+    case "smartWalletCreationFailed":
+      print('smartWalletCreationFailed ${event.data.toString()}');
+      exit(1);
+  }
 }

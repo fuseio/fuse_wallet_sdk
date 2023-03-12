@@ -15,7 +15,6 @@ dependencies:
   data_channel: ^2.0.0+1
   decimal: ^2.3.2
   dio: ^4.0.6
-  events_emitter: ^0.5.2
   freezed_annotation: ^2.2.0
   gql: ^0.14.0
   graphql: ^5.1.3
