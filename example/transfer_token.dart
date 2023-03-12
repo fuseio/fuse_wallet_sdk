@@ -67,16 +67,16 @@ void main() async {
 void _onSmartWalletEvent(SmartWalletEvent event) {
   switch (event.name) {
     case 'transactionStarted':
-      print('transactionStarted ${event.toString()}');
+      print('transactionStarted ${event.data.toString()}');
       break;
     case 'transactionHash':
-      print('transactionHash ${event.toString()}');
+      print('transactionHash ${event.data.toString()}');
       break;
     case 'transactionSucceeded':
-      print('transactionSucceeded ${event.toString()}');
+      print('transactionSucceeded ${event.data.toString()}');
       exit(1);
     case 'transactionFailed':
-      print('transactionFailed ${event.toString()}');
+      print('transactionFailed ${event.data.toString()}');
       exit(1);
   }
 }
