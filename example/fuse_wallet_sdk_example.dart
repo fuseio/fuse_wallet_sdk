@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
-import 'package:fuse_wallet_sdk/src/models/smart_wallet/smart_wallet_event.dart';
 
 import 'create_wallet.dart';
 
