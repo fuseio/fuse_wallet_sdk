@@ -274,6 +274,7 @@ class FuseWalletSDK {
   /// to receive updates on the transaction and maps the received data to a
   /// stream of SmartWalletEvents.
   ///
+  /// Parameters:
   /// [relay] is the Relay object containing the transaction details to be relayed.
   ///
   /// Returns a Future that resolves to a DC object containing either an
