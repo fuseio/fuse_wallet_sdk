@@ -4,12 +4,24 @@ import 'package:dio/dio.dart';
 import 'package:fuse_wallet_sdk/src/constants/variables.dart';
 import 'package:fuse_wallet_sdk/src/models/models.dart';
 
+/// A class that provides methods for interacting with the Fuse blockchain explorer.
 class ExplorerSection {
   final Dio _dio;
 
+  /// Creates an instance of the [ExplorerSection] class.
+  ///
+  /// Parameters:
+  /// - [_dio] – An instance of [Dio] for making network requests.
   const ExplorerSection(this._dio);
 
-  // Get the native balance for an wallet address
+  /// Gets the native balance of a wallet address.
+  ///
+  /// Parameters:
+  /// - [walletAddress] – The wallet address whose native balance is to be retrieved.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [BigInt] representing the native balance.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, BigInt>> getNativeBalance(
     String walletAddress,
   ) async {
@@ -82,7 +94,7 @@ class ExplorerSection {
   }
 
   /// Retrieves the token balance for a given contract address
-  /// and wallet address from the blockchain explorer API
+  /// and wallet address from the blockchain explorer API.
   ///
   /// Parameters:
   /// - [contractAddress] the contract address

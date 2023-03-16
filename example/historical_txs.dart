@@ -22,8 +22,8 @@ void main() async {
         final historicalActionsData =
             await fuseWalletSDK.getHistoricalActions();
         historicalActionsData.pick(
-          onData: (List<Action> actions) {
-            print('actions ${actions.length}');
+          onData: (ActionResult result) {
+            print('actions ${result.actions.length}');
           },
           onError: (err) {
             print(err);

@@ -2,15 +2,14 @@ import 'dart:math';
 
 import 'package:decimal/decimal.dart';
 
-/// A utility class for formatting and converting wei amounts.
+/// A utility class for formatting and converting token amounts.
 class AmountFormat {
-  /// Converts a value in wei to its equivalent decimal representation, based on the specified number of decimals.
+  /// Converts a token amount from its smallest unit (Wei) to its decimal representation.
   ///
-  /// [value] - The value to convert, in wei.
+  /// [value] - The amount in its smallest unit (BigInt).
+  /// [decimals] - The number of decimal places for the token.
   ///
-  /// [decimals] - The number of decimals for the token.
-  ///
-  /// Returns a Decimal representation of the value.
+  /// Returns the decimal representation of the token amount (Decimal).
   static Decimal fromWei(
     BigInt value,
     int decimals,
@@ -25,13 +24,12 @@ class AmountFormat {
               ))
           .toDecimal();
 
-  /// Formats a value in wei as a string, based on the specified number of decimals.
+  /// Formats a token amount to a string representation.
   ///
-  /// [value] - The value to format, in wei.
+  /// [value] - The amount in its smallest unit (BigInt).
+  /// [decimals] - The number of decimal places for the token.
   ///
-  /// [decimals] - The number of decimals for the token.
-  ///
-  /// Returns a string representation of the value, formatted to display the appropriate number of decimal places.
+  /// Returns the string representation of the token amount (String).
   static String formatValue(
     BigInt value,
     int decimals,
@@ -40,15 +38,12 @@ class AmountFormat {
     return formattedValue.toString();
   }
 
-  /// Converts a value to its equivalent value in wei, based on the specified number of decimals.
+  /// Converts a token amount to its smallest unit (BigInt) representation.
   ///
-  /// [value] - The value to convert.
+  /// [value] - The amount as a dynamic type.
+  /// [decimals] - (Optional) The number of decimal places for the token, defaults to 18.
   ///
-  /// [decimals] - The number of decimals for the token.
-  ///
-  /// Throws an exception if the input value is null.
-  ///
-  /// Returns a BigInt representation of the value in wei.
+  /// Returns the token amount in its smallest unit representation (BigInt).
   static BigInt toBigInt(dynamic value, [int decimals = 18]) {
     if (value == null) throw Exception('Value was not defined');
     final Decimal tokensAmountDecimal = Decimal.parse(value.toString());

@@ -21,7 +21,7 @@ void main() async {
 
     walletData.pick(
       onData: (SmartWallet smartWallet) async {
-        final stakeRequestBody = StakeRequestBody(
+        final StakeRequestBody stakeRequestBody = StakeRequestBody(
           accountAddress: smartWallet.smartWalletAddress,
           tokenAmount: 'TOKEN_AMOUNT',
           tokenAddress: "TOKEN_ADDRESS",

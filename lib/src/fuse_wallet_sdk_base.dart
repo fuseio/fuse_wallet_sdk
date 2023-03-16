@@ -164,9 +164,13 @@ class FuseWalletSDK {
     }
   }
 
-  /// This function is used to fetch the user's smart wallet details from the API.
+  /// Fetches the SmartWallet information for the user.
   ///
-  /// Returns a [DC] object that contains either the [SmartWallet] data or an [Exception] in case of an error.
+  /// This method makes an API call to retrieve the SmartWallet data associated with the user.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [SmartWallet] object representing the user's SmartWallet.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, SmartWallet>> fetchWallet() async {
     try {
       final Response response = await _dio.get(
@@ -184,7 +188,15 @@ class FuseWalletSDK {
     }
   }
 
-  /// This method is used to create a new smart wallet.
+  /// Creates a new smart wallet and returns a stream of [SmartWalletEvent]s.
+  ///
+  /// This function sends a request to create a new smart wallet and listens for the
+  /// events related to the wallet creation process. It returns a stream of [SmartWalletEvent]s
+  /// that can be used to track the wallet creation progress.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [Stream] of [SmartWalletEvent]s.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, Stream<SmartWalletEvent>>> createWallet() async {
     try {
       final Response response = await _dio.post(
@@ -216,17 +228,17 @@ class FuseWalletSDK {
     );
   }
 
-  /// Get a list of historical transactions associated with the authenticated user.
+  /// Retrieves historical actions for a smart wallet, with optional filtering by token address and update time.
   ///
   /// Parameters:
-  /// - [int] page - The page of results to return (defaults to 1).
-  /// - [int] updatedAt - If set, only results with an last update time greater than this timestamp will be returned.
-  /// - [String] tokenAddress - If set, only results related to the given token address will be returned.
+  /// - [page] (optional) – The page number to retrieve, default is 1.
+  /// - [updatedAt] (optional) – Filter actions updated at or after the specified Unix timestamp.
+  /// - [tokenAddress] (optional) – Filter actions related to the specified token address.
   ///
-  /// Returns A [DC] that contains either an [Exception] in the case of a network error,
-  /// or a [List] of [Action]s associated with the authenticated user.
-  ///
-  Future<DC<Exception, List<Action>>> getHistoricalActions({
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with an [ActionResult] object containing the historical actions.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
+  Future<DC<Exception, ActionResult>> getHistoricalActions({
     int page = 1,
     int? updatedAt,
     String? tokenAddress,
@@ -246,8 +258,8 @@ class FuseWalletSDK {
         queryParameters: queryParameters,
         options: options,
       );
-      return DC.data(Action.actionsFromJson(
-        response.data['data']['docs'] ?? [],
+      return DC.data(ActionResult.fromJson(
+        response.data['data'],
       ));
     } catch (e) {
       print(e.toString());
@@ -255,12 +267,17 @@ class FuseWalletSDK {
     }
   }
 
-  /// A function that send a relay object to the relayer service and allows you to send transactions via a regular HTTP API.
+  /// A method to relay a transaction and get a stream of smart wallet events.
   ///
-  /// Parameters:
-  /// - [Relay] relay - The relay object
+  /// This method sends a post request to relay a transaction and obtains a
+  /// transaction ID in response. It then subscribes to the websocket client
+  /// to receive updates on the transaction and maps the received data to a
+  /// stream of SmartWalletEvents.
   ///
-  /// Returns a [Future] with a [DC] containing a possible [Exception] or a [String].
+  /// [relay] is the Relay object containing the transaction details to be relayed.
+  ///
+  /// Returns a Future that resolves to a DC object containing either an
+  /// Exception or a Stream of SmartWalletEvent`s.
   Future<DC<Exception, Stream<SmartWalletEvent>>> _relay(Relay relay) async {
     try {
       // Make a post request to get the transaction id
@@ -813,7 +830,8 @@ class FuseWalletSDK {
     }
   }
 
-  Future<DC<Exception, Stream<SmartWalletEvent>>> encodeDataAndApproveTokenAndCallContract(
+  Future<DC<Exception, Stream<SmartWalletEvent>>>
+      encodeDataAndApproveTokenAndCallContract(
     EthPrivateKey cred,
     String jsonInterface,
     String contractAddress,

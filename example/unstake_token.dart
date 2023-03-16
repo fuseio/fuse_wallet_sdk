@@ -23,7 +23,7 @@ void main() async {
       onData: (SmartWallet smartWallet) async {
         final unstakeRequestBody = UnstakeRequestBody(
           accountAddress: smartWallet.smartWalletAddress,
-          tokenAmount: 'TOKEN_AMOUNTS',
+          tokenAmount: 'TOKEN_AMOUNT',
           tokenAddress: "0x34Ef2Cc892a88415e9f02b91BfA9c91fC0bE6bD4",
         );
 
