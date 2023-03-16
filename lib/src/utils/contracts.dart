@@ -5,7 +5,18 @@ import 'package:fuse_wallet_sdk/src/utils/crypto.dart';
 import 'package:web3dart/crypto.dart';
 import 'package:web3dart/web3dart.dart';
 
+/// A utility class for interacting with Fuse contracts on the Fuse network.
 class ContractsHelper {
+  /// Reads data from a deployed contract by invoking a specific function.
+  ///
+  /// [client] is the Web3Client instance to interact with the Fuse network.
+  /// [contractName] is the name of the contract.
+  /// [contractAddress] is the address of the deployed contract.
+  /// [functionName] is the name of the function to be called.
+  /// [params] is a list of parameters to pass to the function.
+  /// [jsonInterface] is the optional JSON ABI interface of the contract.
+  ///
+  /// Returns a list of dynamic values that are the result of the contract function call.
   static Future<List<dynamic>> readFromContract(
     Web3Client client,
     String contractName,
@@ -26,6 +37,13 @@ class ContractsHelper {
     );
   }
 
+  /// Returns a DeployedContract instance from the given contract information.
+  ///
+  /// [contractName] is the name of the contract.
+  /// [contractAddress] is the address of the deployed contract.
+  /// [jsonInterface] is the optional JSON ABI interface of the contract.
+  ///
+  /// Returns a DeployedContract instance.
   static DeployedContract getDeployedContract(
     String contractName,
     String contractAddress, {
@@ -40,6 +58,19 @@ class ContractsHelper {
     );
     return contract;
   }
+
+  /// Encodes data for a contract function call.
+  ///
+  /// [contractName] is the name of the contract.
+  /// [contractAddress] is the address of the deployed contract.
+  /// [functionName] is the name of the function to be called.
+  /// [params] is a list of parameters to pass to the function.
+  /// [jsonInterface] is the optional JSON ABI interface of the contract.
+  /// [include0x] indicates whether to include the '0x' prefix in the result.
+  /// [forcePadLength] is the optional padding length to force the result to be.
+  /// [padToEvenLength] indicates whether to pad the result to an even length.
+  ///
+  /// Returns the encoded data as a hex string.
 
   static String getEncodedDataForContractCall(
     String contractName,
@@ -65,6 +96,18 @@ class ContractsHelper {
     );
   }
 
+  /// Signs an off-chain message for an Fuse transaction.
+  ///
+  /// [credentials] are the Fuse private key credentials.
+  /// [from] is the sender's Fuse address.
+  /// [to] is the recipient's Fuse address.
+  /// [value] is the amount of Ether to send.
+  /// [data] is the transaction payload data as a hex string.
+  /// [nonce] is the sender's nonce as a hex string.
+  /// [gasPrice] is the gas price for the transaction.
+  /// [gasLimit] is the gas limit for the transaction.
+  ///
+  /// Returns the signed message as a hex string.
   static String signOffChain(
     EthPrivateKey credentials,
     String from,

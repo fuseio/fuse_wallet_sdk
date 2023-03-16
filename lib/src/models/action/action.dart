@@ -5,16 +5,28 @@ import 'package:fuse_wallet_sdk/src/models/trade/trade.dart';
 part 'action.freezed.dart';
 part 'action.g.dart';
 
+/// A class representing different types of actions related to wallet operations.
+///
+/// It implements the [Comparable] interface, allowing Actions to be compared based on their timestamps.
 @Freezed(unionKey: 'name')
 class Action with _$Action implements Comparable<Action> {
   const Action._();
 
+  /// Compares this [Action] to [other], based on their timestamps.
+  ///
+  /// Returns:
+  /// - A positive integer if this [Action] is greater than [other].
+  /// - A negative integer if this [Action] is less than [other].
+  /// - 0 if this [Action] is equal to [other].
   @override
   int compareTo(Action? other) {
     if (other == null) return 1;
     return timestamp.compareTo(other.timestamp);
   }
 
+  /// Creates an [Action] from a [Map] of key-value pairs.
+  ///
+  /// Returns: A new [Action] instance.
   static Action create(Map<String, dynamic> json) {
     json =
         json.containsKey('data') ? Map.from({...json, ...json['data']}) : json;
@@ -30,6 +42,9 @@ class Action with _$Action implements Comparable<Action> {
     return Action.fromJson(json);
   }
 
+  /// Creates a list of [Action] objects from an iterable of dynamic objects.
+  ///
+  /// Returns: A list of [Action] objects.
   static List<Action> actionsFromJson(Iterable<dynamic> docs) =>
       List.from(docs).fold<List<Action>>([], (previousValue, action) {
         try {
@@ -39,6 +54,9 @@ class Action with _$Action implements Comparable<Action> {
         }
       });
 
+  /// Creates an [Action] from a JSON object.
+  ///
+  /// Returns: A new [Action] instance.
   factory Action.fromJson(dynamic json) => _$ActionFromJson(json);
 
   bool isPending() => status == 'PENDING' || status == 'STARTED';

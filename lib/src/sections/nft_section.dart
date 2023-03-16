@@ -7,6 +7,9 @@ import 'package:fuse_wallet_sdk/src/utils/queries.dart';
 class NftSection {
   final GraphQLClient _graphQLClient;
 
+  /// Creates an instance of [NftSection] with the given NFT subgraph URL.
+  ///
+  /// [nftSubgraph] is the NFT subgraph URL. Defaults to [https://api.thegraph.com/subgraphs/name/fuseio/fuse-nft].
   NftSection({
     String nftSubgraph = Variables.NFT_SUB_GRAPH_URL,
   }) : _graphQLClient = GraphQLClient(
@@ -14,6 +17,11 @@ class NftSection {
           cache: GraphQLCache(),
         );
 
+  /// Retrieves the collectibles owned by a specified address.
+  ///
+  /// [owner] is the owner's address.
+  ///
+  /// Returns a [Future] that resolves to a [DC] containing either an [OperationException] or a [Map] of collectibles.
   Future<DC<OperationException?, Map<String, Map<int, Collectible>>>>
       getCollectiblesByOwner(
     String owner,

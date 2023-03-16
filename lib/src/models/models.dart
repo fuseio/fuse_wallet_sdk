@@ -1,4 +1,5 @@
 export 'action/action.dart';
+export 'action/action_result.dart';
 export 'auth/auth.dto.dart';
 export 'collectible/collectible.dart';
 export 'relay/relay.dart';
