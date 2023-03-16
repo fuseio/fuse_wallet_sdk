@@ -1,16 +1,26 @@
-## 0.0.4
+# CHANGELOG
 
-### Updates
-- Use build-in Stream class instead of extending `EventEmitter`
-- Added `getBalance` function for getting token balances directly from the blockchain
+## [0.0.5]
 
-## 0.0.3
+### Added
+- Added comprehensive documentation to the package, making it easier for users to understand and use the package effectively.
+- Introduced a new model `ActionResult` which provides information on the next page of actions, the next page number, and a list of actions.
 
-## 0.0.2
+## [0.0.4]
 
-### Updates
-- Added historical transactions functionality  
+### Changed
+- Replaced custom `EventEmitter` extension with the built-in `Stream` class for improved compatibility and maintainability.
+- Added a `getBalance` function to allow users to retrieve token balances directly from the blockchain.
 
-## 0.0.1
+## [0.0.3]
 
-- Initial version.
+(No changes in this version)
+
+## [0.0.2]
+
+### Added
+- Implemented historical transactions functionality to enable users to access and analyze past transactions.
+
+## [0.0.1]
+
+- Initial release of the package.
