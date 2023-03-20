@@ -15,20 +15,19 @@ class Mnemonic {
   /// Validates a BIP-39 mnemonic.
   ///
   /// Returns true if the mnemonic is valid, and false otherwise.
-  static bool validateMnemonic(String mnemonic) =>
-      bip39.validateMnemonic(mnemonic);
+  static bool isValid(String mnemonic) => bip39.validateMnemonic(mnemonic);
 
   /// Derives a private key from a BIP-39 mnemonic using a given derivation path and passphrase.
   ///
   /// [mnemonic] - The BIP-39 mnemonic to derive the private key from.
-  /// [derivePath] - The derivation path to use (default "m/44'/60'/0'/0/").
+  /// [derivationPath] - The derivation path to use (default "m/44'/60'/0'/0/").
   /// [childIndex] - The index of the child key to derive (default 0).
   /// [passphrase] - The optional passphrase to use when deriving the key (default "").
   ///
   /// Returns a string representing the derived private key.
   static String privateKeyFromMnemonic(
     String mnemonic, {
-    String derivePath = "m/44'/60'/0'/0/",
+    String derivationPath = "m/44'/60'/0'/0/",
     int childIndex = 0,
     String passphrase = "",
   }) {
@@ -36,11 +35,13 @@ class Mnemonic {
       mnemonic,
       passphrase: passphrase,
     );
-    final bip32.BIP32 root = bip32.BIP32.fromSeed(
+    final bip32.BIP32 rootNode = bip32.BIP32.fromSeed(
       HEX.decode(seed) as Uint8List,
     );
-    final bip32.BIP32 child = root.derivePath("$derivePath$childIndex");
-    final String privateKey = HEX.encode(child.privateKey!);
+    final bip32.BIP32 childNode = rootNode.derivePath(
+      "$derivationPath$childIndex",
+    );
+    final String privateKey = HEX.encode(childNode.privateKey!);
     return privateKey;
   }
 

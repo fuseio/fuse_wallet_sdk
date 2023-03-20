@@ -1,22 +1,28 @@
+import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:fuse_wallet_sdk/src/utils/abis.dart';
-import 'package:fuse_wallet_sdk/src/utils/crypto.dart';
+import 'package:fuse_wallet_sdk/src/constants/variables.dart';
+import 'package:path/path.dart' show join;
 import 'package:web3dart/crypto.dart';
 import 'package:web3dart/web3dart.dart';
 
-/// A utility class for interacting with Fuse contracts on the Fuse network.
+import 'package:fuse_wallet_sdk/src/utils/crypto.dart';
+
+/// A utility class providing methods to interact with contracts.
+///
+/// `ContractsHelper` simplifies tasks such as reading from a contract,
+/// encoding data for contract calls, and signing off-chain transactions.
 class ContractsHelper {
-  /// Reads data from a deployed contract by invoking a specific function.
+  /// Reads data from a deployed contract using the specified function and parameters.
   ///
-  /// [client] is the Web3Client instance to interact with the Fuse network.
+  /// [client] is the web3 client instance to interact with the Fuse network.
   /// [contractName] is the name of the contract.
   /// [contractAddress] is the address of the deployed contract.
   /// [functionName] is the name of the function to be called.
-  /// [params] is a list of parameters to pass to the function.
-  /// [jsonInterface] is the optional JSON ABI interface of the contract.
+  /// [params] is a list of parameters to be passed to the function.
+  /// [jsonInterface] is an optional JSON string representing the contract ABI.
   ///
-  /// Returns a list of dynamic values that are the result of the contract function call.
+  /// Returns a `Future` that resolves to a list of values returned by the contract function.
   static Future<List<dynamic>> readFromContract(
     Web3Client client,
     String contractName,
@@ -24,8 +30,8 @@ class ContractsHelper {
     String functionName,
     List<dynamic> params, {
     String? jsonInterface,
-  }) {
-    final DeployedContract contract = getDeployedContract(
+  }) async {
+    final DeployedContract contract = await _getDeployedContract(
       contractName,
       contractAddress,
       jsonInterface: jsonInterface,
@@ -37,19 +43,19 @@ class ContractsHelper {
     );
   }
 
-  /// Returns a DeployedContract instance from the given contract information.
+  /// Retrieves the deployed contract instance using the contract name and address.
   ///
   /// [contractName] is the name of the contract.
   /// [contractAddress] is the address of the deployed contract.
-  /// [jsonInterface] is the optional JSON ABI interface of the contract.
+  /// [jsonInterface] is an optional JSON string representing the contract ABI.
   ///
-  /// Returns a DeployedContract instance.
-  static DeployedContract getDeployedContract(
+  /// Returns a `Future` that resolves to a `DeployedContract` instance.
+  static Future<DeployedContract> _getDeployedContract(
     String contractName,
     String contractAddress, {
     String? jsonInterface,
-  }) {
-    final String abi = jsonInterface ?? ABI.get(contractName);
+  }) async {
+    final String abi = jsonInterface ?? await _readAbiFile(contractName);
     final ContractAbi contractAbi = ContractAbi.fromJson(abi, contractName);
     final EthereumAddress address = EthereumAddress.fromHex(contractAddress);
     final DeployedContract contract = DeployedContract(
@@ -59,20 +65,19 @@ class ContractsHelper {
     return contract;
   }
 
-  /// Encodes data for a contract function call.
+  /// Encodes data for a contract call using the specified function and parameters.
   ///
   /// [contractName] is the name of the contract.
   /// [contractAddress] is the address of the deployed contract.
   /// [functionName] is the name of the function to be called.
-  /// [params] is a list of parameters to pass to the function.
-  /// [jsonInterface] is the optional JSON ABI interface of the contract.
-  /// [include0x] indicates whether to include the '0x' prefix in the result.
-  /// [forcePadLength] is the optional padding length to force the result to be.
-  /// [padToEvenLength] indicates whether to pad the result to an even length.
+  /// [params] is a list of parameters to be passed to the function.
+  /// [jsonInterface] is an optional JSON string representing the contract ABI.
+  /// [include0x] is a flag to include the '0x' prefix in the encoded data.
+  /// [forcePadLength] is an optional integer to force padding of the output data.
+  /// [padToEvenLength] is a flag to pad the output data to an even length.
   ///
-  /// Returns the encoded data as a hex string.
-
-  static String getEncodedDataForContractCall(
+  /// Returns a `Future` that resolves to the encoded data as a hex string.
+  static Future<String> encodedDataForContractCall(
     String contractName,
     String contractAddress,
     String functionName,
@@ -81,8 +86,8 @@ class ContractsHelper {
     bool include0x = false,
     int? forcePadLength,
     bool padToEvenLength = false,
-  }) {
-    final DeployedContract contract = getDeployedContract(
+  }) async {
+    final DeployedContract contract = await _getDeployedContract(
       contractName,
       contractAddress,
       jsonInterface: jsonInterface,
@@ -96,38 +101,39 @@ class ContractsHelper {
     );
   }
 
-  /// Signs an off-chain message for an Fuse transaction.
+  /// Signs an off-chain transaction using the provided credentials and transaction data.
   ///
-  /// [credentials] are the Fuse private key credentials.
-  /// [from] is the sender's Fuse address.
-  /// [to] is the recipient's Fuse address.
-  /// [value] is the amount of Ether to send.
-  /// [data] is the transaction payload data as a hex string.
-  /// [nonce] is the sender's nonce as a hex string.
-  /// [gasPrice] is the gas price for the transaction.
-  /// [gasLimit] is the gas limit for the transaction.
+  /// [credentials] is the private key used for signing.
+  /// [from] is the address of the sender.
+  /// [to] is the address of the receiver.
+  /// [data] is the transaction data to be sent.
+  /// [nonce] is the nonce of the transaction.
+  /// [value] is the optional amount of Ether to be sent.
+  /// [gasPrice] is the optional gas price for the transaction.
+  /// [gasLimit] is the optional gas limit for the transaction.
   ///
-  /// Returns the signed message as a hex string.
+  /// Returns a hex string representing the signed transaction.
   static String signOffChain(
     EthPrivateKey credentials,
     String from,
     String to,
-    BigInt value,
     String data,
-    String nonce,
-    BigInt gasPrice,
-    BigInt gasLimit,
-  ) {
+    String nonce, {
+    BigInt? value,
+    BigInt? gasPrice,
+    BigInt? gasLimit,
+  }) {
     final List<String> inputArr = [
       '0x19',
       '0x00',
       from,
       to,
-      hexZeroPad(hexlify(value), 32),
+      hexZeroPad(hexlify(value ?? BigInt.from(0)), 32),
       data,
       nonce,
-      hexZeroPad(hexlify(gasPrice), 32),
-      hexZeroPad(hexlify(gasLimit), 32)
+      hexZeroPad(hexlify(gasPrice ?? BigInt.from(0)), 32),
+      hexZeroPad(
+          hexlify(gasLimit ?? BigInt.from(Variables.DEFAULT_GAS_LIMIT)), 32)
     ];
     final String input =
         '0x${inputArr.map((hexStr) => hexStr.toString().substring(2)).join('')}';
@@ -136,5 +142,12 @@ class ContractsHelper {
       messagePayload,
     );
     return bytesToHex(signature, include0x: true);
+  }
+
+  static Future<String> _readAbiFile(String contractName) async {
+    final File abiFile = File(
+      join('lib/src/constants/abis', '$contractName.json'),
+    );
+    return await abiFile.readAsString();
   }
 }
