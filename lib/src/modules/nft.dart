@@ -4,13 +4,13 @@ import 'package:graphql/client.dart';
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 import 'package:fuse_wallet_sdk/src/utils/queries.dart';
 
-class NftSection {
+class NftModule {
   final GraphQLClient _graphQLClient;
 
-  /// Creates an instance of [NftSection] with the given NFT subgraph URL.
+  /// Creates an instance of [NftModule] with the given NFT subgraph URL.
   ///
   /// [nftSubgraph] is the NFT subgraph URL. Defaults to [https://api.thegraph.com/subgraphs/name/fuseio/fuse-nft].
-  NftSection({
+  NftModule({
     String nftSubgraph = Variables.NFT_SUB_GRAPH_URL,
   }) : _graphQLClient = GraphQLClient(
           link: HttpLink(nftSubgraph),

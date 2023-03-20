@@ -26,7 +26,7 @@ void main() async {
         final String nftContractAddress = '0x...';
         final num tokenId = 0; // YOUR ITEM ID
 
-        final exceptionOrStream = await fuseWalletSDK.transferNFT(
+        final exceptionOrStream = await fuseWalletSDK.transferNft(
           credentials,
           nftContractAddress,
           receiverAddress,

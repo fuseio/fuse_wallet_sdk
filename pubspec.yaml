@@ -21,6 +21,7 @@ dependencies:
   hex: ^0.2.0
   http: ^0.13.5
   json_annotation: ^4.8.0
+  path: ^1.8.3
   web3dart: ^2.5.3
 
 dev_dependencies:
