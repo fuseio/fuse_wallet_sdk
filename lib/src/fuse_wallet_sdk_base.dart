@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:centrifuge/centrifuge.dart';
 import 'package:data_channel/data_channel.dart';
 import 'package:dio/dio.dart';
 import 'package:hex/hex.dart';
@@ -10,15 +11,22 @@ import 'package:web3dart/web3dart.dart';
 
 import 'package:fuse_wallet_sdk/src/constants/variables.dart';
 import 'package:fuse_wallet_sdk/src/models/models.dart';
-import 'package:fuse_wallet_sdk/src/modules/modules.dart';
-import 'package:fuse_wallet_sdk/src/utils/utils.dart';
+import 'package:fuse_wallet_sdk/src/sections/explorer_section.dart';
+import 'package:fuse_wallet_sdk/src/sections/nft_section.dart';
+import 'package:fuse_wallet_sdk/src/sections/staking_section.dart';
+import 'package:fuse_wallet_sdk/src/sections/trade_section.dart';
+import 'package:fuse_wallet_sdk/src/utils/auth.dart';
+import 'package:fuse_wallet_sdk/src/utils/contracts.dart';
+import 'package:fuse_wallet_sdk/src/utils/crypto.dart';
+import 'package:fuse_wallet_sdk/src/utils/format.dart';
+import 'package:fuse_wallet_sdk/src/utils/websocket.dart';
 
 class FuseWalletSDK {
   /// The public API key used to access the Fuse API.
   final String publicApiKey;
 
   /// The smart wallet associated with the authenticated user.
-  late SmartWallet smartWallet;
+  late SmartWallet _smartWallet;
 
   /// The JWT token returned after authentication.
   late String _jwtToken;
@@ -29,7 +37,7 @@ class FuseWalletSDK {
   /// The Web3 client used for sending requests over an HTTP JSON-RPC API endpoint to Ethereum clients.
   final Web3Client web3client;
 
-  late final WebSocketConnection webSocketConnection;
+  late final Websocket websocket;
 
   /// Constructs a new instance of [FuseWalletSDK].
   ///
@@ -52,32 +60,28 @@ class FuseWalletSDK {
           ),
         ),
         web3client = Web3Client(rpcUrl, http.Client()) {
-    _initializeModules();
+    _tradeSection = TradeSection(_dio);
+    _explorerSection = ExplorerSection(_dio);
+    _stakingSection = StakingSection(_dio);
+    _nftSection = NftSection();
   }
 
-  void _initializeModules() {
-    _tradeModule = TradeModule(_dio);
-    _explorerModule = ExplorerModule(_dio);
-    _stakingModule = StakingModule(_dio);
-    _nftModule = NftModule();
-  }
+  late ExplorerSection _explorerSection;
+  late TradeSection _tradeSection;
+  late StakingSection _stakingSection;
+  late NftSection _nftSection;
 
-  late ExplorerModule _explorerModule;
-  late TradeModule _tradeModule;
-  late StakingModule _stakingModule;
-  late NftModule _nftModule;
+  ExplorerSection get explorerSection => _explorerSection;
 
-  ExplorerModule get explorerModule => _explorerModule;
+  TradeSection get tradeSection => _tradeSection;
 
-  TradeModule get tradeModule => _tradeModule;
+  StakingSection get stakingSection => _stakingSection;
 
-  StakingModule get stakingModule => _stakingModule;
-
-  NftModule get nftModule => _nftModule;
+  NftSection get nftSection => _nftSection;
 
   set jwtToken(String value) => _jwtToken = value;
 
-  set setWallet(SmartWallet value) => smartWallet = value;
+  set smartWallet(SmartWallet value) => _smartWallet = value;
 
   Future<String> getNonceForRelay() async {
     final BigInt block = BigInt.from(await web3client.getBlockNumber());
@@ -94,11 +98,45 @@ class FuseWalletSDK {
     );
   }
 
-  Options get _options => Options(
+  Options get options => Options(
         headers: {
           'Authorization': 'Bearer $_jwtToken',
         },
       );
+
+  Future<DC<Exception, BigInt>> _getNativeBalance(
+    String address,
+  ) async {
+    try {
+      final EtherAmount etherAmount =
+          await web3client.getBalance(EthereumAddress.fromHex(address));
+      return DC.data(etherAmount.getInWei);
+    } catch (e) {
+      return DC.error(Exception(e.toString()));
+    }
+  }
+
+  Future<DC<Exception, BigInt>> getBalance(
+    String tokenAddress,
+    String address,
+  ) async {
+    if (tokenAddress.toLowerCase() ==
+        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
+      return _getNativeBalance(address);
+    }
+    try {
+      final List<dynamic> response = await ContractsHelper.readFromContract(
+        web3client,
+        'BasicToken',
+        tokenAddress,
+        'balanceOf',
+        [EthereumAddress.fromHex(address)],
+      );
+      return DC.data(response.first);
+    } catch (e) {
+      return DC.error(Exception(e.toString()));
+    }
+  }
 
   /// This function authenticates the provided credentials by sending a request to the server.
   ///
@@ -119,7 +157,7 @@ class FuseWalletSDK {
       );
       final String jwt = response.data['jwt'];
       jwtToken = jwt;
-      webSocketConnection = await WebSocketConnection.init(jwt);
+      websocket = await Websocket.init(jwt);
       return DC.data(jwt);
     } catch (e) {
       return DC.error(Exception(e.toString()));
@@ -137,14 +175,14 @@ class FuseWalletSDK {
     try {
       final Response response = await _dio.get(
         '/v1/smart-wallets',
-        options: _options,
+        options: options,
       );
       if (response.statusCode != 200) {
         return DC.error(Exception('Failed to fetch wallet'));
       }
-      final SmartWallet smartWallet = SmartWallet.fromJson(response.data);
-      setWallet = smartWallet;
-      return DC.data(smartWallet);
+      final SmartWallet account = SmartWallet.fromJson(response.data);
+      smartWallet = account;
+      return DC.data(account);
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
@@ -163,20 +201,31 @@ class FuseWalletSDK {
     try {
       final Response response = await _dio.post(
         '/v1/smart-wallets/create',
-        options: _options,
+        options: options,
       );
       if (response.statusCode == 201) {
         final String transactionId = response.data['transactionId'];
-        final stream = webSocketConnection.client
-            .newSubscription('transaction:#$transactionId')
-            .publication
-            .map(_toSmartWalletEventStream);
-        return DC.data(stream);
+        final Subscription subscription = websocket.client.newSubscription(
+          'transaction:#$transactionId',
+        );
+        final smartWalletEventStream =
+            subscription.publication.map(_toSmartWalletEventStream);
+        return DC.data(smartWalletEventStream);
       }
       return DC.error(Exception('Failed to create wallet'));
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
+  }
+
+  SmartWalletEvent _toSmartWalletEventStream(publicationEvent) {
+    final Map data = jsonDecode(
+      utf8.decode(publicationEvent.data, allowMalformed: true),
+    );
+    return SmartWalletEvent(
+      name: data['eventName'],
+      data: data['eventData'],
+    );
   }
 
   /// Retrieves historical actions for a smart wallet, with optional filtering by token address and update time.
@@ -207,7 +256,7 @@ class FuseWalletSDK {
       final Response response = await _dio.get(
         '/v1/smart-wallets/historical_txs',
         queryParameters: queryParameters,
-        options: _options,
+        options: options,
       );
       return DC.data(ActionResult.fromJson(
         response.data['data'],
@@ -232,18 +281,21 @@ class FuseWalletSDK {
   /// Exception or a Stream of SmartWalletEvent`s.
   Future<DC<Exception, Stream<SmartWalletEvent>>> _relay(Relay relay) async {
     try {
-      final response = await _dio.post(
+      // Make a post request to get the transaction id
+      final Response response = await _dio.post(
         '/v1/smart-wallets/relay',
-        options: _options,
+        options: options,
         data: relay.toJson(),
       );
       if (response.statusCode == 201) {
-        final transactionId = response.data['transactionId'];
-        final stream = webSocketConnection.client
-            .newSubscription('transaction:#$transactionId')
-            .publication
-            .map(_toSmartWalletEventStream);
-        return DC.data(stream);
+        // Success, now we have the transaction id
+        final String transactionId = response.data['transactionId'];
+        final Subscription subscription = websocket.client.newSubscription(
+          'transaction:#$transactionId',
+        );
+        final smartWalletEventStream =
+            subscription.publication.map(_toSmartWalletEventStream);
+        return DC.data(smartWalletEventStream);
       }
       return DC.error(Exception('Failed to relay'));
     } catch (e) {
@@ -252,14 +304,21 @@ class FuseWalletSDK {
   }
 
   Future<DC<Exception, Stream<SmartWalletEvent>>> transferToken(
-    EthPrivateKey credentials,
+    EthPrivateKey cred,
     String tokenAddress,
-    String recipientAddress,
+    String toAddress,
     String value, {
-    String transactionData = '0x',
+    String txData = '0x',
     String? externalId,
   }) async {
-    final tokenDetailsRes = await _explorerModule.getTokenDetails(tokenAddress);
+    final String walletModule = 'TransferManager';
+    final String methodName = 'transferToken';
+    final EthereumAddress wallet =
+        EthereumAddress.fromHex(_smartWallet.smartWalletAddress);
+    final EthereumAddress token = EthereumAddress.fromHex(tokenAddress);
+    final EthereumAddress receiver = EthereumAddress.fromHex(toAddress);
+    final DC<Exception, TokenDetails> tokenDetailsRes =
+        await _explorerSection.getTokenDetails(tokenAddress);
 
     if (tokenDetailsRes.hasError) {
       return DC.error(tokenDetailsRes.error!);
@@ -270,34 +329,35 @@ class FuseWalletSDK {
       tokenDetailsRes.data!.decimals,
     );
 
-    final String walletModule = 'TransferManager';
-    final String methodName = 'transferToken';
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsHelper.getEncodedDataForContractCall(
       walletModule,
-      smartWallet.walletModules.transferManager,
+      _smartWallet.walletModules.transferManager,
       methodName,
       [
-        EthereumAddress.fromHex(smartWallet.smartWalletAddress),
-        EthereumAddress.fromHex(tokenAddress),
-        EthereumAddress.fromHex(recipientAddress),
+        wallet,
+        token,
+        receiver,
         amount,
-        hexToBytes(transactionData),
+        hexToBytes(txData),
       ],
       include0x: true,
     );
-    final String nonce = await getNonceForRelay();
+    String nonce = await getNonceForRelay();
     final String signature = ContractsHelper.signOffChain(
-      credentials,
-      smartWallet.walletModules.transferManager,
-      smartWallet.smartWalletAddress,
+      cred,
+      _smartWallet.walletModules.transferManager,
+      _smartWallet.smartWalletAddress,
+      BigInt.from(0),
       data,
       nonce,
+      BigInt.from(0),
+      BigInt.from(Variables.DEFAULT_GAS_LIMIT),
     );
 
     final Map<String, dynamic> txBody = Map.from({
       "status": 'pending',
-      "from": smartWallet.smartWalletAddress,
-      "to": recipientAddress,
+      "from": _smartWallet.smartWalletAddress,
+      "to": toAddress,
       "value": amount.toString(),
       'type': 'SEND',
       "asset": tokenDetailsRes.data?.symbol,
@@ -308,8 +368,8 @@ class FuseWalletSDK {
     });
 
     final Relay relayDto = Relay(
-      walletModuleAddress: smartWallet.walletModules.transferManager,
-      walletAddress: smartWallet.smartWalletAddress,
+      walletModuleAddress: _smartWallet.walletModules.transferManager,
+      walletAddress: _smartWallet.smartWalletAddress,
       data: data,
       nonce: nonce,
       methodName: methodName,
@@ -322,95 +382,114 @@ class FuseWalletSDK {
     return _relay(relayDto);
   }
 
-  Future<DC<Exception, Stream<SmartWalletEvent>>> transferNft(
-    EthPrivateKey credentials,
-    String nftContractAddress,
-    String recipientAddress,
+  Future<DC<Exception, Stream<SmartWalletEvent>>> transferNFT(
+    EthPrivateKey cred,
+    String nftContract,
+    String toAddress,
     num tokenId, {
-    bool? isSafeTransfer = false,
-    String transactionData = '0x',
-    Map<String, dynamic>? transactionDetails = const {},
+    bool? safe = false,
+    String txData = '0x',
+    Map<String, dynamic>? transactionBody = const {},
   }) async {
     final String methodName = 'transferNFT';
     final String walletModule = 'NftTransfer';
-    final String walletModuleAddress = smartWallet.walletModules.nftTransfer!;
+    final EthereumAddress wallet = EthereumAddress.fromHex(
+      _smartWallet.smartWalletAddress,
+    );
+    final EthereumAddress contract = EthereumAddress.fromHex(nftContract);
+    final EthereumAddress receiver = EthereumAddress.fromHex(toAddress);
+    final BigInt id = BigInt.from(tokenId);
+    final String walletModuleAddress = _smartWallet.walletModules.nftTransfer!;
 
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsHelper.getEncodedDataForContractCall(
       walletModule,
       walletModuleAddress,
       methodName,
       [
-        EthereumAddress.fromHex(smartWallet.smartWalletAddress),
-        EthereumAddress.fromHex(nftContractAddress),
-        EthereumAddress.fromHex(recipientAddress),
-        BigInt.from(tokenId),
-        isSafeTransfer,
-        hexToBytes(transactionData),
+        wallet,
+        contract,
+        receiver,
+        id,
+        safe,
+        hexToBytes(txData),
       ],
       include0x: true,
     );
 
-    final Map<String, dynamic> transactionBody = Map.from({
-      "from": smartWallet.smartWalletAddress,
-      "to": recipientAddress,
-      'tokenAddress': nftContractAddress,
+    final Map<String, dynamic> txBody = Map.from({
+      "from": _smartWallet.smartWalletAddress,
+      "to": toAddress,
+      'tokenAddress': nftContract,
       "status": 'pending',
-      ...?transactionDetails,
+      ...?transactionBody,
     });
 
     final String nonce = await getNonceForRelay();
     final String signature = ContractsHelper.signOffChain(
-      credentials,
+      cred,
       walletModuleAddress,
-      smartWallet.smartWalletAddress,
+      _smartWallet.smartWalletAddress,
+      BigInt.from(0),
       data,
       nonce,
+      BigInt.from(0),
+      BigInt.from(Variables.DEFAULT_GAS_LIMIT),
     );
 
     final Relay relayDto = Relay(
       walletModuleAddress: walletModuleAddress,
-      walletAddress: smartWallet.smartWalletAddress,
+      walletAddress: _smartWallet.smartWalletAddress,
       data: data,
       nonce: nonce,
       methodName: methodName,
       signature: signature,
       walletModule: walletModule,
-      transactionBody: transactionBody,
+      transactionBody: txBody,
     );
 
     return _relay(relayDto);
   }
 
   Future<DC<Exception, Stream<SmartWalletEvent>>> addModule(
-    EthPrivateKey credentials,
+    EthPrivateKey cred,
     String disableModuleName,
     String disableModuleAddress,
     String enableModuleAddress, {
+    String methodName = 'addModule',
     Map<String, dynamic>? transactionBody,
   }) async {
-    final String methodName = 'addModule';
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final EthereumAddress wallet = EthereumAddress.fromHex(
+      _smartWallet.smartWalletAddress,
+    );
+    final EthereumAddress newModule = EthereumAddress.fromHex(
+      enableModuleAddress,
+    );
+
+    final String data = ContractsHelper.getEncodedDataForContractCall(
       disableModuleName,
       disableModuleAddress,
       methodName,
       [
-        EthereumAddress.fromHex(smartWallet.smartWalletAddress),
-        EthereumAddress.fromHex(enableModuleAddress),
+        wallet,
+        newModule,
       ],
       include0x: true,
     );
     final String nonce = await getNonceForRelay();
     final String signature = ContractsHelper.signOffChain(
-      credentials,
+      cred,
       disableModuleAddress,
-      smartWallet.smartWalletAddress,
+      _smartWallet.smartWalletAddress,
+      BigInt.from(0),
       data,
       nonce,
+      BigInt.from(0),
+      BigInt.from(Variables.DEFAULT_GAS_LIMIT),
     );
 
     final Relay relayDto = Relay(
-      walletModuleAddress: smartWallet.walletModules.transferManager,
-      walletAddress: smartWallet.smartWalletAddress,
+      walletModuleAddress: _smartWallet.walletModules.transferManager,
+      walletAddress: _smartWallet.smartWalletAddress,
       data: data,
       nonce: nonce,
       methodName: methodName,
@@ -423,13 +502,23 @@ class FuseWalletSDK {
   }
 
   Future<DC<Exception, Stream<SmartWalletEvent>>> approveToken(
-    EthPrivateKey credentials,
+    EthPrivateKey cred,
     String tokenAddress,
-    String spender,
     String value, {
+    String? spenderContract,
     Map<String, dynamic>? transactionBody,
   }) async {
-    final tokenDetailsRes = await _explorerModule.getTokenDetails(tokenAddress);
+    final String walletModule = 'TransferManager';
+    final String methodName = 'approveToken';
+    final EthereumAddress wallet =
+        EthereumAddress.fromHex(_smartWallet.smartWalletAddress);
+    final EthereumAddress token = EthereumAddress.fromHex(tokenAddress);
+    EthereumAddress spender = wallet;
+    if (spenderContract != null) {
+      spender = EthereumAddress.fromHex(spenderContract);
+    }
+    final DC<Exception, TokenDetails> tokenDetailsRes =
+        await _explorerSection.getTokenDetails(tokenAddress);
 
     if (tokenDetailsRes.hasError) {
       return DC.error(tokenDetailsRes.error!);
@@ -440,16 +529,14 @@ class FuseWalletSDK {
       tokenDetailsRes.data!.decimals,
     );
 
-    final String walletModule = 'TransferManager';
-    final String methodName = 'approveToken';
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsHelper.getEncodedDataForContractCall(
       walletModule,
-      smartWallet.walletModules.transferManager,
+      _smartWallet.walletModules.transferManager,
       methodName,
       [
-        EthereumAddress.fromHex(smartWallet.smartWalletAddress),
-        EthereumAddress.fromHex(tokenAddress),
-        EthereumAddress.fromHex(spender),
+        wallet,
+        token,
+        spender,
         amount,
       ],
       include0x: true,
@@ -457,16 +544,19 @@ class FuseWalletSDK {
 
     final String nonce = await getNonceForRelay();
     final String signature = ContractsHelper.signOffChain(
-      credentials,
-      smartWallet.walletModules.transferManager,
-      smartWallet.smartWalletAddress,
+      cred,
+      _smartWallet.walletModules.transferManager,
+      _smartWallet.smartWalletAddress,
+      BigInt.from(0),
       data,
       nonce,
+      BigInt.from(0),
+      BigInt.from(Variables.DEFAULT_GAS_LIMIT),
     );
 
     final Relay relayDto = Relay(
-      walletModuleAddress: smartWallet.walletModules.transferManager,
-      walletAddress: smartWallet.smartWalletAddress,
+      walletModuleAddress: _smartWallet.walletModules.transferManager,
+      walletAddress: _smartWallet.smartWalletAddress,
       data: data,
       nonce: nonce,
       methodName: methodName,
@@ -479,41 +569,48 @@ class FuseWalletSDK {
   }
 
   Future<DC<Exception, Stream<SmartWalletEvent>>> callContract(
-    EthPrivateKey credentials,
+    EthPrivateKey cred,
     String contractAddress,
-    String encodedData, {
+    String data, {
     BigInt? value,
     Map<String, dynamic>? transactionBody,
   }) async {
     final String walletModule = 'TransferManager';
     final String methodName = 'callContract';
+    final EthereumAddress wallet = EthereumAddress.fromHex(
+      _smartWallet.smartWalletAddress,
+    );
+    final EthereumAddress contract = EthereumAddress.fromHex(contractAddress);
 
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String encodedData = ContractsHelper.getEncodedDataForContractCall(
       walletModule,
-      smartWallet.walletModules.transferManager,
+      _smartWallet.walletModules.transferManager,
       methodName,
       [
-        EthereumAddress.fromHex(smartWallet.smartWalletAddress),
-        EthereumAddress.fromHex(contractAddress),
+        wallet,
+        contract,
         value ?? BigInt.zero,
-        HEX.decode(encodedData),
+        HEX.decode(data),
       ],
       include0x: true,
     );
 
     final String nonce = await getNonceForRelay();
     final String signature = ContractsHelper.signOffChain(
-      credentials,
-      smartWallet.walletModules.transferManager,
-      smartWallet.smartWalletAddress,
-      data,
+      cred,
+      _smartWallet.walletModules.transferManager,
+      _smartWallet.smartWalletAddress,
+      BigInt.from(0),
+      encodedData,
       nonce,
+      BigInt.from(0),
+      BigInt.from(Variables.DEFAULT_GAS_LIMIT),
     );
 
     final Relay relayDto = Relay(
-      walletModuleAddress: smartWallet.walletModules.transferManager,
-      walletAddress: smartWallet.smartWalletAddress,
-      data: data,
+      walletModuleAddress: _smartWallet.walletModules.transferManager,
+      walletAddress: _smartWallet.smartWalletAddress,
+      data: encodedData,
       nonce: nonce,
       methodName: methodName,
       signature: signature,
@@ -525,14 +622,21 @@ class FuseWalletSDK {
   }
 
   Future<DC<Exception, Stream<SmartWalletEvent>>> approveTokenAndCallContract(
-    EthPrivateKey credentials,
+    EthPrivateKey cred,
     String tokenAddress,
     String contractAddress,
     String value,
-    String encodedData, {
+    String data, {
     Map<String, dynamic>? transactionBody,
   }) async {
-    final tokenDetailsRes = await _explorerModule.getTokenDetails(
+    final String walletModule = 'TransferManager';
+    final String methodName = 'approveTokenAndCallContract';
+    final EthereumAddress wallet =
+        EthereumAddress.fromHex(_smartWallet.smartWalletAddress);
+    final EthereumAddress token = EthereumAddress.fromHex(tokenAddress);
+    final EthereumAddress contract = EthereumAddress.fromHex(contractAddress);
+    final DC<Exception, TokenDetails> tokenDetailsRes =
+        await _explorerSection.getTokenDetails(
       tokenAddress,
     );
 
@@ -545,35 +649,36 @@ class FuseWalletSDK {
       tokenDetailsRes.data!.decimals,
     );
 
-    final String walletModule = 'TransferManager';
-    final String methodName = 'approveTokenAndCallContract';
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String encodedData = ContractsHelper.getEncodedDataForContractCall(
       walletModule,
-      smartWallet.walletModules.transferManager,
+      _smartWallet.walletModules.transferManager,
       methodName,
       [
-        EthereumAddress.fromHex(smartWallet.smartWalletAddress),
-        EthereumAddress.fromHex(tokenAddress),
-        EthereumAddress.fromHex(contractAddress),
+        wallet,
+        token,
+        contract,
         amount,
-        HEX.decode(encodedData),
+        HEX.decode(data),
       ],
       include0x: true,
     );
 
     final String nonce = await getNonceForRelay();
     final String signature = ContractsHelper.signOffChain(
-      credentials,
-      smartWallet.walletModules.transferManager,
-      smartWallet.smartWalletAddress,
-      data,
+      cred,
+      _smartWallet.walletModules.transferManager,
+      _smartWallet.smartWalletAddress,
+      BigInt.from(0),
+      encodedData,
       nonce,
+      BigInt.from(0),
+      BigInt.from(Variables.DEFAULT_GAS_LIMIT),
     );
 
     final Relay relayDto = Relay(
-      walletModuleAddress: smartWallet.walletModules.transferManager,
-      walletAddress: smartWallet.smartWalletAddress,
-      data: data,
+      walletModuleAddress: _smartWallet.walletModules.transferManager,
+      walletAddress: _smartWallet.smartWalletAddress,
+      data: encodedData,
       nonce: nonce,
       methodName: methodName,
       signature: signature,
@@ -585,35 +690,27 @@ class FuseWalletSDK {
   }
 
   Future<DC<Exception, Stream<SmartWalletEvent>>> swapTokens(
-    EthPrivateKey credentials,
+    EthPrivateKey cred,
     TradeRequestBody tradeRequestBody,
   ) async {
-    final tradeRes = await _tradeModule.quote(
-      tradeRequestBody,
-    );
-    final swapCallParameters = await _tradeModule.requestParameters(
+    final DC<Exception, TradeCallParameters> swapCallParameters =
+        await _tradeSection.requestParameters(
       tradeRequestBody,
     );
 
     final String data = strip0x(swapCallParameters.data?.rawTxn['data']);
 
-    final Map<String, dynamic> transactionBody = Map.from({
-      "to": tradeRequestBody.recipient,
-      "status": 'pending',
-      "isSwap": true,
-      "tradeInfo": tradeRes.data?.toJson(),
-    });
     if (tradeRequestBody.currencyIn.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
       return callContract(
-        credentials,
+        cred,
         swapCallParameters.data!.rawTxn['to'],
         data,
         value: BigInt.parse(swapCallParameters.data!.value),
-        transactionBody: transactionBody,
       );
     } else {
-      final tokenDetailsRes = await _explorerModule.getTokenDetails(
+      final DC<Exception, TokenDetails> tokenDetailsRes =
+          await _explorerSection.getTokenDetails(
         tradeRequestBody.currencyIn,
       );
 
@@ -622,30 +719,33 @@ class FuseWalletSDK {
       }
 
       return approveTokenAndCallContract(
-        credentials,
+        cred,
         tradeRequestBody.currencyIn,
         swapCallParameters.data?.rawTxn['to'],
         AmountFormat.formatValue(
           BigInt.parse(swapCallParameters.data!.args.first),
-          tokenDetailsRes.data!.decimals,
+          tokenDetailsRes.data?.decimals ?? 18,
         ),
         data,
-        transactionBody: transactionBody,
       );
     }
   }
 
   Future<DC<Exception, Stream<SmartWalletEvent>>> stakeToken(
-    EthPrivateKey credentials,
+    EthPrivateKey cred,
     StakeRequestBody stakeRequestBody,
   ) async {
-    final response = await _stakingModule.stake(stakeRequestBody);
+    final DC<Exception, StakeResponseBody> response =
+        await _stakingSection.stake(
+      stakeRequestBody,
+    );
 
     if (response.hasError) {
       return DC.error(response.error!);
     }
 
-    final tokenDetailsRes = await _explorerModule.getTokenDetails(
+    final DC<Exception, TokenDetails> tokenDetailsRes =
+        await _explorerSection.getTokenDetails(
       stakeRequestBody.tokenAddress,
     );
 
@@ -663,14 +763,14 @@ class FuseWalletSDK {
     if (stakeRequestBody.tokenAddress.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
       return callContract(
-        credentials,
+        cred,
         response.data!.contractAddress,
         data,
         value: amount,
       );
     } else {
       return approveTokenAndCallContract(
-        credentials,
+        cred,
         stakeRequestBody.tokenAddress,
         response.data!.contractAddress,
         amount.toString(),
@@ -680,14 +780,18 @@ class FuseWalletSDK {
   }
 
   Future<DC<Exception, Stream<SmartWalletEvent>>> unstakeToken(
-    EthPrivateKey credentials,
+    EthPrivateKey cred,
     UnstakeRequestBody unstakeRequestBody,
   ) async {
-    final response = await _stakingModule.unstake(unstakeRequestBody);
+    final DC<Exception, UnstakeResponseBody> response =
+        await _stakingSection.unstake(
+      unstakeRequestBody,
+    );
     if (response.hasError) {
       return DC.error(response.error!);
     }
-    final tokenDetailsRes = await _explorerModule.getTokenDetails(
+    final DC<Exception, TokenDetails> tokenDetailsRes =
+        await _explorerSection.getTokenDetails(
       unstakeRequestBody.tokenAddress,
     );
 
@@ -701,7 +805,7 @@ class FuseWalletSDK {
     );
     final Map<String, dynamic> transactionBody = {
       "status": 'pending',
-      "from": smartWallet.smartWalletAddress,
+      "from": _smartWallet.smartWalletAddress,
       'value': amount.toString(),
     };
     final String data = strip0x(response.data!.encodedABI);
@@ -709,7 +813,7 @@ class FuseWalletSDK {
     if (unstakeRequestBody.tokenAddress.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
       return callContract(
-        credentials,
+        cred,
         response.data!.contractAddress,
         data,
         value: amount,
@@ -717,7 +821,7 @@ class FuseWalletSDK {
       );
     } else {
       return approveTokenAndCallContract(
-        credentials,
+        cred,
         unstakeRequestBody.tokenAddress,
         response.data!.contractAddress,
         amount.toString(),
@@ -729,7 +833,7 @@ class FuseWalletSDK {
 
   Future<DC<Exception, Stream<SmartWalletEvent>>>
       encodeDataAndApproveTokenAndCallContract(
-    EthPrivateKey credentials,
+    EthPrivateKey cred,
     String jsonInterface,
     String contractAddress,
     String contractName,
@@ -739,7 +843,7 @@ class FuseWalletSDK {
     List<dynamic> params, {
     Map<String, dynamic>? transactionBody,
   }) async {
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsHelper.getEncodedDataForContractCall(
       contractName,
       contractAddress,
       methodName,
@@ -748,7 +852,7 @@ class FuseWalletSDK {
     );
 
     return approveTokenAndCallContract(
-      credentials,
+      cred,
       tokenAddress,
       contractAddress,
       value,
@@ -758,7 +862,7 @@ class FuseWalletSDK {
   }
 
   Future<DC<Exception, Stream<SmartWalletEvent>>> encodeDataAndCallContract(
-    EthPrivateKey credentials,
+    EthPrivateKey cred,
     String jsonInterface,
     String contractAddress,
     String contractName,
@@ -767,7 +871,7 @@ class FuseWalletSDK {
     List<dynamic> params, {
     Map<String, dynamic>? transactionBody,
   }) async {
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsHelper.getEncodedDataForContractCall(
       contractName,
       contractAddress,
       methodName,
@@ -777,53 +881,11 @@ class FuseWalletSDK {
     );
 
     return callContract(
-      credentials,
+      cred,
       contractAddress,
       data,
       value: value,
       transactionBody: transactionBody,
     );
-  }
-
-  Future<DC<Exception, BigInt>> _getNativeBalance(
-    String address,
-  ) async {
-    try {
-      final etherAmount = await web3client.getBalance(
-        EthereumAddress.fromHex(address),
-      );
-      return DC.data(etherAmount.getInWei);
-    } catch (e) {
-      return DC.error(Exception(e.toString()));
-    }
-  }
-
-  Future<DC<Exception, BigInt>> getBalance(
-    String tokenAddress,
-    String address,
-  ) async {
-    if (tokenAddress.toLowerCase() ==
-        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
-      return _getNativeBalance(address);
-    }
-    try {
-      final List<dynamic> response = await ContractsHelper.readFromContract(
-        web3client,
-        'BasicToken',
-        tokenAddress,
-        'balanceOf',
-        [EthereumAddress.fromHex(address)],
-      );
-      return DC.data(response.first);
-    } catch (e) {
-      return DC.error(Exception(e.toString()));
-    }
-  }
-
-  SmartWalletEvent _toSmartWalletEventStream(publicationEvent) {
-    final Map<String, dynamic> json = jsonDecode(
-      utf8.decode(publicationEvent.data, allowMalformed: true),
-    );
-    return SmartWalletEvent.fromJson(json);
   }
 }

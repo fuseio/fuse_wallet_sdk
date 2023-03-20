@@ -11,7 +11,7 @@ class AuthDto with _$AuthDto {
   /// Constructs an AuthDto instance.
   ///
   /// Parameters:
-  /// - [ownerAddress] – The owner's address.
+  /// - [ownerAddress] – The owner's Ethereum address.
   /// - [signature] – The owner's signature of the hash.
   /// - [hash] – The hash of the data to be signed.
   factory AuthDto({

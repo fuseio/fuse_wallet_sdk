@@ -15,7 +15,7 @@ void main() async {
   } else {
     await fuseWalletSDK.fetchWallet();
     final tokenAddress = Variables.NATIVE_TOKEN_ADDRESS;
-    final tokensData = await fuseWalletSDK.tradeModule.fetchTokens();
+    final tokensData = await fuseWalletSDK.tradeSection.fetchTokens();
     tokensData.pick(
       onData: (List<TokenDetails> tokens) {
         print('tokens list');
@@ -26,7 +26,7 @@ void main() async {
         // Handle errors
       },
     );
-    final priceData = await fuseWalletSDK.tradeModule.price(tokenAddress);
+    final priceData = await fuseWalletSDK.tradeSection.price(tokenAddress);
     priceData.pick(
       onData: (String tokenPrice) {
         print('tokenPrice');
@@ -39,7 +39,7 @@ void main() async {
     );
 
     final priceChangeData =
-        await fuseWalletSDK.tradeModule.priceChange(tokenAddress);
+        await fuseWalletSDK.tradeSection.priceChange(tokenAddress);
     priceChangeData.pick(
       onData: (String priceInfo) {
         print('priceInfo');
@@ -52,7 +52,7 @@ void main() async {
     );
 
     final intervalData =
-        await fuseWalletSDK.tradeModule.interval(tokenAddress, TimeFrame.day);
+        await fuseWalletSDK.tradeSection.interval(tokenAddress, TimeFrame.day);
     intervalData.pick(
       onData: (List<IntervalStats> stats) {
         print('stats');

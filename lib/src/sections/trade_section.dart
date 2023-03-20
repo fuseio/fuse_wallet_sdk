@@ -1,16 +1,17 @@
 import 'package:data_channel/data_channel.dart';
 import 'package:dio/dio.dart';
 
+import 'package:fuse_wallet_sdk/src/constants/enum.dart';
 import 'package:fuse_wallet_sdk/src/models/models.dart';
 
 /// A class to handle trade-related operations in the Fuse Wallet SDK.
 ///
 /// Provides methods to request trade parameters, get trade quotes, fetch token prices,
 /// price changes, interval statistics, and token details.
-class TradeModule {
+class TradeSection {
   final Dio _dio;
 
-  const TradeModule(this._dio);
+  const TradeSection(this._dio);
 
   /// Fetches the parameters required for a trade request.
   ///

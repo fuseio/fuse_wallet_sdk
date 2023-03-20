@@ -1,4 +1,3 @@
-export 'enum.dart';
 export 'action/action.dart';
 export 'action/action_result.dart';
 export 'auth/auth.dto.dart';
