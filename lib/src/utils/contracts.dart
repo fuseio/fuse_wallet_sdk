@@ -15,7 +15,7 @@ import 'package:fuse_wallet_sdk/src/utils/crypto.dart';
 class ContractsHelper {
   /// Reads data from a deployed contract using the specified function and parameters.
   ///
-  /// [client] is the web3 client instance to interact with the Ethereum network.
+  /// [client] is the web3 client instance to interact with the Fuse network.
   /// [contractName] is the name of the contract.
   /// [contractAddress] is the address of the deployed contract.
   /// [functionName] is the name of the function to be called.
@@ -104,8 +104,8 @@ class ContractsHelper {
   /// Signs an off-chain transaction using the provided credentials and transaction data.
   ///
   /// [credentials] is the private key used for signing.
-  /// [from] is the Ethereum address of the sender.
-  /// [to] is the Ethereum address of the receiver.
+  /// [from] is the address of the sender.
+  /// [to] is the address of the receiver.
   /// [data] is the transaction data to be sent.
   /// [nonce] is the nonce of the transaction.
   /// [value] is the optional amount of Ether to be sent.
