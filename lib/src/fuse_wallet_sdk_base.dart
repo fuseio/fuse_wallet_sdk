@@ -79,21 +79,6 @@ class FuseWalletSDK {
 
   set setWallet(SmartWallet value) => smartWallet = value;
 
-  Future<String> getNonceForRelay() async {
-    final BigInt block = BigInt.from(await web3client.getBlockNumber());
-    final BigInt timestamp = BigInt.from(DateTime.now().millisecondsSinceEpoch);
-    final String blockHex = hexZeroPad(hexlify(block), 16);
-    final String timestampHex = hexZeroPad(hexlify(timestamp), 16);
-
-    final String combinedHex =
-        '${blockHex.substring(2, blockHex.length)}${timestampHex.substring(2, timestampHex.length)}';
-
-    return bytesToHex(
-      HEX.decode(combinedHex),
-      include0x: true,
-    );
-  }
-
   Options get _options => Options(
         headers: {
           'Authorization': 'Bearer $_jwtToken',
@@ -166,12 +151,8 @@ class FuseWalletSDK {
         options: _options,
       );
       if (response.statusCode == 201) {
-        final String transactionId = response.data['transactionId'];
-        final stream = webSocketConnection.client
-            .newSubscription('transaction:#$transactionId')
-            .publication
-            .map(_toSmartWalletEventStream);
-        return DC.data(stream);
+        final transactionId = response.data['transactionId'];
+        return DC.data(_createSubscriptionStream(transactionId));
       }
       return DC.error(Exception('Failed to create wallet'));
     } catch (e) {
@@ -239,11 +220,7 @@ class FuseWalletSDK {
       );
       if (response.statusCode == 201) {
         final transactionId = response.data['transactionId'];
-        final stream = webSocketConnection.client
-            .newSubscription('transaction:#$transactionId')
-            .publication
-            .map(_toSmartWalletEventStream);
-        return DC.data(stream);
+        return DC.data(_createSubscriptionStream(transactionId));
       }
       return DC.error(Exception('Failed to relay'));
     } catch (e) {
@@ -285,7 +262,7 @@ class FuseWalletSDK {
       ],
       include0x: true,
     );
-    final String nonce = await getNonceForRelay();
+    final String nonce = await _getNonce();
     final String signature = ContractsHelper.signOffChain(
       credentials,
       smartWallet.walletModules.transferManager,
@@ -358,7 +335,7 @@ class FuseWalletSDK {
       ...?transactionDetails,
     });
 
-    final String nonce = await getNonceForRelay();
+    final String nonce = await _getNonce();
     final String signature = ContractsHelper.signOffChain(
       credentials,
       walletModuleAddress,
@@ -399,7 +376,7 @@ class FuseWalletSDK {
       ],
       include0x: true,
     );
-    final String nonce = await getNonceForRelay();
+    final String nonce = await _getNonce();
     final String signature = ContractsHelper.signOffChain(
       credentials,
       disableModuleAddress,
@@ -455,7 +432,7 @@ class FuseWalletSDK {
       include0x: true,
     );
 
-    final String nonce = await getNonceForRelay();
+    final String nonce = await _getNonce();
     final String signature = ContractsHelper.signOffChain(
       credentials,
       smartWallet.walletModules.transferManager,
@@ -501,7 +478,7 @@ class FuseWalletSDK {
       include0x: true,
     );
 
-    final String nonce = await getNonceForRelay();
+    final String nonce = await _getNonce();
     final String signature = ContractsHelper.signOffChain(
       credentials,
       smartWallet.walletModules.transferManager,
@@ -561,7 +538,7 @@ class FuseWalletSDK {
       include0x: true,
     );
 
-    final String nonce = await getNonceForRelay();
+    final String nonce = await _getNonce();
     final String signature = ContractsHelper.signOffChain(
       credentials,
       smartWallet.walletModules.transferManager,
@@ -818,6 +795,28 @@ class FuseWalletSDK {
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
+  }
+
+  Future<String> _getNonce() async {
+    final BigInt block = BigInt.from(await web3client.getBlockNumber());
+    final BigInt timestamp = BigInt.from(DateTime.now().millisecondsSinceEpoch);
+    final String blockHex = hexZeroPad(hexlify(block), 16);
+    final String timestampHex = hexZeroPad(hexlify(timestamp), 16);
+
+    final String combinedHex =
+        '${blockHex.substring(2, blockHex.length)}${timestampHex.substring(2, timestampHex.length)}';
+
+    return bytesToHex(
+      HEX.decode(combinedHex),
+      include0x: true,
+    );
+  }
+
+  Stream<SmartWalletEvent> _createSubscriptionStream(String transactionId) {
+    return webSocketConnection.client
+        .newSubscription('transaction:#$transactionId')
+        .publication
+        .map(_toSmartWalletEventStream);
   }
 
   SmartWalletEvent _toSmartWalletEventStream(publicationEvent) {
