@@ -22,6 +22,8 @@ ActionResult _$ActionResultFromJson(Map<String, dynamic> json) {
 mixin _$ActionResult {
   bool get hasNextPage => throw _privateConstructorUsedError;
   num get nextPage => throw _privateConstructorUsedError;
+  @ActionsConverter()
+  @JsonKey(name: 'docs')
   List<Action> get actions => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +38,10 @@ abstract class $ActionResultCopyWith<$Res> {
           ActionResult value, $Res Function(ActionResult) then) =
       _$ActionResultCopyWithImpl<$Res, ActionResult>;
   @useResult
-  $Res call({bool hasNextPage, num nextPage, List<Action> actions});
+  $Res call(
+      {bool hasNextPage,
+      num nextPage,
+      @ActionsConverter() @JsonKey(name: 'docs') List<Action> actions});
 }
 
 /// @nodoc
@@ -81,7 +86,10 @@ abstract class _$$_ActionResultCopyWith<$Res>
       __$$_ActionResultCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool hasNextPage, num nextPage, List<Action> actions});
+  $Res call(
+      {bool hasNextPage,
+      num nextPage,
+      @ActionsConverter() @JsonKey(name: 'docs') List<Action> actions});
 }
 
 /// @nodoc
@@ -122,7 +130,7 @@ class _$_ActionResult implements _ActionResult {
   _$_ActionResult(
       {required this.hasNextPage,
       required this.nextPage,
-      required this.actions});
+      @ActionsConverter() @JsonKey(name: 'docs') required this.actions});
 
   factory _$_ActionResult.fromJson(Map<String, dynamic> json) =>
       _$$_ActionResultFromJson(json);
@@ -132,6 +140,8 @@ class _$_ActionResult implements _ActionResult {
   @override
   final num nextPage;
   @override
+  @ActionsConverter()
+  @JsonKey(name: 'docs')
   final List<Action> actions;
 
   @override
@@ -174,7 +184,9 @@ abstract class _ActionResult implements ActionResult {
   factory _ActionResult(
       {required final bool hasNextPage,
       required final num nextPage,
-      required final List<Action> actions}) = _$_ActionResult;
+      @ActionsConverter()
+      @JsonKey(name: 'docs')
+          required final List<Action> actions}) = _$_ActionResult;
 
   factory _ActionResult.fromJson(Map<String, dynamic> json) =
       _$_ActionResult.fromJson;
@@ -184,6 +196,8 @@ abstract class _ActionResult implements ActionResult {
   @override
   num get nextPage;
   @override
+  @ActionsConverter()
+  @JsonKey(name: 'docs')
   List<Action> get actions;
   @override
   @JsonKey(ignore: true)

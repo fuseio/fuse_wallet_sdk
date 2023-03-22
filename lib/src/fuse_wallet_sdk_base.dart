@@ -194,7 +194,6 @@ class FuseWalletSDK {
         response.data['data'],
       ));
     } catch (e) {
-      print(e.toString());
       return DC.error(Exception(e.toString()));
     }
   }

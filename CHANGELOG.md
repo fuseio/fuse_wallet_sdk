@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.0.7]
+
+### Fixed
+- JSON serialization for the `Action` model
+
 ## [0.0.6]
 
 ### Fixed
