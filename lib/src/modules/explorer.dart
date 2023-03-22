@@ -139,7 +139,7 @@ class ExplorerModule {
     }
     try {
       final Response response = await _dio.get(
-        '?module=account&action=tokenbalance&contractaddress=$contractAddress&address=$walletAddress',
+        '/v0/explorer?module=account&action=tokenbalance&contractaddress=$contractAddress&address=$walletAddress',
       );
       if (response.data['status'] == '1') {
         return DC.data(BigInt.parse(response.data['result']));
