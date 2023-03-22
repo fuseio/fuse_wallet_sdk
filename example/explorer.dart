@@ -17,7 +17,7 @@ void main() async {
   } else {
     final exceptionOrWallet = await fuseWalletSDK.fetchWallet();
 
-    final tokenListData = await fuseWalletSDK.explorerSection.getTokenList(
+    final tokenListData = await fuseWalletSDK.explorerModule.getTokenList(
       exceptionOrWallet.data!.smartWalletAddress,
     );
     tokenListData.pick(
@@ -29,11 +29,22 @@ void main() async {
       },
     );
 
+    final abiData = await fuseWalletSDK.explorerModule.getABI(
+      '0x2B3113B752645dfAFCe690706b5eCAd9d83977CF',
+    );
+    abiData.pick(
+      onData: (String abi) {
+        print(abi);
+      },
+      onError: (err) {
+        print(err);
+      },
+    );
+
     final String usdcAddressOnFuse =
         '0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5';
 
-    final tokenDetailsData =
-        await fuseWalletSDK.explorerSection.getTokenDetails(
+    final tokenDetailsData = await fuseWalletSDK.explorerModule.getTokenDetails(
       usdcAddressOnFuse,
     );
 
@@ -46,8 +57,7 @@ void main() async {
       },
     );
 
-    final tokenBalanceData =
-        await fuseWalletSDK.explorerSection.getTokenBalance(
+    final tokenBalanceData = await fuseWalletSDK.explorerModule.getTokenBalance(
       Variables.NATIVE_TOKEN_ADDRESS,
       exceptionOrWallet.data!.smartWalletAddress,
     );

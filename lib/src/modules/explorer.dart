@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:data_channel/data_channel.dart';
 import 'package:dio/dio.dart';
 
@@ -5,14 +7,14 @@ import 'package:fuse_wallet_sdk/src/constants/variables.dart';
 import 'package:fuse_wallet_sdk/src/models/models.dart';
 
 /// A class that provides methods for interacting with the Fuse blockchain explorer.
-class ExplorerSection {
+class ExplorerModule {
   final Dio _dio;
 
-  /// Creates an instance of the [ExplorerSection] class.
+  /// Creates an instance of the [ExplorerModule] class.
   ///
   /// Parameters:
   /// - [_dio] – An instance of [Dio] for making network requests.
-  const ExplorerSection(this._dio);
+  const ExplorerModule(this._dio);
 
   /// Gets the native balance of a wallet address.
   ///
@@ -30,6 +32,30 @@ class ExplorerSection {
         '/v0/explorer?module=account&action=eth_get_balance&address=$walletAddress',
       );
       return DC.data(BigInt.from(int.parse(response.data['result'])));
+    } catch (e) {
+      return DC.error(Exception(e.toString()));
+    }
+  }
+
+  /// Retrieves the contract ABI for a given contract address.
+  ///
+  /// Parameters:
+  /// - [address] - The contract address whose ABI is to be retrieved.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, DC.data will be called with a [String] representing the contract ABI.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
+  Future<DC<Exception, String>> getABI(
+    String address,
+  ) async {
+    try {
+      final Response response = await _dio.get(
+        '/v0/explorer?module=contract&action=getabi&address=$address',
+      );
+      if (response.data['status'] == '1') {
+        return DC.data(jsonEncode(jsonDecode(response.data['result'])));
+      }
+      return DC.error(Exception(response.data['message']));
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
@@ -113,7 +139,7 @@ class ExplorerSection {
     }
     try {
       final Response response = await _dio.get(
-        '?module=account&action=tokenbalance&contractaddress=$contractAddress&address=$walletAddress',
+        '/v0/explorer?module=account&action=tokenbalance&contractaddress=$contractAddress&address=$walletAddress',
       );
       if (response.data['status'] == '1') {
         return DC.data(BigInt.parse(response.data['result']));

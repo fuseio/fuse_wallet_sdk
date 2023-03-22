@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## [0.0.6]
+
+### Fixed
+- Resolved issue with `getTokenBalance` function in `ExplorerModule`
+
+### Added
+- Introduced `ExplorerModule.getABI` function - Retrieves the contract ABI for a given contract address.
+
+### Changed
+- **Breaking:** Sections renamed to Modules
+
 ## [0.0.5]
 
 ### Added

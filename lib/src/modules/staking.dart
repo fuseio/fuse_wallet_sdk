@@ -5,15 +5,15 @@ import 'package:fuse_wallet_sdk/src/models/models.dart';
 
 /// Provides an interface to interact with staking functionalities on the platform.
 ///
-/// [StakingSection] class contains methods to:
+/// [StakingModule] class contains methods to:
 /// 1. Retrieve staking options available on the platform.
 /// 2. Stake tokens by calling a contract.
 /// 3. Unstake tokens by calling a contract.
 /// 4. Retrieve staked tokens of a given smart wallet address on the platform.
-class StakingSection {
+class StakingModule {
   final Dio _dio;
 
-  const StakingSection(this._dio);
+  const StakingModule(this._dio);
 
   /// Retrieves the staking options available on the platform.
   ///
