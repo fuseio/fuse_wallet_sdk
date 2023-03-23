@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.0.8]
+
+### Fixed
+- ABI reader fixed
+
 ## [0.0.7]
 
 ### Fixed
