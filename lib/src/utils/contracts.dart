@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:fuse_wallet_sdk/src/constants/variables.dart';
-import 'package:path/path.dart' show join;
 import 'package:web3dart/crypto.dart';
 import 'package:web3dart/web3dart.dart';
 
+import 'package:fuse_wallet_sdk/src/constants/abis.dart';
+import 'package:fuse_wallet_sdk/src/constants/variables.dart';
 import 'package:fuse_wallet_sdk/src/utils/crypto.dart';
 
 /// A utility class providing methods to interact with contracts.
@@ -55,7 +55,7 @@ class ContractsHelper {
     String contractAddress, {
     String? jsonInterface,
   }) async {
-    final String abi = jsonInterface ?? await _readAbiFile(contractName);
+    final String abi = jsonInterface ?? ABI.get(contractName);
     final ContractAbi contractAbi = ContractAbi.fromJson(abi, contractName);
     final EthereumAddress address = EthereumAddress.fromHex(contractAddress);
     final DeployedContract contract = DeployedContract(
@@ -142,12 +142,5 @@ class ContractsHelper {
       messagePayload,
     );
     return bytesToHex(signature, include0x: true);
-  }
-
-  static Future<String> _readAbiFile(String contractName) async {
-    final File abiFile = File(
-      join('lib/src/constants/abis', '$contractName.json'),
-    );
-    return await abiFile.readAsString();
   }
 }
