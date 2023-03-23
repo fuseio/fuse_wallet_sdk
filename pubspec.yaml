@@ -1,6 +1,7 @@
 name: fuse_wallet_sdk
-description: Fuse Wallet SDK now has a Dart implementation, making it even easier to integrate blockchain technology into your mobile apps.
-version: 0.0.7
+description: Fuse Wallet SDK now has a Dart implementation, making it even
+  easier to integrate blockchain technology into your mobile apps.
+version: 0.0.8
 homepage: https://fuse.io/sdk
 repository: https://github.com/fuseio/fuse_wallet_sdk
 
@@ -21,7 +22,6 @@ dependencies:
   hex: ^0.2.0
   http: ^0.13.5
   json_annotation: ^4.8.0
-  path: ^1.8.3
   web3dart: ^2.5.3
 
 dev_dependencies:
