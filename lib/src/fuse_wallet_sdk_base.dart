@@ -185,16 +185,6 @@ class FuseWalletSDK {
     return DC.error(Exception(exception.toString()));
   }
 
-  SmartWalletEvent _toSmartWalletEventStream(publicationEvent) {
-    final Map data = jsonDecode(
-      utf8.decode(publicationEvent.data, allowMalformed: true),
-    );
-    return SmartWalletEvent(
-      name: data['eventName'],
-      data: data['eventData'],
-    );
-  }
-
   /// Retrieves historical actions for a smart wallet, with optional filtering by token address and update time.
   ///
   /// Parameters:
