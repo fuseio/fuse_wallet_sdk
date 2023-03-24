@@ -174,7 +174,7 @@ class FuseWalletSDK {
     final statusCode = response.statusCode;
 
     if (statusCode == 400) {
-      final message = response.data["message"];
+      final message = response.data["errorMessage"];
       if (message == "Owner address already has a deployed smart wallet") {
         return DC.error(
           WalletAlreadyExistsException(message),
