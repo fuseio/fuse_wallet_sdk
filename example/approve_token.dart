@@ -17,27 +17,23 @@ void main() async {
     print("Error occurred in authenticate");
     print(authRes.error);
   } else {
-    final DC<Exception, SmartWallet> walletData =
-        await fuseWalletSDK.fetchWallet();
+    final exceptionWallet = await fuseWalletSDK.fetchWallet();
 
-    walletData.pick(
+    exceptionWallet.pick(
       onData: (SmartWallet smartWallet) async {
-        final String receiverAddress = '0x...';
-        final String nftContractAddress = '0x...';
-        final num tokenId = 0; // YOUR ITEM ID
-
-        final exceptionOrStream = await fuseWalletSDK.transferNft(
+        final tokenAddress = 'TOKEN_ADDRESS';
+        final exceptionOrStream = await fuseWalletSDK.approveToken(
           credentials,
-          nftContractAddress,
-          receiverAddress,
-          tokenId,
+          tokenAddress,
+          smartWallet.smartWalletAddress,
+          '1',
         );
 
         if (exceptionOrStream.hasError) {
-          final defaultTransferNftException =
-              Exception("An error occurred while transferring NFT.");
+          final defaultTransferTokenException =
+              Exception("An error occurred while transferring token.");
           final exception =
-              exceptionOrStream.error ?? defaultTransferNftException;
+              exceptionOrStream.error ?? defaultTransferTokenException;
           print(exception.toString());
           exit(1);
         }
@@ -53,8 +49,6 @@ void main() async {
         );
       },
       onError: (Exception exception) async {
-        print('Fetch wallet failed, wallet was not created yet');
-        print('creating...');
         createWalletAndListenToSmartWalletEventStream(fuseWalletSDK);
       },
     );
@@ -63,16 +57,16 @@ void main() async {
 
 void _onSmartWalletEvent(SmartWalletEvent event) {
   switch (event.name) {
-    case "transactionStarted":
+    case 'transactionStarted':
       print('transactionStarted ${event.data.toString()}');
       break;
-    case "transactionHash":
+    case 'transactionHash':
       print('transactionHash ${event.data.toString()}');
       break;
-    case "transactionSucceeded":
+    case 'transactionSucceeded':
       print('transactionSucceeded ${event.data.toString()}');
       exit(1);
-    case "transactionFailed":
+    case 'transactionFailed':
       print('transactionFailed ${event.data.toString()}');
       exit(1);
   }

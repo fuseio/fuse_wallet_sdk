@@ -20,7 +20,7 @@ class ActionResult with _$ActionResult {
   factory ActionResult({
     required bool hasNextPage,
     required num nextPage,
-    required List<Action> actions,
+    @ActionsConverter() @JsonKey(name: 'docs') required List<Action> actions,
   }) = _ActionResult;
 
   /// Creates an ActionResult object from a JSON object.
@@ -31,4 +31,15 @@ class ActionResult with _$ActionResult {
   /// Returns an ActionResult object created from the JSON data.
   factory ActionResult.fromJson(Map<String, dynamic> json) =>
       _$ActionResultFromJson(json);
+}
+
+class ActionsConverter implements JsonConverter<List<Action>, List<dynamic>> {
+  const ActionsConverter();
+
+  @override
+  List<Action> fromJson(List<dynamic>? json) =>
+      json != null ? Action.actionsFromJson(json) : [];
+
+  @override
+  List<dynamic> toJson(List<Action> instance) => instance.toList();
 }
