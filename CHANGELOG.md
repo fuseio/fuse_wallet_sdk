@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.0.9]
+
+### Added
+- Return `WalletAlreadyExistsException` from createWallet
+
 ## [0.0.8]
 
 ### Fixed
