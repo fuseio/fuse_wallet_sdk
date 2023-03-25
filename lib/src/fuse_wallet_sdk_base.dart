@@ -155,9 +155,33 @@ class FuseWalletSDK {
         return DC.data(_createSubscriptionStream(transactionId));
       }
       return DC.error(Exception('Failed to create wallet'));
+    } on DioError catch (exception) {
+      return _handleDioErrorOccurredWhileCreatingWallet(exception);
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
+  }
+
+  DC<Exception, Stream<SmartWalletEvent>>
+      _handleDioErrorOccurredWhileCreatingWallet(DioError exception) {
+    final response = exception.response;
+
+    if (response == null) {
+      return DC.error(Exception(exception.toString()));
+    }
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 400) {
+      final message = response.data["errorMessage"];
+      if (message == "Owner address already has a deployed smart wallet") {
+        return DC.error(
+          WalletAlreadyExistsException(message),
+        );
+      }
+    }
+
+    return DC.error(Exception(exception.toString()));
   }
 
   /// Retrieves historical actions for a smart wallet, with optional filtering by token address and update time.
