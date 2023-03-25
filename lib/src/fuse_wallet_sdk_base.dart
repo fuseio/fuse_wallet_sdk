@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:data_channel/data_channel.dart';
 import 'package:dio/dio.dart';
-import 'package:fuse_wallet_sdk/src/utils/exceptions.dart';
 import 'package:hex/hex.dart';
 import 'package:http/http.dart' as http;
 import 'package:web3dart/crypto.dart';
