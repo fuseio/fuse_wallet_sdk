@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.0.11]
+
+### Fixed
+- Resolved `webSocketConnection` already been initialized issue
+
 ## [0.0.10]
 
 ### Fixed
