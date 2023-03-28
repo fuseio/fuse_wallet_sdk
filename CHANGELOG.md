@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.0.10]
+
+### Fixed
+- Resolved `FormatException` issue
+
 ## [0.0.9]
 
 ### Added

@@ -31,7 +31,7 @@ class ExplorerModule {
       final Response response = await _dio.get(
         '/v0/explorer?module=account&action=eth_get_balance&address=$walletAddress',
       );
-      return DC.data(BigInt.from(int.parse(response.data['result'])));
+      return DC.data(BigInt.parse(response.data['result']));
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
