@@ -29,7 +29,7 @@ class FuseWalletSDK {
   /// The Web3 client used for sending requests over an HTTP JSON-RPC API endpoint to Ethereum clients.
   final Web3Client web3client;
 
-  late final WebSocketConnection webSocketConnection;
+  WebSocketConnection? webSocketConnection;
 
   /// Constructs a new instance of [FuseWalletSDK].
   ///
@@ -836,7 +836,7 @@ class FuseWalletSDK {
   }
 
   Stream<SmartWalletEvent> _createSubscriptionStream(String transactionId) {
-    return webSocketConnection.client
+    return webSocketConnection!.client
         .newSubscription('transaction:#$transactionId')
         .publication
         .map(_toSmartWalletEventStream);
