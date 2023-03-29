@@ -21,6 +21,8 @@ void main() async {
 
     walletData.pick(
       onData: (SmartWallet smartWallet) async {
+        final unstakeTokenAddress =
+            '0x97a6e78c9208c21afaDa67e7E61d7ad27688eFd1';
         final unstakeRequestBody = UnstakeRequestBody(
           accountAddress: smartWallet.smartWalletAddress,
           tokenAmount: 'TOKEN_AMOUNT',
@@ -30,6 +32,7 @@ void main() async {
         final exceptionOrStream = await fuseWalletSDK.unstakeToken(
           credentials,
           unstakeRequestBody,
+          unstakeTokenAddress,
         );
 
         if (exceptionOrStream.hasError) {

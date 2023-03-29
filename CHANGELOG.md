@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.0.12]
+
+### Fixed
+- Resolved `unstakeToken`
+
 ## [0.0.11]
 
 ### Fixed
