@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.0.13]
+
+### Added
+- Expose a function to disconnect from the websocket when a application goes to the background
+
 ## [0.0.12]
 
 ### Fixed
