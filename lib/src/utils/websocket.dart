@@ -42,6 +42,4 @@ class WebSocketConnection {
     _instance = WebSocketConnection(client);
     return _instance!;
   }
-
-  Future<void> disconnect() => client.disconnect();
 }
