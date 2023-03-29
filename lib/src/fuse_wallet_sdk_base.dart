@@ -849,4 +849,8 @@ class FuseWalletSDK {
     );
     return SmartWalletEvent.fromJson(json);
   }
+
+  Future<void>? disconnectWebSocketClient() {
+    return webSocketConnection?.disconnect();
+  }
 }
