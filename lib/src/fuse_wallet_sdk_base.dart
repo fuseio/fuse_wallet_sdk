@@ -682,6 +682,7 @@ class FuseWalletSDK {
   Future<DC<Exception, Stream<SmartWalletEvent>>> unstakeToken(
     EthPrivateKey credentials,
     UnstakeRequestBody unstakeRequestBody,
+    String unStakeTokenAddress,
   ) async {
     final response = await _stakingModule.unstake(unstakeRequestBody);
     if (response.hasError) {
@@ -706,7 +707,7 @@ class FuseWalletSDK {
     };
     final String data = strip0x(response.data!.encodedABI);
 
-    if (unstakeRequestBody.tokenAddress.toLowerCase() ==
+    if (unStakeTokenAddress.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
       return callContract(
         credentials,
@@ -718,7 +719,7 @@ class FuseWalletSDK {
     } else {
       return approveTokenAndCallContract(
         credentials,
-        unstakeRequestBody.tokenAddress,
+        unStakeTokenAddress,
         response.data!.contractAddress,
         amount.toString(),
         data,
