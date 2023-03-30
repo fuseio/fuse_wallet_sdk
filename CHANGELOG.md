@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.0.14]
+
+### Changed
+- Upgrade dependencies: dio & web3dart.
+
 ## [0.0.13]
 
 ### Added
