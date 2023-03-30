@@ -272,7 +272,7 @@ class FuseWalletSDK {
 
     final String walletModule = 'TransferManager';
     final String methodName = 'transferToken';
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsHelper.encodedDataForContractCall(
       walletModule,
       smartWallet.walletModules.transferManager,
       methodName,
@@ -335,7 +335,7 @@ class FuseWalletSDK {
     final String walletModule = 'NftTransfer';
     final String walletModuleAddress = smartWallet.walletModules.nftTransfer!;
 
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsHelper.encodedDataForContractCall(
       walletModule,
       walletModuleAddress,
       methodName,
@@ -389,7 +389,7 @@ class FuseWalletSDK {
     Map<String, dynamic>? transactionBody,
   }) async {
     final String methodName = 'addModule';
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsHelper.encodedDataForContractCall(
       disableModuleName,
       disableModuleAddress,
       methodName,
@@ -442,7 +442,7 @@ class FuseWalletSDK {
 
     final String walletModule = 'TransferManager';
     final String methodName = 'approveToken';
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsHelper.encodedDataForContractCall(
       walletModule,
       smartWallet.walletModules.transferManager,
       methodName,
@@ -488,7 +488,7 @@ class FuseWalletSDK {
     final String walletModule = 'TransferManager';
     final String methodName = 'callContract';
 
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsHelper.encodedDataForContractCall(
       walletModule,
       smartWallet.walletModules.transferManager,
       methodName,
@@ -547,7 +547,7 @@ class FuseWalletSDK {
 
     final String walletModule = 'TransferManager';
     final String methodName = 'approveTokenAndCallContract';
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsHelper.encodedDataForContractCall(
       walletModule,
       smartWallet.walletModules.transferManager,
       methodName,
@@ -740,7 +740,7 @@ class FuseWalletSDK {
     List<dynamic> params, {
     Map<String, dynamic>? transactionBody,
   }) async {
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsHelper.encodedDataForContractCall(
       contractName,
       contractAddress,
       methodName,
@@ -768,7 +768,7 @@ class FuseWalletSDK {
     List<dynamic> params, {
     Map<String, dynamic>? transactionBody,
   }) async {
-    final String data = await ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsHelper.encodedDataForContractCall(
       contractName,
       contractAddress,
       methodName,

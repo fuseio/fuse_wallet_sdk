@@ -30,7 +30,7 @@ class ContractsHelper {
     List<dynamic> params, {
     String? jsonInterface,
   }) async {
-    final DeployedContract contract = await _getDeployedContract(
+    final DeployedContract contract = _getDeployedContract(
       contractName,
       contractAddress,
       jsonInterface: jsonInterface,
@@ -49,11 +49,11 @@ class ContractsHelper {
   /// [jsonInterface] is an optional JSON string representing the contract ABI.
   ///
   /// Returns a `Future` that resolves to a `DeployedContract` instance.
-  static Future<DeployedContract> _getDeployedContract(
+  static DeployedContract _getDeployedContract(
     String contractName,
     String contractAddress, {
     String? jsonInterface,
-  }) async {
+  }) {
     final String abi = jsonInterface ?? ABI.get(contractName);
     final ContractAbi contractAbi = ContractAbi.fromJson(abi, contractName);
     final EthereumAddress address = EthereumAddress.fromHex(contractAddress);
@@ -76,7 +76,7 @@ class ContractsHelper {
   /// [padToEvenLength] is a flag to pad the output data to an even length.
   ///
   /// Returns a `Future` that resolves to the encoded data as a hex string.
-  static Future<String> encodedDataForContractCall(
+  static String encodedDataForContractCall(
     String contractName,
     String contractAddress,
     String functionName,
@@ -85,8 +85,8 @@ class ContractsHelper {
     bool include0x = false,
     int? forcePadLength,
     bool padToEvenLength = false,
-  }) async {
-    final DeployedContract contract = await _getDeployedContract(
+  }) {
+    final DeployedContract contract = _getDeployedContract(
       contractName,
       contractAddress,
       jsonInterface: jsonInterface,
