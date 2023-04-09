@@ -1,9 +1,14 @@
 # CHANGELOG
 
+## [0.0.16]
+
+### Changed
+- Added more properties to `ActionResult` model. 
+
 ## [0.0.15]
 
 ### Changed
-- Expose `ContractsHelper` for clients
+- Expose `ContractsHelper` for clients.
 
 ## [0.0.14]
 
@@ -13,7 +18,7 @@
 ## [0.0.13]
 
 ### Added
-- Expose a function to disconnect from the websocket when a application goes to the background
+- Expose a function to disconnect from the websocket when a application goes to the background.
 
 ## [0.0.12]
 

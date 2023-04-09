@@ -19,7 +19,11 @@ class ActionResult with _$ActionResult {
   /// - [actions] – A list of [Action] instances associated with the ActionResult.
   factory ActionResult({
     required bool hasNextPage,
-    required num nextPage,
+    required bool hasPrevPage,
+    required num? nextPage,
+    required num? prevPage,
+    required num? page,
+    required num totalPages,
     @ActionsConverter() @JsonKey(name: 'docs') required List<Action> actions,
   }) = _ActionResult;
 
