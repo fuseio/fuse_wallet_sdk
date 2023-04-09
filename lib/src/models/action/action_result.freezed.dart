@@ -21,7 +21,11 @@ ActionResult _$ActionResultFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ActionResult {
   bool get hasNextPage => throw _privateConstructorUsedError;
-  num get nextPage => throw _privateConstructorUsedError;
+  bool get hasPrevPage => throw _privateConstructorUsedError;
+  num? get nextPage => throw _privateConstructorUsedError;
+  num? get prevPage => throw _privateConstructorUsedError;
+  num? get page => throw _privateConstructorUsedError;
+  num get totalPages => throw _privateConstructorUsedError;
   @ActionsConverter()
   @JsonKey(name: 'docs')
   List<Action> get actions => throw _privateConstructorUsedError;
@@ -40,7 +44,11 @@ abstract class $ActionResultCopyWith<$Res> {
   @useResult
   $Res call(
       {bool hasNextPage,
-      num nextPage,
+      bool hasPrevPage,
+      num? nextPage,
+      num? prevPage,
+      num? page,
+      num totalPages,
       @ActionsConverter() @JsonKey(name: 'docs') List<Action> actions});
 }
 
@@ -58,7 +66,11 @@ class _$ActionResultCopyWithImpl<$Res, $Val extends ActionResult>
   @override
   $Res call({
     Object? hasNextPage = null,
-    Object? nextPage = null,
+    Object? hasPrevPage = null,
+    Object? nextPage = freezed,
+    Object? prevPage = freezed,
+    Object? page = freezed,
+    Object? totalPages = null,
     Object? actions = null,
   }) {
     return _then(_value.copyWith(
@@ -66,9 +78,25 @@ class _$ActionResultCopyWithImpl<$Res, $Val extends ActionResult>
           ? _value.hasNextPage
           : hasNextPage // ignore: cast_nullable_to_non_nullable
               as bool,
-      nextPage: null == nextPage
+      hasPrevPage: null == hasPrevPage
+          ? _value.hasPrevPage
+          : hasPrevPage // ignore: cast_nullable_to_non_nullable
+              as bool,
+      nextPage: freezed == nextPage
           ? _value.nextPage
           : nextPage // ignore: cast_nullable_to_non_nullable
+              as num?,
+      prevPage: freezed == prevPage
+          ? _value.prevPage
+          : prevPage // ignore: cast_nullable_to_non_nullable
+              as num?,
+      page: freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as num?,
+      totalPages: null == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
               as num,
       actions: null == actions
           ? _value.actions
@@ -88,7 +116,11 @@ abstract class _$$_ActionResultCopyWith<$Res>
   @useResult
   $Res call(
       {bool hasNextPage,
-      num nextPage,
+      bool hasPrevPage,
+      num? nextPage,
+      num? prevPage,
+      num? page,
+      num totalPages,
       @ActionsConverter() @JsonKey(name: 'docs') List<Action> actions});
 }
 
@@ -104,7 +136,11 @@ class __$$_ActionResultCopyWithImpl<$Res>
   @override
   $Res call({
     Object? hasNextPage = null,
-    Object? nextPage = null,
+    Object? hasPrevPage = null,
+    Object? nextPage = freezed,
+    Object? prevPage = freezed,
+    Object? page = freezed,
+    Object? totalPages = null,
     Object? actions = null,
   }) {
     return _then(_$_ActionResult(
@@ -112,9 +148,25 @@ class __$$_ActionResultCopyWithImpl<$Res>
           ? _value.hasNextPage
           : hasNextPage // ignore: cast_nullable_to_non_nullable
               as bool,
-      nextPage: null == nextPage
+      hasPrevPage: null == hasPrevPage
+          ? _value.hasPrevPage
+          : hasPrevPage // ignore: cast_nullable_to_non_nullable
+              as bool,
+      nextPage: freezed == nextPage
           ? _value.nextPage
           : nextPage // ignore: cast_nullable_to_non_nullable
+              as num?,
+      prevPage: freezed == prevPage
+          ? _value.prevPage
+          : prevPage // ignore: cast_nullable_to_non_nullable
+              as num?,
+      page: freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as num?,
+      totalPages: null == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
               as num,
       actions: null == actions
           ? _value.actions
@@ -129,7 +181,11 @@ class __$$_ActionResultCopyWithImpl<$Res>
 class _$_ActionResult implements _ActionResult {
   _$_ActionResult(
       {required this.hasNextPage,
+      required this.hasPrevPage,
       required this.nextPage,
+      required this.prevPage,
+      required this.page,
+      required this.totalPages,
       @ActionsConverter() @JsonKey(name: 'docs') required this.actions});
 
   factory _$_ActionResult.fromJson(Map<String, dynamic> json) =>
@@ -138,7 +194,15 @@ class _$_ActionResult implements _ActionResult {
   @override
   final bool hasNextPage;
   @override
-  final num nextPage;
+  final bool hasPrevPage;
+  @override
+  final num? nextPage;
+  @override
+  final num? prevPage;
+  @override
+  final num? page;
+  @override
+  final num totalPages;
   @override
   @ActionsConverter()
   @JsonKey(name: 'docs')
@@ -146,7 +210,7 @@ class _$_ActionResult implements _ActionResult {
 
   @override
   String toString() {
-    return 'ActionResult(hasNextPage: $hasNextPage, nextPage: $nextPage, actions: $actions)';
+    return 'ActionResult(hasNextPage: $hasNextPage, hasPrevPage: $hasPrevPage, nextPage: $nextPage, prevPage: $prevPage, page: $page, totalPages: $totalPages, actions: $actions)';
   }
 
   @override
@@ -156,14 +220,28 @@ class _$_ActionResult implements _ActionResult {
             other is _$_ActionResult &&
             (identical(other.hasNextPage, hasNextPage) ||
                 other.hasNextPage == hasNextPage) &&
+            (identical(other.hasPrevPage, hasPrevPage) ||
+                other.hasPrevPage == hasPrevPage) &&
             (identical(other.nextPage, nextPage) ||
                 other.nextPage == nextPage) &&
+            (identical(other.prevPage, prevPage) ||
+                other.prevPage == prevPage) &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.totalPages, totalPages) ||
+                other.totalPages == totalPages) &&
             const DeepCollectionEquality().equals(other.actions, actions));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, hasNextPage, nextPage,
+  int get hashCode => Object.hash(
+      runtimeType,
+      hasNextPage,
+      hasPrevPage,
+      nextPage,
+      prevPage,
+      page,
+      totalPages,
       const DeepCollectionEquality().hash(actions));
 
   @JsonKey(ignore: true)
@@ -183,7 +261,11 @@ class _$_ActionResult implements _ActionResult {
 abstract class _ActionResult implements ActionResult {
   factory _ActionResult(
       {required final bool hasNextPage,
-      required final num nextPage,
+      required final bool hasPrevPage,
+      required final num? nextPage,
+      required final num? prevPage,
+      required final num? page,
+      required final num totalPages,
       @ActionsConverter()
       @JsonKey(name: 'docs')
           required final List<Action> actions}) = _$_ActionResult;
@@ -194,7 +276,15 @@ abstract class _ActionResult implements ActionResult {
   @override
   bool get hasNextPage;
   @override
-  num get nextPage;
+  bool get hasPrevPage;
+  @override
+  num? get nextPage;
+  @override
+  num? get prevPage;
+  @override
+  num? get page;
+  @override
+  num get totalPages;
   @override
   @ActionsConverter()
   @JsonKey(name: 'docs')
