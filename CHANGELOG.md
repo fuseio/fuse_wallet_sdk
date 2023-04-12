@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.0.17]
+
+### Added
+- Expose a function to reconnect to the websocket when app goes to the foreground.
+
 ## [0.0.16]
 
 ### Changed
