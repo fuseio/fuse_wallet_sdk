@@ -853,4 +853,8 @@ class FuseWalletSDK {
   Future<void>? disconnectWebSocketClient() {
     return webSocketConnection?.client.disconnect();
   }
+
+  Future<void>? reconnectWebSocketClient() {
+    return webSocketConnection?.client.connect();
+  }
 }
