@@ -1,8 +1,11 @@
 export 'enum.dart';
+export 'account/account.dart';
 export 'action/action.dart';
 export 'action/action_result.dart';
 export 'auth/auth.dto.dart';
 export 'collectible/collectible.dart';
+export 'collection/address.dart';
+export 'collection/collection.dart';
 export 'relay/relay.dart';
 export 'smart_wallet/smart_wallet.dart';
 export 'smart_wallet/smart_wallet_event.dart';

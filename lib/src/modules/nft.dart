@@ -4,6 +4,7 @@ import 'package:graphql/client.dart';
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 import 'package:fuse_wallet_sdk/src/utils/queries.dart';
 
+@Deprecated('Use the new NFT module instead')
 class NftModule {
   final GraphQLClient _graphQLClient;
 

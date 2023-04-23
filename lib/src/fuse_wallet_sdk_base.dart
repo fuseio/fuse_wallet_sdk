@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:data_channel/data_channel.dart';
 import 'package:dio/dio.dart';
+import 'package:fuse_wallet_sdk/src/modules/nft_v2.dart';
 import 'package:hex/hex.dart';
 import 'package:http/http.dart' as http;
 import 'package:web3dart/crypto.dart';
@@ -60,12 +61,14 @@ class FuseWalletSDK {
     _explorerModule = ExplorerModule(_dio);
     _stakingModule = StakingModule(_dio);
     _nftModule = NftModule();
+    _nftModuleV2 = NftModuleV2();
   }
 
   late ExplorerModule _explorerModule;
   late TradeModule _tradeModule;
   late StakingModule _stakingModule;
   late NftModule _nftModule;
+  late NftModuleV2 _nftModuleV2;
 
   ExplorerModule get explorerModule => _explorerModule;
 
@@ -74,6 +77,8 @@ class FuseWalletSDK {
   StakingModule get stakingModule => _stakingModule;
 
   NftModule get nftModule => _nftModule;
+
+  NftModuleV2 get nftModuleV2 => _nftModuleV2;
 
   set jwtToken(String value) => _jwtToken = value;
 

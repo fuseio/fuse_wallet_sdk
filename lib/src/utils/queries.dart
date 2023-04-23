@@ -11,3 +11,32 @@ const String getCollectiblesByOwnerQuery = r'''
       }
   }
 ''';
+
+const String getAccountByAddress = r'''
+  query getCollectiblesByOwner($address: String!) {
+      account(id: $address) {
+        id
+        address
+        collectibles {
+          id
+          created
+          tokenId
+          description
+          descriptorUri
+          name
+          imageURL
+          creator {
+            id
+          }
+          owner {
+            id
+          }
+          collection {
+            collectionName
+            collectionSymbol
+            collectionAddress
+          }
+        }
+      }
+  }
+''';
