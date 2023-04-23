@@ -24,7 +24,7 @@ class NftModuleV2 {
   ///
   /// Returns a [Future] that resolves to a [DC] containing either an [OperationException] or a [Map] of collectibles.
   Future<DC<OperationException?, Account>> getErc721(
-    String owner,
+    String address,
   ) async {
     QueryResult result = await _graphQLClient.query(
       QueryOptions(
@@ -32,7 +32,7 @@ class NftModuleV2 {
         fetchPolicy: FetchPolicy.networkOnly,
         cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
         variables: <String, dynamic>{
-          'address': owner.toLowerCase(),
+          'address': address.toLowerCase(),
         },
       ),
     );

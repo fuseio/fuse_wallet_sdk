@@ -5,12 +5,15 @@ import 'package:fuse_wallet_sdk/src/models/collection/collection.dart';
 part 'collectible.freezed.dart';
 part 'collectible.g.dart';
 
+/// A [Collectible] class represents the collectible data.
 @freezed
 class Collectible with _$Collectible {
   const Collectible._();
 
+  /// Returns true if the [metadata] is not null.
   bool get hasMetadata => metadata != null;
 
+  /// Creates a [Collectible] instance.
   factory Collectible({
     String? description,
     String? name,
@@ -25,6 +28,7 @@ class Collectible with _$Collectible {
     Map<String, dynamic>? metadata,
   }) = _Collectible;
 
+  /// Creates a [Collectible] instance from a JSON map.
   factory Collectible.fromJson(Map<String, dynamic> json) =>
       _$CollectibleFromJson(json);
 }

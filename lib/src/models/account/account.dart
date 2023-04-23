@@ -7,22 +7,28 @@ import 'package:fuse_wallet_sdk/src/models/collection/collectible.dart';
 part 'account.freezed.dart';
 part 'account.g.dart';
 
+/// An [Account] class represents the account data.
 @freezed
 class Account with _$Account {
+  /// Creates an [Account] instance.
   factory Account({
     required String id,
     required String address,
     @CollectibleConverter() required List<Collectible> collectibles,
   }) = _Account;
 
+  /// Creates an [Account] instance from a JSON map.
   factory Account.fromJson(Map<String, dynamic> json) =>
       _$AccountFromJson(json);
 }
 
+/// A custom converter for converting between JSON and a list of [Collectible] instances.
 class CollectibleConverter
     implements JsonConverter<List<Collectible>, List<dynamic>> {
+  /// Creates an instance of [CollectibleConverter].
   const CollectibleConverter();
 
+  /// Converts the given JSON [List] to a list of [Collectible] instances.
   @override
   List<Collectible> fromJson(List<dynamic>? json) {
     if (json == null) {
@@ -50,6 +56,7 @@ class CollectibleConverter
     }
   }
 
+  /// Converts the given list of [Collectible] instances to a JSON [List].
   @override
   List<dynamic> toJson(List<Collectible> instance) => instance.toList();
 }

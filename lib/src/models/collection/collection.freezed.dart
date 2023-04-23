@@ -20,9 +20,12 @@ Collection _$CollectionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Collection {
-  String get collectionName => throw _privateConstructorUsedError;
-  String get collectionSymbol => throw _privateConstructorUsedError;
-  String get collectionAddress => throw _privateConstructorUsedError;
+  @JsonKey(name: 'collectionName')
+  String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'collectionSymbol')
+  String get symbol => throw _privateConstructorUsedError;
+  @JsonKey(name: 'collectionAddress')
+  String get address => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,9 +40,9 @@ abstract class $CollectionCopyWith<$Res> {
       _$CollectionCopyWithImpl<$Res, Collection>;
   @useResult
   $Res call(
-      {String collectionName,
-      String collectionSymbol,
-      String collectionAddress});
+      {@JsonKey(name: 'collectionName') String name,
+      @JsonKey(name: 'collectionSymbol') String symbol,
+      @JsonKey(name: 'collectionAddress') String address});
 }
 
 /// @nodoc
@@ -55,22 +58,22 @@ class _$CollectionCopyWithImpl<$Res, $Val extends Collection>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? collectionName = null,
-    Object? collectionSymbol = null,
-    Object? collectionAddress = null,
+    Object? name = null,
+    Object? symbol = null,
+    Object? address = null,
   }) {
     return _then(_value.copyWith(
-      collectionName: null == collectionName
-          ? _value.collectionName
-          : collectionName // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      collectionSymbol: null == collectionSymbol
-          ? _value.collectionSymbol
-          : collectionSymbol // ignore: cast_nullable_to_non_nullable
+      symbol: null == symbol
+          ? _value.symbol
+          : symbol // ignore: cast_nullable_to_non_nullable
               as String,
-      collectionAddress: null == collectionAddress
-          ? _value.collectionAddress
-          : collectionAddress // ignore: cast_nullable_to_non_nullable
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -85,9 +88,9 @@ abstract class _$$_CollectionCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String collectionName,
-      String collectionSymbol,
-      String collectionAddress});
+      {@JsonKey(name: 'collectionName') String name,
+      @JsonKey(name: 'collectionSymbol') String symbol,
+      @JsonKey(name: 'collectionAddress') String address});
 }
 
 /// @nodoc
@@ -101,22 +104,22 @@ class __$$_CollectionCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? collectionName = null,
-    Object? collectionSymbol = null,
-    Object? collectionAddress = null,
+    Object? name = null,
+    Object? symbol = null,
+    Object? address = null,
   }) {
     return _then(_$_Collection(
-      collectionName: null == collectionName
-          ? _value.collectionName
-          : collectionName // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      collectionSymbol: null == collectionSymbol
-          ? _value.collectionSymbol
-          : collectionSymbol // ignore: cast_nullable_to_non_nullable
+      symbol: null == symbol
+          ? _value.symbol
+          : symbol // ignore: cast_nullable_to_non_nullable
               as String,
-      collectionAddress: null == collectionAddress
-          ? _value.collectionAddress
-          : collectionAddress // ignore: cast_nullable_to_non_nullable
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -126,23 +129,26 @@ class __$$_CollectionCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Collection implements _Collection {
   _$_Collection(
-      {required this.collectionName,
-      required this.collectionSymbol,
-      required this.collectionAddress});
+      {@JsonKey(name: 'collectionName') required this.name,
+      @JsonKey(name: 'collectionSymbol') required this.symbol,
+      @JsonKey(name: 'collectionAddress') required this.address});
 
   factory _$_Collection.fromJson(Map<String, dynamic> json) =>
       _$$_CollectionFromJson(json);
 
   @override
-  final String collectionName;
+  @JsonKey(name: 'collectionName')
+  final String name;
   @override
-  final String collectionSymbol;
+  @JsonKey(name: 'collectionSymbol')
+  final String symbol;
   @override
-  final String collectionAddress;
+  @JsonKey(name: 'collectionAddress')
+  final String address;
 
   @override
   String toString() {
-    return 'Collection(collectionName: $collectionName, collectionSymbol: $collectionSymbol, collectionAddress: $collectionAddress)';
+    return 'Collection(name: $name, symbol: $symbol, address: $address)';
   }
 
   @override
@@ -150,18 +156,14 @@ class _$_Collection implements _Collection {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Collection &&
-            (identical(other.collectionName, collectionName) ||
-                other.collectionName == collectionName) &&
-            (identical(other.collectionSymbol, collectionSymbol) ||
-                other.collectionSymbol == collectionSymbol) &&
-            (identical(other.collectionAddress, collectionAddress) ||
-                other.collectionAddress == collectionAddress));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.symbol, symbol) || other.symbol == symbol) &&
+            (identical(other.address, address) || other.address == address));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, collectionName, collectionSymbol, collectionAddress);
+  int get hashCode => Object.hash(runtimeType, name, symbol, address);
 
   @JsonKey(ignore: true)
   @override
@@ -179,19 +181,23 @@ class _$_Collection implements _Collection {
 
 abstract class _Collection implements Collection {
   factory _Collection(
-      {required final String collectionName,
-      required final String collectionSymbol,
-      required final String collectionAddress}) = _$_Collection;
+          {@JsonKey(name: 'collectionName') required final String name,
+          @JsonKey(name: 'collectionSymbol') required final String symbol,
+          @JsonKey(name: 'collectionAddress') required final String address}) =
+      _$_Collection;
 
   factory _Collection.fromJson(Map<String, dynamic> json) =
       _$_Collection.fromJson;
 
   @override
-  String get collectionName;
+  @JsonKey(name: 'collectionName')
+  String get name;
   @override
-  String get collectionSymbol;
+  @JsonKey(name: 'collectionSymbol')
+  String get symbol;
   @override
-  String get collectionAddress;
+  @JsonKey(name: 'collectionAddress')
+  String get address;
   @override
   @JsonKey(ignore: true)
   _$$_CollectionCopyWith<_$_Collection> get copyWith =>
