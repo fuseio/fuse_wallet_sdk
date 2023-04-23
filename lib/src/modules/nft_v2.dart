@@ -1,4 +1,3 @@
-import 'package:fuse_wallet_sdk/src/models/account/account.dart';
 import 'package:gql/language.dart';
 import 'package:graphql/client.dart';
 
