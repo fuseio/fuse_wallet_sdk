@@ -20,13 +20,16 @@ Collectible _$CollectibleFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Collectible {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get imageURL => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  String get collectionName => throw _privateConstructorUsedError;
-  String get collectionSymbol => throw _privateConstructorUsedError;
-  String get collectionAddress => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get imageURL => throw _privateConstructorUsedError;
+  String get descriptorUri => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
+  DateTime get created => throw _privateConstructorUsedError;
+  String get tokenId => throw _privateConstructorUsedError;
+  Collection get collection => throw _privateConstructorUsedError;
+  Address get owner => throw _privateConstructorUsedError;
+  Address get creator => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,13 +44,20 @@ abstract class $CollectibleCopyWith<$Res> {
       _$CollectibleCopyWithImpl<$Res, Collectible>;
   @useResult
   $Res call(
-      {String id,
-      String name,
-      String imageURL,
-      String description,
-      String collectionName,
-      String collectionSymbol,
-      String collectionAddress});
+      {String? description,
+      String? name,
+      String? imageURL,
+      String descriptorUri,
+      @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
+          DateTime created,
+      String tokenId,
+      Collection collection,
+      Address owner,
+      Address creator});
+
+  $CollectionCopyWith<$Res> get collection;
+  $AddressCopyWith<$Res> get owner;
+  $AddressCopyWith<$Res> get creator;
 }
 
 /// @nodoc
@@ -63,44 +73,78 @@ class _$CollectibleCopyWithImpl<$Res, $Val extends Collectible>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? imageURL = null,
-    Object? description = null,
-    Object? collectionName = null,
-    Object? collectionSymbol = null,
-    Object? collectionAddress = null,
+    Object? description = freezed,
+    Object? name = freezed,
+    Object? imageURL = freezed,
+    Object? descriptorUri = null,
+    Object? created = null,
+    Object? tokenId = null,
+    Object? collection = null,
+    Object? owner = null,
+    Object? creator = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageURL: null == imageURL
-          ? _value.imageURL
-          : imageURL // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageURL: freezed == imageURL
+          ? _value.imageURL
+          : imageURL // ignore: cast_nullable_to_non_nullable
+              as String?,
+      descriptorUri: null == descriptorUri
+          ? _value.descriptorUri
+          : descriptorUri // ignore: cast_nullable_to_non_nullable
               as String,
-      collectionName: null == collectionName
-          ? _value.collectionName
-          : collectionName // ignore: cast_nullable_to_non_nullable
+      created: null == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      tokenId: null == tokenId
+          ? _value.tokenId
+          : tokenId // ignore: cast_nullable_to_non_nullable
               as String,
-      collectionSymbol: null == collectionSymbol
-          ? _value.collectionSymbol
-          : collectionSymbol // ignore: cast_nullable_to_non_nullable
-              as String,
-      collectionAddress: null == collectionAddress
-          ? _value.collectionAddress
-          : collectionAddress // ignore: cast_nullable_to_non_nullable
-              as String,
+      collection: null == collection
+          ? _value.collection
+          : collection // ignore: cast_nullable_to_non_nullable
+              as Collection,
+      owner: null == owner
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as Address,
+      creator: null == creator
+          ? _value.creator
+          : creator // ignore: cast_nullable_to_non_nullable
+              as Address,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CollectionCopyWith<$Res> get collection {
+    return $CollectionCopyWith<$Res>(_value.collection, (value) {
+      return _then(_value.copyWith(collection: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AddressCopyWith<$Res> get owner {
+    return $AddressCopyWith<$Res>(_value.owner, (value) {
+      return _then(_value.copyWith(owner: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AddressCopyWith<$Res> get creator {
+    return $AddressCopyWith<$Res>(_value.creator, (value) {
+      return _then(_value.copyWith(creator: value) as $Val);
+    });
   }
 }
 
@@ -113,13 +157,23 @@ abstract class _$$_CollectibleCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      String name,
-      String imageURL,
-      String description,
-      String collectionName,
-      String collectionSymbol,
-      String collectionAddress});
+      {String? description,
+      String? name,
+      String? imageURL,
+      String descriptorUri,
+      @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
+          DateTime created,
+      String tokenId,
+      Collection collection,
+      Address owner,
+      Address creator});
+
+  @override
+  $CollectionCopyWith<$Res> get collection;
+  @override
+  $AddressCopyWith<$Res> get owner;
+  @override
+  $AddressCopyWith<$Res> get creator;
 }
 
 /// @nodoc
@@ -133,80 +187,99 @@ class __$$_CollectibleCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? imageURL = null,
-    Object? description = null,
-    Object? collectionName = null,
-    Object? collectionSymbol = null,
-    Object? collectionAddress = null,
+    Object? description = freezed,
+    Object? name = freezed,
+    Object? imageURL = freezed,
+    Object? descriptorUri = null,
+    Object? created = null,
+    Object? tokenId = null,
+    Object? collection = null,
+    Object? owner = null,
+    Object? creator = null,
   }) {
     return _then(_$_Collectible(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageURL: null == imageURL
-          ? _value.imageURL
-          : imageURL // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageURL: freezed == imageURL
+          ? _value.imageURL
+          : imageURL // ignore: cast_nullable_to_non_nullable
+              as String?,
+      descriptorUri: null == descriptorUri
+          ? _value.descriptorUri
+          : descriptorUri // ignore: cast_nullable_to_non_nullable
               as String,
-      collectionName: null == collectionName
-          ? _value.collectionName
-          : collectionName // ignore: cast_nullable_to_non_nullable
+      created: null == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      tokenId: null == tokenId
+          ? _value.tokenId
+          : tokenId // ignore: cast_nullable_to_non_nullable
               as String,
-      collectionSymbol: null == collectionSymbol
-          ? _value.collectionSymbol
-          : collectionSymbol // ignore: cast_nullable_to_non_nullable
-              as String,
-      collectionAddress: null == collectionAddress
-          ? _value.collectionAddress
-          : collectionAddress // ignore: cast_nullable_to_non_nullable
-              as String,
+      collection: null == collection
+          ? _value.collection
+          : collection // ignore: cast_nullable_to_non_nullable
+              as Collection,
+      owner: null == owner
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as Address,
+      creator: null == creator
+          ? _value.creator
+          : creator // ignore: cast_nullable_to_non_nullable
+              as Address,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Collectible implements _Collectible {
+class _$_Collectible extends _Collectible {
   _$_Collectible(
-      {required this.id,
-      required this.name,
-      required this.imageURL,
-      required this.description,
-      required this.collectionName,
-      required this.collectionSymbol,
-      required this.collectionAddress});
+      {this.description,
+      this.name,
+      this.imageURL,
+      required this.descriptorUri,
+      @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
+          required this.created,
+      required this.tokenId,
+      required this.collection,
+      required this.owner,
+      required this.creator})
+      : super._();
 
   factory _$_Collectible.fromJson(Map<String, dynamic> json) =>
       _$$_CollectibleFromJson(json);
 
   @override
-  final String id;
+  final String? description;
   @override
-  final String name;
+  final String? name;
   @override
-  final String imageURL;
+  final String? imageURL;
   @override
-  final String description;
+  final String descriptorUri;
   @override
-  final String collectionName;
+  @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
+  final DateTime created;
   @override
-  final String collectionSymbol;
+  final String tokenId;
   @override
-  final String collectionAddress;
+  final Collection collection;
+  @override
+  final Address owner;
+  @override
+  final Address creator;
 
   @override
   String toString() {
-    return 'Collectible(id: $id, name: $name, imageURL: $imageURL, description: $description, collectionName: $collectionName, collectionSymbol: $collectionSymbol, collectionAddress: $collectionAddress)';
+    return 'Collectible(description: $description, name: $name, imageURL: $imageURL, descriptorUri: $descriptorUri, created: $created, tokenId: $tokenId, collection: $collection, owner: $owner, creator: $creator)';
   }
 
   @override
@@ -214,24 +287,25 @@ class _$_Collectible implements _Collectible {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Collectible &&
-            (identical(other.id, id) || other.id == id) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.imageURL, imageURL) ||
                 other.imageURL == imageURL) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.collectionName, collectionName) ||
-                other.collectionName == collectionName) &&
-            (identical(other.collectionSymbol, collectionSymbol) ||
-                other.collectionSymbol == collectionSymbol) &&
-            (identical(other.collectionAddress, collectionAddress) ||
-                other.collectionAddress == collectionAddress));
+            (identical(other.descriptorUri, descriptorUri) ||
+                other.descriptorUri == descriptorUri) &&
+            (identical(other.created, created) || other.created == created) &&
+            (identical(other.tokenId, tokenId) || other.tokenId == tokenId) &&
+            (identical(other.collection, collection) ||
+                other.collection == collection) &&
+            (identical(other.owner, owner) || other.owner == owner) &&
+            (identical(other.creator, creator) || other.creator == creator));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, imageURL, description,
-      collectionName, collectionSymbol, collectionAddress);
+  int get hashCode => Object.hash(runtimeType, description, name, imageURL,
+      descriptorUri, created, tokenId, collection, owner, creator);
 
   @JsonKey(ignore: true)
   @override
@@ -247,33 +321,42 @@ class _$_Collectible implements _Collectible {
   }
 }
 
-abstract class _Collectible implements Collectible {
+abstract class _Collectible extends Collectible {
   factory _Collectible(
-      {required final String id,
-      required final String name,
-      required final String imageURL,
-      required final String description,
-      required final String collectionName,
-      required final String collectionSymbol,
-      required final String collectionAddress}) = _$_Collectible;
+      {final String? description,
+      final String? name,
+      final String? imageURL,
+      required final String descriptorUri,
+      @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
+          required final DateTime created,
+      required final String tokenId,
+      required final Collection collection,
+      required final Address owner,
+      required final Address creator}) = _$_Collectible;
+  _Collectible._() : super._();
 
   factory _Collectible.fromJson(Map<String, dynamic> json) =
       _$_Collectible.fromJson;
 
   @override
-  String get id;
+  String? get description;
   @override
-  String get name;
+  String? get name;
   @override
-  String get imageURL;
+  String? get imageURL;
   @override
-  String get description;
+  String get descriptorUri;
   @override
-  String get collectionName;
+  @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
+  DateTime get created;
   @override
-  String get collectionSymbol;
+  String get tokenId;
   @override
-  String get collectionAddress;
+  Collection get collection;
+  @override
+  Address get owner;
+  @override
+  Address get creator;
   @override
   @JsonKey(ignore: true)
   _$$_CollectibleCopyWith<_$_Collectible> get copyWith =>
