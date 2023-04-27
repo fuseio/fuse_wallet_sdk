@@ -12,9 +12,9 @@ class Account with _$Account {
   /// and [collectibles].
   ///
   /// Parameters:
-  /// [id]: The current owner of the collectible.
-  /// [address]: The current owner of the collectible.
-  /// [collectibles]: The collectibles of the address.
+  /// - [id]: The current owner of the collectible.
+  /// - [address]: The current owner of the collectible.
+  /// - [collectibles]: The collectibles of the address.
   factory Account({
     required String id,
     required String address,

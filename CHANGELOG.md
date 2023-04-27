@@ -3,7 +3,7 @@
 ## [0.0.18]
 
 ### Added
-- Introduced a new NFT module for fetching non-fungible tokens (ERC-721) on FUSE network.
+- Introduced a new GraphQL module to retrieve data from hosted subgraphs on the FUSE network.
 
 ## [0.0.17]
 

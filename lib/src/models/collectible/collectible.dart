@@ -20,16 +20,16 @@ class Collectible with _$Collectible {
   /// Creates a new `Collectible` instance with the given properties.
   ///
   /// Parameters:
-  /// [description]: An optional description of the collectible.
-  /// [name]: An optional name for the collectible.
-  /// [imageURL]: An optional URL for an image representing the collectible.
-  /// [descriptorUri]: The descriptor URI for the collectible.
-  /// [created]: The date when the collectible was created.
-  /// [tokenId]: The unique identifier of the collectible.
-  /// [collection]: The collection to which the collectible belongs.
-  /// [owner]: The current owner of the collectible.
-  /// [creator]: The original creator of the collectible.
-  /// [metadata]: Optional metadata associated with the collectible.
+  /// - [description]: An optional description of the collectible.
+  /// - [name]: An optional name for the collectible.
+  /// - [imageURL]: An optional URL for an image representing the collectible.
+  /// - [descriptorUri]: The descriptor URI for the collectible.
+  /// - [created]: The date when the collectible was created.
+  /// - [tokenId]: The unique identifier of the collectible.
+  /// - [collection]: The collection to which the collectible belongs.
+  /// - [owner]: The current owner of the collectible.
+  /// - [creator]: The original creator of the collectible.
+  /// - [metadata]: Optional metadata associated with the collectible.
   factory Collectible({
     String? description,
     String? name,
