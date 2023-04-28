@@ -5,7 +5,7 @@ void main() async {
   final String publicApiKey = '';
   final FuseWalletSDK fuseWalletSDK = FuseWalletSDK(publicApiKey);
   final String address = '0x...';
-  final res = await fuseWalletSDK.graphQLModule.getCollectiblesByOwner(
+  final res = await fuseWalletSDK.nftModule.getCollectiblesByOwner(
     address,
   );
   print(res.data);

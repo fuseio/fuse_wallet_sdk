@@ -1,4 +1,4 @@
 export 'explorer.dart';
-export 'graphql.dart';
+export 'nft.dart';
 export 'staking.dart';
 export 'trade.dart';

@@ -59,13 +59,13 @@ class FuseWalletSDK {
     _tradeModule = TradeModule(_dio);
     _explorerModule = ExplorerModule(_dio);
     _stakingModule = StakingModule(_dio);
-    _graphQLModule = GraphQLModule(_dio);
+    _nftModule = NftModule(_dio);
   }
 
   late ExplorerModule _explorerModule;
   late TradeModule _tradeModule;
   late StakingModule _stakingModule;
-  late GraphQLModule _graphQLModule;
+  late NftModule _nftModule;
 
   ExplorerModule get explorerModule => _explorerModule;
 
@@ -73,7 +73,7 @@ class FuseWalletSDK {
 
   StakingModule get stakingModule => _stakingModule;
 
-  GraphQLModule get graphQLModule => _graphQLModule;
+  NftModule get nftModule => _nftModule;
 
   set jwtToken(String value) => _jwtToken = value;
 

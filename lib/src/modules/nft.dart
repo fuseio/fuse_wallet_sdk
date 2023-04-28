@@ -3,10 +3,10 @@ import 'package:dio/dio.dart';
 
 import 'package:fuse_wallet_sdk/src/models/models.dart';
 
-class GraphQLModule {
+class NftModule {
   final Dio _dio;
 
-  const GraphQLModule(this._dio);
+  const NftModule(this._dio);
 
   /// Retrieves the collectibles owned by a specified address.
   ///
