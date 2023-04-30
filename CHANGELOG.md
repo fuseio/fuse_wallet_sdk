@@ -1,9 +1,9 @@
 # CHANGELOG
 
-## [0.0.18]
+## [0.1.0]
 
-### Added
-- Introduced a new NFT module for fetching non-fungible tokens (ERC-721) on FUSE network.
+### Changed
+- **Breaking:** Introduced a new NFT module for fetching non-fungible tokens (ERC-721) on FUSE network.
 
 ## [0.0.17]
 
