@@ -59,7 +59,7 @@ class FuseWalletSDK {
     _tradeModule = TradeModule(_dio);
     _explorerModule = ExplorerModule(_dio);
     _stakingModule = StakingModule(_dio);
-    _nftModule = NftModule();
+    _nftModule = NftModule(_dio);
   }
 
   late ExplorerModule _explorerModule;
