@@ -57,13 +57,26 @@ class Collectible with _$Collectible {
     return null;
   }
 
+  String? get image {
+    if (imageURL != null) {
+      return imageURL;
+    } else {
+      final Map<String, dynamic>? decodedMetadata = decodeDescriptorUri();
+      if (decodedMetadata != null && decodedMetadata.containsKey('image')) {
+        return decodedMetadata['image'] as String?;
+      }
+    }
+    return null;
+  }
+
   /// Creates a `Collectible` instance from a JSON object.
   factory Collectible.fromJson(Map<String, dynamic> json) =>
       _$CollectibleFromJson(json);
 }
 
 /// Converts a [DateTime] object to its corresponding milliseconds since epoch value.
-int _savedAtToJson(DateTime savedAt) => savedAt.millisecondsSinceEpoch;
+String _savedAtToJson(DateTime savedAt) =>
+    savedAt.millisecondsSinceEpoch.toString();
 
 /// Parses a string representing milliseconds since epoch and returns a [DateTime] object.
 DateTime _savedAtFromJson(String savedAtMillisecondsSinceEpoch) {

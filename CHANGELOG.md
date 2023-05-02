@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.1.0+1]
+
+### Fixed
+- `Collectible` `fromJson` function 
+
 ## [0.1.0]
 
 ### Changed
