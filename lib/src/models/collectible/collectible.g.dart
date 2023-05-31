@@ -12,7 +12,7 @@ _$_Collectible _$$_CollectibleFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       imageURL: json['imageURL'] as String?,
       descriptorUri: json['descriptorUri'] as String,
-      created: _savedAtFromJson(json['created'] as String),
+      createdAt: json['created'] as String,
       tokenId: json['tokenId'] as String,
       collection:
           Collection.fromJson(json['collection'] as Map<String, dynamic>),
@@ -26,7 +26,7 @@ Map<String, dynamic> _$$_CollectibleToJson(_$_Collectible instance) =>
       'name': instance.name,
       'imageURL': instance.imageURL,
       'descriptorUri': instance.descriptorUri,
-      'created': _savedAtToJson(instance.created),
+      'created': instance.createdAt,
       'tokenId': instance.tokenId,
       'collection': instance.collection.toJson(),
       'owner': instance.owner.toJson(),

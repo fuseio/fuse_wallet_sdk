@@ -24,7 +24,7 @@ class Collectible with _$Collectible {
   /// - [name]: An optional name for the collectible.
   /// - [imageURL]: An optional URL for an image representing the collectible.
   /// - [descriptorUri]: The descriptor URI for the collectible.
-  /// - [created]: The date when the collectible was created.
+  /// - [created]: The date when the collectible was created in unix time.
   /// - [tokenId]: The unique identifier of the collectible.
   /// - [collection]: The collection to which the collectible belongs.
   /// - [owner]: The current owner of the collectible.
@@ -35,8 +35,7 @@ class Collectible with _$Collectible {
     String? name,
     String? imageURL,
     required String descriptorUri,
-    @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
-        required DateTime created,
+    @JsonKey(name: 'created') required String createdAt,
     required String tokenId,
     required Collection collection,
     required Address owner,
@@ -72,18 +71,4 @@ class Collectible with _$Collectible {
   /// Creates a `Collectible` instance from a JSON object.
   factory Collectible.fromJson(Map<String, dynamic> json) =>
       _$CollectibleFromJson(json);
-}
-
-/// Converts a [DateTime] object to its corresponding milliseconds since epoch value.
-String _savedAtToJson(DateTime savedAt) =>
-    savedAt.millisecondsSinceEpoch.toString();
-
-/// Parses a string representing milliseconds since epoch and returns a [DateTime] object.
-DateTime _savedAtFromJson(String savedAtMillisecondsSinceEpoch) {
-  return DateTime.fromMillisecondsSinceEpoch(
-    int.parse(
-          savedAtMillisecondsSinceEpoch,
-        ) *
-        1000,
-  );
 }

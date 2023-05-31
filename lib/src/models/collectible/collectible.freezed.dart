@@ -24,8 +24,8 @@ mixin _$Collectible {
   String? get name => throw _privateConstructorUsedError;
   String? get imageURL => throw _privateConstructorUsedError;
   String get descriptorUri => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
-  DateTime get created => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created')
+  String get createdAt => throw _privateConstructorUsedError;
   String get tokenId => throw _privateConstructorUsedError;
   Collection get collection => throw _privateConstructorUsedError;
   Address get owner => throw _privateConstructorUsedError;
@@ -48,8 +48,7 @@ abstract class $CollectibleCopyWith<$Res> {
       String? name,
       String? imageURL,
       String descriptorUri,
-      @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
-          DateTime created,
+      @JsonKey(name: 'created') String createdAt,
       String tokenId,
       Collection collection,
       Address owner,
@@ -77,7 +76,7 @@ class _$CollectibleCopyWithImpl<$Res, $Val extends Collectible>
     Object? name = freezed,
     Object? imageURL = freezed,
     Object? descriptorUri = null,
-    Object? created = null,
+    Object? createdAt = null,
     Object? tokenId = null,
     Object? collection = null,
     Object? owner = null,
@@ -100,10 +99,10 @@ class _$CollectibleCopyWithImpl<$Res, $Val extends Collectible>
           ? _value.descriptorUri
           : descriptorUri // ignore: cast_nullable_to_non_nullable
               as String,
-      created: null == created
-          ? _value.created
-          : created // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
       tokenId: null == tokenId
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
@@ -161,8 +160,7 @@ abstract class _$$_CollectibleCopyWith<$Res>
       String? name,
       String? imageURL,
       String descriptorUri,
-      @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
-          DateTime created,
+      @JsonKey(name: 'created') String createdAt,
       String tokenId,
       Collection collection,
       Address owner,
@@ -191,7 +189,7 @@ class __$$_CollectibleCopyWithImpl<$Res>
     Object? name = freezed,
     Object? imageURL = freezed,
     Object? descriptorUri = null,
-    Object? created = null,
+    Object? createdAt = null,
     Object? tokenId = null,
     Object? collection = null,
     Object? owner = null,
@@ -214,10 +212,10 @@ class __$$_CollectibleCopyWithImpl<$Res>
           ? _value.descriptorUri
           : descriptorUri // ignore: cast_nullable_to_non_nullable
               as String,
-      created: null == created
-          ? _value.created
-          : created // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
       tokenId: null == tokenId
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
@@ -246,8 +244,7 @@ class _$_Collectible extends _Collectible {
       this.name,
       this.imageURL,
       required this.descriptorUri,
-      @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
-          required this.created,
+      @JsonKey(name: 'created') required this.createdAt,
       required this.tokenId,
       required this.collection,
       required this.owner,
@@ -266,8 +263,8 @@ class _$_Collectible extends _Collectible {
   @override
   final String descriptorUri;
   @override
-  @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
-  final DateTime created;
+  @JsonKey(name: 'created')
+  final String createdAt;
   @override
   final String tokenId;
   @override
@@ -279,7 +276,7 @@ class _$_Collectible extends _Collectible {
 
   @override
   String toString() {
-    return 'Collectible(description: $description, name: $name, imageURL: $imageURL, descriptorUri: $descriptorUri, created: $created, tokenId: $tokenId, collection: $collection, owner: $owner, creator: $creator)';
+    return 'Collectible(description: $description, name: $name, imageURL: $imageURL, descriptorUri: $descriptorUri, createdAt: $createdAt, tokenId: $tokenId, collection: $collection, owner: $owner, creator: $creator)';
   }
 
   @override
@@ -294,7 +291,8 @@ class _$_Collectible extends _Collectible {
                 other.imageURL == imageURL) &&
             (identical(other.descriptorUri, descriptorUri) ||
                 other.descriptorUri == descriptorUri) &&
-            (identical(other.created, created) || other.created == created) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
             (identical(other.tokenId, tokenId) || other.tokenId == tokenId) &&
             (identical(other.collection, collection) ||
                 other.collection == collection) &&
@@ -305,7 +303,7 @@ class _$_Collectible extends _Collectible {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, description, name, imageURL,
-      descriptorUri, created, tokenId, collection, owner, creator);
+      descriptorUri, createdAt, tokenId, collection, owner, creator);
 
   @JsonKey(ignore: true)
   @override
@@ -327,8 +325,7 @@ abstract class _Collectible extends Collectible {
       final String? name,
       final String? imageURL,
       required final String descriptorUri,
-      @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
-          required final DateTime created,
+      @JsonKey(name: 'created') required final String createdAt,
       required final String tokenId,
       required final Collection collection,
       required final Address owner,
@@ -347,8 +344,8 @@ abstract class _Collectible extends Collectible {
   @override
   String get descriptorUri;
   @override
-  @JsonKey(fromJson: _savedAtFromJson, toJson: _savedAtToJson)
-  DateTime get created;
+  @JsonKey(name: 'created')
+  String get createdAt;
   @override
   String get tokenId;
   @override
