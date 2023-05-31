@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.1.0+2]
+
+### Fixed
+- `Collectible` serialization
+
 ## [0.1.0+1]
 
 ### Fixed
