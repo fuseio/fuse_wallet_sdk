@@ -203,6 +203,7 @@ class FuseWalletSDK {
   }) async {
     final Map<String, dynamic> queryParameters = {
       'page': page,
+      'limit': limit,
     };
     if (tokenAddress != null) {
       queryParameters.putIfAbsent('tokenAddress', () => tokenAddress);
