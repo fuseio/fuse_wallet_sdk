@@ -188,6 +188,7 @@ class FuseWalletSDK {
   ///
   /// Parameters:
   /// - [page] (optional) – The page number to retrieve, default is 1.
+  /// - [limit] (optional) – Number of items in each page, default is 10.
   /// - [updatedAt] (optional) – Filter actions updated at or after the specified Unix timestamp.
   /// - [tokenAddress] (optional) – Filter actions related to the specified token address.
   ///
@@ -196,11 +197,13 @@ class FuseWalletSDK {
   /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, ActionResult>> getHistoricalActions({
     int page = 1,
+    int limit = 10,
     int? updatedAt,
     String? tokenAddress,
   }) async {
     final Map<String, dynamic> queryParameters = {
       'page': page,
+      'limit': limit,
     };
     if (tokenAddress != null) {
       queryParameters.putIfAbsent('tokenAddress', () => tokenAddress);
