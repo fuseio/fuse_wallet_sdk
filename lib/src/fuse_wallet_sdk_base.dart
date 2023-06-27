@@ -155,7 +155,7 @@ class FuseWalletSDK {
         return DC.data(_createSubscriptionStream(transactionId));
       }
       return DC.error(Exception('Failed to create wallet'));
-    } on DioError catch (exception) {
+    } on DioException catch (exception) {
       return _handleDioErrorOccurredWhileCreatingWallet(exception);
     } catch (e) {
       return DC.error(Exception(e.toString()));
@@ -163,7 +163,7 @@ class FuseWalletSDK {
   }
 
   DC<Exception, Stream<SmartWalletEvent>>
-      _handleDioErrorOccurredWhileCreatingWallet(DioError exception) {
+      _handleDioErrorOccurredWhileCreatingWallet(DioException exception) {
     final response = exception.response;
 
     if (response == null) {
