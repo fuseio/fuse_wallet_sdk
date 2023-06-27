@@ -17,6 +17,7 @@ class StakedToken with _$StakedToken {
   /// - [unStakeTokenAddress] – The address of the unstaking token.
   /// - [stakedAmountUSD] – The staked amount in USD.
   /// - [earnedAmountUSD] – The earned amount in USD.
+  /// - [stakingApr] – The annual percentage rate (APR) for staking.
   factory StakedToken({
     required String tokenAddress,
     required String tokenSymbol,
@@ -26,6 +27,7 @@ class StakedToken with _$StakedToken {
     required String unStakeTokenAddress,
     required double stakedAmountUSD,
     required double earnedAmountUSD,
+    required double stakingApr,
   }) = _StakedToken;
 
   /// Creates a StakedToken instance from a JSON object.

@@ -26,6 +26,7 @@ mixin _$StakingOption {
   String get tokenLogoURI => throw _privateConstructorUsedError;
   String get unStakeTokenAddress => throw _privateConstructorUsedError;
   double get stakingApr => throw _privateConstructorUsedError;
+  double get tvl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +46,8 @@ abstract class $StakingOptionCopyWith<$Res> {
       String tokenName,
       String tokenLogoURI,
       String unStakeTokenAddress,
-      double stakingApr});
+      double stakingApr,
+      double tvl});
 }
 
 /// @nodoc
@@ -67,6 +69,7 @@ class _$StakingOptionCopyWithImpl<$Res, $Val extends StakingOption>
     Object? tokenLogoURI = null,
     Object? unStakeTokenAddress = null,
     Object? stakingApr = null,
+    Object? tvl = null,
   }) {
     return _then(_value.copyWith(
       tokenAddress: null == tokenAddress
@@ -93,6 +96,10 @@ class _$StakingOptionCopyWithImpl<$Res, $Val extends StakingOption>
           ? _value.stakingApr
           : stakingApr // ignore: cast_nullable_to_non_nullable
               as double,
+      tvl: null == tvl
+          ? _value.tvl
+          : tvl // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -111,7 +118,8 @@ abstract class _$$_StakingOptionCopyWith<$Res>
       String tokenName,
       String tokenLogoURI,
       String unStakeTokenAddress,
-      double stakingApr});
+      double stakingApr,
+      double tvl});
 }
 
 /// @nodoc
@@ -131,6 +139,7 @@ class __$$_StakingOptionCopyWithImpl<$Res>
     Object? tokenLogoURI = null,
     Object? unStakeTokenAddress = null,
     Object? stakingApr = null,
+    Object? tvl = null,
   }) {
     return _then(_$_StakingOption(
       tokenAddress: null == tokenAddress
@@ -157,6 +166,10 @@ class __$$_StakingOptionCopyWithImpl<$Res>
           ? _value.stakingApr
           : stakingApr // ignore: cast_nullable_to_non_nullable
               as double,
+      tvl: null == tvl
+          ? _value.tvl
+          : tvl // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -170,7 +183,8 @@ class _$_StakingOption extends _StakingOption {
       required this.tokenName,
       required this.tokenLogoURI,
       required this.unStakeTokenAddress,
-      required this.stakingApr})
+      required this.stakingApr,
+      required this.tvl})
       : super._();
 
   factory _$_StakingOption.fromJson(Map<String, dynamic> json) =>
@@ -188,10 +202,12 @@ class _$_StakingOption extends _StakingOption {
   final String unStakeTokenAddress;
   @override
   final double stakingApr;
+  @override
+  final double tvl;
 
   @override
   String toString() {
-    return 'StakingOption(tokenAddress: $tokenAddress, tokenSymbol: $tokenSymbol, tokenName: $tokenName, tokenLogoURI: $tokenLogoURI, unStakeTokenAddress: $unStakeTokenAddress, stakingApr: $stakingApr)';
+    return 'StakingOption(tokenAddress: $tokenAddress, tokenSymbol: $tokenSymbol, tokenName: $tokenName, tokenLogoURI: $tokenLogoURI, unStakeTokenAddress: $unStakeTokenAddress, stakingApr: $stakingApr, tvl: $tvl)';
   }
 
   @override
@@ -210,13 +226,14 @@ class _$_StakingOption extends _StakingOption {
             (identical(other.unStakeTokenAddress, unStakeTokenAddress) ||
                 other.unStakeTokenAddress == unStakeTokenAddress) &&
             (identical(other.stakingApr, stakingApr) ||
-                other.stakingApr == stakingApr));
+                other.stakingApr == stakingApr) &&
+            (identical(other.tvl, tvl) || other.tvl == tvl));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, tokenAddress, tokenSymbol,
-      tokenName, tokenLogoURI, unStakeTokenAddress, stakingApr);
+      tokenName, tokenLogoURI, unStakeTokenAddress, stakingApr, tvl);
 
   @JsonKey(ignore: true)
   @override
@@ -239,7 +256,8 @@ abstract class _StakingOption extends StakingOption {
       required final String tokenName,
       required final String tokenLogoURI,
       required final String unStakeTokenAddress,
-      required final double stakingApr}) = _$_StakingOption;
+      required final double stakingApr,
+      required final double tvl}) = _$_StakingOption;
   _StakingOption._() : super._();
 
   factory _StakingOption.fromJson(Map<String, dynamic> json) =
@@ -257,6 +275,8 @@ abstract class _StakingOption extends StakingOption {
   String get unStakeTokenAddress;
   @override
   double get stakingApr;
+  @override
+  double get tvl;
   @override
   @JsonKey(ignore: true)
   _$$_StakingOptionCopyWith<_$_StakingOption> get copyWith =>
