@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [0.1.0+3]
+## [0.1.1]
 
 ### Added
 - Introduced tvl (total value locked) property in the StakingOption model.
