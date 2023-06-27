@@ -28,6 +28,7 @@ mixin _$StakedToken {
   String get unStakeTokenAddress => throw _privateConstructorUsedError;
   double get stakedAmountUSD => throw _privateConstructorUsedError;
   double get earnedAmountUSD => throw _privateConstructorUsedError;
+  double get stakingApr => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +50,8 @@ abstract class $StakedTokenCopyWith<$Res> {
       double stakedAmount,
       String unStakeTokenAddress,
       double stakedAmountUSD,
-      double earnedAmountUSD});
+      double earnedAmountUSD,
+      double stakingApr});
 }
 
 /// @nodoc
@@ -73,6 +75,7 @@ class _$StakedTokenCopyWithImpl<$Res, $Val extends StakedToken>
     Object? unStakeTokenAddress = null,
     Object? stakedAmountUSD = null,
     Object? earnedAmountUSD = null,
+    Object? stakingApr = null,
   }) {
     return _then(_value.copyWith(
       tokenAddress: null == tokenAddress
@@ -107,6 +110,10 @@ class _$StakedTokenCopyWithImpl<$Res, $Val extends StakedToken>
           ? _value.earnedAmountUSD
           : earnedAmountUSD // ignore: cast_nullable_to_non_nullable
               as double,
+      stakingApr: null == stakingApr
+          ? _value.stakingApr
+          : stakingApr // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -127,7 +134,8 @@ abstract class _$$_StakedTokenCopyWith<$Res>
       double stakedAmount,
       String unStakeTokenAddress,
       double stakedAmountUSD,
-      double earnedAmountUSD});
+      double earnedAmountUSD,
+      double stakingApr});
 }
 
 /// @nodoc
@@ -149,6 +157,7 @@ class __$$_StakedTokenCopyWithImpl<$Res>
     Object? unStakeTokenAddress = null,
     Object? stakedAmountUSD = null,
     Object? earnedAmountUSD = null,
+    Object? stakingApr = null,
   }) {
     return _then(_$_StakedToken(
       tokenAddress: null == tokenAddress
@@ -183,6 +192,10 @@ class __$$_StakedTokenCopyWithImpl<$Res>
           ? _value.earnedAmountUSD
           : earnedAmountUSD // ignore: cast_nullable_to_non_nullable
               as double,
+      stakingApr: null == stakingApr
+          ? _value.stakingApr
+          : stakingApr // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -198,7 +211,8 @@ class _$_StakedToken implements _StakedToken {
       required this.stakedAmount,
       required this.unStakeTokenAddress,
       required this.stakedAmountUSD,
-      required this.earnedAmountUSD});
+      required this.earnedAmountUSD,
+      required this.stakingApr});
 
   factory _$_StakedToken.fromJson(Map<String, dynamic> json) =>
       _$$_StakedTokenFromJson(json);
@@ -219,10 +233,12 @@ class _$_StakedToken implements _StakedToken {
   final double stakedAmountUSD;
   @override
   final double earnedAmountUSD;
+  @override
+  final double stakingApr;
 
   @override
   String toString() {
-    return 'StakedToken(tokenAddress: $tokenAddress, tokenSymbol: $tokenSymbol, tokenName: $tokenName, tokenLogoURI: $tokenLogoURI, stakedAmount: $stakedAmount, unStakeTokenAddress: $unStakeTokenAddress, stakedAmountUSD: $stakedAmountUSD, earnedAmountUSD: $earnedAmountUSD)';
+    return 'StakedToken(tokenAddress: $tokenAddress, tokenSymbol: $tokenSymbol, tokenName: $tokenName, tokenLogoURI: $tokenLogoURI, stakedAmount: $stakedAmount, unStakeTokenAddress: $unStakeTokenAddress, stakedAmountUSD: $stakedAmountUSD, earnedAmountUSD: $earnedAmountUSD, stakingApr: $stakingApr)';
   }
 
   @override
@@ -245,7 +261,9 @@ class _$_StakedToken implements _StakedToken {
             (identical(other.stakedAmountUSD, stakedAmountUSD) ||
                 other.stakedAmountUSD == stakedAmountUSD) &&
             (identical(other.earnedAmountUSD, earnedAmountUSD) ||
-                other.earnedAmountUSD == earnedAmountUSD));
+                other.earnedAmountUSD == earnedAmountUSD) &&
+            (identical(other.stakingApr, stakingApr) ||
+                other.stakingApr == stakingApr));
   }
 
   @JsonKey(ignore: true)
@@ -259,7 +277,8 @@ class _$_StakedToken implements _StakedToken {
       stakedAmount,
       unStakeTokenAddress,
       stakedAmountUSD,
-      earnedAmountUSD);
+      earnedAmountUSD,
+      stakingApr);
 
   @JsonKey(ignore: true)
   @override
@@ -284,7 +303,8 @@ abstract class _StakedToken implements StakedToken {
       required final double stakedAmount,
       required final String unStakeTokenAddress,
       required final double stakedAmountUSD,
-      required final double earnedAmountUSD}) = _$_StakedToken;
+      required final double earnedAmountUSD,
+      required final double stakingApr}) = _$_StakedToken;
 
   factory _StakedToken.fromJson(Map<String, dynamic> json) =
       _$_StakedToken.fromJson;
@@ -305,6 +325,8 @@ abstract class _StakedToken implements StakedToken {
   double get stakedAmountUSD;
   @override
   double get earnedAmountUSD;
+  @override
+  double get stakingApr;
   @override
   @JsonKey(ignore: true)
   _$$_StakedTokenCopyWith<_$_StakedToken> get copyWith =>

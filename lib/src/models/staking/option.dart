@@ -17,6 +17,7 @@ class StakingOption with _$StakingOption {
   /// - [tokenLogoURI] – The URI for the logo of the staking token.
   /// - [unStakeTokenAddress] – The address of the unstaking token.
   /// - [stakingApr] – The annual percentage rate (APR) for staking.
+  /// - [tvl] – The total value locked in the contract.
   factory StakingOption({
     required String tokenAddress,
     required String tokenSymbol,
@@ -24,6 +25,7 @@ class StakingOption with _$StakingOption {
     required String tokenLogoURI,
     required String unStakeTokenAddress,
     required double stakingApr,
+    required double tvl,
   }) = _StakingOption;
 
   /// Creates a StakingOption instance from a JSON object.
