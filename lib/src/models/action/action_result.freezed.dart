@@ -268,7 +268,7 @@ abstract class _ActionResult implements ActionResult {
       required final num totalPages,
       @ActionsConverter()
       @JsonKey(name: 'docs')
-          required final List<Action> actions}) = _$_ActionResult;
+      required final List<Action> actions}) = _$_ActionResult;
 
   factory _ActionResult.fromJson(Map<String, dynamic> json) =
       _$_ActionResult.fromJson;

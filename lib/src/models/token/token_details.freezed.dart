@@ -69,25 +69,19 @@ mixin _$TokenDetails {
         miscToken,
     required TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)
         erc20,
     required TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)
         erc721,
   }) =>
       throw _privateConstructorUsedError;
@@ -119,25 +113,19 @@ mixin _$TokenDetails {
         miscToken,
     TResult? Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc20,
     TResult? Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc721,
   }) =>
       throw _privateConstructorUsedError;
@@ -169,25 +157,19 @@ mixin _$TokenDetails {
         miscToken,
     TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc20,
     TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc721,
     required TResult orElse(),
   }) =>
@@ -425,25 +407,19 @@ class _$Native extends Native {
         miscToken,
     required TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)
         erc20,
     required TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)
         erc721,
   }) {
     return native(symbol, name, decimals, address, amount);
@@ -478,25 +454,19 @@ class _$Native extends Native {
         miscToken,
     TResult? Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc20,
     TResult? Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc721,
   }) {
     return native?.call(symbol, name, decimals, address, amount);
@@ -531,25 +501,19 @@ class _$Native extends Native {
         miscToken,
     TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc20,
     TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc721,
     required TResult orElse(),
   }) {
@@ -788,25 +752,19 @@ class _$LiquidityPoolToken extends LiquidityPoolToken {
         miscToken,
     required TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)
         erc20,
     required TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)
         erc721,
   }) {
     return liquidityPoolToken(
@@ -842,25 +800,19 @@ class _$LiquidityPoolToken extends LiquidityPoolToken {
         miscToken,
     TResult? Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc20,
     TResult? Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc721,
   }) {
     return liquidityPoolToken?.call(
@@ -896,25 +848,19 @@ class _$LiquidityPoolToken extends LiquidityPoolToken {
         miscToken,
     TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc20,
     TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc721,
     required TResult orElse(),
   }) {
@@ -1154,25 +1100,19 @@ class _$BridgedToken extends BridgedToken {
         miscToken,
     required TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)
         erc20,
     required TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)
         erc721,
   }) {
     return bridgedToken(symbol, logoURI, decimals, name, address);
@@ -1207,25 +1147,19 @@ class _$BridgedToken extends BridgedToken {
         miscToken,
     TResult? Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc20,
     TResult? Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc721,
   }) {
     return bridgedToken?.call(symbol, logoURI, decimals, name, address);
@@ -1260,25 +1194,19 @@ class _$BridgedToken extends BridgedToken {
         miscToken,
     TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc20,
     TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc721,
     required TResult orElse(),
   }) {
@@ -1517,25 +1445,19 @@ class _$MiscToken extends MiscToken {
         miscToken,
     required TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)
         erc20,
     required TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)
         erc721,
   }) {
     return miscToken(symbol, logoURI, decimals, name, address);
@@ -1570,25 +1492,19 @@ class _$MiscToken extends MiscToken {
         miscToken,
     TResult? Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc20,
     TResult? Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc721,
   }) {
     return miscToken?.call(symbol, logoURI, decimals, name, address);
@@ -1623,25 +1539,19 @@ class _$MiscToken extends MiscToken {
         miscToken,
     TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc20,
     TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc721,
     required TResult orElse(),
   }) {
@@ -1739,14 +1649,11 @@ abstract class _$$ERC20CopyWith<$Res> implements $TokenDetailsCopyWith<$Res> {
   @useResult
   $Res call(
       {String symbol,
-      @JsonKey(fromJson: nameFromJson)
-          String name,
-      @JsonKey(fromJson: _decimalsFromJson)
-          int decimals,
+      @JsonKey(fromJson: nameFromJson) String name,
+      @JsonKey(fromJson: _decimalsFromJson) int decimals,
       @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-          String address,
-      @JsonKey(name: 'balance')
-          BigInt amount});
+      String address,
+      @JsonKey(name: 'balance') BigInt amount});
 }
 
 /// @nodoc
@@ -1795,14 +1702,11 @@ class __$$ERC20CopyWithImpl<$Res>
 class _$ERC20 extends ERC20 {
   const _$ERC20(
       {required this.symbol,
-      @JsonKey(fromJson: nameFromJson)
-          required this.name,
-      @JsonKey(fromJson: _decimalsFromJson)
-          this.decimals = 0,
+      @JsonKey(fromJson: nameFromJson) required this.name,
+      @JsonKey(fromJson: _decimalsFromJson) this.decimals = 0,
       @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-          required this.address,
-      @JsonKey(name: 'balance')
-          required this.amount,
+      required this.address,
+      @JsonKey(name: 'balance') required this.amount,
       final String? $type})
       : $type = $type ?? 'ERC-20',
         super._();
@@ -1885,25 +1789,19 @@ class _$ERC20 extends ERC20 {
         miscToken,
     required TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)
         erc20,
     required TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)
         erc721,
   }) {
     return erc20(symbol, name, decimals, address, amount);
@@ -1938,25 +1836,19 @@ class _$ERC20 extends ERC20 {
         miscToken,
     TResult? Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc20,
     TResult? Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc721,
   }) {
     return erc20?.call(symbol, name, decimals, address, amount);
@@ -1991,25 +1883,19 @@ class _$ERC20 extends ERC20 {
         miscToken,
     TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc20,
     TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc721,
     required TResult orElse(),
   }) {
@@ -2073,14 +1959,11 @@ class _$ERC20 extends ERC20 {
 abstract class ERC20 extends TokenDetails implements IToken {
   const factory ERC20(
       {required final String symbol,
-      @JsonKey(fromJson: nameFromJson)
-          required final String name,
-      @JsonKey(fromJson: _decimalsFromJson)
-          final int decimals,
+      @JsonKey(fromJson: nameFromJson) required final String name,
+      @JsonKey(fromJson: _decimalsFromJson) final int decimals,
       @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-          required final String address,
-      @JsonKey(name: 'balance')
-          required final BigInt amount}) = _$ERC20;
+      required final String address,
+      @JsonKey(name: 'balance') required final BigInt amount}) = _$ERC20;
   const ERC20._() : super._();
 
   factory ERC20.fromJson(Map<String, dynamic> json) = _$ERC20.fromJson;
@@ -2111,14 +1994,11 @@ abstract class _$$ERC721CopyWith<$Res> implements $TokenDetailsCopyWith<$Res> {
   @useResult
   $Res call(
       {String symbol,
-      @JsonKey(fromJson: nameFromJson)
-          String name,
-      @JsonKey(fromJson: _decimalsFromJson)
-          int decimals,
+      @JsonKey(fromJson: nameFromJson) String name,
+      @JsonKey(fromJson: _decimalsFromJson) int decimals,
       @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-          String address,
-      @JsonKey(name: 'balance')
-          BigInt amount});
+      String address,
+      @JsonKey(name: 'balance') BigInt amount});
 }
 
 /// @nodoc
@@ -2167,14 +2047,11 @@ class __$$ERC721CopyWithImpl<$Res>
 class _$ERC721 extends ERC721 {
   const _$ERC721(
       {required this.symbol,
-      @JsonKey(fromJson: nameFromJson)
-          required this.name,
-      @JsonKey(fromJson: _decimalsFromJson)
-          required this.decimals,
+      @JsonKey(fromJson: nameFromJson) required this.name,
+      @JsonKey(fromJson: _decimalsFromJson) required this.decimals,
       @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-          required this.address,
-      @JsonKey(name: 'balance')
-          required this.amount,
+      required this.address,
+      @JsonKey(name: 'balance') required this.amount,
       final String? $type})
       : $type = $type ?? 'ERC-721',
         super._();
@@ -2258,25 +2135,19 @@ class _$ERC721 extends ERC721 {
         miscToken,
     required TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)
         erc20,
     required TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)
         erc721,
   }) {
     return erc721(symbol, name, decimals, address, amount);
@@ -2311,25 +2182,19 @@ class _$ERC721 extends ERC721 {
         miscToken,
     TResult? Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc20,
     TResult? Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc721,
   }) {
     return erc721?.call(symbol, name, decimals, address, amount);
@@ -2364,25 +2229,19 @@ class _$ERC721 extends ERC721 {
         miscToken,
     TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc20,
     TResult Function(
             String symbol,
-            @JsonKey(fromJson: nameFromJson)
-                String name,
-            @JsonKey(fromJson: _decimalsFromJson)
-                int decimals,
+            @JsonKey(fromJson: nameFromJson) String name,
+            @JsonKey(fromJson: _decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-                String address,
-            @JsonKey(name: 'balance')
-                BigInt amount)?
+            String address,
+            @JsonKey(name: 'balance') BigInt amount)?
         erc721,
     required TResult orElse(),
   }) {
@@ -2446,14 +2305,11 @@ class _$ERC721 extends ERC721 {
 abstract class ERC721 extends TokenDetails implements IToken {
   const factory ERC721(
       {required final String symbol,
-      @JsonKey(fromJson: nameFromJson)
-          required final String name,
-      @JsonKey(fromJson: _decimalsFromJson)
-          required final int decimals,
+      @JsonKey(fromJson: nameFromJson) required final String name,
+      @JsonKey(fromJson: _decimalsFromJson) required final int decimals,
       @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
-          required final String address,
-      @JsonKey(name: 'balance')
-          required final BigInt amount}) = _$ERC721;
+      required final String address,
+      @JsonKey(name: 'balance') required final BigInt amount}) = _$ERC721;
   const ERC721._() : super._();
 
   factory ERC721.fromJson(Map<String, dynamic> json) = _$ERC721.fromJson;
