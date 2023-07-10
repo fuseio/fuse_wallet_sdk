@@ -1,11 +1,16 @@
 # CHANGELOG
 
+## [0.1.2]
+
+### Changed
+- Upgrade dependencies.
+
 ## [0.1.1]
 
 ### Added
-- Introduced tvl (total value locked) property in the StakingOption model.
-- Added stakingApr property to the StakedToken model.
-- Enhanced getHistoricalActions by introducing limit query parameter, enabling clients to retrieve more items per page.
+- Introduced `tvl` (total value locked) property in the `StakingOption` model.
+- Added `stakingApr` property to the `StakedToken` model.
+- Enhanced `getHistoricalActions` by introducing limit query parameter, enabling clients to retrieve more items per page.
   
 ## [0.1.0+2]
 

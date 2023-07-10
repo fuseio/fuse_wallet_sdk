@@ -178,7 +178,7 @@ abstract class _Account implements Account {
       {required final String id,
       required final String address,
       @CollectibleConverter()
-          required final List<Collectible> collectibles}) = _$_Account;
+      required final List<Collectible> collectibles}) = _$_Account;
 
   factory _Account.fromJson(Map<String, dynamic> json) = _$_Account.fromJson;
 

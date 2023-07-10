@@ -227,26 +227,17 @@ class __$$_WalletModulesCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_WalletModules implements _WalletModules {
   _$_WalletModules(
-      {@JsonKey(name: 'GuardianManager')
-          required this.guardianManager,
-      @JsonKey(name: 'LockManager')
-          required this.lockManager,
-      @JsonKey(name: 'RecoveryManager')
-          required this.recoveryManager,
-      @JsonKey(name: 'ApprovedTransfer')
-          required this.approvedTransfer,
-      @JsonKey(name: 'TokenExchanger')
-          required this.tokenExchanger,
-      @JsonKey(name: 'CommunityManager')
-          required this.communityManager,
+      {@JsonKey(name: 'GuardianManager') required this.guardianManager,
+      @JsonKey(name: 'LockManager') required this.lockManager,
+      @JsonKey(name: 'RecoveryManager') required this.recoveryManager,
+      @JsonKey(name: 'ApprovedTransfer') required this.approvedTransfer,
+      @JsonKey(name: 'TokenExchanger') required this.tokenExchanger,
+      @JsonKey(name: 'CommunityManager') required this.communityManager,
       @JsonKey(name: 'WalletOwnershipManager')
-          required this.walletOwnershipManager,
-      @JsonKey(name: 'DAIPointsManager')
-          this.daiPointsManager,
-      @JsonKey(name: 'TransferManager')
-          required this.transferManager,
-      @JsonKey(name: 'NftTransfer')
-          this.nftTransfer});
+      required this.walletOwnershipManager,
+      @JsonKey(name: 'DAIPointsManager') this.daiPointsManager,
+      @JsonKey(name: 'TransferManager') required this.transferManager,
+      @JsonKey(name: 'NftTransfer') this.nftTransfer});
 
   factory _$_WalletModules.fromJson(Map<String, dynamic> json) =>
       _$$_WalletModulesFromJson(json);
@@ -345,26 +336,18 @@ class _$_WalletModules implements _WalletModules {
 
 abstract class _WalletModules implements WalletModules {
   factory _WalletModules(
-      {@JsonKey(name: 'GuardianManager')
-          required final String guardianManager,
-      @JsonKey(name: 'LockManager')
-          required final String lockManager,
-      @JsonKey(name: 'RecoveryManager')
-          required final String recoveryManager,
-      @JsonKey(name: 'ApprovedTransfer')
-          required final String approvedTransfer,
-      @JsonKey(name: 'TokenExchanger')
-          required final String tokenExchanger,
-      @JsonKey(name: 'CommunityManager')
-          required final String communityManager,
+      {@JsonKey(name: 'GuardianManager') required final String guardianManager,
+      @JsonKey(name: 'LockManager') required final String lockManager,
+      @JsonKey(name: 'RecoveryManager') required final String recoveryManager,
+      @JsonKey(name: 'ApprovedTransfer') required final String approvedTransfer,
+      @JsonKey(name: 'TokenExchanger') required final String tokenExchanger,
+      @JsonKey(name: 'CommunityManager') required final String communityManager,
       @JsonKey(name: 'WalletOwnershipManager')
-          required final String walletOwnershipManager,
-      @JsonKey(name: 'DAIPointsManager')
-          final String? daiPointsManager,
-      @JsonKey(name: 'TransferManager')
-          required final String transferManager,
+      required final String walletOwnershipManager,
+      @JsonKey(name: 'DAIPointsManager') final String? daiPointsManager,
+      @JsonKey(name: 'TransferManager') required final String transferManager,
       @JsonKey(name: 'NftTransfer')
-          final String? nftTransfer}) = _$_WalletModules;
+      final String? nftTransfer}) = _$_WalletModules;
 
   factory _WalletModules.fromJson(Map<String, dynamic> json) =
       _$_WalletModules.fromJson;

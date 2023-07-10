@@ -163,10 +163,9 @@ class _$_SmartWalletEvent implements _SmartWalletEvent {
 
 abstract class _SmartWalletEvent implements SmartWalletEvent {
   factory _SmartWalletEvent(
-      {@JsonKey(name: 'eventName')
-          required final String name,
+      {@JsonKey(name: 'eventName') required final String name,
       @JsonKey(name: 'eventData')
-          required final Map<String, dynamic> data}) = _$_SmartWalletEvent;
+      required final Map<String, dynamic> data}) = _$_SmartWalletEvent;
 
   factory _SmartWalletEvent.fromJson(Map<String, dynamic> json) =
       _$_SmartWalletEvent.fromJson;

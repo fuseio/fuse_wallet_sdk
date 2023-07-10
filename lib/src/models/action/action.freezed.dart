@@ -121,8 +121,36 @@ mixin _$Action {
             String tokenSymbol,
             int tokenDecimal)
         receiveNFT,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) stakeTokens,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) unstakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        stakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        unstakeTokens,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -198,8 +226,36 @@ mixin _$Action {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -275,8 +331,36 @@ mixin _$Action {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -585,8 +669,36 @@ class _$CreateWallet extends CreateWallet {
             String tokenSymbol,
             int tokenDecimal)
         receiveNFT,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) stakeTokens,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) unstakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        stakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        unstakeTokens,
   }) {
     return createWallet(timestamp, id, name, txHash, status, blockNumber);
   }
@@ -665,8 +777,36 @@ class _$CreateWallet extends CreateWallet {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
   }) {
     return createWallet?.call(timestamp, id, name, txHash, status, blockNumber);
   }
@@ -745,8 +885,36 @@ class _$CreateWallet extends CreateWallet {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
     required TResult orElse(),
   }) {
     if (createWallet != null) {
@@ -1131,8 +1299,36 @@ class _$FiatDeposit extends FiatDeposit {
             String tokenSymbol,
             int tokenDecimal)
         receiveNFT,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) stakeTokens,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) unstakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        stakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        unstakeTokens,
   }) {
     return fiatDeposit(timestamp, id, name, txHash, status, blockNumber,
         tokenAddress, from, to, value, tokenName, tokenSymbol, tokenDecimal);
@@ -1212,8 +1408,36 @@ class _$FiatDeposit extends FiatDeposit {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
   }) {
     return fiatDeposit?.call(timestamp, id, name, txHash, status, blockNumber,
         tokenAddress, from, to, value, tokenName, tokenSymbol, tokenDecimal);
@@ -1293,8 +1517,36 @@ class _$FiatDeposit extends FiatDeposit {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
     required TResult orElse(),
   }) {
     if (fiatDeposit != null) {
@@ -1690,8 +1942,36 @@ class _$Send extends Send {
             String tokenSymbol,
             int tokenDecimal)
         receiveNFT,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) stakeTokens,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) unstakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        stakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        unstakeTokens,
   }) {
     return send(timestamp, id, name, txHash, status, blockNumber, tokenAddress,
         from, to, value, tokenName, tokenSymbol, tokenDecimal);
@@ -1771,8 +2051,36 @@ class _$Send extends Send {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
   }) {
     return send?.call(timestamp, id, name, txHash, status, blockNumber,
         tokenAddress, from, to, value, tokenName, tokenSymbol, tokenDecimal);
@@ -1852,8 +2160,36 @@ class _$Send extends Send {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
     required TResult orElse(),
   }) {
     if (send != null) {
@@ -2249,8 +2585,36 @@ class _$Receive extends Receive {
             String tokenSymbol,
             int tokenDecimal)
         receiveNFT,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) stakeTokens,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) unstakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        stakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        unstakeTokens,
   }) {
     return receive(timestamp, id, name, txHash, status, blockNumber,
         tokenAddress, from, to, value, tokenName, tokenSymbol, tokenDecimal);
@@ -2330,8 +2694,36 @@ class _$Receive extends Receive {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
   }) {
     return receive?.call(timestamp, id, name, txHash, status, blockNumber,
         tokenAddress, from, to, value, tokenName, tokenSymbol, tokenDecimal);
@@ -2411,8 +2803,36 @@ class _$Receive extends Receive {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
     required TResult orElse(),
   }) {
     if (receive != null) {
@@ -2746,8 +3166,36 @@ class _$Swap extends Swap {
             String tokenSymbol,
             int tokenDecimal)
         receiveNFT,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) stakeTokens,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) unstakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        stakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        unstakeTokens,
   }) {
     return swap(timestamp, id, name, txHash, status, blockNumber, tradeInfo);
   }
@@ -2826,8 +3274,36 @@ class _$Swap extends Swap {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
   }) {
     return swap?.call(
         timestamp, id, name, txHash, status, blockNumber, tradeInfo);
@@ -2907,8 +3383,36 @@ class _$Swap extends Swap {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
     required TResult orElse(),
   }) {
     if (swap != null) {
@@ -3283,8 +3787,36 @@ class _$ReceiveNFT extends ReceiveNFT {
             String tokenSymbol,
             int tokenDecimal)
         receiveNFT,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) stakeTokens,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) unstakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        stakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        unstakeTokens,
   }) {
     return receiveNFT(timestamp, id, name, txHash, status, blockNumber,
         tokenAddress, from, to, tokenName, tokenSymbol, tokenDecimal);
@@ -3364,8 +3896,36 @@ class _$ReceiveNFT extends ReceiveNFT {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
   }) {
     return receiveNFT?.call(timestamp, id, name, txHash, status, blockNumber,
         tokenAddress, from, to, tokenName, tokenSymbol, tokenDecimal);
@@ -3445,8 +4005,36 @@ class _$ReceiveNFT extends ReceiveNFT {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
     required TResult orElse(),
   }) {
     if (receiveNFT != null) {
@@ -3844,8 +4432,36 @@ class _$StakeTokens extends StakeTokens {
             String tokenSymbol,
             int tokenDecimal)
         receiveNFT,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) stakeTokens,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) unstakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        stakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        unstakeTokens,
   }) {
     return stakeTokens(timestamp, id, name, txHash, status, blockNumber,
         tokenAddress, from, to, value, tokenName, tokenSymbol, tokenDecimal);
@@ -3925,8 +4541,36 @@ class _$StakeTokens extends StakeTokens {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
   }) {
     return stakeTokens?.call(timestamp, id, name, txHash, status, blockNumber,
         tokenAddress, from, to, value, tokenName, tokenSymbol, tokenDecimal);
@@ -4006,8 +4650,36 @@ class _$StakeTokens extends StakeTokens {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
     required TResult orElse(),
   }) {
     if (stakeTokens != null) {
@@ -4407,8 +5079,36 @@ class _$UnstakeTokens extends UnstakeTokens {
             String tokenSymbol,
             int tokenDecimal)
         receiveNFT,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) stakeTokens,
-    required TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal) unstakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        stakeTokens,
+    required TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)
+        unstakeTokens,
   }) {
     return unstakeTokens(timestamp, id, name, txHash, status, blockNumber,
         tokenAddress, from, to, value, tokenName, tokenSymbol, tokenDecimal);
@@ -4488,8 +5188,36 @@ class _$UnstakeTokens extends UnstakeTokens {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult? Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult? Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
   }) {
     return unstakeTokens?.call(timestamp, id, name, txHash, status, blockNumber,
         tokenAddress, from, to, value, tokenName, tokenSymbol, tokenDecimal);
@@ -4569,8 +5297,36 @@ class _$UnstakeTokens extends UnstakeTokens {
             String tokenSymbol,
             int tokenDecimal)?
         receiveNFT,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? stakeTokens,
-    TResult Function(int timestamp, @JsonKey(name: '_id') String id, String name, String? txHash, String status, int? blockNumber, String tokenAddress, String from, String to, BigInt value, String tokenName, String tokenSymbol, int tokenDecimal)? unstakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        stakeTokens,
+    TResult Function(
+            int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String tokenAddress,
+            String from,
+            String to,
+            BigInt value,
+            String tokenName,
+            String tokenSymbol,
+            int tokenDecimal)?
+        unstakeTokens,
     required TResult orElse(),
   }) {
     if (unstakeTokens != null) {
