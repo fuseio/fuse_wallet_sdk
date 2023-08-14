@@ -445,6 +445,10 @@ class FuseSDK {
   }
 
   Future<TokenDetails> getERC20TokenDetails(String tokenAddress) async {
+    if (tokenAddress.toLowerCase() ==
+        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
+      return Native(amount: BigInt.zero);
+    }
     final toRead = ['name', 'symbol', 'decimals'];
     final token = await Future.wait(
       toRead.map(
