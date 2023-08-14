@@ -252,13 +252,13 @@ class FuseSDK {
 
       return client.sendUserOperation(userOp);
     } else {
-      final tokenDetailsRes = await getERC20TokenDetails(
+      final tokenDetails = await getERC20TokenDetails(
         tradeRequestBody.currencyIn,
       );
 
       final amount = AmountFormat.toBigInt(
         tradeRequestBody.amountIn,
-        tokenDetailsRes.decimals,
+        tokenDetails.decimals,
       );
 
       final allowance = await getAllowance(
@@ -293,13 +293,13 @@ class FuseSDK {
       throw response.error!;
     }
 
-    final tokenDetailsRes = await getERC20TokenDetails(
+    final tokenDetails = await getERC20TokenDetails(
       stakeRequestBody.tokenAddress,
     );
 
     final BigInt amount = AmountFormat.toBigInt(
       stakeRequestBody.tokenAmount,
-      tokenDetailsRes.decimals,
+      tokenDetails.decimals,
     );
 
     final spender = EthereumAddress.fromHex(
@@ -349,13 +349,13 @@ class FuseSDK {
       throw response.error!;
     }
 
-    final tokenDetailsRes = await getERC20TokenDetails(
+    final tokenDetails = await getERC20TokenDetails(
       unstakeRequestBody.tokenAddress,
     );
 
     final BigInt amount = AmountFormat.toBigInt(
       unstakeRequestBody.tokenAmount,
-      tokenDetailsRes.decimals,
+      tokenDetails.decimals,
     );
 
     final spender = EthereumAddress.fromHex(
