@@ -40,7 +40,7 @@
 ## [0.0.15]
 
 ### Changed
-- Expose `ContractsHelper` for clients.
+- Expose `ContractsUtils` for clients.
 
 ## [0.0.14]
 

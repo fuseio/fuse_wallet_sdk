@@ -275,7 +275,7 @@ class FuseWalletSDK {
 
     final String walletModule = 'TransferManager';
     final String methodName = 'transferToken';
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
       smartWallet.walletModules.transferManager,
       methodName,
@@ -289,7 +289,7 @@ class FuseWalletSDK {
       include0x: true,
     );
     final String nonce = await _getNonce();
-    final String signature = ContractsHelper.signOffChain(
+    final String signature = ContractsUtils.signOffChain(
       credentials,
       smartWallet.walletModules.transferManager,
       smartWallet.smartWalletAddress,
@@ -338,7 +338,7 @@ class FuseWalletSDK {
     final String walletModule = 'NftTransfer';
     final String walletModuleAddress = smartWallet.walletModules.nftTransfer!;
 
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
       walletModuleAddress,
       methodName,
@@ -362,7 +362,7 @@ class FuseWalletSDK {
     });
 
     final String nonce = await _getNonce();
-    final String signature = ContractsHelper.signOffChain(
+    final String signature = ContractsUtils.signOffChain(
       credentials,
       walletModuleAddress,
       smartWallet.smartWalletAddress,
@@ -392,7 +392,7 @@ class FuseWalletSDK {
     Map<String, dynamic>? transactionBody,
   }) async {
     final String methodName = 'addModule';
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       disableModuleName,
       disableModuleAddress,
       methodName,
@@ -403,7 +403,7 @@ class FuseWalletSDK {
       include0x: true,
     );
     final String nonce = await _getNonce();
-    final String signature = ContractsHelper.signOffChain(
+    final String signature = ContractsUtils.signOffChain(
       credentials,
       disableModuleAddress,
       smartWallet.smartWalletAddress,
@@ -445,7 +445,7 @@ class FuseWalletSDK {
 
     final String walletModule = 'TransferManager';
     final String methodName = 'approveToken';
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
       smartWallet.walletModules.transferManager,
       methodName,
@@ -459,7 +459,7 @@ class FuseWalletSDK {
     );
 
     final String nonce = await _getNonce();
-    final String signature = ContractsHelper.signOffChain(
+    final String signature = ContractsUtils.signOffChain(
       credentials,
       smartWallet.walletModules.transferManager,
       smartWallet.smartWalletAddress,
@@ -491,7 +491,7 @@ class FuseWalletSDK {
     final String walletModule = 'TransferManager';
     final String methodName = 'callContract';
 
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
       smartWallet.walletModules.transferManager,
       methodName,
@@ -505,7 +505,7 @@ class FuseWalletSDK {
     );
 
     final String nonce = await _getNonce();
-    final String signature = ContractsHelper.signOffChain(
+    final String signature = ContractsUtils.signOffChain(
       credentials,
       smartWallet.walletModules.transferManager,
       smartWallet.smartWalletAddress,
@@ -550,7 +550,7 @@ class FuseWalletSDK {
 
     final String walletModule = 'TransferManager';
     final String methodName = 'approveTokenAndCallContract';
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
       smartWallet.walletModules.transferManager,
       methodName,
@@ -565,7 +565,7 @@ class FuseWalletSDK {
     );
 
     final String nonce = await _getNonce();
-    final String signature = ContractsHelper.signOffChain(
+    final String signature = ContractsUtils.signOffChain(
       credentials,
       smartWallet.walletModules.transferManager,
       smartWallet.smartWalletAddress,
@@ -743,7 +743,7 @@ class FuseWalletSDK {
     List<dynamic> params, {
     Map<String, dynamic>? transactionBody,
   }) async {
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       contractName,
       contractAddress,
       methodName,
@@ -771,7 +771,7 @@ class FuseWalletSDK {
     List<dynamic> params, {
     Map<String, dynamic>? transactionBody,
   }) async {
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       contractName,
       contractAddress,
       methodName,
@@ -811,7 +811,7 @@ class FuseWalletSDK {
       return _getNativeBalance(address);
     }
     try {
-      final List<dynamic> response = await ContractsHelper.readFromContract(
+      final List<dynamic> response = await ContractsUtils.readFromContract(
         web3client,
         'BasicToken',
         tokenAddress,

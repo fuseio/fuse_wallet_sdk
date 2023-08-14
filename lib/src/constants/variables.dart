@@ -8,4 +8,5 @@ class Variables {
       '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'; // For sending native (ETH/FUSE) using TransferManager
   static const BASE_URL = 'https://api.fuse.io/api';
   static const SOCKET_SERVER_URL = 'wss://ws.fuse.io/connection/websocket';
+  static const STAGING_BASE_URL = 'api.staging.fuse.io';
 }
