@@ -53,14 +53,11 @@ class FuseSDK {
       'apiKey': publicApiKey,
     }).toString();
 
-    final paymasterRpc =
-        Uri.https(Variables.STAGING_BASE_URL, '/api/v0/paymaster', {
-      'apiKey': publicApiKey,
-    }).toString();
-
     final paymasterMiddleware = withPaymaster
         ? verifyingPaymaster(
-            paymasterRpc,
+            Uri.https(Variables.STAGING_BASE_URL, '/api/v0/paymaster', {
+              'apiKey': publicApiKey,
+            }).toString(),
             paymasterContext ?? {},
           )
         : null;
