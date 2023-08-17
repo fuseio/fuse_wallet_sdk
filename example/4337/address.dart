@@ -10,6 +10,7 @@ void main() async {
     publicApiKey,
     credentials,
   );
+
   print('Simple account address: ${fuseSDK.simpleAccount.getSender()}');
   exit(1);
 }

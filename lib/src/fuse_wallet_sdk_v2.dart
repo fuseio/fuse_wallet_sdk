@@ -100,9 +100,11 @@ class FuseSDK {
     if (tokenAddress.toString().toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
       final userOp = await simpleAccount.execute(
-        recipientAddress,
-        amount,
-        Uint8List(0),
+        Call(
+          to: recipientAddress,
+          value: amount,
+          data: Uint8List(0),
+        ),
       );
 
       return client.sendUserOperation(userOp);
@@ -117,10 +119,13 @@ class FuseSDK {
         ],
         include0x: true,
       );
+
       final userOp = await simpleAccount.execute(
-        tokenAddress,
-        BigInt.zero,
-        callData,
+        Call(
+          to: tokenAddress,
+          value: BigInt.zero,
+          data: callData,
+        ),
       );
 
       return client.sendUserOperation(userOp);
@@ -142,24 +147,13 @@ class FuseSDK {
       ],
       include0x: true,
     );
-    final userOp = await simpleAccount.execute(
-      tokenAddress,
-      BigInt.zero,
-      callData,
-    );
 
-    return client.sendUserOperation(userOp);
-  }
-
-  Future<ISendUserOperationResponse> callContract(
-    EthereumAddress to,
-    BigInt value,
-    Uint8List data,
-  ) async {
     final userOp = await simpleAccount.execute(
-      to,
-      value,
-      data,
+      Call(
+        to: tokenAddress,
+        value: BigInt.zero,
+        data: callData,
+      ),
     );
 
     return client.sendUserOperation(userOp);
@@ -190,10 +184,13 @@ class FuseSDK {
       include0x: true,
       jsonInterface: ABI.get('ERC721'),
     );
+
     final userOp = await simpleAccount.execute(
-      nftContractAddress,
-      BigInt.zero,
-      callData,
+      Call(
+        to: nftContractAddress,
+        value: BigInt.zero,
+        data: callData,
+      ),
     );
 
     return client.sendUserOperation(userOp);
@@ -215,16 +212,20 @@ class FuseSDK {
       ],
       include0x: true,
     );
-    final batchOp = await simpleAccount.executeBatch(
-      [
-        tokenAddress,
-        spender,
-      ],
-      [
-        approveCallData,
-        callData,
-      ],
-    );
+    final calls = [
+      Call(
+        to: tokenAddress,
+        value: BigInt.zero,
+        data: approveCallData,
+      ),
+      Call(
+        to: spender,
+        value: BigInt.zero,
+        data: callData,
+      ),
+    ];
+
+    final batchOp = await simpleAccount.executeBatch(calls);
 
     return client.sendUserOperation(batchOp);
   }
@@ -245,9 +246,11 @@ class FuseSDK {
     if (tradeRequestBody.currencyIn.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
       final userOp = await simpleAccount.execute(
-        spender,
-        BigInt.parse(swapCallParameters.data!.value),
-        callData,
+        Call(
+          to: spender,
+          value: BigInt.parse(swapCallParameters.data!.value),
+          data: callData,
+        ),
       );
 
       return client.sendUserOperation(userOp);
@@ -268,9 +271,11 @@ class FuseSDK {
 
       if (allowance >= amount) {
         final userOp = await simpleAccount.execute(
-          spender,
-          BigInt.zero,
-          callData,
+          Call(
+            to: spender,
+            value: BigInt.zero,
+            data: callData,
+          ),
         );
 
         return client.sendUserOperation(userOp);
@@ -310,9 +315,11 @@ class FuseSDK {
     if (stakeRequestBody.tokenAddress.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
       final userOp = await simpleAccount.execute(
-        spender,
-        amount,
-        stakeCallData,
+        Call(
+          to: spender,
+          value: amount,
+          data: stakeCallData,
+        ),
       );
       return await client.sendUserOperation(
         userOp,
@@ -325,10 +332,13 @@ class FuseSDK {
 
       if (allowance >= amount) {
         final userOp = await simpleAccount.execute(
-          spender,
-          BigInt.zero,
-          stakeCallData,
+          Call(
+            to: spender,
+            value: BigInt.zero,
+            data: stakeCallData,
+          ),
         );
+
         return client.sendUserOperation(userOp);
       } else {
         return approveTokenAndCallContract(
@@ -367,9 +377,11 @@ class FuseSDK {
     if (unstakeRequestBody.tokenAddress.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
       final userOp = await simpleAccount.execute(
-        spender,
-        amount,
-        unstakeCallData,
+        Call(
+          to: spender,
+          value: amount,
+          data: unstakeCallData,
+        ),
       );
 
       return client.sendUserOperation(userOp);
@@ -381,9 +393,11 @@ class FuseSDK {
 
       if (allowance >= amount) {
         final userOp = await simpleAccount.execute(
-          EthereumAddress.fromHex(unstakeRequestBody.tokenAddress),
-          BigInt.zero,
-          unstakeCallData,
+          Call(
+            to: EthereumAddress.fromHex(unstakeRequestBody.tokenAddress),
+            value: BigInt.zero,
+            data: unstakeCallData,
+          ),
         );
 
         return client.sendUserOperation(userOp);
