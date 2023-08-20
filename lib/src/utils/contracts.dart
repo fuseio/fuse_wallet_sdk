@@ -42,6 +42,23 @@ class ContractsUtils {
     );
   }
 
+  static Future<BigInt> readFromContractWithFirstResult({
+    required Web3Client client,
+    required String contractName,
+    required String contractAddress,
+    required String functionName,
+    required List<dynamic> params,
+  }) async {
+    final response = await readFromContract(
+      client,
+      contractName,
+      contractAddress,
+      functionName,
+      params,
+    );
+    return response.first as BigInt;
+  }
+
   /// Retrieves the deployed contract instance using the contract name and address.
   ///
   /// [contractName] is the name of the contract.

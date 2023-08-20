@@ -2,29 +2,26 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 import 'package:userop/userop.dart' hide ABI;
 import 'package:web3dart/crypto.dart';
 
-import 'package:fuse_wallet_sdk/src/constants/variables.dart';
 import 'package:fuse_wallet_sdk/src/modules/modules.dart';
 
 import 'constants/abis.dart';
-import 'models/models.dart';
-import 'utils/contracts.dart';
-import 'utils/format.dart';
 
+/// The main SDK class for interacting with FuseBox.
+///
+/// Provides methods for wallet interaction, calling contracts, and managing tokens.
 class FuseSDK {
-  late SimpleAccount simpleAccount;
-
-  late IClient client;
-
-  final Dio _dio;
-
+  /// Creates a new FuseSDK instance.
+  ///
+  /// [publicApiKey] API key for accessing Fuse endpoints.
+  /// [credentials] Private key for wallet signing.
   FuseSDK(
     String publicApiKey,
-    EthPrivateKey credentials, {
-    IPresetBuilderOpts? opts,
-  }) : _dio = Dio(
+    EthPrivateKey credentials,
+  ) : _dio = Dio(
           BaseOptions(
             baseUrl: Uri.https(Variables.STAGING_BASE_URL, '/api').toString(),
             headers: {
@@ -38,31 +35,51 @@ class FuseSDK {
     _initializeModules();
   }
 
+  late final EtherspotWallet wallet;
+
+  late final IClient client;
+
+  final Dio _dio;
+
+  late ExplorerModule _explorerModule;
+  late TradeModule _tradeModule;
+  late StakingModule _stakingModule;
+  late NftModule _nftModule;
+
+  /// Initializes the SDK with the provided parameters.
+  ///
+  /// [publicApiKey] is the public API key used for authenticating with Fuse's backend services.
+  /// [credentials] provides the Ethereum private key for signing transactions.
+  ///
+  /// The optional parameters [withPaymaster] and [paymasterContext] are used for handling
+  /// Ethereum gas payment on behalf of users.
   static Future<FuseSDK> init(
     String publicApiKey,
     EthPrivateKey credentials, {
     bool withPaymaster = false,
     Map<String, dynamic>? paymasterContext,
   }) async {
-    final FuseSDK fuseSDK = FuseSDK(
-      publicApiKey,
-      credentials,
-    );
+    final fuseSDK = FuseSDK(publicApiKey, credentials);
+
     final bundlerRpc =
         Uri.https(Variables.STAGING_BASE_URL, '/api/v0/bundler', {
       'apiKey': publicApiKey,
     }).toString();
 
-    final paymasterMiddleware = withPaymaster
-        ? verifyingPaymaster(
-            Uri.https(Variables.STAGING_BASE_URL, '/api/v0/paymaster', {
-              'apiKey': publicApiKey,
-            }).toString(),
-            paymasterContext ?? {},
-          )
-        : null;
+    UserOperationMiddlewareFn? paymasterMiddleware;
+    if (withPaymaster) {
+      final paymasterRpc = Uri.https(
+        Variables.STAGING_BASE_URL,
+        '/api/v0/paymaster',
+        {'apiKey': publicApiKey},
+      ).toString();
+      paymasterMiddleware = verifyingPaymaster(
+        paymasterRpc,
+        paymasterContext ?? {},
+      );
+    }
 
-    fuseSDK.simpleAccount = await SimpleAccount.init(
+    fuseSDK.wallet = await EtherspotWallet.init(
       credentials,
       bundlerRpc,
       opts: IPresetBuilderOpts()..paymasterMiddleware = paymasterMiddleware,
@@ -79,11 +96,6 @@ class FuseSDK {
     _nftModule = NftModule(_dio);
   }
 
-  late ExplorerModule _explorerModule;
-  late TradeModule _tradeModule;
-  late StakingModule _stakingModule;
-  late NftModule _nftModule;
-
   ExplorerModule get explorerModule => _explorerModule;
 
   TradeModule get tradeModule => _tradeModule;
@@ -92,73 +104,119 @@ class FuseSDK {
 
   NftModule get nftModule => _nftModule;
 
+  bool _isNativeToken(String address) {
+    return address.toLowerCase() ==
+        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase();
+  }
+
+  Future<ISendUserOperationResponse> _executeUserOperation(
+    EthereumAddress address,
+    BigInt value,
+    Uint8List callData,
+  ) async {
+    final userOp = await wallet.execute(
+      Call(
+        to: address,
+        value: value,
+        data: callData,
+      ),
+    );
+    return client.sendUserOperation(userOp);
+  }
+
+  Future<ISendUserOperationResponse> _processTokenOperation({
+    required EthereumAddress tokenAddress,
+    required EthereumAddress to,
+    required BigInt amount,
+    required Uint8List callData,
+  }) async {
+    if (_isNativeToken(tokenAddress.toString())) {
+      return _executeUserOperation(to, amount, Uint8List(0));
+    } else {
+      return _executeUserOperation(tokenAddress, BigInt.zero, callData);
+    }
+  }
+
+  Future<ISendUserOperationResponse> _processOperation({
+    required EthereumAddress tokenAddress,
+    required EthereumAddress spender,
+    required Uint8List callData,
+    BigInt? amount,
+  }) async {
+    if (_isNativeToken(tokenAddress.toString())) {
+      return _executeUserOperation(spender, amount!, callData);
+    }
+
+    final tokenAllowance = await getAllowance(tokenAddress, spender);
+    if (tokenAllowance >= amount!) {
+      return _executeUserOperation(spender, BigInt.zero, callData);
+    } else {
+      return approveTokenAndCallContract(
+        tokenAddress,
+        spender,
+        amount,
+        callData,
+      );
+    }
+  }
+
+  /// Transfers ETH/ERC20 tokens to a given address.
+  ///
+  /// [tokenAddress] is the address of the token.
+  /// [recipientAddress] is the recipient's address.
+  /// [amount] is the amount to transfer.
   Future<ISendUserOperationResponse> transferToken(
     EthereumAddress tokenAddress,
     EthereumAddress recipientAddress,
     BigInt amount,
   ) async {
-    if (tokenAddress.toString().toLowerCase() ==
-        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
-      final userOp = await simpleAccount.execute(
-        Call(
-          to: recipientAddress,
-          value: amount,
-          data: Uint8List(0),
-        ),
-      );
+    final callData = ContractsHelper.encodedDataForContractCall(
+      'ERC20',
+      tokenAddress.toString(),
+      'transfer',
+      [recipientAddress, amount],
+      include0x: true,
+    );
 
-      return client.sendUserOperation(userOp);
-    } else {
-      final callData = ContractsHelper.encodedDataForContractCall(
-        'ERC20',
-        tokenAddress.toString(),
-        'transfer',
-        [
-          recipientAddress,
-          amount,
-        ],
-        include0x: true,
-      );
-
-      final userOp = await simpleAccount.execute(
-        Call(
-          to: tokenAddress,
-          value: BigInt.zero,
-          data: callData,
-        ),
-      );
-
-      return client.sendUserOperation(userOp);
-    }
+    return _processTokenOperation(
+      tokenAddress: tokenAddress,
+      to: recipientAddress,
+      amount: amount,
+      callData: callData,
+    );
   }
 
+  /// Approves a spender to spend a specific amount of a ERC20 token.
+  ///
+  /// [tokenAddress] is the address of the token.
+  /// [spender] is the address of the spender.
+  /// [amount] is the amount to approve.
   Future<ISendUserOperationResponse> approveToken(
     EthereumAddress tokenAddress,
     EthereumAddress spender,
     BigInt amount,
-  ) async {
+  ) {
     final callData = ContractsHelper.encodedDataForContractCall(
       'ERC20',
       tokenAddress.toString(),
       'approve',
-      [
-        spender,
-        amount,
-      ],
+      [spender, amount],
       include0x: true,
     );
-
-    final userOp = await simpleAccount.execute(
-      Call(
-        to: tokenAddress,
-        value: BigInt.zero,
-        data: callData,
-      ),
+    return _executeUserOperation(
+      tokenAddress,
+      BigInt.zero,
+      callData,
     );
-
-    return client.sendUserOperation(userOp);
   }
 
+  /// Transfers an NFT.
+  ///
+  /// [nftContractAddress] The NFT contract address.
+  /// [recipientAddress] The recipient address.
+  /// [tokenId] The token ID to transfer.
+  /// [isSafe] Whether to use safeTransferFrom.
+  /// [data] Optional data parameter.
   Future<ISendUserOperationResponse> transferNFT(
     EthereumAddress nftContractAddress,
     EthereumAddress recipientAddress,
@@ -167,7 +225,7 @@ class FuseSDK {
     String? data,
   }) async {
     final params = [
-      EthereumAddress.fromHex(simpleAccount.getSender()),
+      EthereumAddress.fromHex(wallet.getSender()),
       recipientAddress,
       BigInt.from(tokenId),
     ];
@@ -185,17 +243,19 @@ class FuseSDK {
       jsonInterface: ABI.get('ERC721'),
     );
 
-    final userOp = await simpleAccount.execute(
-      Call(
-        to: nftContractAddress,
-        value: BigInt.zero,
-        data: callData,
-      ),
+    return _executeUserOperation(
+      nftContractAddress,
+      BigInt.zero,
+      callData,
     );
-
-    return client.sendUserOperation(userOp);
   }
 
+  /// Approves tokens and makes a contract call.
+  ///
+  /// [tokenAddress] The token contract address.
+  /// [spender] The contract address.
+  /// [value] The amount to approve.
+  /// [callData] The encoded function call data.
   Future<ISendUserOperationResponse> approveTokenAndCallContract(
     EthereumAddress tokenAddress,
     EthereumAddress spender,
@@ -206,10 +266,7 @@ class FuseSDK {
       'ERC20',
       tokenAddress.toString(),
       'approve',
-      [
-        spender,
-        value,
-      ],
+      [spender, value],
       include0x: true,
     );
     final calls = [
@@ -225,11 +282,14 @@ class FuseSDK {
       ),
     ];
 
-    final batchOp = await simpleAccount.executeBatch(calls);
+    final batchOp = await wallet.executeBatch(calls);
 
     return client.sendUserOperation(batchOp);
   }
 
+  /// Performs a token swap operation.
+  ///
+  /// [tradeRequestBody] The swap parameters.
   Future<ISendUserOperationResponse> swapTokens(
     TradeRequestBody tradeRequestBody,
   ) async {
@@ -243,127 +303,76 @@ class FuseSDK {
 
     final callData = hexToBytes(swapCallParameters.data?.rawTxn['data']);
 
-    if (tradeRequestBody.currencyIn.toLowerCase() ==
-        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
-      final userOp = await simpleAccount.execute(
-        Call(
-          to: spender,
-          value: BigInt.parse(swapCallParameters.data!.value),
-          data: callData,
-        ),
-      );
+    final tokenDetails = await getERC20TokenDetails(
+      tradeRequestBody.currencyIn,
+    );
 
-      return client.sendUserOperation(userOp);
-    } else {
-      final tokenDetails = await getERC20TokenDetails(
-        tradeRequestBody.currencyIn,
-      );
+    final amount = AmountFormat.toBigInt(
+      tradeRequestBody.amountIn,
+      tokenDetails.decimals,
+    );
 
-      final amount = AmountFormat.toBigInt(
-        tradeRequestBody.amountIn,
-        tokenDetails.decimals,
-      );
+    return _processOperation(
+      tokenAddress: EthereumAddress.fromHex(tradeRequestBody.currencyIn),
+      spender: spender,
+      callData: callData,
+      amount: amount,
+    );
+  }
 
-      final allowance = await getAllowance(
-        EthereumAddress.fromHex(tradeRequestBody.currencyIn),
-        spender,
-      );
-
-      if (allowance >= amount) {
-        final userOp = await simpleAccount.execute(
-          Call(
-            to: spender,
-            value: BigInt.zero,
-            data: callData,
-          ),
-        );
-
-        return client.sendUserOperation(userOp);
-      } else {
-        return approveTokenAndCallContract(
-          EthereumAddress.fromHex(tradeRequestBody.currencyIn),
-          spender,
-          amount,
-          callData,
-        );
-      }
+  void _handleModuleError(DC response) {
+    if (response.hasError) {
+      throw response.error!;
     }
   }
 
+  /// Stakes tokens into a contract.
+  ///
+  /// [stakeRequestBody] The staking parameters
   Future<ISendUserOperationResponse> stakeToken(
     StakeRequestBody stakeRequestBody,
   ) async {
     final response = await _stakingModule.stake(stakeRequestBody);
-    if (response.hasError) {
-      throw response.error!;
-    }
+    _handleModuleError(response);
 
     final tokenDetails = await getERC20TokenDetails(
       stakeRequestBody.tokenAddress,
     );
 
-    final BigInt amount = AmountFormat.toBigInt(
+    final amount = AmountFormat.toBigInt(
       stakeRequestBody.tokenAmount,
       tokenDetails.decimals,
+    );
+    final stakeCallData = hexToBytes(
+      response.data!.encodedABI,
     );
 
     final spender = EthereumAddress.fromHex(
       response.data!.contractAddress,
     );
 
-    final stakeCallData = hexToBytes(response.data!.encodedABI);
-    if (stakeRequestBody.tokenAddress.toLowerCase() ==
-        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
-      final userOp = await simpleAccount.execute(
-        Call(
-          to: spender,
-          value: amount,
-          data: stakeCallData,
-        ),
-      );
-      return await client.sendUserOperation(
-        userOp,
-      );
-    } else {
-      final allowance = await getAllowance(
-        EthereumAddress.fromHex(stakeRequestBody.tokenAddress),
-        spender,
-      );
-
-      if (allowance >= amount) {
-        final userOp = await simpleAccount.execute(
-          Call(
-            to: spender,
-            value: BigInt.zero,
-            data: stakeCallData,
-          ),
-        );
-
-        return client.sendUserOperation(userOp);
-      } else {
-        return approveTokenAndCallContract(
-          EthereumAddress.fromHex(stakeRequestBody.tokenAddress),
-          spender,
-          amount,
-          stakeCallData,
-        );
-      }
-    }
+    return _processOperation(
+      tokenAddress: EthereumAddress.fromHex(stakeRequestBody.tokenAddress),
+      spender: spender,
+      callData: stakeCallData,
+      amount: amount,
+    );
   }
 
+  /// Unstake tokens from a contract.
+  ///
+  /// [unstakeRequestBody] The unstake parameters.
   Future<ISendUserOperationResponse> unstakeToken(
     UnstakeRequestBody unstakeRequestBody,
   ) async {
     final response = await _stakingModule.unstake(unstakeRequestBody);
-    if (response.hasError) {
-      throw response.error!;
-    }
+    _handleModuleError(response);
 
     final tokenDetails = await getERC20TokenDetails(
       unstakeRequestBody.tokenAddress,
     );
 
-    final BigInt amount = AmountFormat.toBigInt(
+    final amount = AmountFormat.toBigInt(
       unstakeRequestBody.tokenAmount,
       tokenDetails.decimals,
     );
@@ -374,90 +383,67 @@ class FuseSDK {
 
     final unstakeCallData = hexToBytes(response.data!.encodedABI);
 
-    if (unstakeRequestBody.tokenAddress.toLowerCase() ==
-        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
-      final userOp = await simpleAccount.execute(
-        Call(
-          to: spender,
-          value: amount,
-          data: unstakeCallData,
-        ),
-      );
-
-      return client.sendUserOperation(userOp);
-    } else {
-      final allowance = await getAllowance(
-        EthereumAddress.fromHex(unstakeRequestBody.tokenAddress),
-        spender,
-      );
-
-      if (allowance >= amount) {
-        final userOp = await simpleAccount.execute(
-          Call(
-            to: EthereumAddress.fromHex(unstakeRequestBody.tokenAddress),
-            value: BigInt.zero,
-            data: unstakeCallData,
-          ),
-        );
-
-        return client.sendUserOperation(userOp);
-      } else {
-        return approveTokenAndCallContract(
-          EthereumAddress.fromHex(unstakeRequestBody.tokenAddress),
-          EthereumAddress.fromHex(response.data!.contractAddress),
-          amount,
-          unstakeCallData,
-        );
-      }
-    }
+    return _processOperation(
+      tokenAddress: EthereumAddress.fromHex(unstakeRequestBody.tokenAddress),
+      spender: spender,
+      callData: unstakeCallData,
+      amount: amount,
+    );
   }
 
   Future<BigInt> _getNativeBalance(
     EthereumAddress address,
   ) async {
-    final etherAmount = await simpleAccount.proxy.client.getBalance(address);
+    final web3client = wallet.proxy.client;
+    final etherAmount = await web3client.getBalance(address);
 
     return etherAmount.getInWei;
   }
 
+  /// Fetches the balance of the user for a given token.
+  ///
+  /// [tokenAddress] is the address of the token.
+  /// [address] is the address of the user.
   Future<BigInt> getBalance(
     EthereumAddress tokenAddress,
     EthereumAddress address,
   ) async {
-    if (tokenAddress.toString().toLowerCase() ==
-        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
+    if (_isNativeToken(address.toString())) {
       return _getNativeBalance(address);
     }
 
-    final List<dynamic> response = await ContractsUtils.readFromContract(
-      simpleAccount.proxy.client,
-      'BasicToken',
-      tokenAddress.toString(),
-      'balanceOf',
-      [address],
+    return ContractsUtils.readFromContractWithFirstResult(
+      client: wallet.proxy.client,
+      contractName: 'BasicToken',
+      contractAddress: tokenAddress.toString(),
+      functionName: 'balanceOf',
+      params: [address],
     );
-
-    return response.first as BigInt;
   }
 
+  /// Gets the token allowance for an address and spender.
+  ///
+  /// [tokenAddress] The token contract address.
+  /// [spender] The spender address.
   Future<BigInt> getAllowance(
     EthereumAddress tokenAddress,
     EthereumAddress spender,
-  ) async {
-    final List<dynamic> response = await ContractsUtils.readFromContract(
-      simpleAccount.proxy.client,
-      'BasicToken',
-      tokenAddress.toString(),
-      'allowance',
-      [
-        EthereumAddress.fromHex(simpleAccount.getSender()),
+  ) {
+    return ContractsUtils.readFromContractWithFirstResult(
+      client: wallet.proxy.client,
+      contractName: 'BasicToken',
+      contractAddress: tokenAddress.toString(),
+      functionName: 'allowance',
+      params: [
+        EthereumAddress.fromHex(wallet.getSender()),
         spender,
       ],
     );
-
-    return response.first as BigInt;
   }
 
+  /// Gets metadata for an ERC20 token.
+  ///
+  /// [tokenAddress] The token contract address.
   Future<TokenDetails> getERC20TokenDetails(String tokenAddress) async {
     if (tokenAddress.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
@@ -467,7 +453,7 @@ class FuseSDK {
     final token = await Future.wait(
       toRead.map(
         (function) => ContractsUtils.readFromContract(
-          simpleAccount.proxy.client,
+          wallet.proxy.client,
           'BasicToken',
           tokenAddress.toString(),
           function,
