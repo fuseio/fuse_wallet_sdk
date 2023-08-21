@@ -58,6 +58,7 @@ class FuseSDK {
     EthPrivateKey credentials, {
     bool withPaymaster = false,
     Map<String, dynamic>? paymasterContext,
+    IPresetBuilderOpts? opts,
   }) async {
     final fuseSDK = FuseSDK(publicApiKey, credentials);
 
@@ -82,7 +83,12 @@ class FuseSDK {
     fuseSDK.wallet = await EtherspotWallet.init(
       credentials,
       bundlerRpc,
-      opts: IPresetBuilderOpts()..paymasterMiddleware = paymasterMiddleware,
+      opts: IPresetBuilderOpts()
+        ..entryPoint = opts?.entryPoint
+        ..salt = opts?.salt
+        ..factoryAddress = opts?.factoryAddress
+        ..paymasterMiddleware = opts?.paymasterMiddleware ?? paymasterMiddleware
+        ..overrideBundlerRpc = opts?.overrideBundlerRpc,
     );
     fuseSDK.client = await Client.init(bundlerRpc);
 
@@ -364,6 +370,7 @@ class FuseSDK {
   /// [unstakeRequestBody] The unstake parameters.
   Future<ISendUserOperationResponse> unstakeToken(
     UnstakeRequestBody unstakeRequestBody,
+    String unStakeTokenAddress,
   ) async {
     final response = await _stakingModule.unstake(unstakeRequestBody);
     _handleModuleError(response);
@@ -384,7 +391,7 @@ class FuseSDK {
     final unstakeCallData = hexToBytes(response.data!.encodedABI);
 
     return _processOperation(
-      tokenAddress: EthereumAddress.fromHex(unstakeRequestBody.tokenAddress),
+      tokenAddress: EthereumAddress.fromHex(unStakeTokenAddress),
       spender: spender,
       callData: unstakeCallData,
       amount: amount,
