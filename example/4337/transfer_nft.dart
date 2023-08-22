@@ -11,12 +11,11 @@ void main() async {
     credentials,
   );
 
-  final res = await fuseSDK.stakeToken(
-    StakeRequestBody(
-      accountAddress: fuseSDK.wallet.getSender(),
-      tokenAmount: '0.1',
-      tokenAddress: Variables.NATIVE_TOKEN_ADDRESS,
-    ),
+  final tokenId = 1;
+  final res = await fuseSDK.transferNFT(
+    EthereumAddress.fromHex('NFT_CONTRACT_ADDRESS'),
+    EthereumAddress.fromHex('RECIPIENT_ADDRESS'),
+    tokenId,
   );
   print('UserOpHash: ${res.userOpHash}');
 
