@@ -23,7 +23,7 @@ class FuseSDK {
     EthPrivateKey credentials,
   ) : _dio = Dio(
           BaseOptions(
-            baseUrl: Uri.https(Variables.STAGING_BASE_URL, '/api').toString(),
+            baseUrl: Uri.https(Variables.BASE_URL, '/api').toString(),
             headers: {
               'Content-Type': 'application/json',
             },
@@ -62,15 +62,14 @@ class FuseSDK {
   }) async {
     final fuseSDK = FuseSDK(publicApiKey, credentials);
 
-    final bundlerRpc =
-        Uri.https(Variables.STAGING_BASE_URL, '/api/v0/bundler', {
+    final bundlerRpc = Uri.https(Variables.BASE_URL, '/api/v0/bundler', {
       'apiKey': publicApiKey,
     }).toString();
 
     UserOperationMiddlewareFn? paymasterMiddleware;
     if (withPaymaster) {
       final paymasterRpc = Uri.https(
-        Variables.STAGING_BASE_URL,
+        Variables.BASE_URL,
         '/api/v0/paymaster',
         {'apiKey': publicApiKey},
       ).toString();
