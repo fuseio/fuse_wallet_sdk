@@ -1,6 +1,7 @@
 library fuse_wallet_sdk;
 
 export 'package:web3dart/web3dart.dart';
+export 'package:userop/userop.dart';
 export 'package:data_channel/data_channel.dart';
 
 export 'src/constants/variables.dart';
