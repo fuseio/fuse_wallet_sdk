@@ -3,12 +3,9 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
-import 'package:userop/userop.dart' hide ABI;
 import 'package:web3dart/crypto.dart';
 
 import 'package:fuse_wallet_sdk/src/modules/modules.dart';
-
-import 'constants/abis.dart';
 
 /// The main SDK class for interacting with FuseBox.
 ///
@@ -255,13 +252,14 @@ class FuseSDK {
       params.add(hexToBytes(data));
     }
 
-    final callData = ContractsHelper.encodedDataForContractCall(
-      'ERC721',
-      nftContractAddress.toString(),
-      isSafe ? 'safeTransferFrom' : 'transferFrom',
-      params,
-      include0x: true,
-      jsonInterface: ABI.get('ERC721'),
+    final callData = hexToBytes(
+      ContractsUtils.encodedDataForContractCall(
+        'ERC721',
+        nftContractAddress.toString(),
+        isSafe ? 'safeTransferFrom' : 'transferFrom',
+        params,
+        include0x: true,
+      ),
     );
 
     return _executeUserOperation(

@@ -52,10 +52,7 @@ class ExplorerModule {
       final Response response = await _dio.get(
         '/v0/explorer?module=contract&action=getabi&address=$address',
       );
-      if (response.data['status'] == '1') {
-        return DC.data(jsonEncode(jsonDecode(response.data['result'])));
-      }
-      return DC.error(Exception(response.data['message']));
+      return DC.data(jsonEncode(jsonDecode(response.data['result'])));
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
@@ -76,10 +73,7 @@ class ExplorerModule {
       final Response response = await _dio.get(
         '/v0/explorer?module=account&action=tokenlist&address=$walletAddress',
       );
-      if (response.data['status'] == '1') {
-        return DC.data(TokenList.fromJson(response.data));
-      }
-      return DC.error(Exception(response.data['message']));
+      return DC.data(TokenList.fromJson(response.data));
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
@@ -107,13 +101,10 @@ class ExplorerModule {
       final Response response = await _dio.get(
         '/v0/explorer?module=token&action=getToken&contractaddress=$contractAddress',
       );
-      if (response.data['status'] == '1') {
-        return DC.data(TokenDetails.fromJson({
-          ...response.data['result'],
-          'balance': '0',
-        }));
-      }
-      return DC.error(Exception(response.data['message']));
+      return DC.data(TokenDetails.fromJson({
+        ...response.data['result'],
+        'balance': '0',
+      }));
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
@@ -141,10 +132,7 @@ class ExplorerModule {
       final Response response = await _dio.get(
         '/v0/explorer?module=account&action=tokenbalance&contractaddress=$contractAddress&address=$walletAddress',
       );
-      if (response.data['status'] == '1') {
-        return DC.data(BigInt.parse(response.data['result']));
-      }
-      return DC.error(Exception(response.data['message']));
+      return DC.data(BigInt.parse(response.data['result']));
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
