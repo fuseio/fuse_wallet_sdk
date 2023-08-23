@@ -165,6 +165,22 @@ class FuseSDK {
     }
   }
 
+  Future<ISendUserOperationResponse> callContract(
+    EthereumAddress to,
+    BigInt value,
+    Uint8List data,
+  ) async {
+    final userOp = await wallet.execute(
+      Call(
+        to: to,
+        value: value,
+        data: data,
+      ),
+    );
+
+    return client.sendUserOperation(userOp);
+  }
+
   /// Transfers ETH/ERC20 tokens to a given address.
   ///
   /// [tokenAddress] is the address of the token.
