@@ -13,7 +13,10 @@ class SmartWalletAuth {
   /// The [credentials] should be type of [EthPrivateKey], and contains the address of the wallet to authenticate.
   ///
   /// It returns a [AuthDto], containing the [hash], [ownerAddress] and [signature] of the authenticated wallet.
-  static AuthDto signer(EthPrivateKey credentials) {
+  static AuthDto signer(
+    EthPrivateKey credentials, {
+    String? smartWalletAddress,
+  }) {
     final String ownerAddress = credentials.address.hexEip55;
     final Uint8List input = Uint8List.fromList(HEX.decode(
       ownerAddress.replaceFirst('0x', ''),
@@ -22,10 +25,17 @@ class SmartWalletAuth {
     final Uint8List signature =
         credentials.signPersonalMessageToUint8List(hash);
 
-    return AuthDto(
+    AuthDto authDto = AuthDto(
       hash: bytesToHex(hash, include0x: true),
       ownerAddress: ownerAddress,
       signature: bytesToHex(signature.toList(), include0x: true),
     );
+
+    if (smartWalletAddress != null) {
+      authDto = authDto.copyWith(
+        smartWalletAddress: smartWalletAddress,
+      );
+    }
+    return authDto;
   }
 }

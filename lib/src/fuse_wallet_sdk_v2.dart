@@ -17,7 +17,6 @@ class FuseSDK {
   /// [credentials] Private key for wallet signing.
   FuseSDK(
     String publicApiKey,
-    EthPrivateKey credentials,
   ) : _dio = Dio(
           BaseOptions(
             baseUrl: Uri.https(Variables.BASE_URL, '/api').toString(),
@@ -31,6 +30,8 @@ class FuseSDK {
         ) {
     _initializeModules();
   }
+
+  late String _jwtToken;
 
   late final EtherspotWallet wallet;
 
@@ -56,8 +57,9 @@ class FuseSDK {
     bool withPaymaster = false,
     Map<String, dynamic>? paymasterContext,
     IPresetBuilderOpts? opts,
+    IClientOpts? clientOpts,
   }) async {
-    final fuseSDK = FuseSDK(publicApiKey, credentials);
+    final fuseSDK = FuseSDK(publicApiKey);
 
     final bundlerRpc = Uri.https(Variables.BASE_URL, '/api/v0/bundler', {
       'apiKey': publicApiKey,
@@ -86,7 +88,13 @@ class FuseSDK {
         ..paymasterMiddleware = opts?.paymasterMiddleware ?? paymasterMiddleware
         ..overrideBundlerRpc = opts?.overrideBundlerRpc,
     );
-    fuseSDK.client = await Client.init(bundlerRpc);
+
+    await fuseSDK.authenticate(credentials);
+
+    fuseSDK.client = await Client.init(
+      bundlerRpc,
+      opts: clientOpts,
+    );
 
     return fuseSDK;
   }
@@ -105,6 +113,19 @@ class FuseSDK {
   StakingModule get stakingModule => _stakingModule;
 
   NftModule get nftModule => _nftModule;
+
+  Future<String> authenticate(EthPrivateKey credentials) async {
+    final AuthDto auth = SmartWalletAuth.signer(
+      credentials,
+      smartWalletAddress: wallet.getSender(),
+    );
+    final Response response = await _dio.post(
+      '/v2/smart-wallets/auth',
+      data: auth.toJson(),
+    );
+    _jwtToken = response.data['jwt'];
+    return response.data['jwt'];
+  }
 
   bool _isNativeToken(String address) {
     return address.toLowerCase() ==

@@ -20,7 +20,8 @@ AuthDto _$AuthDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AuthDto {
-  String get ownerAddress => throw _privateConstructorUsedError;
+  String? get ownerAddress => throw _privateConstructorUsedError;
+  String? get smartWalletAddress => throw _privateConstructorUsedError;
   String get signature => throw _privateConstructorUsedError;
   String get hash => throw _privateConstructorUsedError;
 
@@ -34,7 +35,11 @@ abstract class $AuthDtoCopyWith<$Res> {
   factory $AuthDtoCopyWith(AuthDto value, $Res Function(AuthDto) then) =
       _$AuthDtoCopyWithImpl<$Res, AuthDto>;
   @useResult
-  $Res call({String ownerAddress, String signature, String hash});
+  $Res call(
+      {String? ownerAddress,
+      String? smartWalletAddress,
+      String signature,
+      String hash});
 }
 
 /// @nodoc
@@ -50,15 +55,20 @@ class _$AuthDtoCopyWithImpl<$Res, $Val extends AuthDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? ownerAddress = null,
+    Object? ownerAddress = freezed,
+    Object? smartWalletAddress = freezed,
     Object? signature = null,
     Object? hash = null,
   }) {
     return _then(_value.copyWith(
-      ownerAddress: null == ownerAddress
+      ownerAddress: freezed == ownerAddress
           ? _value.ownerAddress
           : ownerAddress // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      smartWalletAddress: freezed == smartWalletAddress
+          ? _value.smartWalletAddress
+          : smartWalletAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
       signature: null == signature
           ? _value.signature
           : signature // ignore: cast_nullable_to_non_nullable
@@ -78,7 +88,11 @@ abstract class _$$_AuthDtoCopyWith<$Res> implements $AuthDtoCopyWith<$Res> {
       __$$_AuthDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String ownerAddress, String signature, String hash});
+  $Res call(
+      {String? ownerAddress,
+      String? smartWalletAddress,
+      String signature,
+      String hash});
 }
 
 /// @nodoc
@@ -91,15 +105,20 @@ class __$$_AuthDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? ownerAddress = null,
+    Object? ownerAddress = freezed,
+    Object? smartWalletAddress = freezed,
     Object? signature = null,
     Object? hash = null,
   }) {
     return _then(_$_AuthDto(
-      ownerAddress: null == ownerAddress
+      ownerAddress: freezed == ownerAddress
           ? _value.ownerAddress
           : ownerAddress // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      smartWalletAddress: freezed == smartWalletAddress
+          ? _value.smartWalletAddress
+          : smartWalletAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
       signature: null == signature
           ? _value.signature
           : signature // ignore: cast_nullable_to_non_nullable
@@ -116,7 +135,8 @@ class __$$_AuthDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AuthDto implements _AuthDto {
   _$_AuthDto(
-      {required this.ownerAddress,
+      {this.ownerAddress,
+      this.smartWalletAddress,
       required this.signature,
       required this.hash});
 
@@ -124,7 +144,9 @@ class _$_AuthDto implements _AuthDto {
       _$$_AuthDtoFromJson(json);
 
   @override
-  final String ownerAddress;
+  final String? ownerAddress;
+  @override
+  final String? smartWalletAddress;
   @override
   final String signature;
   @override
@@ -132,7 +154,7 @@ class _$_AuthDto implements _AuthDto {
 
   @override
   String toString() {
-    return 'AuthDto(ownerAddress: $ownerAddress, signature: $signature, hash: $hash)';
+    return 'AuthDto(ownerAddress: $ownerAddress, smartWalletAddress: $smartWalletAddress, signature: $signature, hash: $hash)';
   }
 
   @override
@@ -142,6 +164,8 @@ class _$_AuthDto implements _AuthDto {
             other is _$_AuthDto &&
             (identical(other.ownerAddress, ownerAddress) ||
                 other.ownerAddress == ownerAddress) &&
+            (identical(other.smartWalletAddress, smartWalletAddress) ||
+                other.smartWalletAddress == smartWalletAddress) &&
             (identical(other.signature, signature) ||
                 other.signature == signature) &&
             (identical(other.hash, hash) || other.hash == hash));
@@ -149,7 +173,8 @@ class _$_AuthDto implements _AuthDto {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, ownerAddress, signature, hash);
+  int get hashCode => Object.hash(
+      runtimeType, ownerAddress, smartWalletAddress, signature, hash);
 
   @JsonKey(ignore: true)
   @override
@@ -167,14 +192,17 @@ class _$_AuthDto implements _AuthDto {
 
 abstract class _AuthDto implements AuthDto {
   factory _AuthDto(
-      {required final String ownerAddress,
+      {final String? ownerAddress,
+      final String? smartWalletAddress,
       required final String signature,
       required final String hash}) = _$_AuthDto;
 
   factory _AuthDto.fromJson(Map<String, dynamic> json) = _$_AuthDto.fromJson;
 
   @override
-  String get ownerAddress;
+  String? get ownerAddress;
+  @override
+  String? get smartWalletAddress;
   @override
   String get signature;
   @override
