@@ -132,7 +132,8 @@ class __$$_AuthDtoCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$_AuthDto implements _AuthDto {
   _$_AuthDto(
       {required this.ownerAddress,

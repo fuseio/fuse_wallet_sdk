@@ -25,17 +25,11 @@ class SmartWalletAuth {
     final Uint8List signature =
         credentials.signPersonalMessageToUint8List(hash);
 
-    AuthDto authDto = AuthDto(
+    return AuthDto(
       hash: bytesToHex(hash, include0x: true),
       ownerAddress: ownerAddress,
       signature: bytesToHex(signature.toList(), include0x: true),
+      smartWalletAddress: smartWalletAddress,
     );
-
-    if (smartWalletAddress != null) {
-      authDto = authDto.copyWith(
-        smartWalletAddress: smartWalletAddress,
-      );
-    }
-    return authDto;
   }
 }
