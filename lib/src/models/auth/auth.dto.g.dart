@@ -7,7 +7,7 @@ part of 'auth.dto.dart';
 // **************************************************************************
 
 _$_AuthDto _$$_AuthDtoFromJson(Map<String, dynamic> json) => _$_AuthDto(
-      ownerAddress: json['ownerAddress'] as String?,
+      ownerAddress: json['ownerAddress'] as String,
       smartWalletAddress: json['smartWalletAddress'] as String?,
       signature: json['signature'] as String,
       hash: json['hash'] as String,

@@ -15,7 +15,7 @@ class AuthDto with _$AuthDto {
   /// - [signature] – The owner's signature of the hash.
   /// - [hash] – The hash of the data to be signed.
   factory AuthDto({
-    String? ownerAddress,
+    required String ownerAddress,
     String? smartWalletAddress,
     required String signature,
     required String hash,
