@@ -153,16 +153,16 @@ class FuseSDK {
   /// [nftContractAddress] The NFT contract address.
   /// [recipientAddress] The recipient address.
   /// [tokenId] The token ID to transfer.
-  /// [isSafe] Whether to use safeTransferFrom.
-  /// [data] Optional data parameter.
+  /// [isSafe] Whether to use safeTransferFrom. Defaults to false.
+  /// [data] Additional data with no specified format, sent in call to `_to`. Defaults to null.
   Future<ISendUserOperationResponse> transferNFT(
     EthereumAddress nftContractAddress,
     EthereumAddress recipientAddress,
-    num tokenId, {
+    num tokenId, [
     bool isSafe = false,
     String? data,
     TxOptions? options,
-  }) async {
+  ]) async {
     final params = [
       EthereumAddress.fromHex(wallet.getSender()),
       recipientAddress,
