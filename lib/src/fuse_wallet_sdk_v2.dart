@@ -6,6 +6,7 @@ import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 import 'package:web3dart/crypto.dart';
 
 import 'package:fuse_wallet_sdk/src/modules/modules.dart';
+import 'package:web3dart/json_rpc.dart';
 
 /// The main SDK class for interacting with FuseBox.
 ///
@@ -30,6 +31,9 @@ class FuseSDK {
         ) {
     _initializeModules();
   }
+
+  static const DEFAULT_FEE_VALUE = '1000000';
+  static const DEFAULT_FEE_INCREMENT_PERCENTAGE = 10;
 
   late String _jwtToken;
 
@@ -76,38 +80,25 @@ class FuseSDK {
   }) async {
     final fuseSDK = FuseSDK(publicApiKey);
 
-    final bundlerRpc = Uri.https(Variables.BASE_URL, '/api/v0/bundler', {
-      'apiKey': publicApiKey,
-    }).toString();
-
     UserOperationMiddlewareFn? paymasterMiddleware;
     if (withPaymaster) {
-      final paymasterRpc = Uri.https(
-        Variables.BASE_URL,
-        '/api/v0/paymaster',
-        {'apiKey': publicApiKey},
-      ).toString();
-      paymasterMiddleware = verifyingPaymaster(
-        paymasterRpc,
-        paymasterContext ?? {},
+      paymasterMiddleware = _getPaymasterMiddleware(
+        publicApiKey,
+        paymasterContext,
       );
     }
 
-    fuseSDK.wallet = await EtherspotWallet.init(
+    fuseSDK.wallet = await _initializeWallet(
       credentials,
-      bundlerRpc,
-      opts: IPresetBuilderOpts()
-        ..entryPoint = opts?.entryPoint
-        ..salt = opts?.salt
-        ..factoryAddress = opts?.factoryAddress
-        ..paymasterMiddleware = opts?.paymasterMiddleware ?? paymasterMiddleware
-        ..overrideBundlerRpc = opts?.overrideBundlerRpc,
+      publicApiKey,
+      opts,
+      paymasterMiddleware,
     );
 
     await fuseSDK.authenticate(credentials);
 
     fuseSDK.client = await Client.init(
-      bundlerRpc,
+      _getBundlerRpc(publicApiKey),
       opts: clientOpts,
     );
 
@@ -135,8 +126,10 @@ class FuseSDK {
   Future<ISendUserOperationResponse> transferToken(
     EthereumAddress tokenAddress,
     EthereumAddress recipientAddress,
-    BigInt amount,
-  ) async {
+    BigInt amount, {
+    String initialFeeValue = DEFAULT_FEE_VALUE,
+    int feeIncrementPercentage = DEFAULT_FEE_INCREMENT_PERCENTAGE,
+  }) async {
     final callData = ContractsHelper.encodedDataForContractCall(
       'ERC20',
       tokenAddress.toString(),
@@ -150,6 +143,8 @@ class FuseSDK {
       to: recipientAddress,
       amount: amount,
       callData: callData,
+      initialFeeValue: initialFeeValue,
+      feeIncrementPercentage: feeIncrementPercentage,
     );
   }
 
@@ -166,6 +161,8 @@ class FuseSDK {
     num tokenId, {
     bool isSafe = false,
     String? data,
+    String initialFeeValue = DEFAULT_FEE_VALUE,
+    int feeIncrementPercentage = DEFAULT_FEE_INCREMENT_PERCENTAGE,
   }) async {
     final params = [
       EthereumAddress.fromHex(wallet.getSender()),
@@ -193,6 +190,8 @@ class FuseSDK {
         value: BigInt.zero,
         data: callData,
       ),
+      initialFeeValue: initialFeeValue,
+      feeIncrementPercentage: feeIncrementPercentage,
     );
   }
 
@@ -200,11 +199,34 @@ class FuseSDK {
   ///
   /// [calls] The list of calls.
   Future<ISendUserOperationResponse> executeBatch(
-    List<Call> calls,
-  ) async {
-    final batchOp = await wallet.executeBatch(calls);
+    List<Call> calls, {
+    String initialFeeValue = DEFAULT_FEE_VALUE,
+    int feeIncrementPercentage = DEFAULT_FEE_INCREMENT_PERCENTAGE,
+  }) async {
+    final BigInt initialFee = BigInt.parse(initialFeeValue);
+    setWalletFees(initialFee);
 
-    return client.sendUserOperation(batchOp);
+    try {
+      final userOp = await wallet.executeBatch(calls);
+      return await client.sendUserOperation(userOp);
+    } on RPCError catch (e) {
+      if (e.message.contains('fee too low')) {
+        final increasedFee = _increaseFeeByPercentage(
+          initialFee,
+          feeIncrementPercentage,
+        );
+        setWalletFees(increasedFee);
+
+        try {
+          final userOpRetry = await wallet.executeBatch(calls);
+          return await client.sendUserOperation(userOpRetry);
+        } catch (e) {
+          rethrow;
+        }
+      } else {
+        rethrow;
+      }
+    }
   }
 
   /// Approves a spender to spend a specific amount of a ERC20 token.
@@ -215,8 +237,10 @@ class FuseSDK {
   Future<ISendUserOperationResponse> approveToken(
     EthereumAddress tokenAddress,
     EthereumAddress spender,
-    BigInt amount,
-  ) {
+    BigInt amount, {
+    String initialFeeValue = DEFAULT_FEE_VALUE,
+    int feeIncrementPercentage = DEFAULT_FEE_INCREMENT_PERCENTAGE,
+  }) {
     final callData = ContractsHelper.encodedDataForContractCall(
       'ERC20',
       tokenAddress.toString(),
@@ -231,20 +255,26 @@ class FuseSDK {
         value: BigInt.zero,
         data: callData,
       ),
+      initialFeeValue: initialFeeValue,
+      feeIncrementPercentage: feeIncrementPercentage,
     );
   }
 
   Future<ISendUserOperationResponse> callContract(
     EthereumAddress to,
     BigInt value,
-    Uint8List data,
-  ) async {
+    Uint8List data, {
+    String initialFeeValue = DEFAULT_FEE_VALUE,
+    int feeIncrementPercentage = DEFAULT_FEE_INCREMENT_PERCENTAGE,
+  }) async {
     return _executeUserOperation(
       Call(
         to: to,
         value: value,
         data: data,
       ),
+      initialFeeValue: initialFeeValue,
+      feeIncrementPercentage: feeIncrementPercentage,
     );
   }
 
@@ -258,8 +288,10 @@ class FuseSDK {
     EthereumAddress tokenAddress,
     EthereumAddress spender,
     BigInt value,
-    Uint8List callData,
-  ) async {
+    Uint8List callData, {
+    String initialFeeValue = DEFAULT_FEE_VALUE,
+    int feeIncrementPercentage = DEFAULT_FEE_INCREMENT_PERCENTAGE,
+  }) async {
     final approveCallData = ContractsHelper.encodedDataForContractCall(
       'ERC20',
       tokenAddress.toString(),
@@ -280,15 +312,21 @@ class FuseSDK {
       ),
     ];
 
-    return executeBatch(calls);
+    return executeBatch(
+      calls,
+      initialFeeValue: initialFeeValue,
+      feeIncrementPercentage: feeIncrementPercentage,
+    );
   }
 
   /// Performs a token swap operation.
   ///
   /// [tradeRequestBody] The swap parameters.
   Future<ISendUserOperationResponse> swapTokens(
-    TradeRequestBody tradeRequestBody,
-  ) async {
+    TradeRequestBody tradeRequestBody, {
+    String initialFeeValue = DEFAULT_FEE_VALUE,
+    int feeIncrementPercentage = DEFAULT_FEE_INCREMENT_PERCENTAGE,
+  }) async {
     final swapCallParameters = await _tradeModule.requestParameters(
       tradeRequestBody,
     );
@@ -313,6 +351,8 @@ class FuseSDK {
       spender: spender,
       callData: callData,
       amount: amount,
+      initialFeeValue: initialFeeValue,
+      feeIncrementPercentage: feeIncrementPercentage,
     );
   }
 
@@ -320,8 +360,10 @@ class FuseSDK {
   ///
   /// [stakeRequestBody] The staking parameters
   Future<ISendUserOperationResponse> stakeToken(
-    StakeRequestBody stakeRequestBody,
-  ) async {
+    StakeRequestBody stakeRequestBody, {
+    String initialFeeValue = DEFAULT_FEE_VALUE,
+    int feeIncrementPercentage = DEFAULT_FEE_INCREMENT_PERCENTAGE,
+  }) async {
     final response = await _stakingModule.stake(stakeRequestBody);
     _handleModuleError(response);
 
@@ -346,6 +388,8 @@ class FuseSDK {
       spender: spender,
       callData: stakeCallData,
       amount: amount,
+      initialFeeValue: initialFeeValue,
+      feeIncrementPercentage: feeIncrementPercentage,
     );
   }
 
@@ -354,8 +398,10 @@ class FuseSDK {
   /// [unstakeRequestBody] The unstake parameters.
   Future<ISendUserOperationResponse> unstakeToken(
     UnstakeRequestBody unstakeRequestBody,
-    String unStakeTokenAddress,
-  ) async {
+    String unStakeTokenAddress, {
+    String initialFeeValue = DEFAULT_FEE_VALUE,
+    int feeIncrementPercentage = DEFAULT_FEE_INCREMENT_PERCENTAGE,
+  }) async {
     final response = await _stakingModule.unstake(unstakeRequestBody);
     _handleModuleError(response);
 
@@ -379,6 +425,8 @@ class FuseSDK {
       spender: spender,
       callData: unstakeCallData,
       amount: amount,
+      initialFeeValue: initialFeeValue,
+      feeIncrementPercentage: feeIncrementPercentage,
     );
   }
 
@@ -468,12 +516,44 @@ class FuseSDK {
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase();
   }
 
-  Future<ISendUserOperationResponse> _executeUserOperation(
-    Call call,
-  ) async {
-    final userOp = await wallet.execute(call);
+  BigInt _increaseFeeByPercentage(BigInt fee, int percentage) {
+    return fee + BigInt.from(fee * BigInt.from(percentage) / BigInt.from(100));
+  }
 
-    return client.sendUserOperation(userOp);
+  void setWalletFees(BigInt fee) {
+    wallet.setMaxFeePerGas(fee);
+    wallet.setMaxPriorityFeePerGas(fee);
+  }
+
+  Future<ISendUserOperationResponse> _executeUserOperation(
+    Call call, {
+    String initialFeeValue = DEFAULT_FEE_VALUE,
+    int feeIncrementPercentage = DEFAULT_FEE_INCREMENT_PERCENTAGE,
+  }) async {
+    final BigInt initialFee = BigInt.parse(initialFeeValue);
+    setWalletFees(initialFee);
+
+    try {
+      final userOp = await wallet.execute(call);
+      return await client.sendUserOperation(userOp);
+    } on RPCError catch (e) {
+      if (e.message.contains('fee too low')) {
+        final increasedFee = _increaseFeeByPercentage(
+          initialFee,
+          feeIncrementPercentage,
+        );
+        setWalletFees(increasedFee);
+
+        try {
+          final userOpRetry = await wallet.execute(call);
+          return await client.sendUserOperation(userOpRetry);
+        } catch (e) {
+          rethrow;
+        }
+      } else {
+        rethrow;
+      }
+    }
   }
 
   Future<ISendUserOperationResponse> _processTokenOperation({
@@ -481,15 +561,18 @@ class FuseSDK {
     required EthereumAddress to,
     required BigInt amount,
     required Uint8List callData,
+    String initialFeeValue = DEFAULT_FEE_VALUE,
+    int feeIncrementPercentage = DEFAULT_FEE_INCREMENT_PERCENTAGE,
   }) async {
     if (_isNativeToken(tokenAddress.toString())) {
       return _executeUserOperation(
-        Call(
-          to: to,
-          value: amount,
-          data: Uint8List(0),
-        ),
-      );
+          Call(
+            to: to,
+            value: amount,
+            data: Uint8List(0),
+          ),
+          initialFeeValue: initialFeeValue,
+          feeIncrementPercentage: feeIncrementPercentage);
     } else {
       return _executeUserOperation(
         Call(
@@ -497,6 +580,8 @@ class FuseSDK {
           value: BigInt.zero,
           data: callData,
         ),
+        initialFeeValue: initialFeeValue,
+        feeIncrementPercentage: feeIncrementPercentage,
       );
     }
   }
@@ -506,6 +591,8 @@ class FuseSDK {
     required EthereumAddress spender,
     required Uint8List callData,
     BigInt? amount,
+    String initialFeeValue = DEFAULT_FEE_VALUE,
+    int feeIncrementPercentage = DEFAULT_FEE_INCREMENT_PERCENTAGE,
   }) async {
     if (_isNativeToken(tokenAddress.toString())) {
       return _executeUserOperation(
@@ -514,6 +601,8 @@ class FuseSDK {
           value: amount!,
           data: callData,
         ),
+        initialFeeValue: initialFeeValue,
+        feeIncrementPercentage: feeIncrementPercentage,
       );
     }
 
@@ -525,6 +614,8 @@ class FuseSDK {
           value: BigInt.zero,
           data: callData,
         ),
+        initialFeeValue: initialFeeValue,
+        feeIncrementPercentage: feeIncrementPercentage,
       );
     } else {
       return approveTokenAndCallContract(
@@ -532,6 +623,8 @@ class FuseSDK {
         spender,
         amount,
         callData,
+        initialFeeValue: initialFeeValue,
+        feeIncrementPercentage: feeIncrementPercentage,
       );
     }
   }
@@ -540,5 +633,40 @@ class FuseSDK {
     if (response.hasError) {
       throw response.error!;
     }
+  }
+
+  static UserOperationMiddlewareFn? _getPaymasterMiddleware(
+    String publicApiKey,
+    Map<String, dynamic>? paymasterContext,
+  ) {
+    final paymasterRpc = Uri.https(Variables.BASE_URL, '/api/v0/paymaster', {
+      'apiKey': publicApiKey,
+    }).toString();
+
+    return verifyingPaymaster(paymasterRpc, paymasterContext ?? {});
+  }
+
+  static Future<EtherspotWallet> _initializeWallet(
+    EthPrivateKey credentials,
+    String publicApiKey,
+    IPresetBuilderOpts? opts,
+    UserOperationMiddlewareFn? paymasterMiddleware,
+  ) {
+    return EtherspotWallet.init(
+      credentials,
+      _getBundlerRpc(publicApiKey),
+      opts: IPresetBuilderOpts()
+        ..entryPoint = opts?.entryPoint
+        ..salt = opts?.salt
+        ..factoryAddress = opts?.factoryAddress
+        ..paymasterMiddleware = opts?.paymasterMiddleware ?? paymasterMiddleware
+        ..overrideBundlerRpc = opts?.overrideBundlerRpc,
+    );
+  }
+
+  static String _getBundlerRpc(String publicApiKey) {
+    return Uri.https(Variables.BASE_URL, '/api/v0/bundler', {
+      'apiKey': publicApiKey,
+    }).toString();
   }
 }
