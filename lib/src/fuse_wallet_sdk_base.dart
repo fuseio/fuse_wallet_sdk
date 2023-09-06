@@ -13,6 +13,9 @@ import 'package:fuse_wallet_sdk/src/models/models.dart';
 import 'package:fuse_wallet_sdk/src/modules/modules.dart';
 import 'package:fuse_wallet_sdk/src/utils/utils.dart';
 
+@Deprecated(
+  'Use FuseSDK instead, This class will be removed in the near future.',
+)
 class FuseWalletSDK {
   /// The public API key used to access the Fuse API.
   final String publicApiKey;
@@ -132,55 +135,6 @@ class FuseWalletSDK {
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
-  }
-
-  /// Creates a new smart wallet and returns a stream of [SmartWalletEvent]s.
-  ///
-  /// This function sends a request to create a new smart wallet and listens for the
-  /// events related to the wallet creation process. It returns a stream of [SmartWalletEvent]s
-  /// that can be used to track the wallet creation progress.
-  ///
-  /// Returns a Future that completes with a [DC] object:
-  /// - On success, `DC.data` will be called with a [Stream] of [SmartWalletEvent]s.
-  /// - On failure, `DC.error` will be called with an `Exception` object.
-  Future<DC<Exception, Stream<SmartWalletEvent>>> createWallet() async {
-    try {
-      final Response response = await _dio.post(
-        '/v1/smart-wallets/create',
-        options: _options,
-      );
-      if (response.statusCode == 201) {
-        final transactionId = response.data['transactionId'];
-        return DC.data(_createSubscriptionStream(transactionId));
-      }
-      return DC.error(Exception('Failed to create wallet'));
-    } on DioException catch (exception) {
-      return _handleDioErrorOccurredWhileCreatingWallet(exception);
-    } catch (e) {
-      return DC.error(Exception(e.toString()));
-    }
-  }
-
-  DC<Exception, Stream<SmartWalletEvent>>
-      _handleDioErrorOccurredWhileCreatingWallet(DioException exception) {
-    final response = exception.response;
-
-    if (response == null) {
-      return DC.error(Exception(exception.toString()));
-    }
-
-    final statusCode = response.statusCode;
-
-    if (statusCode == 400) {
-      final message = response.data["errorMessage"];
-      if (message == "Owner address already has a deployed smart wallet") {
-        return DC.error(
-          WalletAlreadyExistsException(message),
-        );
-      }
-    }
-
-    return DC.error(Exception(exception.toString()));
   }
 
   /// Retrieves historical actions for a smart wallet, with optional filtering by token address and update time.

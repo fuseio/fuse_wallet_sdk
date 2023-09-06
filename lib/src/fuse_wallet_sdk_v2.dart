@@ -44,6 +44,21 @@ class FuseSDK {
   late StakingModule _stakingModule;
   late NftModule _nftModule;
 
+  ExplorerModule get explorerModule => _explorerModule;
+
+  TradeModule get tradeModule => _tradeModule;
+
+  StakingModule get stakingModule => _stakingModule;
+
+  NftModule get nftModule => _nftModule;
+
+  void _initializeModules() {
+    _tradeModule = TradeModule(_dio);
+    _explorerModule = ExplorerModule(_dio);
+    _stakingModule = StakingModule(_dio);
+    _nftModule = NftModule(_dio);
+  }
+
   /// Initializes the SDK with the provided parameters.
   ///
   /// [publicApiKey] is the public API key used for authenticating with Fuse's backend services.
@@ -99,21 +114,6 @@ class FuseSDK {
     return fuseSDK;
   }
 
-  void _initializeModules() {
-    _tradeModule = TradeModule(_dio);
-    _explorerModule = ExplorerModule(_dio);
-    _stakingModule = StakingModule(_dio);
-    _nftModule = NftModule(_dio);
-  }
-
-  ExplorerModule get explorerModule => _explorerModule;
-
-  TradeModule get tradeModule => _tradeModule;
-
-  StakingModule get stakingModule => _stakingModule;
-
-  NftModule get nftModule => _nftModule;
-
   Future<String> authenticate(EthPrivateKey credentials) async {
     final AuthDto auth = SmartWalletAuth.signer(
       credentials,
@@ -125,78 +125,6 @@ class FuseSDK {
     );
     _jwtToken = response.data['jwt'];
     return response.data['jwt'];
-  }
-
-  bool _isNativeToken(String address) {
-    return address.toLowerCase() ==
-        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase();
-  }
-
-  Future<ISendUserOperationResponse> _executeUserOperation(
-    EthereumAddress address,
-    BigInt value,
-    Uint8List callData,
-  ) async {
-    final userOp = await wallet.execute(
-      Call(
-        to: address,
-        value: value,
-        data: callData,
-      ),
-    );
-    return client.sendUserOperation(userOp);
-  }
-
-  Future<ISendUserOperationResponse> _processTokenOperation({
-    required EthereumAddress tokenAddress,
-    required EthereumAddress to,
-    required BigInt amount,
-    required Uint8List callData,
-  }) async {
-    if (_isNativeToken(tokenAddress.toString())) {
-      return _executeUserOperation(to, amount, Uint8List(0));
-    } else {
-      return _executeUserOperation(tokenAddress, BigInt.zero, callData);
-    }
-  }
-
-  Future<ISendUserOperationResponse> _processOperation({
-    required EthereumAddress tokenAddress,
-    required EthereumAddress spender,
-    required Uint8List callData,
-    BigInt? amount,
-  }) async {
-    if (_isNativeToken(tokenAddress.toString())) {
-      return _executeUserOperation(spender, amount!, callData);
-    }
-
-    final tokenAllowance = await getAllowance(tokenAddress, spender);
-    if (tokenAllowance >= amount!) {
-      return _executeUserOperation(spender, BigInt.zero, callData);
-    } else {
-      return approveTokenAndCallContract(
-        tokenAddress,
-        spender,
-        amount,
-        callData,
-      );
-    }
-  }
-
-  Future<ISendUserOperationResponse> callContract(
-    EthereumAddress to,
-    BigInt value,
-    Uint8List data,
-  ) async {
-    final userOp = await wallet.execute(
-      Call(
-        to: to,
-        value: value,
-        data: data,
-      ),
-    );
-
-    return client.sendUserOperation(userOp);
   }
 
   /// Transfers ETH/ERC20 tokens to a given address.
@@ -222,30 +150,6 @@ class FuseSDK {
       to: recipientAddress,
       amount: amount,
       callData: callData,
-    );
-  }
-
-  /// Approves a spender to spend a specific amount of a ERC20 token.
-  ///
-  /// [tokenAddress] is the address of the token.
-  /// [spender] is the address of the spender.
-  /// [amount] is the amount to approve.
-  Future<ISendUserOperationResponse> approveToken(
-    EthereumAddress tokenAddress,
-    EthereumAddress spender,
-    BigInt amount,
-  ) {
-    final callData = ContractsHelper.encodedDataForContractCall(
-      'ERC20',
-      tokenAddress.toString(),
-      'approve',
-      [spender, amount],
-      include0x: true,
-    );
-    return _executeUserOperation(
-      tokenAddress,
-      BigInt.zero,
-      callData,
     );
   }
 
@@ -284,10 +188,66 @@ class FuseSDK {
     );
 
     return _executeUserOperation(
-      nftContractAddress,
-      BigInt.zero,
-      callData,
+      Call(
+        to: nftContractAddress,
+        value: BigInt.zero,
+        data: callData,
+      ),
     );
+  }
+
+  /// Executes a batch transaction on the network.
+  ///
+  /// [calls] The list of calls.
+  Future<ISendUserOperationResponse> executeBatch(
+    List<Call> calls,
+  ) async {
+    final batchOp = await wallet.executeBatch(calls);
+
+    return client.sendUserOperation(batchOp);
+  }
+
+  /// Approves a spender to spend a specific amount of a ERC20 token.
+  ///
+  /// [tokenAddress] is the address of the token.
+  /// [spender] is the address of the spender.
+  /// [amount] is the amount to approve.
+  Future<ISendUserOperationResponse> approveToken(
+    EthereumAddress tokenAddress,
+    EthereumAddress spender,
+    BigInt amount,
+  ) {
+    final callData = ContractsHelper.encodedDataForContractCall(
+      'ERC20',
+      tokenAddress.toString(),
+      'approve',
+      [spender, amount],
+      include0x: true,
+    );
+
+    return _executeUserOperation(
+      Call(
+        to: tokenAddress,
+        value: BigInt.zero,
+        data: callData,
+      ),
+    );
+  }
+
+  Future<ISendUserOperationResponse> callContract(
+    EthereumAddress to,
+    BigInt value,
+    Uint8List data,
+  ) async {
+    final userOp = await wallet.execute(
+      Call(
+        to: to,
+        value: value,
+        data: data,
+      ),
+    );
+
+    return client.sendUserOperation(userOp);
   }
 
   /// Approves tokens and makes a contract call.
@@ -358,12 +318,6 @@ class FuseSDK {
       callData: callData,
       amount: amount,
     );
-  }
-
-  void _handleModuleError(DC response) {
-    if (response.hasError) {
-      throw response.error!;
-    }
   }
 
   /// Stakes tokens into a contract.
@@ -511,5 +465,84 @@ class FuseSDK {
       'balance': '0',
       'type': 'ERC-20'
     });
+  }
+
+  bool _isNativeToken(String address) {
+    return address.toLowerCase() ==
+        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase();
+  }
+
+  Future<ISendUserOperationResponse> _executeUserOperation(
+    Call call,
+  ) async {
+    final userOp = await wallet.execute(call);
+
+    return client.sendUserOperation(userOp);
+  }
+
+  Future<ISendUserOperationResponse> _processTokenOperation({
+    required EthereumAddress tokenAddress,
+    required EthereumAddress to,
+    required BigInt amount,
+    required Uint8List callData,
+  }) async {
+    if (_isNativeToken(tokenAddress.toString())) {
+      return _executeUserOperation(
+        Call(
+          to: to,
+          value: amount,
+          data: Uint8List(0),
+        ),
+      );
+    } else {
+      return _executeUserOperation(
+        Call(
+          to: tokenAddress,
+          value: BigInt.zero,
+          data: callData,
+        ),
+      );
+    }
+  }
+
+  Future<ISendUserOperationResponse> _processOperation({
+    required EthereumAddress tokenAddress,
+    required EthereumAddress spender,
+    required Uint8List callData,
+    BigInt? amount,
+  }) async {
+    if (_isNativeToken(tokenAddress.toString())) {
+      return _executeUserOperation(
+        Call(
+          to: spender,
+          value: amount!,
+          data: callData,
+        ),
+      );
+    }
+
+    final tokenAllowance = await getAllowance(tokenAddress, spender);
+    if (tokenAllowance >= amount!) {
+      return _executeUserOperation(
+        Call(
+          to: spender,
+          value: BigInt.zero,
+          data: callData,
+        ),
+      );
+    } else {
+      return approveTokenAndCallContract(
+        tokenAddress,
+        spender,
+        amount,
+        callData,
+      );
+    }
+  }
+
+  void _handleModuleError(DC response) {
+    if (response.hasError) {
+      throw response.error!;
+    }
   }
 }

@@ -17,25 +17,26 @@ void main() async {
 Future<void> createWalletAndListenToSmartWalletEventStream(
   FuseWalletSDK fuseWalletSDK,
 ) async {
-  final exceptionOrStream = await fuseWalletSDK.createWallet();
+  // DEPRECATED
+  // final exceptionOrStream = await fuseWalletSDK.createWallet();
 
-  if (exceptionOrStream.hasError) {
-    final defaultCreateWalletException =
-        Exception("An error occurred while creating wallet.");
-    final exception = exceptionOrStream.error ?? defaultCreateWalletException;
-    print(exception.toString());
-    exit(1);
-  }
+  // if (exceptionOrStream.hasError) {
+  //   final defaultCreateWalletException =
+  //       Exception("An error occurred while creating wallet.");
+  //   final exception = exceptionOrStream.error ?? defaultCreateWalletException;
+  //   print(exception.toString());
+  //   exit(1);
+  // }
 
-  final smartWalletEventStream = exceptionOrStream.data!;
+  // final smartWalletEventStream = exceptionOrStream.data!;
 
-  smartWalletEventStream.listen(
-    _onSmartWalletEvent,
-    onError: (error) {
-      print('Error occurred: ${error.toString()}');
-      exit(1);
-    },
-  );
+  // smartWalletEventStream.listen(
+  //   _onSmartWalletEvent,
+  //   onError: (error) {
+  //     print('Error occurred: ${error.toString()}');
+  //     exit(1);
+  //   },
+  // );
 }
 
 void _onSmartWalletEvent(SmartWalletEvent event) {
