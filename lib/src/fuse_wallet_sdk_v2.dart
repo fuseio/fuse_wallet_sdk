@@ -239,15 +239,13 @@ class FuseSDK {
     BigInt value,
     Uint8List data,
   ) async {
-    final userOp = await wallet.execute(
+    return _executeUserOperation(
       Call(
         to: to,
         value: value,
         data: data,
       ),
     );
-
-    return client.sendUserOperation(userOp);
   }
 
   /// Approves tokens and makes a contract call.
@@ -282,9 +280,7 @@ class FuseSDK {
       ),
     ];
 
-    final batchOp = await wallet.executeBatch(calls);
-
-    return client.sendUserOperation(batchOp);
+    return executeBatch(calls);
   }
 
   /// Performs a token swap operation.
