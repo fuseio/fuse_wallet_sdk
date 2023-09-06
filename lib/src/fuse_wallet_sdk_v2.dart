@@ -202,7 +202,7 @@ class FuseSDK {
   ]) async {
     options ??= defaultOptions;
     final initialFee = BigInt.parse(options.feePerGas);
-    wallet.useMiddleware(_setGasPrice(initialFee));
+    setWalletFees(initialFee);
 
     try {
       final userOp = await wallet.executeBatch(calls);
@@ -214,7 +214,7 @@ class FuseSDK {
           initialFee,
           options.feeIncrementPercentage,
         );
-        wallet.useMiddleware(_setGasPrice(increasedFee));
+        setWalletFees(increasedFee);
 
         try {
           final userOpRetry = await wallet.executeBatch(calls);
@@ -505,13 +505,18 @@ class FuseSDK {
     return fee + BigInt.from(fee * BigInt.from(percentage) / BigInt.from(100));
   }
 
+  void setWalletFees(BigInt fee) {
+    wallet.setMaxFeePerGas(fee);
+    wallet.setMaxPriorityFeePerGas(fee);
+  }
+
   Future<ISendUserOperationResponse> _executeUserOperation(
     Call call, [
     TxOptions? options,
   ]) async {
     options ??= defaultOptions;
     final initialFee = BigInt.parse(options.feePerGas);
-    wallet.useMiddleware(_setGasPrice(initialFee));
+    setWalletFees(initialFee);
 
     try {
       final userOp = await wallet.execute(call);
@@ -523,7 +528,7 @@ class FuseSDK {
           initialFee,
           options.feeIncrementPercentage,
         );
-        wallet.useMiddleware(_setGasPrice(increasedFee));
+        setWalletFees(increasedFee);
 
         try {
           final userOpRetry = await wallet.execute(call);
@@ -643,12 +648,5 @@ class FuseSDK {
     return Uri.https(Variables.BASE_URL, '/api/v0/bundler', {
       'apiKey': publicApiKey,
     }).toString();
-  }
-
-  UserOperationMiddlewareFn _setGasPrice(BigInt fee) {
-    return (ctx) async {
-      ctx.op.maxFeePerGas = fee;
-      ctx.op.maxPriorityFeePerGas = fee;
-    };
   }
 }
