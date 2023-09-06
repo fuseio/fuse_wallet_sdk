@@ -32,9 +32,12 @@ class FuseSDK {
     _initializeModules();
   }
 
+  final _feeTooLowError = 'fee too low';
+
   static final TxOptions defaultOptions = TxOptions(
     feePerGas: '1000000',
     feeIncrementPercentage: 10,
+    withRetry: false,
   );
 
   late String _jwtToken;
@@ -209,7 +212,7 @@ class FuseSDK {
 
       return await client.sendUserOperation(userOp);
     } on RPCError catch (e) {
-      if (e.message.contains('fee too low')) {
+      if (e.message.contains(_feeTooLowError) && options.withRetry) {
         final increasedFee = _increaseFeeByPercentage(
           initialFee,
           options.feeIncrementPercentage,
@@ -523,7 +526,7 @@ class FuseSDK {
 
       return await client.sendUserOperation(userOp);
     } on RPCError catch (e) {
-      if (e.message.contains('fee too low')) {
+      if (e.message.contains(_feeTooLowError) && options.withRetry) {
         final increasedFee = _increaseFeeByPercentage(
           initialFee,
           options.feeIncrementPercentage,

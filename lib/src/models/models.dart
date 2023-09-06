@@ -6,7 +6,7 @@ export 'address/address.dart';
 export 'auth/auth.dto.dart';
 export 'collectible/collectible.dart';
 export 'collection/collection.dart';
-export 'fee_options/fee_options.dart';
+export 'transaction_options/transaction_options.dart';
 export 'relay/relay.dart';
 export 'smart_wallet/smart_wallet.dart';
 export 'smart_wallet/smart_wallet_event.dart';
