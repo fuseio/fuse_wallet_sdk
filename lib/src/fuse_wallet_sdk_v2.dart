@@ -34,7 +34,7 @@ class FuseSDK {
 
   final _feeTooLowError = 'fee too low';
 
-  static final TxOptions defaultOptions = TxOptions(
+  static final TxOptions defaultTxOptions = TxOptions(
     feePerGas: '1000000',
     feeIncrementPercentage: 10,
     withRetry: false,
@@ -203,7 +203,7 @@ class FuseSDK {
     List<Call> calls, [
     TxOptions? options,
   ]) async {
-    options ??= defaultOptions;
+    options ??= defaultTxOptions;
     final initialFee = BigInt.parse(options.feePerGas);
     setWalletFees(initialFee);
 
@@ -517,7 +517,7 @@ class FuseSDK {
     Call call, [
     TxOptions? options,
   ]) async {
-    options ??= defaultOptions;
+    options ??= defaultTxOptions;
     final initialFee = BigInt.parse(options.feePerGas);
     setWalletFees(initialFee);
 

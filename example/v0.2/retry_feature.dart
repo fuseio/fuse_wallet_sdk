@@ -16,7 +16,7 @@ void main() async {
     EthereumAddress.fromHex('TOKEN_ADDRESS'),
     EthereumAddress.fromHex('RECIPIENT_ADDRESS'),
     BigInt.parse('AMOUNT_IN_WEI'),
-    FuseSDK.defaultOptions.copyWith(
+    FuseSDK.defaultTxOptions.copyWith(
       withRetry: true,
       feeIncrementPercentage: 11,
     ),
