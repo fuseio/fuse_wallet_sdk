@@ -12,10 +12,9 @@ import 'package:web3dart/json_rpc.dart';
 ///
 /// Provides methods for wallet interaction, calling contracts, and managing tokens.
 class FuseSDK {
-  /// Creates a new FuseSDK instance.
+  /// Creates a new instance of the SDK.
   ///
-  /// [publicApiKey] API key for accessing Fuse endpoints.
-  /// [credentials] Private key for wallet signing.
+  /// [publicApiKey] is required to authenticate with the Fuse API.
   FuseSDK(
     String publicApiKey,
   ) : _dio = Dio(
@@ -34,6 +33,7 @@ class FuseSDK {
 
   final _feeTooLowError = 'fee too low';
 
+  /// Default transaction options.
   static final TxOptions defaultTxOptions = TxOptions(
     feePerGas: '1000000',
     feeIncrementPercentage: 10,
@@ -53,14 +53,19 @@ class FuseSDK {
   late StakingModule _stakingModule;
   late NftModule _nftModule;
 
+  /// Provides access to the explorer module.
   ExplorerModule get explorerModule => _explorerModule;
 
+  /// Provides access to the trade module.
   TradeModule get tradeModule => _tradeModule;
 
+  /// Provides access to the staking module.
   StakingModule get stakingModule => _stakingModule;
 
+  /// Provides access to the NFT module.
   NftModule get nftModule => _nftModule;
 
+  /// Initializes the modules.
   void _initializeModules() {
     _tradeModule = TradeModule(_dio);
     _explorerModule = ExplorerModule(_dio);
@@ -68,13 +73,14 @@ class FuseSDK {
     _nftModule = NftModule(_dio);
   }
 
-  /// Initializes the SDK with the provided parameters.
+  /// Initializes the SDK.
   ///
-  /// [publicApiKey] is the public API key used for authenticating with Fuse's backend services.
-  /// [credentials] provides the Ethereum private key for signing transactions.
-  ///
-  /// The optional parameters [withPaymaster] and [paymasterContext] are used for handling
-  /// Ethereum gas payment on behalf of users.
+  /// [publicApiKey] is required to authenticate with the Fuse API.
+  /// [credentials] are the Ethereum private key credentials.
+  /// [withPaymaster] indicates if the paymaster should be used.
+  /// [paymasterContext] provides additional context for the paymaster.
+  /// [opts] are the preset builder options.
+  /// [clientOpts] are the client options.
   static Future<FuseSDK> init(
     String publicApiKey,
     EthPrivateKey credentials, {
@@ -110,6 +116,9 @@ class FuseSDK {
     return fuseSDK;
   }
 
+  /// Authenticates the user using the provided private key [credentials].
+  ///
+  /// Returns a JWT token upon successful authentication.
   Future<String> authenticate(EthPrivateKey credentials) async {
     final AuthDto auth = SmartWalletAuth.signer(
       credentials,
@@ -123,11 +132,10 @@ class FuseSDK {
     return response.data['jwt'];
   }
 
-  /// Transfers ETH/ERC20 tokens to a given address.
+  /// Transfers a specified [amount] of tokens from the user's address to the [recipientAddress].
   ///
-  /// [tokenAddress] is the address of the token.
-  /// [recipientAddress] is the recipient's address.
-  /// [amount] is the amount to transfer.
+  /// [tokenAddress] is the address of the token contract.
+  /// [options] provides additional transaction options.
   Future<ISendUserOperationResponse> transferToken(
     EthereumAddress tokenAddress,
     EthereumAddress recipientAddress,
@@ -151,13 +159,12 @@ class FuseSDK {
     );
   }
 
-  /// Transfers an NFT.
+  /// Transfers an NFT with a given [tokenId] to the [recipientAddress].
   ///
-  /// [nftContractAddress] The NFT contract address.
-  /// [recipientAddress] The recipient address.
-  /// [tokenId] The token ID to transfer.
-  /// [isSafe] Whether to use safeTransferFrom. Defaults to false.
-  /// [data] Additional data with no specified format, sent in call to `_to`. Defaults to null.
+  /// [nftContractAddress] is the address of the NFT contract.
+  /// [isSafe] indicates if the transfer should be done safely.
+  /// [data] is optional data to accompany the transfer.
+  /// [options] provides additional transaction options.
   Future<ISendUserOperationResponse> transferNFT(
     EthereumAddress nftContractAddress,
     EthereumAddress recipientAddress,
@@ -196,9 +203,10 @@ class FuseSDK {
     );
   }
 
-  /// Executes a batch transaction on the network.
+  /// Executes a batch of calls in a single transaction.
   ///
-  /// [calls] The list of calls.
+  /// [calls] is a list of calls to be executed.
+  /// [options] provides additional transaction options.
   Future<ISendUserOperationResponse> executeBatch(
     List<Call> calls, [
     TxOptions? options,
@@ -232,11 +240,10 @@ class FuseSDK {
     }
   }
 
-  /// Approves a spender to spend a specific amount of a ERC20 token.
+  /// Approves a [spender] to spend a specified [amount] of tokens on behalf of the user.
   ///
-  /// [tokenAddress] is the address of the token.
-  /// [spender] is the address of the spender.
-  /// [amount] is the amount to approve.
+  /// [tokenAddress] is the address of the token contract.
+  /// [options] provides additional transaction options.
   Future<ISendUserOperationResponse> approveToken(
     EthereumAddress tokenAddress,
     EthereumAddress spender,
@@ -261,6 +268,13 @@ class FuseSDK {
     );
   }
 
+  /// Calls a contract with the specified parameters.
+  ///
+  /// This method facilitates direct contract interactions.
+  /// [to] is the address of the contract to be called.
+  /// [value] is the amount of Ether (in Wei) to be sent with the call.
+  /// [data] is the encoded data for the contract call.
+  /// [options] provides additional transaction options.
   Future<ISendUserOperationResponse> callContract(
     EthereumAddress to,
     BigInt value,
@@ -277,12 +291,17 @@ class FuseSDK {
     );
   }
 
-  /// Approves tokens and makes a contract call.
+  /// Approves a token for spending and then calls a contract.
   ///
-  /// [tokenAddress] The token contract address.
-  /// [spender] The contract address.
-  /// [value] The amount to approve.
-  /// [callData] The encoded function call data.
+  /// This method first approves a certain amount of tokens for a spender and then
+  /// makes a contract call. It's commonly used in scenarios like interacting with
+  /// DeFi protocols where a token approval is required before making a transaction.
+  ///
+  /// [tokenAddress] is the address of the ERC20 token to be approved.
+  /// [spender] is the address that will be approved to spend the tokens.
+  /// [value] is the amount of tokens to be approved for spending.
+  /// [callData] is the encoded data for the subsequent contract call after approval.
+  /// [options] provides additional transaction options.
   Future<ISendUserOperationResponse> approveTokenAndCallContract(
     EthereumAddress tokenAddress,
     EthereumAddress spender,
@@ -313,9 +332,11 @@ class FuseSDK {
     return executeBatch(calls, options);
   }
 
-  /// Performs a token swap operation.
+  /// Swaps tokens based on the provided [tradeRequestBody].
   ///
-  /// [tradeRequestBody] The swap parameters.
+  /// This method facilitates token swaps by interacting with the trade module.
+  /// [tradeRequestBody] contains details about the token swap, such as the input and output tokens.
+  /// [options] provides additional transaction options.
   Future<ISendUserOperationResponse> swapTokens(
     TradeRequestBody tradeRequestBody, [
     TxOptions? options,
@@ -348,9 +369,11 @@ class FuseSDK {
     );
   }
 
-  /// Stakes tokens into a contract.
+  /// Stakes tokens based on the provided [stakeRequestBody].
   ///
-  /// [stakeRequestBody] The staking parameters
+  /// This method facilitates token staking by interacting with the staking module.
+  /// [stakeRequestBody] contains details about the token staking, such as the token address and amount.
+  /// [options] provides additional transaction options.
   Future<ISendUserOperationResponse> stakeToken(
     StakeRequestBody stakeRequestBody, [
     TxOptions? options,
@@ -383,9 +406,12 @@ class FuseSDK {
     );
   }
 
-  /// Unstake tokens from a contract.
+  /// Unstakes tokens based on the provided [unstakeRequestBody].
   ///
-  /// [unstakeRequestBody] The unstake parameters.
+  /// This method facilitates token unstaking by interacting with the staking module.
+  /// [unstakeRequestBody] contains details about the token unstaking, such as the token address and amount.
+  /// [unStakeTokenAddress] is the address of the unstake token contract.
+  /// [options] provides additional transaction options.
   Future<ISendUserOperationResponse> unstakeToken(
     UnstakeRequestBody unstakeRequestBody,
     String unStakeTokenAddress, [
@@ -427,10 +453,16 @@ class FuseSDK {
     return etherAmount.getInWei;
   }
 
-  /// Fetches the balance of the user for a given token.
+  /// Retrieves the balance of a specified address for a given token.
   ///
-  /// [tokenAddress] is the address of the token.
-  /// [address] is the address of the user.
+  /// This method fetches the balance of an address. If the token is native, it retrieves
+  /// the native balance. Otherwise, it fetches the balance of the ERC20 token using the
+  /// `balanceOf` function of the token's contract.
+  ///
+  /// [tokenAddress] is the address of the token (either ERC20 or native).
+  /// [address] is the address whose balance is to be retrieved.
+  ///
+  /// Returns a [BigInt] representing the balance of the address for the specified token.
   Future<BigInt> getBalance(
     EthereumAddress tokenAddress,
     EthereumAddress address,
@@ -448,10 +480,15 @@ class FuseSDK {
     );
   }
 
-  /// Gets the token allowance for an address and spender.
+  /// Retrieves the allowance of tokens that a spender is allowed to withdraw from an owner.
   ///
-  /// [tokenAddress] The token contract address.
-  /// [spender] The spender address.
+  /// This method checks the amount of tokens that an owner has allowed a spender
+  /// to withdraw from their account using the ERC20 `approve` function.
+  ///
+  /// [tokenAddress] is the address of the ERC20 token.
+  /// [spender] is the address of the entity that has been approved to spend the tokens.
+  ///
+  /// Returns a [BigInt] representing the amount of tokens the spender is allowed to withdraw.
   Future<BigInt> getAllowance(
     EthereumAddress tokenAddress,
     EthereumAddress spender,
@@ -468,9 +505,14 @@ class FuseSDK {
     );
   }
 
-  /// Gets metadata for an ERC20 token.
+  /// Retrieves detailed information about an ERC20 token.
   ///
-  /// [tokenAddress] The token contract address.
+  /// This method fetches the name, symbol, and decimals of an ERC20 token using its address.
+  /// If the provided [tokenAddress] matches the native token address, it returns a native token with zero amount.
+  ///
+  /// [tokenAddress] is the address of the ERC20 token.
+  ///
+  /// Returns a [TokenDetails] object containing the token's name, symbol, decimals, and other relevant details.
   Future<TokenDetails> getERC20TokenDetails(String tokenAddress) async {
     if (tokenAddress.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
@@ -499,20 +541,30 @@ class FuseSDK {
     });
   }
 
+  /// Checks if the given [address] is the native token's address.
   bool _isNativeToken(String address) {
     return address.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase();
   }
 
+  /// Increases the transaction fee by a specified [percentage].
+  ///
+  /// [fee] is the initial fee amount.
   BigInt _increaseFeeByPercentage(BigInt fee, int percentage) {
     return fee + BigInt.from(fee * BigInt.from(percentage) / BigInt.from(100));
   }
 
+  /// Sets the maximum fee per gas and priority fee per gas for the wallet.
+  ///
+  /// [fee] is the fee amount to be set.
   void setWalletFees(BigInt fee) {
     wallet.setMaxFeePerGas(fee);
     wallet.setMaxPriorityFeePerGas(fee);
   }
 
+  /// Executes a user operation with the provided [call].
+  ///
+  /// [options] provides additional transaction options.
   Future<ISendUserOperationResponse> _executeUserOperation(
     Call call, [
     TxOptions? options,
@@ -545,6 +597,13 @@ class FuseSDK {
     }
   }
 
+  /// Processes a token operation with the provided parameters.
+  ///
+  /// [tokenAddress] is the address of the token contract.
+  /// [to] is the recipient address.
+  /// [amount] is the amount of tokens to be transferred.
+  /// [callData] is the encoded data for the contract call.
+  /// [options] provides additional transaction options.
   Future<ISendUserOperationResponse> _processTokenOperation({
     required EthereumAddress tokenAddress,
     required EthereumAddress to,
@@ -572,6 +631,20 @@ class FuseSDK {
       );
     }
   }
+
+  /// Processes a token operation, either executing it directly or approving and then executing.
+  ///
+  /// This method checks if the token is native. If it is, it directly executes the operation.
+  /// If not, it checks the allowance of the token. If the allowance is sufficient, it executes the operation.
+  /// Otherwise, it first approves the token and then executes the operation.
+  ///
+  /// [tokenAddress] is the address of the token involved in the operation.
+  /// [spender] is the address that will spend or receive the tokens.
+  /// [callData] is the encoded data for the operation.
+  /// [amount] is the amount of tokens involved in the operation.
+  /// [options] provides additional transaction options.
+  ///
+  /// Returns a [ISendUserOperationResponse] indicating the result of the operation.
 
   Future<ISendUserOperationResponse> _processOperation({
     required EthereumAddress tokenAddress,
@@ -612,12 +685,18 @@ class FuseSDK {
     }
   }
 
+  /// Handles errors that may occur during module operations.
+  ///
+  /// [response] is the response from the module operation.
   void _handleModuleError(DC response) {
     if (response.hasError) {
       throw response.error!;
     }
   }
 
+  /// Retrieves the paymaster middleware for the provided [publicApiKey].
+  ///
+  /// [paymasterContext] provides additional context for the paymaster.
   static UserOperationMiddlewareFn? _getPaymasterMiddleware(
     String publicApiKey,
     Map<String, dynamic>? paymasterContext,
@@ -629,6 +708,12 @@ class FuseSDK {
     return verifyingPaymaster(paymasterRpc, paymasterContext ?? {});
   }
 
+  /// Initializes the wallet with the provided parameters.
+  ///
+  /// [credentials] are the private key credentials.
+  /// [publicApiKey] is required to authenticate with the Fuse API.
+  /// [opts] are the preset builder options.
+  /// [paymasterMiddleware] is the middleware for the paymaster.
   static Future<EtherspotWallet> _initializeWallet(
     EthPrivateKey credentials,
     String publicApiKey,
@@ -647,6 +732,7 @@ class FuseSDK {
     );
   }
 
+  /// Retrieves the bundler RPC URL for the provided [publicApiKey].
   static String _getBundlerRpc(String publicApiKey) {
     return Uri.https(Variables.BASE_URL, '/api/v0/bundler', {
       'apiKey': publicApiKey,
