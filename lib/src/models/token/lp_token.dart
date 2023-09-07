@@ -22,11 +22,11 @@ class LpUnderlyingTokens with _$LpUnderlyingTokens {
     @JsonKey(
       fromJson: nameFromJson,
     )
-        required String name,
+    required String name,
     @JsonKey(
       fromJson: addressFromJson,
     )
-        required String address,
+    required String address,
   }) = _LpUnderlyingTokens;
 
   /// Creates an LpUnderlyingTokens instance from a JSON object.

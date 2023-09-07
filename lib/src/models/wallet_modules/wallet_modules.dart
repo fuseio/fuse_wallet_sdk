@@ -27,7 +27,7 @@ class WalletModules with _$WalletModules {
     @JsonKey(name: 'TokenExchanger') required String tokenExchanger,
     @JsonKey(name: 'CommunityManager') required String communityManager,
     @JsonKey(name: 'WalletOwnershipManager')
-        required String walletOwnershipManager,
+    required String walletOwnershipManager,
     @JsonKey(name: 'DAIPointsManager') String? daiPointsManager,
     @JsonKey(name: 'TransferManager') required String transferManager,
     @JsonKey(name: 'NftTransfer') String? nftTransfer,

@@ -16,6 +16,7 @@
       - [Sponsored Transactions](#sponsored-transactions)
       - [Staking](#staking)
       - [Trading](#trading)
+  - [Troubleshooting](#troubleshooting)
   - [Limitations](#limitations)
   - [Migrating to v0.2](#migrating-to-v02)
       - [Introduction](#introduction-1)
@@ -164,6 +165,30 @@ final res = await fuseSDK.swapTokens(
     recipient: fuseSDK.wallet.getSender(),
   ),
 );
+```
+
+## Troubleshooting
+
+1. **User op cannot be replaced: fee too low.**
+
+   If you're getting the `User op cannot be replaced: fee too low` error, it means that the gas price you set is too low. You can increase the gas price by setting the `TxOptions` parameter when sending a transaction. To replace an user operation, a new user operation must have at least 10% higher `maxPriorityFeePerGas` and 10% higher `maxPriorityFeePerGas` than the one in the user operation mempool.
+
+To replace the user operation, the new gas price must be at least 10% higher.
+
+```dart
+final res = await fuseSDK.transferToken(
+    EthereumAddress.fromHex('TOKEN_ADDRESS'),
+    EthereumAddress.fromHex('RECIPIENT_ADDRESS'),
+    BigInt.parse('AMOUNT_IN_WEI'),
+    FuseSDK.defaultTxOptions.copyWith(
+      feePerGas: '2000000',
+      withRetry: true,
+      feeIncrementPercentage: 11,
+    ),
+);
+print('UserOpHash: ${res.userOpHash}');
+print('Waiting for transaction...');
+final ev = await res.wait();
 ```
 
 ## Limitations
