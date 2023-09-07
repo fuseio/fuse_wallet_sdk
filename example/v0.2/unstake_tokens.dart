@@ -17,7 +17,7 @@ void main() async {
       tokenAmount: '0.1',
       tokenAddress: Variables.NATIVE_TOKEN_ADDRESS,
     ),
-    '0xb1DD0B683d9A56525cC096fbF5eec6E60FE79871',
+    EthereumAddress.fromHex('0xb1DD0B683d9A56525cC096fbF5eec6E60FE79871'),
   );
   print('UserOpHash: ${res.userOpHash}');
 

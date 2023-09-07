@@ -414,7 +414,7 @@ class FuseSDK {
   /// [options] provides additional transaction options.
   Future<ISendUserOperationResponse> unstakeToken(
     UnstakeRequestBody unstakeRequestBody,
-    String unStakeTokenAddress, [
+    EthereumAddress unStakeTokenAddress, [
     TxOptions? options,
   ]) async {
     final response = await _stakingModule.unstake(unstakeRequestBody);
@@ -436,7 +436,7 @@ class FuseSDK {
     final unstakeCallData = hexToBytes(response.data!.encodedABI);
 
     return _processOperation(
-      tokenAddress: EthereumAddress.fromHex(unStakeTokenAddress),
+      tokenAddress: unStakeTokenAddress,
       spender: spender,
       callData: unstakeCallData,
       amount: amount,
