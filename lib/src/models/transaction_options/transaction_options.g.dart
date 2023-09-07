@@ -8,7 +8,7 @@ part of 'transaction_options.dart';
 
 _$_TxOptions _$$_TxOptionsFromJson(Map<String, dynamic> json) => _$_TxOptions(
       feePerGas: json['feePerGas'] as String,
-      feeIncrementPercentage: json['feeIncrementPercentage'] as int,
+      feeIncrementPercentage: json['feeIncrementPercentage'] as int? ?? 10,
       withRetry: json['withRetry'] as bool,
     );
 

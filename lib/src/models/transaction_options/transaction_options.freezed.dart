@@ -119,7 +119,7 @@ class __$$_TxOptionsCopyWithImpl<$Res>
 class _$_TxOptions implements _TxOptions {
   _$_TxOptions(
       {required this.feePerGas,
-      required this.feeIncrementPercentage,
+      this.feeIncrementPercentage = 10,
       required this.withRetry});
 
   factory _$_TxOptions.fromJson(Map<String, dynamic> json) =>
@@ -128,6 +128,7 @@ class _$_TxOptions implements _TxOptions {
   @override
   final String feePerGas;
   @override
+  @JsonKey()
   final int feeIncrementPercentage;
   @override
   final bool withRetry;
@@ -172,7 +173,7 @@ class _$_TxOptions implements _TxOptions {
 abstract class _TxOptions implements TxOptions {
   factory _TxOptions(
       {required final String feePerGas,
-      required final int feeIncrementPercentage,
+      final int feeIncrementPercentage,
       required final bool withRetry}) = _$_TxOptions;
 
   factory _TxOptions.fromJson(Map<String, dynamic> json) =
