@@ -7,27 +7,24 @@
 <a href="https://pub.dev/packages/fuse_wallet_sdk"><img src="https://img.shields.io/pub/v/fuse_wallet_sdk.svg?label=pub&color=orange" alt="pub version"></a>
 </p>
 
-# Fuse Wallet SDK
-
-- [Fuse Wallet SDK](#fuse-wallet-sdk)
-  - [Introduction](#introduction)
-      - [Benefits of using Fuse Wallet SDK](#benefits-of-using-fuse-wallet-sdk)
-    - [Purpose of the SDK](#purpose-of-the-sdk)
-  - [Migration guides](#migration-guides)
-  - [Instantiation](#instantiation)
-  - [Features](#features)
-      - [Get Address](#get-address)
-      - [Send transactions](#send-transactions)
-      - [Send batch transactions](#send-batch-transactions)
-      - [Sponsored Transactions](#sponsored-transactions)
-      - [Staking](#staking)
-      - [Trading](#trading)
-  - [Troubleshooting](#troubleshooting)
-  - [Limitations](#limitations)
-  - [Migrating to v0.2](#migrating-to-v02)
-      - [Introduction](#introduction-1)
-      - [Prerequisites](#prerequisites)
-      - [Detailed Migration Steps](#detailed-migration-steps)
+- [Introduction](#introduction)
+    - [Benefits of using Fuse Wallet SDK](#benefits-of-using-fuse-wallet-sdk)
+  - [Purpose of the SDK](#purpose-of-the-sdk)
+- [Migration guides](#migration-guides)
+- [Instantiation](#instantiation)
+- [Features](#features)
+    - [Get Address](#get-address)
+    - [Send transactions](#send-transactions)
+    - [Send batch transactions](#send-batch-transactions)
+    - [Sponsored Transactions](#sponsored-transactions)
+    - [Staking](#staking)
+    - [Trading](#trading)
+- [Troubleshooting](#troubleshooting)
+- [Limitations](#limitations)
+- [Migrating to v0.2](#migrating-to-v02)
+    - [Introduction](#introduction-1)
+    - [Prerequisites](#prerequisites)
+    - [Detailed Migration Steps](#detailed-migration-steps)
 
 ## Introduction
 
