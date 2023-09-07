@@ -1,13 +1,19 @@
+<p align="center">                    
+<img  src="https://raw.githubusercontent.com/fuseio/fuse_wallet_sdk/tree/feat/erc-4337art/fuse_wallet_sdk_logo.svg" height="170">                    
+</p>                    
+
+<p align="center">                    
+<a href="https://img.shields.io/badge/License-MIT-green"><img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License"></a>                  
+<a href="https://pub.dev/packages/fuse_wallet_sdk"><img src="https://img.shields.io/pub/v/fuse_wallet_sdk.svg?label=pub&color=orange" alt="pub version"></a>
+</p>
+
 # Fuse Wallet SDK
 
-## Table of Contents
-
 - [Fuse Wallet SDK](#fuse-wallet-sdk)
-  - [Table of Contents](#table-of-contents)
-  - [Migration guides](#migration-guides)
   - [Introduction](#introduction)
-      - [Benefits of using Fuse Smart Wallets](#benefits-of-using-fuse-smart-wallets)
+      - [Benefits of using Fuse Wallet SDK](#benefits-of-using-fuse-wallet-sdk)
     - [Purpose of the SDK](#purpose-of-the-sdk)
+  - [Migration guides](#migration-guides)
   - [Instantiation](#instantiation)
   - [Features](#features)
       - [Get Address](#get-address)
@@ -23,25 +29,24 @@
       - [Prerequisites](#prerequisites)
       - [Detailed Migration Steps](#detailed-migration-steps)
 
-
-## Migration guides
-
-- [Migrating to v0.2](#migrating-to-v0.2)
-
 ## Introduction
 
 The Fuse Wallet SDK is a set of tools for creating, managing, and engaging with Fuse Wallet SDK in client applications. Fuse Wallet SDK lets users create smart contract wallets(Based 4337) associated with each user's Externally Owned Account (EOA) that provide added security compared to traditional EOAs with a single private key. With Fuse Wallet SDK, users can deposit funds that no one else can control and withdraw at any time.
 
-#### Benefits of using Fuse Smart Wallets
-Using Fuse Smart Wallets provides several benefits, including:
+#### Benefits of using Fuse Wallet SDK
+Using Fuse Wallet SDK provides several benefits, including:
 
-- **Enhanced security**: Fuse Smart Wallets are non-custodial accounts that allow users to deposit funds that no one else can control and withdraw at any time. Each Fuse Smart Wallet is a smart contract associated with the user's EOA and can only be controlled by that user.
-- **Enhanced UX**: Fuse Smart Wallets support gasless transactions, improving the user experience and making it more seamless to interact with the blockchain.
+- **Enhanced security**: Fuse Wallet SDK are non-custodial accounts that allow users to deposit funds that no one else can control and withdraw at any time. Each Fuse Smart Wallet is a smart contract associated with the user's EOA and can only be controlled by that user.
+- **Enhanced UX**: Fuse Wallet SDK support gasless transactions, improving the user experience and making it more seamless to interact with the blockchain.
 - **Better developer experience**: The Fuse Wallet SDK abstracts away the complexities of web3 development, such as cryptography, wallet management, and smart contract interactions, making it easier for developers to build blockchain-based applications
 
 ### Purpose of the SDK
 
 The SDK is designed to make it easy for developers to create, manage, and engage with Fuse Wallet SDK in their applications. The SDK provides pre-built functions and utilities, allowing developers to interact with Fuse Wallet SDK securely and efficiently.
+
+## Migration guides
+
+- [Migrating to v0.2](#migrating-to-v0.2)
 
 ## Instantiation
 
@@ -54,7 +59,7 @@ final fuseSDK = await FuseSDK.init(apiKey, privateKey);
 
 ## Features
 
-The Fuse Wallet SDK provides several features that allow developers to create, manage, and engage with Fuse Smart Wallets in their applications. Some of the key features include:
+The Fuse Wallet SDK provides several features that allow developers to create, manage, and engage with Fuse Wallet SDK in their applications. Some of the key features include:
 
 #### Get Address
 
