@@ -8,7 +8,7 @@
 </p>
 
 - [Introduction](#introduction)
-    - [Benefits of using Fuse Wallet SDK](#benefits-of-using-fuse-wallet-sdk)
+  - [Benefits of using Fuse Wallet SDK](#benefits-of-using-fuse-wallet-sdk)
   - [Purpose of the SDK](#purpose-of-the-sdk)
 - [Migration guides](#migration-guides)
 - [Instantiation](#instantiation)
@@ -30,7 +30,7 @@
 
 The Fuse Wallet SDK is a set of tools for creating, managing, and engaging with Fuse Wallet SDK in client applications. Fuse Wallet SDK lets users create smart contract wallets(Based 4337) associated with each user's Externally Owned Account (EOA) that provide added security compared to traditional EOAs with a single private key. With Fuse Wallet SDK, users can deposit funds that no one else can control and withdraw at any time.
 
-#### Benefits of using Fuse Wallet SDK
+### Benefits of using Fuse Wallet SDK
 Using Fuse Wallet SDK provides several benefits, including:
 
 - **Enhanced security**: Fuse Wallet SDK are non-custodial accounts that allow users to deposit funds that no one else can control and withdraw at any time. Each Fuse Smart Wallet is a smart contract associated with the user's EOA and can only be controlled by that user.
