@@ -7,7 +7,7 @@ import 'create_wallet.dart';
 
 void main() async {
   final String privateKey = await Mnemonic.generatePrivateKey();
-  final EthPrivateKey credentials = EthPrivateKey.fromHex(privateKey);
+  final credentials = EthPrivateKey.fromHex(privateKey);
   // Create a project: https://developers.fuse.io
   final String publicApiKey = '';
   print('privateKey: $privateKey');
