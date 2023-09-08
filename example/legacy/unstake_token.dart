@@ -5,11 +5,11 @@ import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 import 'create_wallet.dart';
 
 void main() async {
-  final String privateKey = await Mnemonic.generatePrivateKey();
+  final privateKey = await Mnemonic.generatePrivateKey();
   final credentials = EthPrivateKey.fromHex(privateKey);
   // Create a project: https://developers.fuse.io
-  final String publicApiKey = '';
-  final FuseWalletSDK fuseWalletSDK = FuseWalletSDK(publicApiKey);
+  final publicApiKey = '';
+  final fuseWalletSDK = FuseWalletSDK(publicApiKey);
   final DC<Exception, String> authRes = await fuseWalletSDK.authenticate(
     credentials,
   );
