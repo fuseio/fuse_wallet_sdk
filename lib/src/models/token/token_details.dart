@@ -49,18 +49,14 @@ class TokenDetails with _$TokenDetails {
   @Implements<IToken>()
   @FreezedUnionValue('native')
   const factory TokenDetails.native({
-    @Default('FUSE')
-        String symbol,
-    @Default('Fuse Token')
-        String name,
-    @Default(18)
-        int decimals,
-    @Default(Variables.NATIVE_TOKEN_ADDRESS)
-        String address,
+    @Default('FUSE') String symbol,
+    @Default('Fuse Token') String name,
+    @Default(18) int decimals,
+    @Default(Variables.NATIVE_TOKEN_ADDRESS) String address,
     @JsonKey(
       fromJson: amountFromJson,
     )
-        required BigInt amount,
+    required BigInt amount,
   }) = Native;
 
   /// Constructs a new LiquidityPoolToken instance.
@@ -79,11 +75,11 @@ class TokenDetails with _$TokenDetails {
     @JsonKey(
       fromJson: nameFromJson,
     )
-        required String name,
+    required String name,
     @JsonKey(
       fromJson: addressFromJson,
     )
-        required String address,
+    required String address,
     required List<LpUnderlyingTokens> underlyingTokens,
   }) = LiquidityPoolToken;
 
@@ -105,11 +101,11 @@ class TokenDetails with _$TokenDetails {
     @JsonKey(
       fromJson: nameFromJson,
     )
-        required String name,
+    required String name,
     @JsonKey(
       fromJson: addressFromJson,
     )
-        required String address,
+    required String address,
   }) = BridgedToken;
 
   /// Constructs a new MiscToken instance.
@@ -129,11 +125,11 @@ class TokenDetails with _$TokenDetails {
     @JsonKey(
       fromJson: nameFromJson,
     )
-        required String name,
+    required String name,
     @JsonKey(
       fromJson: addressFromJson,
     )
-        required String address,
+    required String address,
   }) = MiscToken;
 
   /// Constructs a new ERC20 token instance.
@@ -151,21 +147,21 @@ class TokenDetails with _$TokenDetails {
     @JsonKey(
       fromJson: nameFromJson,
     )
-        required String name,
+    required String name,
     @Default(0)
     @JsonKey(
       fromJson: _decimalsFromJson,
     )
-        int decimals,
+    int decimals,
     @JsonKey(
       name: 'contractAddress',
       fromJson: addressFromJson,
     )
-        required String address,
+    required String address,
     @JsonKey(
       name: 'balance',
     )
-        required BigInt amount,
+    required BigInt amount,
   }) = ERC20;
 
   /// Constructs a new ERC721 token instance.
@@ -183,20 +179,20 @@ class TokenDetails with _$TokenDetails {
     @JsonKey(
       fromJson: nameFromJson,
     )
-        required String name,
+    required String name,
     @JsonKey(
       fromJson: _decimalsFromJson,
     )
-        required int decimals,
+    required int decimals,
     @JsonKey(
       name: 'contractAddress',
       fromJson: addressFromJson,
     )
-        required String address,
+    required String address,
     @JsonKey(
       name: 'balance',
     )
-        required BigInt amount,
+    required BigInt amount,
   }) = ERC721;
 
   /// Constructs a new TokenDetails instance from the provided JSON object.

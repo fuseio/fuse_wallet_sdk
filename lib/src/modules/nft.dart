@@ -21,7 +21,17 @@ class NftModule {
         '/v0/graphql/collectibles/$walletAddress',
       );
       if (result.statusCode == 200) {
-        return DC.data(Account.fromJson(result.data?['data']['account']));
+        if (result.data?['data']['account'] == null) {
+          return DC.data(
+            Account(
+              id: walletAddress,
+              address: walletAddress,
+              collectibles: [],
+            ),
+          );
+        } else {
+          return DC.data(Account.fromJson(result.data?['data']['account']));
+        }
       }
       return DC.error(Exception('Failed to fetch collectibles'));
     } catch (e) {

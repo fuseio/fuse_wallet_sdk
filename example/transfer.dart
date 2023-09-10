@@ -11,21 +11,15 @@ void main() async {
     credentials,
   );
 
-  final usdcTokenAddress = '0x620fd5fa44be6af63715ef4e65ddfa0387ad13f5';
-  final res = await fuseSDK.approveToken(
-    EthereumAddress.fromHex(usdcTokenAddress),
-    EthereumAddress.fromHex('SPENDER_ADDRESS'),
-    BigInt.parse('1000000'),
+  final res = await fuseSDK.transferToken(
+    EthereumAddress.fromHex(Variables.NATIVE_TOKEN_ADDRESS),
+    EthereumAddress.fromHex('RECIPIENT_ADDRESS'),
+    BigInt.parse('AMOUNT_IN_WEI'),
   );
   print('UserOpHash: ${res.userOpHash}');
 
   print('Waiting for transaction...');
   final ev = await res.wait();
   print('Transaction hash: ${ev?.transactionHash}');
-  final val = await fuseSDK.getAllowance(
-    EthereumAddress.fromHex(usdcTokenAddress),
-    EthereumAddress.fromHex('SPENDER_ADDRESS'),
-  );
-  print('allowance ${val.compareTo(BigInt.parse('1000000'))}');
   exit(1);
 }

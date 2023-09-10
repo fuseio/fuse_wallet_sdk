@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [0.2.0]
+
+### Changes
+- **Breaking Change:** Revamped the entire SDK infrastructure. 
+  - Smart Wallets are now 4337 compliant.
+  - Transitioned to using the new API set.
+
 ## [0.1.2]
 
 ### Changed
@@ -40,7 +47,7 @@
 ## [0.0.15]
 
 ### Changed
-- Expose `ContractsHelper` for clients.
+- Expose `ContractsUtils` for clients.
 
 ## [0.0.14]
 

@@ -9,9 +9,9 @@ import 'package:fuse_wallet_sdk/src/utils/crypto.dart';
 
 /// A utility class providing methods to interact with contracts.
 ///
-/// `ContractsHelper` simplifies tasks such as reading from a contract,
+/// `ContractsUtils` simplifies tasks such as reading from a contract,
 /// encoding data for contract calls, and signing off-chain transactions.
-class ContractsHelper {
+class ContractsUtils {
   /// Reads data from a deployed contract using the specified function and parameters.
   ///
   /// [client] is the web3 client instance to interact with the Fuse network.
@@ -40,6 +40,23 @@ class ContractsHelper {
       function: contract.function(functionName),
       params: params,
     );
+  }
+
+  static Future<BigInt> readFromContractWithFirstResult({
+    required Web3Client client,
+    required String contractName,
+    required String contractAddress,
+    required String functionName,
+    required List<dynamic> params,
+  }) async {
+    final response = await readFromContract(
+      client,
+      contractName,
+      contractAddress,
+      functionName,
+      params,
+    );
+    return response.first as BigInt;
   }
 
   /// Retrieves the deployed contract instance using the contract name and address.

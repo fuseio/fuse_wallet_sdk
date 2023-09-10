@@ -13,6 +13,9 @@ import 'package:fuse_wallet_sdk/src/models/models.dart';
 import 'package:fuse_wallet_sdk/src/modules/modules.dart';
 import 'package:fuse_wallet_sdk/src/utils/utils.dart';
 
+@Deprecated(
+  'Use FuseSDK instead, This class will be removed in the near future.',
+)
 class FuseWalletSDK {
   /// The public API key used to access the Fuse API.
   final String publicApiKey;
@@ -38,11 +41,10 @@ class FuseWalletSDK {
   /// [rpcUrl] is the URL of the Ethereum JSON-RPC endpoint. Default value is taken from [Variables.FUSE_RPC_URL].
   FuseWalletSDK(
     this.publicApiKey, {
-    String baseUrl = Variables.BASE_URL,
     String rpcUrl = Variables.FUSE_RPC_URL,
   })  : _dio = Dio(
           BaseOptions(
-            baseUrl: baseUrl,
+            baseUrl: Uri.https(Variables.BASE_URL, '/api').toString(),
             headers: {
               'Content-Type': 'application/json',
             },
@@ -133,55 +135,6 @@ class FuseWalletSDK {
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }
-  }
-
-  /// Creates a new smart wallet and returns a stream of [SmartWalletEvent]s.
-  ///
-  /// This function sends a request to create a new smart wallet and listens for the
-  /// events related to the wallet creation process. It returns a stream of [SmartWalletEvent]s
-  /// that can be used to track the wallet creation progress.
-  ///
-  /// Returns a Future that completes with a [DC] object:
-  /// - On success, `DC.data` will be called with a [Stream] of [SmartWalletEvent]s.
-  /// - On failure, `DC.error` will be called with an `Exception` object.
-  Future<DC<Exception, Stream<SmartWalletEvent>>> createWallet() async {
-    try {
-      final Response response = await _dio.post(
-        '/v1/smart-wallets/create',
-        options: _options,
-      );
-      if (response.statusCode == 201) {
-        final transactionId = response.data['transactionId'];
-        return DC.data(_createSubscriptionStream(transactionId));
-      }
-      return DC.error(Exception('Failed to create wallet'));
-    } on DioException catch (exception) {
-      return _handleDioErrorOccurredWhileCreatingWallet(exception);
-    } catch (e) {
-      return DC.error(Exception(e.toString()));
-    }
-  }
-
-  DC<Exception, Stream<SmartWalletEvent>>
-      _handleDioErrorOccurredWhileCreatingWallet(DioException exception) {
-    final response = exception.response;
-
-    if (response == null) {
-      return DC.error(Exception(exception.toString()));
-    }
-
-    final statusCode = response.statusCode;
-
-    if (statusCode == 400) {
-      final message = response.data["errorMessage"];
-      if (message == "Owner address already has a deployed smart wallet") {
-        return DC.error(
-          WalletAlreadyExistsException(message),
-        );
-      }
-    }
-
-    return DC.error(Exception(exception.toString()));
   }
 
   /// Retrieves historical actions for a smart wallet, with optional filtering by token address and update time.
@@ -275,7 +228,7 @@ class FuseWalletSDK {
 
     final String walletModule = 'TransferManager';
     final String methodName = 'transferToken';
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
       smartWallet.walletModules.transferManager,
       methodName,
@@ -289,7 +242,7 @@ class FuseWalletSDK {
       include0x: true,
     );
     final String nonce = await _getNonce();
-    final String signature = ContractsHelper.signOffChain(
+    final String signature = ContractsUtils.signOffChain(
       credentials,
       smartWallet.walletModules.transferManager,
       smartWallet.smartWalletAddress,
@@ -338,7 +291,7 @@ class FuseWalletSDK {
     final String walletModule = 'NftTransfer';
     final String walletModuleAddress = smartWallet.walletModules.nftTransfer!;
 
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
       walletModuleAddress,
       methodName,
@@ -362,7 +315,7 @@ class FuseWalletSDK {
     });
 
     final String nonce = await _getNonce();
-    final String signature = ContractsHelper.signOffChain(
+    final String signature = ContractsUtils.signOffChain(
       credentials,
       walletModuleAddress,
       smartWallet.smartWalletAddress,
@@ -392,7 +345,7 @@ class FuseWalletSDK {
     Map<String, dynamic>? transactionBody,
   }) async {
     final String methodName = 'addModule';
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       disableModuleName,
       disableModuleAddress,
       methodName,
@@ -403,7 +356,7 @@ class FuseWalletSDK {
       include0x: true,
     );
     final String nonce = await _getNonce();
-    final String signature = ContractsHelper.signOffChain(
+    final String signature = ContractsUtils.signOffChain(
       credentials,
       disableModuleAddress,
       smartWallet.smartWalletAddress,
@@ -445,7 +398,7 @@ class FuseWalletSDK {
 
     final String walletModule = 'TransferManager';
     final String methodName = 'approveToken';
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
       smartWallet.walletModules.transferManager,
       methodName,
@@ -459,7 +412,7 @@ class FuseWalletSDK {
     );
 
     final String nonce = await _getNonce();
-    final String signature = ContractsHelper.signOffChain(
+    final String signature = ContractsUtils.signOffChain(
       credentials,
       smartWallet.walletModules.transferManager,
       smartWallet.smartWalletAddress,
@@ -491,7 +444,7 @@ class FuseWalletSDK {
     final String walletModule = 'TransferManager';
     final String methodName = 'callContract';
 
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
       smartWallet.walletModules.transferManager,
       methodName,
@@ -505,7 +458,7 @@ class FuseWalletSDK {
     );
 
     final String nonce = await _getNonce();
-    final String signature = ContractsHelper.signOffChain(
+    final String signature = ContractsUtils.signOffChain(
       credentials,
       smartWallet.walletModules.transferManager,
       smartWallet.smartWalletAddress,
@@ -550,7 +503,7 @@ class FuseWalletSDK {
 
     final String walletModule = 'TransferManager';
     final String methodName = 'approveTokenAndCallContract';
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
       smartWallet.walletModules.transferManager,
       methodName,
@@ -565,7 +518,7 @@ class FuseWalletSDK {
     );
 
     final String nonce = await _getNonce();
-    final String signature = ContractsHelper.signOffChain(
+    final String signature = ContractsUtils.signOffChain(
       credentials,
       smartWallet.walletModules.transferManager,
       smartWallet.smartWalletAddress,
@@ -743,7 +696,7 @@ class FuseWalletSDK {
     List<dynamic> params, {
     Map<String, dynamic>? transactionBody,
   }) async {
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       contractName,
       contractAddress,
       methodName,
@@ -771,7 +724,7 @@ class FuseWalletSDK {
     List<dynamic> params, {
     Map<String, dynamic>? transactionBody,
   }) async {
-    final String data = ContractsHelper.encodedDataForContractCall(
+    final String data = ContractsUtils.encodedDataForContractCall(
       contractName,
       contractAddress,
       methodName,
@@ -811,7 +764,7 @@ class FuseWalletSDK {
       return _getNativeBalance(address);
     }
     try {
-      final List<dynamic> response = await ContractsHelper.readFromContract(
+      final List<dynamic> response = await ContractsUtils.readFromContract(
         web3client,
         'BasicToken',
         tokenAddress,
