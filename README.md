@@ -1,5 +1,5 @@
 <p align="center">                    
-<img  src="https://raw.githubusercontent.com/fuseio/fuse_wallet_sdk/feat/erc-4337/art/fuse_wallet_sdk_logo.svg" height="170">                    
+<img  src="https://raw.githubusercontent.com/fuseio/fuse_wallet_sdk/master/art/fuse_wallet_sdk_logo.svg" height="170">                    
 </p>                    
 
 <p align="center">                    
