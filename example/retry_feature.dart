@@ -3,20 +3,22 @@ import 'dart:io';
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 
 void main() async {
-  final privateKey = await Mnemonic.generatePrivateKey();
-  final credentials = EthPrivateKey.fromHex(privateKey);
+  final credentials = EthPrivateKey.fromHex('WALLET_PRIVATE_KEY');
   // Create a project: https://developers.fuse.io
   final publicApiKey = 'YOUR_PUBLIC_API_KEY';
   final fuseSDK = await FuseSDK.init(
     publicApiKey,
     credentials,
+    withPaymaster: true,
   );
 
-  final res = await fuseSDK.stakeToken(
-    StakeRequestBody(
-      accountAddress: fuseSDK.wallet.getSender(),
-      tokenAmount: '0.1',
-      tokenAddress: Variables.NATIVE_TOKEN_ADDRESS,
+  final res = await fuseSDK.transferToken(
+    EthereumAddress.fromHex('TOKEN_ADDRESS'),
+    EthereumAddress.fromHex('RECIPIENT_ADDRESS'),
+    BigInt.parse('AMOUNT_IN_WEI'),
+    FuseSDK.defaultTxOptions.copyWith(
+      withRetry: true,
+      feeIncrementPercentage: 11,
     ),
   );
   print('UserOpHash: ${res.userOpHash}');

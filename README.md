@@ -12,13 +12,22 @@
   - [Purpose of the SDK](#purpose-of-the-sdk)
 - [Migration guides](#migration-guides)
 - [Instantiation](#instantiation)
-- [Features](#features)
+  - [Examples](#examples)
     - [Get Address](#get-address)
     - [Send transactions](#send-transactions)
+    - [Approve token](#approve-token)
+    - [Retry mechanism](#retry-mechanism)
     - [Send batch transactions](#send-batch-transactions)
-    - [Sponsored Transactions](#sponsored-transactions)
     - [Staking](#staking)
+    - [Unstake](#unstake)
     - [Trading](#trading)
+- [Features](#features)
+    - [Get Address](#get-address-1)
+    - [Send transactions](#send-transactions-1)
+    - [Send batch transactions](#send-batch-transactions-1)
+    - [Sponsored Transactions](#sponsored-transactions)
+    - [Staking](#staking-1)
+    - [Trading](#trading-1)
 - [Troubleshooting](#troubleshooting)
 - [Limitations](#limitations)
 - [Migrating to v0.2](#migrating-to-v02)
@@ -28,7 +37,7 @@
 
 ## Introduction
 
-The Fuse Wallet SDK is a set of tools for creating, managing, and engaging with Fuse Wallet SDK in client applications. Fuse Wallet SDK lets users create smart contract wallets(Based 4337) associated with each user's Externally Owned Account (EOA) that provide added security compared to traditional EOAs with a single private key. With Fuse Wallet SDK, users can deposit funds that no one else can control and withdraw at any time.
+The Fuse Wallet SDK is a set of tools for creating, managing, and engaging with Fuse Wallet SDK in client applications. Fuse Wallet SDK lets users create smart contract wallets([Based on ERC-4337](https://eips.ethereum.org/EIPS/eip-4337)) associated with each user's Externally Owned Account (EOA) that provide added security compared to traditional EOAs with a single private key. With Fuse Wallet SDK, users can deposit funds that no one else can control and withdraw at any time.
 
 ### Benefits of using Fuse Wallet SDK
 Using Fuse Wallet SDK provides several benefits, including:
@@ -53,6 +62,25 @@ final apiKey = 'YOUR_PUBLIC_API_KEY';
 final privateKey = EthPrivateKey.fromHex('YOUR_PRIVATE_KEY');
 final fuseSDK = await FuseSDK.init(apiKey, privateKey);
 ```
+
+### Examples
+
+#### [Get Address](./example/address.dart)
+
+#### [Send transactions](./example/transfer.dart)
+
+#### [Approve token](./example/approve_token.dart)
+
+#### [Retry mechanism](./example/retry_feature.dart)
+
+#### [Send batch transactions](./example/batch_transactions.dart)
+
+#### [Staking](./example/stake_tokens.dart)
+
+#### [Unstake](./example/unstake_tokens.dart)
+
+#### [Trading](./example/swap_tokens.dart)
+
 
 ## Features
 

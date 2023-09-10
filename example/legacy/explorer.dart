@@ -1,11 +1,9 @@
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 
 void main() async {
-  final privateKey = await Mnemonic.generatePrivateKey();
-  final credentials = EthPrivateKey.fromHex(privateKey);
+  final credentials = EthPrivateKey.fromHex('WALLET_PRIVATE_KEY');
   // Create a project: https://developers.fuse.io
   final publicApiKey = '';
-  print('privateKey: $privateKey');
   print('address: ${credentials.address.hexEip55}');
   final fuseWalletSDK = FuseWalletSDK(publicApiKey);
   final DC<Exception, String> authRes = await fuseWalletSDK.authenticate(

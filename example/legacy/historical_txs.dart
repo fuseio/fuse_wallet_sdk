@@ -1,10 +1,7 @@
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 
-import 'create_wallet.dart';
-
 void main() async {
-  final privateKey = await Mnemonic.generatePrivateKey();
-  final credentials = EthPrivateKey.fromHex(privateKey);
+  final credentials = EthPrivateKey.fromHex('WALLET_PRIVATE_KEY');
   // Create a project: https://developers.fuse.io
   final publicApiKey = '';
   final fuseWalletSDK = FuseWalletSDK(publicApiKey);
@@ -29,11 +26,6 @@ void main() async {
             print(err);
           },
         );
-      },
-      onError: (Exception exception) async {
-        print('Fetch wallet failed, wallet was not created yet');
-        print('creating...');
-        createWalletAndListenToSmartWalletEventStream(fuseWalletSDK);
       },
     );
   }
