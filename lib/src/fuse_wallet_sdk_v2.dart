@@ -162,15 +162,11 @@ class FuseSDK {
   /// Transfers an NFT with a given [tokenId] to the [recipientAddress].
   ///
   /// [nftContractAddress] is the address of the NFT contract.
-  /// [isSafe] indicates if the transfer should be done safely.
-  /// [data] is optional data to accompany the transfer.
   /// [options] provides additional transaction options.
   Future<ISendUserOperationResponse> transferNFT(
     EthereumAddress nftContractAddress,
     EthereumAddress recipientAddress,
     num tokenId, [
-    bool isSafe = false,
-    String? data,
     TxOptions? options,
   ]) async {
     final params = [
@@ -179,17 +175,15 @@ class FuseSDK {
       BigInt.from(tokenId),
     ];
 
-    if (data != null) {
-      params.add(hexToBytes(data));
-    }
-
     final callData = hexToBytes(
       ContractsUtils.encodedDataForContractCall(
         'ERC721',
         nftContractAddress.toString(),
-        isSafe ? 'safeTransferFrom' : 'transferFrom',
+        'safeTransferFrom',
         params,
         include0x: true,
+        jsonInterface:
+            '[{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"safeTransferFrom","inputs":[{"type":"address","name":"from","internalType":"address"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"tokenId","internalType":"uint256"}]}]',
       ),
     );
 
