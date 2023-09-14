@@ -17,7 +17,7 @@ class ContractsUtils {
   /// [client] is the web3 client instance to interact with the Fuse network.
   /// [contractName] is the name of the contract.
   /// [contractAddress] is the address of the deployed contract.
-  /// [functionName] is the name of the function to be called.
+  /// [methodName] is the name of the function to be called.
   /// [params] is a list of parameters to be passed to the function.
   /// [jsonInterface] is an optional JSON string representing the contract ABI.
   ///
@@ -25,8 +25,8 @@ class ContractsUtils {
   static Future<List<dynamic>> readFromContract(
     Web3Client client,
     String contractName,
-    String contractAddress,
-    String functionName,
+    EthereumAddress contractAddress,
+    String methodName,
     List<dynamic> params, {
     String? jsonInterface,
   }) async {
@@ -37,23 +37,32 @@ class ContractsUtils {
     );
     return client.call(
       contract: contract,
-      function: contract.function(functionName),
+      function: contract.function(methodName),
       params: params,
     );
   }
 
+  /// Reads data from a specified contract and returns the first result as BigInt.
+  ///
+  /// [client] - The Web3Client instance to use for reading data.
+  /// [contractName] - Name of the contract (for clarity and potentially for use in other functions).
+  /// [contractAddress] - Address of the contract.
+  /// [methodName] - Name of the method to call on the contract.
+  /// [params] - List of parameters to pass to the contract method.
+  ///
+  /// Returns the first result of the contract call as a BigInt.
   static Future<BigInt> readFromContractWithFirstResult({
     required Web3Client client,
     required String contractName,
-    required String contractAddress,
-    required String functionName,
+    required EthereumAddress contractAddress,
+    required String methodName,
     required List<dynamic> params,
   }) async {
     final response = await readFromContract(
       client,
       contractName,
       contractAddress,
-      functionName,
+      methodName,
       params,
     );
     return response.first as BigInt;
@@ -68,15 +77,14 @@ class ContractsUtils {
   /// Returns a `Future` that resolves to a `DeployedContract` instance.
   static DeployedContract _getDeployedContract(
     String contractName,
-    String contractAddress, {
+    EthereumAddress contractAddress, {
     String? jsonInterface,
   }) {
     final String abi = jsonInterface ?? ABI.get(contractName);
     final ContractAbi contractAbi = ContractAbi.fromJson(abi, contractName);
-    final EthereumAddress address = EthereumAddress.fromHex(contractAddress);
     final DeployedContract contract = DeployedContract(
       contractAbi,
-      address,
+      contractAddress,
     );
     return contract;
   }
@@ -85,7 +93,7 @@ class ContractsUtils {
   ///
   /// [contractName] is the name of the contract.
   /// [contractAddress] is the address of the deployed contract.
-  /// [functionName] is the name of the function to be called.
+  /// [methodName] is the name of the function to be called.
   /// [params] is a list of parameters to be passed to the function.
   /// [jsonInterface] is an optional JSON string representing the contract ABI.
   /// [include0x] is a flag to include the '0x' prefix in the encoded data.
@@ -95,8 +103,8 @@ class ContractsUtils {
   /// Returns a `Future` that resolves to the encoded data as a hex string.
   static String encodedDataForContractCall(
     String contractName,
-    String contractAddress,
-    String functionName,
+    EthereumAddress contractAddress,
+    String methodName,
     List<dynamic> params, {
     String? jsonInterface,
     bool include0x = false,
@@ -108,12 +116,110 @@ class ContractsUtils {
       contractAddress,
       jsonInterface: jsonInterface,
     );
-    final Uint8List data = contract.function(functionName).encodeCall(params);
+    final Uint8List data = contract.function(methodName).encodeCall(params);
     return bytesToHex(
       data,
       include0x: include0x,
       forcePadLength: forcePadLength,
       padToEvenLength: padToEvenLength,
+    );
+  }
+
+  /// Encodes the data for an ERC20 'transfer' operation.
+  ///
+  /// [tokenAddress] - Address of the ERC20 token contract.
+  /// [recipient] - Address receiving the tokens.
+  /// [amount] - Amount of tokens to transfer.
+  static Uint8List encodeERC20TransferCall(
+    EthereumAddress tokenAddress,
+    EthereumAddress recipient,
+    BigInt amount,
+  ) {
+    return _encodeContractCall(
+      'ERC20',
+      tokenAddress,
+      'transfer',
+      [recipient, amount],
+    );
+  }
+
+  /// Encodes the data for an ERC721 'safeTransferFrom' operation.
+  ///
+  /// [from] - Address sending the NFT.
+  /// [nftContractAddress] - Address of the ERC721 token contract.
+  /// [to] - Address receiving the NFT.
+  /// [tokenId] - ID of the NFT being transferred.
+  static Uint8List encodeERC721SafeTransferCall(
+    EthereumAddress from,
+    EthereumAddress nftContractAddress,
+    EthereumAddress to,
+    BigInt tokenId,
+  ) {
+    final params = [from, to, tokenId];
+    final jsonInterface =
+        '[{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"safeTransferFrom","inputs":[{"type":"address","name":"from","internalType":"address"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"tokenId","internalType":"uint256"}]}]';
+
+    return _encodeContractCall(
+      'ERC721',
+      nftContractAddress,
+      'safeTransferFrom',
+      params,
+      jsonInterface: jsonInterface,
+    );
+  }
+
+  /// Encodes the data for an ERC20 'approve' operation.
+  ///
+  /// [tokenAddress] - Address of the ERC20 token contract.
+  /// [spender] - Address which will be approved to spend the tokens.
+  /// [amount] - Amount of tokens to approve.
+  static Uint8List encodeERC20ApproveCall(
+    EthereumAddress tokenAddress,
+    EthereumAddress spender,
+    BigInt amount,
+  ) {
+    return _encodeContractCall(
+      'ERC20',
+      tokenAddress,
+      'approve',
+      [spender, amount],
+    );
+  }
+
+  /// Encodes the data for an ERC721 'approve' operation.
+  ///
+  /// [tokenAddress] - Address of the ERC721 token contract.
+  /// [spender] - Address which will be approved to spend the tokens.
+  /// [amount] - Amount of tokens to approve.
+  static Uint8List encodeERC721ApproveCall(
+    EthereumAddress tokenAddress,
+    EthereumAddress spender,
+    BigInt tokenId,
+  ) {
+    return _encodeContractCall(
+      'ERC721',
+      tokenAddress,
+      'approve',
+      [spender, tokenId],
+    );
+  }
+  // Internal helper function to reduce repetitive logic
+  static Uint8List _encodeContractCall(
+    String contractType,
+    EthereumAddress contractAddress,
+    String methodName,
+    List<dynamic> params, {
+    String? jsonInterface,
+  }) {
+    return hexToBytes(
+      ContractsUtils.encodedDataForContractCall(
+        contractType,
+        contractAddress,
+        methodName,
+        params,
+        include0x: true,
+        jsonInterface: jsonInterface,
+      ),
     );
   }
 
