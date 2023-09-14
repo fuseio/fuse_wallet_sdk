@@ -515,7 +515,7 @@ class ABI {
           }
         ];
         break;
-      case "BasicToken":
+      case "ERC20":
         abi = [
           {
             "constant": true,

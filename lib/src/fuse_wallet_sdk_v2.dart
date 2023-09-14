@@ -134,65 +134,57 @@ class FuseSDK {
 
   /// Transfers a specified [amount] of tokens from the user's address to the [recipientAddress].
   ///
-  /// [tokenAddress] is the address of the token contract.
-  /// [options] provides additional transaction options.
+  /// [tokenAddress] - Address of the token contract.
+  /// [recipientAddress] - Address of the recipient.
+  /// [amount] - Amount of tokens to transfer.
+  /// [options] - Additional transaction options.
   Future<ISendUserOperationResponse> transferToken(
     EthereumAddress tokenAddress,
     EthereumAddress recipientAddress,
     BigInt amount, [
     TxOptions? options,
   ]) async {
-    final callData = ContractsHelper.encodedDataForContractCall(
-      'ERC20',
-      tokenAddress.toString(),
-      'transfer',
-      [recipientAddress, amount],
-      include0x: true,
-    );
+    Call call;
+    if (_isNativeToken(tokenAddress.toString())) {
+      call = Call(
+        to: recipientAddress,
+        value: amount,
+        data: Uint8List(0),
+      );
+    } else {
+      final callData = ContractsUtils.encodeERC20TransferCall(
+        tokenAddress,
+        recipientAddress,
+        amount,
+      );
 
-    return _processTokenOperation(
-      tokenAddress: tokenAddress,
-      to: recipientAddress,
-      amount: amount,
-      callData: callData,
-      options: options,
-    );
+      call = Call(
+        to: tokenAddress,
+        value: BigInt.zero,
+        data: callData,
+      );
+    }
+
+    return _executeUserOperation(call, options);
   }
 
   /// Transfers an NFT with a given [tokenId] to the [recipientAddress].
   ///
-  /// [nftContractAddress] is the address of the NFT contract.
-  /// [options] provides additional transaction options.
+  /// [nftContractAddress] - Address of the NFT contract.
+  /// [recipientAddress] - Address of the recipient.
+  /// [tokenId] - ID of the token to transfer.
+  /// [options] - Additional transaction options.
   Future<ISendUserOperationResponse> transferNFT(
     EthereumAddress nftContractAddress,
     EthereumAddress recipientAddress,
     num tokenId, [
     TxOptions? options,
-  ]) async {
-    final params = [
-      EthereumAddress.fromHex(wallet.getSender()),
+  ]) {
+    return _executeTokenOperation(
+      nftContractAddress,
       recipientAddress,
       BigInt.from(tokenId),
-    ];
-
-    final callData = hexToBytes(
-      ContractsUtils.encodedDataForContractCall(
-        'ERC721',
-        nftContractAddress.toString(),
-        'safeTransferFrom',
-        params,
-        include0x: true,
-        jsonInterface:
-            '[{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"safeTransferFrom","inputs":[{"type":"address","name":"from","internalType":"address"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"tokenId","internalType":"uint256"}]}]',
-      ),
-    );
-
-    return _executeUserOperation(
-      Call(
-        to: nftContractAddress,
-        value: BigInt.zero,
-        data: callData,
-      ),
+      ContractsUtils.encodeERC721SafeTransferCall,
       options,
     );
   }
@@ -234,30 +226,44 @@ class FuseSDK {
     }
   }
 
-  /// Approves a [spender] to spend a specified [amount] of tokens on behalf of the user.
+  /// Approves the [spender] to withdraw or transfer a certain [amount] of tokens on behalf of the user's address.
   ///
-  /// [tokenAddress] is the address of the token contract.
-  /// [options] provides additional transaction options.
+  /// [tokenAddress] - Address of the token contract.
+  /// [spender] - Address which will spend the tokens.
+  /// [amount] - Amount of tokens to approve.
+  /// [options] - Additional transaction options.
   Future<ISendUserOperationResponse> approveToken(
     EthereumAddress tokenAddress,
     EthereumAddress spender,
     BigInt amount, [
     TxOptions? options,
   ]) {
-    final callData = ContractsHelper.encodedDataForContractCall(
-      'ERC20',
-      tokenAddress.toString(),
-      'approve',
-      [spender, amount],
-      include0x: true,
+    return _executeTokenOperation(
+      tokenAddress,
+      spender,
+      amount,
+      ContractsUtils.encodeERC20ApproveCall,
+      options,
     );
+  }
 
-    return _executeUserOperation(
-      Call(
-        to: tokenAddress,
-        value: BigInt.zero,
-        data: callData,
-      ),
+  /// Approves a [spender] to transfer or withdraw a specific NFT [tokenId] on behalf of the user.
+  ///
+  /// [nftContractAddress] - Address of the token contract.
+  /// [spender] - Address which will spend the tokens.
+  /// [tokenId] - NFT token ID of item in the collection to approve.
+  /// [options] - Additional transaction options.
+  Future<ISendUserOperationResponse> approveNFTToken(
+    EthereumAddress nftContractAddress,
+    EthereumAddress spender,
+    BigInt tokenId, [
+    TxOptions? options,
+  ]) {
+    return _executeTokenOperation(
+      nftContractAddress,
+      spender,
+      tokenId,
+      ContractsUtils.encodeERC721ApproveCall,
       options,
     );
   }
@@ -303,13 +309,12 @@ class FuseSDK {
     Uint8List callData, [
     TxOptions? options,
   ]) async {
-    final approveCallData = ContractsHelper.encodedDataForContractCall(
-      'ERC20',
-      tokenAddress.toString(),
-      'approve',
-      [spender, value],
-      include0x: true,
+    final approveCallData = ContractsUtils.encodeERC20ApproveCall(
+      tokenAddress,
+      spender,
+      value,
     );
+
     final calls = [
       Call(
         to: tokenAddress,
@@ -346,7 +351,7 @@ class FuseSDK {
     final callData = hexToBytes(swapCallParameters.data?.rawTxn['data']);
 
     final tokenDetails = await getERC20TokenDetails(
-      tradeRequestBody.currencyIn,
+      EthereumAddress.fromHex(tradeRequestBody.currencyIn),
     );
 
     final amount = AmountFormat.toBigInt(
@@ -376,7 +381,7 @@ class FuseSDK {
     _handleModuleError(response);
 
     final tokenDetails = await getERC20TokenDetails(
-      stakeRequestBody.tokenAddress,
+      EthereumAddress.fromHex(stakeRequestBody.tokenAddress),
     );
 
     final amount = AmountFormat.toBigInt(
@@ -415,7 +420,7 @@ class FuseSDK {
     _handleModuleError(response);
 
     final tokenDetails = await getERC20TokenDetails(
-      unstakeRequestBody.tokenAddress,
+      EthereumAddress.fromHex(unstakeRequestBody.tokenAddress),
     );
 
     final amount = AmountFormat.toBigInt(
@@ -467,9 +472,9 @@ class FuseSDK {
 
     return ContractsUtils.readFromContractWithFirstResult(
       client: wallet.proxy.client,
-      contractName: 'BasicToken',
-      contractAddress: tokenAddress.toString(),
-      functionName: 'balanceOf',
+      contractName: 'ERC20',
+      contractAddress: tokenAddress,
+      methodName: 'balanceOf',
       params: [address],
     );
   }
@@ -489,9 +494,9 @@ class FuseSDK {
   ) {
     return ContractsUtils.readFromContractWithFirstResult(
       client: wallet.proxy.client,
-      contractName: 'BasicToken',
-      contractAddress: tokenAddress.toString(),
-      functionName: 'allowance',
+      contractName: 'ERC20',
+      contractAddress: tokenAddress,
+      methodName: 'allowance',
       params: [
         EthereumAddress.fromHex(wallet.getSender()),
         spender,
@@ -507,18 +512,20 @@ class FuseSDK {
   /// [tokenAddress] is the address of the ERC20 token.
   ///
   /// Returns a [TokenDetails] object containing the token's name, symbol, decimals, and other relevant details.
-  Future<TokenDetails> getERC20TokenDetails(String tokenAddress) async {
-    if (tokenAddress.toLowerCase() ==
+  Future<TokenDetails> getERC20TokenDetails(
+    EthereumAddress tokenAddress,
+  ) async {
+    if (tokenAddress.toString().toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
-      return Native(amount: BigInt.zero);
+      return TokenDetails.native(amount: BigInt.zero);
     }
     final toRead = ['name', 'symbol', 'decimals'];
     final token = await Future.wait(
       toRead.map(
         (function) => ContractsUtils.readFromContract(
           wallet.proxy.client,
-          'BasicToken',
-          tokenAddress.toString(),
+          'ERC20',
+          tokenAddress,
           function,
           [],
         ),
@@ -591,41 +598,6 @@ class FuseSDK {
     }
   }
 
-  /// Processes a token operation with the provided parameters.
-  ///
-  /// [tokenAddress] is the address of the token contract.
-  /// [to] is the recipient address.
-  /// [amount] is the amount of tokens to be transferred.
-  /// [callData] is the encoded data for the contract call.
-  /// [options] provides additional transaction options.
-  Future<ISendUserOperationResponse> _processTokenOperation({
-    required EthereumAddress tokenAddress,
-    required EthereumAddress to,
-    required BigInt amount,
-    required Uint8List callData,
-    TxOptions? options,
-  }) async {
-    if (_isNativeToken(tokenAddress.toString())) {
-      return _executeUserOperation(
-        Call(
-          to: to,
-          value: amount,
-          data: Uint8List(0),
-        ),
-        options,
-      );
-    } else {
-      return _executeUserOperation(
-        Call(
-          to: tokenAddress,
-          value: BigInt.zero,
-          data: callData,
-        ),
-        options,
-      );
-    }
-  }
-
   /// Processes a token operation, either executing it directly or approving and then executing.
   ///
   /// This method checks if the token is native. If it is, it directly executes the operation.
@@ -639,7 +611,6 @@ class FuseSDK {
   /// [options] provides additional transaction options.
   ///
   /// Returns a [ISendUserOperationResponse] indicating the result of the operation.
-
   Future<ISendUserOperationResponse> _processOperation({
     required EthereumAddress tokenAddress,
     required EthereumAddress spender,
@@ -677,6 +648,24 @@ class FuseSDK {
         options,
       );
     }
+  }
+
+  Future<ISendUserOperationResponse> _executeTokenOperation(
+    EthereumAddress contractAddress,
+    EthereumAddress to,
+    BigInt value,
+    Function encoder, [
+    TxOptions? options,
+  ]) {
+    final callData = encoder(contractAddress, to, value);
+    return _executeUserOperation(
+      Call(
+        to: contractAddress,
+        value: BigInt.zero,
+        data: callData,
+      ),
+      options,
+    );
   }
 
   /// Handles errors that may occur during module operations.

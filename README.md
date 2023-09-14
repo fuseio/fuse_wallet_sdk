@@ -126,15 +126,10 @@ final res = await fuseSDK.executeBatch(
     Call(
       to: EthereumAddress.fromHex('TOKEN_ADDRESS'),
       value: BigInt.zero,
-      data: ContractsHelper.encodedDataForContractCall(
-        'ERC20',
-        'TOKEN_ADDRESS',
-        'transfer',
-        [
-          EthereumAddress.fromHex('RECIPIENT_ADDRESS'),
-          BigInt.parse('AMOUNT_IN_WEI'),
-        ],
-        include0x: true,
+      data: ContractsUtils.encodeERC20TransferCall(
+        EthereumAddress.fromHex('TOKEN_ADDRESS'),
+        EthereumAddress.fromHex('RECIPIENT_ADDRESS'),
+        BigInt.parse('AMOUNT_IN_WEI'),
       ),
     ),
   ],

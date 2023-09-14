@@ -230,7 +230,7 @@ class FuseWalletSDK {
     final String methodName = 'transferToken';
     final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
-      smartWallet.walletModules.transferManager,
+      EthereumAddress.fromHex(smartWallet.walletModules.transferManager),
       methodName,
       [
         EthereumAddress.fromHex(smartWallet.smartWalletAddress),
@@ -293,7 +293,7 @@ class FuseWalletSDK {
 
     final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
-      walletModuleAddress,
+      EthereumAddress.fromHex(walletModuleAddress),
       methodName,
       [
         EthereumAddress.fromHex(smartWallet.smartWalletAddress),
@@ -347,7 +347,7 @@ class FuseWalletSDK {
     final String methodName = 'addModule';
     final String data = ContractsUtils.encodedDataForContractCall(
       disableModuleName,
-      disableModuleAddress,
+      EthereumAddress.fromHex(disableModuleAddress),
       methodName,
       [
         EthereumAddress.fromHex(smartWallet.smartWalletAddress),
@@ -400,7 +400,7 @@ class FuseWalletSDK {
     final String methodName = 'approveToken';
     final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
-      smartWallet.walletModules.transferManager,
+      EthereumAddress.fromHex(smartWallet.walletModules.transferManager),
       methodName,
       [
         EthereumAddress.fromHex(smartWallet.smartWalletAddress),
@@ -446,7 +446,7 @@ class FuseWalletSDK {
 
     final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
-      smartWallet.walletModules.transferManager,
+      EthereumAddress.fromHex(smartWallet.walletModules.transferManager),
       methodName,
       [
         EthereumAddress.fromHex(smartWallet.smartWalletAddress),
@@ -505,7 +505,7 @@ class FuseWalletSDK {
     final String methodName = 'approveTokenAndCallContract';
     final String data = ContractsUtils.encodedDataForContractCall(
       walletModule,
-      smartWallet.walletModules.transferManager,
+      EthereumAddress.fromHex(smartWallet.walletModules.transferManager),
       methodName,
       [
         EthereumAddress.fromHex(smartWallet.smartWalletAddress),
@@ -698,7 +698,7 @@ class FuseWalletSDK {
   }) async {
     final String data = ContractsUtils.encodedDataForContractCall(
       contractName,
-      contractAddress,
+      EthereumAddress.fromHex(contractAddress),
       methodName,
       params,
       jsonInterface: jsonInterface,
@@ -726,7 +726,7 @@ class FuseWalletSDK {
   }) async {
     final String data = ContractsUtils.encodedDataForContractCall(
       contractName,
-      contractAddress,
+      EthereumAddress.fromHex(contractAddress),
       methodName,
       params,
       jsonInterface: jsonInterface,
@@ -766,8 +766,8 @@ class FuseWalletSDK {
     try {
       final List<dynamic> response = await ContractsUtils.readFromContract(
         web3client,
-        'BasicToken',
-        tokenAddress,
+        'ERC20',
+        EthereumAddress.fromHex(tokenAddress),
         'balanceOf',
         [EthereumAddress.fromHex(address)],
       );
