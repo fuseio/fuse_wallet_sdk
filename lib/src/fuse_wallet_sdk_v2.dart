@@ -247,7 +247,7 @@ class FuseSDK {
     );
   }
 
-  /// Approves the [spender] to withdraw or transfer a certain NFT [tokenId] on behalf of the user's address.
+  /// Approves a [spender] to transfer or withdraw a specific NFT [tokenId] on behalf of the user.
   ///
   /// [nftContractAddress] - Address of the token contract.
   /// [spender] - Address which will spend the tokens.
