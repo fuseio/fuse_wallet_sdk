@@ -132,6 +132,43 @@ class FuseSDK {
     return response.data['jwt'];
   }
 
+  /// Retrieves historical actions for a smart wallet, with optional filtering by token address and update time.
+  ///
+  /// Parameters:
+  /// - [page] (optional) – The page number to retrieve, default is 1.
+  /// - [limit] (optional) – Number of items in each page, default is 10.
+  /// - [updatedAt] (optional) – Filter actions updated at or after the specified Unix timestamp.
+  /// - [tokenAddress] (optional) – Filter actions related to the specified token address.
+  ///
+  /// Returns a Future that completes with an [WalletActionResult] object containing the historical wallets actions.
+  Future<WalletActionResult> getWalletActions({
+    int page = 1,
+    int limit = 10,
+    int? updatedAt,
+    String? tokenAddress,
+  }) async {
+    final Map<String, dynamic> queryParameters = {
+      'page': page,
+      'limit': limit,
+    };
+
+    if (tokenAddress != null) {
+      queryParameters.putIfAbsent('tokenAddress', () => tokenAddress);
+    }
+
+    final Response response = await _dio.get(
+      '/v2/smart-wallets/actions',
+      queryParameters: queryParameters,
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $_jwtToken',
+        },
+      ),
+    );
+
+    return WalletActionResult.fromJson(response.data);
+  }
+
   /// Transfers a specified [amount] of tokens from the user's address to the [recipientAddress].
   ///
   /// [tokenAddress] - Address of the token contract.

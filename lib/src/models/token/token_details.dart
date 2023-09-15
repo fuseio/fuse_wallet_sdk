@@ -204,3 +204,79 @@ class TokenDetails with _$TokenDetails {
   factory TokenDetails.fromJson(Map<String, dynamic> json) =>
       _$TokenDetailsFromJson(json);
 }
+
+// class TokenDetailsConverter
+//     implements JsonConverter<TokenDetails, Map<String, dynamic>> {
+//   const TokenDetailsConverter();
+
+//   @override
+//   TokenDetails fromJson(Map<String, dynamic> json) {
+//     return TokenDetails.erc20(
+//       name: json['name'],
+//       symbol: json['symbol'],
+//       address: json['address'],
+//       amount: BigInt.parse(json['value'] ?? '0'),
+//     );
+//   }
+
+//   @override
+//   Map<String, dynamic> toJson(TokenDetails instance) => instance.toJson();
+// }
+
+// /// A JSON converter to convert between a list of Collectible instances and
+// /// a list of JSON objects.
+// class TokenDetailsListConverter
+//     implements JsonConverter<List<TokenDetails>, List<dynamic>> {
+//   /// Creates an instance of TokenDetailsListConverter.
+//   const TokenDetailsListConverter();
+
+//   /// Converts JSON data to a list of Collectible instances.
+//   @override
+//   List<TokenDetails> fromJson(List<dynamic>? json) {
+//     if (json == null) {
+//       return [];
+//     } else {
+//       return json.map(
+//         (e) {
+//           if (e['type'] == 'native') {
+//             return TokenDetails.native(
+//               amount: BigInt.parse(e['value'] ?? '0'),
+//             );
+//           } else if (e['type'] == 'ERC-20') {
+//             return TokenDetails.erc20(
+//               name: e['name'],
+//               symbol: e['symbol'],
+//               address: e['address'],
+//               amount: BigInt.parse(e['value'] ?? '0'),
+//             );
+//           } else if (e['type'] == 'ERC-721') {
+//             return TokenDetails.erc721(
+//               symbol: e['symbol'],
+//               name: e['name'],
+//               decimals: int.parse(e['decimals'] ?? '0'),
+//               address: e['address'],
+//               amount: BigInt.parse(e['value'] ?? '0'),
+//             );
+//           }
+//           // if (e['address'].toString().toLowerCase() ==
+//           //     Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
+//           //   return Native(amount: BigInt.zero);
+//           // }
+
+//           // TokenDetails tokenDetails = TokenDetails.erc20(
+//           //   name: e['name'],
+//           //   symbol: e['symbol'],
+//           //   address: e['address'],
+//           //   amount: BigInt.parse(e['value'] ?? '0'),
+//           // );
+
+//           return tokenDetails;
+//         },
+//       ).toList();
+//     }
+//   }
+
+//   /// Converts a list of Collectible instances to a list of JSON objects.
+//   @override
+//   List<dynamic> toJson(List<TokenDetails> instance) => instance.toList();
+// }
