@@ -47,7 +47,7 @@ class WalletAction with _$WalletAction implements Comparable<WalletAction> {
         (previousValue, action) {
           try {
             return [...previousValue, WalletAction.fromJson(action)];
-          } catch (e, s) {
+          } catch (e) {
             return previousValue;
           }
         },

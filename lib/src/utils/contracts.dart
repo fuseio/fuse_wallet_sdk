@@ -203,6 +203,7 @@ class ContractsUtils {
       [spender, tokenId],
     );
   }
+
   // Internal helper function to reduce repetitive logic
   static Uint8List _encodeContractCall(
     String contractType,
