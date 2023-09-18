@@ -59,13 +59,14 @@ class WalletAction with _$WalletAction implements Comparable<WalletAction> {
   factory WalletAction.fromJson(dynamic json) => _$WalletActionFromJson(json);
 
   /// Checks if the wallet action is in a pending state.
-  bool isPending() => status == 'PENDING' || status == 'STARTED';
+  bool isPending() => status == 'pending' || status == 'started';
 
   /// Checks if the wallet action has failed.
-  bool isFailed() => status == 'FAILED';
+  bool isFailed() => status == 'failed';
 
   /// Checks if the wallet action has been confirmed.
-  bool isConfirmed() => status == 'CONFIRMED' || status == 'SUCCEEDED';
+  bool isConfirmed() =>
+      status == 'confirmed' || status == 'success' || status == 'succeeded';
 
   /// Represents a batch transaction action on the blockchain.
   @FreezedUnionValue('batchTransaction')
