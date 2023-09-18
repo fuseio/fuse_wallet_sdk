@@ -1,10 +1,15 @@
 # CHANGELOG
 
+## [0.2.2]
+
+### Changed
+- Upgrade `userop` - It now uses the latest EtherspotWalletFactory contract.
+
 ## [0.2.1]
 
 ### Fixed
 - Transfer NFT method was fixed.
-  
+
 ## [0.2.0]
 
 ### Changes
