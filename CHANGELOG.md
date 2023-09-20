@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [0.2.2+1]
+
+### Fixed
+- Swap VoltToken to Fuse native token.
+
+
 ## [0.2.2]
 
 ### Changed
