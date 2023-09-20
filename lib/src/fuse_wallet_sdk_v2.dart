@@ -533,7 +533,7 @@ class FuseSDK {
     );
 
     return TokenDetails.fromJson({
-      'contractAddress': tokenAddress,
+      'contractAddress': tokenAddress.toString(),
       'name': token[0].first,
       'symbol': token[1].first,
       'decimals': token[2].first.toString(),
