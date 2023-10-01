@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.2.3]
+
+### Fixed
+- Transfer NFT method was fixed.
+
 ## [0.2.2+1]
 
 ### Fixed

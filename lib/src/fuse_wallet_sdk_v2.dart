@@ -120,16 +120,19 @@ class FuseSDK {
   ///
   /// Returns a JWT token upon successful authentication.
   Future<String> authenticate(EthPrivateKey credentials) async {
-    final AuthDto auth = SmartWalletAuth.signer(
+    final auth = SmartWalletAuth.signer(
       credentials,
       smartWalletAddress: wallet.getSender(),
     );
-    final Response response = await _dio.post(
+
+    var Response(:data) = await _dio.post(
       '/v2/smart-wallets/auth',
       data: auth.toJson(),
     );
-    _jwtToken = response.data['jwt'];
-    return response.data['jwt'];
+
+    _jwtToken = data['jwt'];
+
+    return data['jwt'];
   }
 
   /// Transfers a specified [amount] of tokens from the user's address to the [recipientAddress].
@@ -180,11 +183,19 @@ class FuseSDK {
     num tokenId, [
     TxOptions? options,
   ]) {
-    return _executeTokenOperation(
+    final callData = ContractsUtils.encodeERC721SafeTransferCall(
+      EthereumAddress.fromHex(wallet.getSender()),
       nftContractAddress,
       recipientAddress,
       BigInt.from(tokenId),
-      ContractsUtils.encodeERC721SafeTransferCall,
+    );
+
+    return _executeUserOperation(
+      Call(
+        to: nftContractAddress,
+        value: BigInt.zero,
+        data: callData,
+      ),
       options,
     );
   }
@@ -340,27 +351,30 @@ class FuseSDK {
     TradeRequestBody tradeRequestBody, [
     TxOptions? options,
   ]) async {
-    final swapCallParameters = await _tradeModule.requestParameters(
+    var DC(:data, :error, :hasError) = await _tradeModule.requestParameters(
       tradeRequestBody,
     );
 
-    final spender = EthereumAddress.fromHex(
-      swapCallParameters.data?.rawTxn['to'],
+    if (hasError) {
+      throw error!;
+    }
+
+    var TradeCallParameters(:rawTxn) = data!;
+
+    var TradeRequestBody(:amountIn, :currencyIn) = tradeRequestBody;
+
+    final spender = EthereumAddress.fromHex(rawTxn['to']);
+
+    final callData = hexToBytes(rawTxn['data']);
+
+    var TokenDetails(:decimals) = await getERC20TokenDetails(
+      EthereumAddress.fromHex(currencyIn),
     );
 
-    final callData = hexToBytes(swapCallParameters.data?.rawTxn['data']);
-
-    final tokenDetails = await getERC20TokenDetails(
-      EthereumAddress.fromHex(tradeRequestBody.currencyIn),
-    );
-
-    final amount = AmountFormat.toBigInt(
-      tradeRequestBody.amountIn,
-      tokenDetails.decimals,
-    );
+    final amount = AmountFormat.toBigInt(amountIn, decimals);
 
     return _processOperation(
-      tokenAddress: EthereumAddress.fromHex(tradeRequestBody.currencyIn),
+      tokenAddress: EthereumAddress.fromHex(currencyIn),
       spender: spender,
       callData: callData,
       amount: amount,
@@ -377,27 +391,29 @@ class FuseSDK {
     StakeRequestBody stakeRequestBody, [
     TxOptions? options,
   ]) async {
-    final response = await _stakingModule.stake(stakeRequestBody);
-    _handleModuleError(response);
+    var DC(:data, :error, :hasError) =
+        await _stakingModule.stake(stakeRequestBody);
 
-    final tokenDetails = await getERC20TokenDetails(
-      EthereumAddress.fromHex(stakeRequestBody.tokenAddress),
+    if (hasError) {
+      throw error!;
+    }
+
+    var StakeRequestBody(:tokenAmount, :tokenAddress) = stakeRequestBody;
+
+    var StakeResponseBody(:contractAddress, :encodedABI) = data!;
+
+    var TokenDetails(:decimals) = await getERC20TokenDetails(
+      EthereumAddress.fromHex(tokenAddress),
     );
 
-    final amount = AmountFormat.toBigInt(
-      stakeRequestBody.tokenAmount,
-      tokenDetails.decimals,
-    );
-    final stakeCallData = hexToBytes(
-      response.data!.encodedABI,
-    );
+    final amount = AmountFormat.toBigInt(tokenAmount, decimals);
 
-    final spender = EthereumAddress.fromHex(
-      response.data!.contractAddress,
-    );
+    final stakeCallData = hexToBytes(encodedABI);
+
+    final spender = EthereumAddress.fromHex(contractAddress);
 
     return _processOperation(
-      tokenAddress: EthereumAddress.fromHex(stakeRequestBody.tokenAddress),
+      tokenAddress: EthereumAddress.fromHex(tokenAddress),
       spender: spender,
       callData: stakeCallData,
       amount: amount,
@@ -416,23 +432,27 @@ class FuseSDK {
     EthereumAddress unStakeTokenAddress, [
     TxOptions? options,
   ]) async {
-    final response = await _stakingModule.unstake(unstakeRequestBody);
-    _handleModuleError(response);
+    var DC(:data, :error, :hasError) = await _stakingModule.unstake(
+      unstakeRequestBody,
+    );
 
-    final tokenDetails = await getERC20TokenDetails(
+    if (hasError) {
+      throw error!;
+    }
+
+    var UnstakeRequestBody(:tokenAmount) = unstakeRequestBody;
+
+    var UnstakeResponseBody(:contractAddress, :encodedABI) = data!;
+
+    var TokenDetails(:decimals) = await getERC20TokenDetails(
       EthereumAddress.fromHex(unstakeRequestBody.tokenAddress),
     );
 
-    final amount = AmountFormat.toBigInt(
-      unstakeRequestBody.tokenAmount,
-      tokenDetails.decimals,
-    );
+    final amount = AmountFormat.toBigInt(tokenAmount, decimals);
 
-    final spender = EthereumAddress.fromHex(
-      response.data!.contractAddress,
-    );
+    final spender = EthereumAddress.fromHex(contractAddress);
 
-    final unstakeCallData = hexToBytes(response.data!.encodedABI);
+    final unstakeCallData = hexToBytes(encodedABI);
 
     return _processOperation(
       tokenAddress: unStakeTokenAddress,
@@ -658,6 +678,7 @@ class FuseSDK {
     TxOptions? options,
   ]) {
     final callData = encoder(contractAddress, to, value);
+
     return _executeUserOperation(
       Call(
         to: contractAddress,
@@ -666,15 +687,6 @@ class FuseSDK {
       ),
       options,
     );
-  }
-
-  /// Handles errors that may occur during module operations.
-  ///
-  /// [response] is the response from the module operation.
-  void _handleModuleError(DC response) {
-    if (response.hasError) {
-      throw response.error!;
-    }
   }
 
   /// Retrieves the paymaster middleware for the provided [publicApiKey].
