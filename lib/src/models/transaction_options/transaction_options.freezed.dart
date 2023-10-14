@@ -73,21 +73,22 @@ class _$TxOptionsCopyWithImpl<$Res, $Val extends TxOptions>
 }
 
 /// @nodoc
-abstract class _$$_TxOptionsCopyWith<$Res> implements $TxOptionsCopyWith<$Res> {
-  factory _$$_TxOptionsCopyWith(
-          _$_TxOptions value, $Res Function(_$_TxOptions) then) =
-      __$$_TxOptionsCopyWithImpl<$Res>;
+abstract class _$$TxOptionsImplCopyWith<$Res>
+    implements $TxOptionsCopyWith<$Res> {
+  factory _$$TxOptionsImplCopyWith(
+          _$TxOptionsImpl value, $Res Function(_$TxOptionsImpl) then) =
+      __$$TxOptionsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String feePerGas, int feeIncrementPercentage, bool withRetry});
 }
 
 /// @nodoc
-class __$$_TxOptionsCopyWithImpl<$Res>
-    extends _$TxOptionsCopyWithImpl<$Res, _$_TxOptions>
-    implements _$$_TxOptionsCopyWith<$Res> {
-  __$$_TxOptionsCopyWithImpl(
-      _$_TxOptions _value, $Res Function(_$_TxOptions) _then)
+class __$$TxOptionsImplCopyWithImpl<$Res>
+    extends _$TxOptionsCopyWithImpl<$Res, _$TxOptionsImpl>
+    implements _$$TxOptionsImplCopyWith<$Res> {
+  __$$TxOptionsImplCopyWithImpl(
+      _$TxOptionsImpl _value, $Res Function(_$TxOptionsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -97,7 +98,7 @@ class __$$_TxOptionsCopyWithImpl<$Res>
     Object? feeIncrementPercentage = null,
     Object? withRetry = null,
   }) {
-    return _then(_$_TxOptions(
+    return _then(_$TxOptionsImpl(
       feePerGas: null == feePerGas
           ? _value.feePerGas
           : feePerGas // ignore: cast_nullable_to_non_nullable
@@ -116,14 +117,14 @@ class __$$_TxOptionsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TxOptions implements _TxOptions {
-  _$_TxOptions(
+class _$TxOptionsImpl implements _TxOptions {
+  _$TxOptionsImpl(
       {required this.feePerGas,
       this.feeIncrementPercentage = 10,
       required this.withRetry});
 
-  factory _$_TxOptions.fromJson(Map<String, dynamic> json) =>
-      _$$_TxOptionsFromJson(json);
+  factory _$TxOptionsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TxOptionsImplFromJson(json);
 
   @override
   final String feePerGas;
@@ -142,7 +143,7 @@ class _$_TxOptions implements _TxOptions {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TxOptions &&
+            other is _$TxOptionsImpl &&
             (identical(other.feePerGas, feePerGas) ||
                 other.feePerGas == feePerGas) &&
             (identical(other.feeIncrementPercentage, feeIncrementPercentage) ||
@@ -159,12 +160,12 @@ class _$_TxOptions implements _TxOptions {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TxOptionsCopyWith<_$_TxOptions> get copyWith =>
-      __$$_TxOptionsCopyWithImpl<_$_TxOptions>(this, _$identity);
+  _$$TxOptionsImplCopyWith<_$TxOptionsImpl> get copyWith =>
+      __$$TxOptionsImplCopyWithImpl<_$TxOptionsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TxOptionsToJson(
+    return _$$TxOptionsImplToJson(
       this,
     );
   }
@@ -174,10 +175,10 @@ abstract class _TxOptions implements TxOptions {
   factory _TxOptions(
       {required final String feePerGas,
       final int feeIncrementPercentage,
-      required final bool withRetry}) = _$_TxOptions;
+      required final bool withRetry}) = _$TxOptionsImpl;
 
   factory _TxOptions.fromJson(Map<String, dynamic> json) =
-      _$_TxOptions.fromJson;
+      _$TxOptionsImpl.fromJson;
 
   @override
   String get feePerGas;
@@ -187,6 +188,6 @@ abstract class _TxOptions implements TxOptions {
   bool get withRetry;
   @override
   @JsonKey(ignore: true)
-  _$$_TxOptionsCopyWith<_$_TxOptions> get copyWith =>
+  _$$TxOptionsImplCopyWith<_$TxOptionsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -107,11 +107,11 @@ class _$ActionResultCopyWithImpl<$Res, $Val extends ActionResult>
 }
 
 /// @nodoc
-abstract class _$$_ActionResultCopyWith<$Res>
+abstract class _$$ActionResultImplCopyWith<$Res>
     implements $ActionResultCopyWith<$Res> {
-  factory _$$_ActionResultCopyWith(
-          _$_ActionResult value, $Res Function(_$_ActionResult) then) =
-      __$$_ActionResultCopyWithImpl<$Res>;
+  factory _$$ActionResultImplCopyWith(
+          _$ActionResultImpl value, $Res Function(_$ActionResultImpl) then) =
+      __$$ActionResultImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -125,11 +125,11 @@ abstract class _$$_ActionResultCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ActionResultCopyWithImpl<$Res>
-    extends _$ActionResultCopyWithImpl<$Res, _$_ActionResult>
-    implements _$$_ActionResultCopyWith<$Res> {
-  __$$_ActionResultCopyWithImpl(
-      _$_ActionResult _value, $Res Function(_$_ActionResult) _then)
+class __$$ActionResultImplCopyWithImpl<$Res>
+    extends _$ActionResultCopyWithImpl<$Res, _$ActionResultImpl>
+    implements _$$ActionResultImplCopyWith<$Res> {
+  __$$ActionResultImplCopyWithImpl(
+      _$ActionResultImpl _value, $Res Function(_$ActionResultImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -143,7 +143,7 @@ class __$$_ActionResultCopyWithImpl<$Res>
     Object? totalPages = null,
     Object? actions = null,
   }) {
-    return _then(_$_ActionResult(
+    return _then(_$ActionResultImpl(
       hasNextPage: null == hasNextPage
           ? _value.hasNextPage
           : hasNextPage // ignore: cast_nullable_to_non_nullable
@@ -178,8 +178,8 @@ class __$$_ActionResultCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ActionResult implements _ActionResult {
-  _$_ActionResult(
+class _$ActionResultImpl implements _ActionResult {
+  _$ActionResultImpl(
       {required this.hasNextPage,
       required this.hasPrevPage,
       required this.nextPage,
@@ -188,8 +188,8 @@ class _$_ActionResult implements _ActionResult {
       required this.totalPages,
       @ActionsConverter() @JsonKey(name: 'docs') required this.actions});
 
-  factory _$_ActionResult.fromJson(Map<String, dynamic> json) =>
-      _$$_ActionResultFromJson(json);
+  factory _$ActionResultImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ActionResultImplFromJson(json);
 
   @override
   final bool hasNextPage;
@@ -217,7 +217,7 @@ class _$_ActionResult implements _ActionResult {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ActionResult &&
+            other is _$ActionResultImpl &&
             (identical(other.hasNextPage, hasNextPage) ||
                 other.hasNextPage == hasNextPage) &&
             (identical(other.hasPrevPage, hasPrevPage) ||
@@ -247,12 +247,12 @@ class _$_ActionResult implements _ActionResult {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ActionResultCopyWith<_$_ActionResult> get copyWith =>
-      __$$_ActionResultCopyWithImpl<_$_ActionResult>(this, _$identity);
+  _$$ActionResultImplCopyWith<_$ActionResultImpl> get copyWith =>
+      __$$ActionResultImplCopyWithImpl<_$ActionResultImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ActionResultToJson(
+    return _$$ActionResultImplToJson(
       this,
     );
   }
@@ -268,10 +268,10 @@ abstract class _ActionResult implements ActionResult {
       required final num totalPages,
       @ActionsConverter()
       @JsonKey(name: 'docs')
-      required final List<Action> actions}) = _$_ActionResult;
+      required final List<Action> actions}) = _$ActionResultImpl;
 
   factory _ActionResult.fromJson(Map<String, dynamic> json) =
-      _$_ActionResult.fromJson;
+      _$ActionResultImpl.fromJson;
 
   @override
   bool get hasNextPage;
@@ -291,6 +291,6 @@ abstract class _ActionResult implements ActionResult {
   List<Action> get actions;
   @override
   @JsonKey(ignore: true)
-  _$$_ActionResultCopyWith<_$_ActionResult> get copyWith =>
+  _$$ActionResultImplCopyWith<_$ActionResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

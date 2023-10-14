@@ -6,8 +6,9 @@ part of 'wallet_action.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$BatchTransaction _$$BatchTransactionFromJson(Map<String, dynamic> json) =>
-    _$BatchTransaction(
+_$BatchTransactionImpl _$$BatchTransactionImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BatchTransactionImpl(
       timestamp: json['updatedAt'] == null
           ? 0
           : const TimestampConverter().fromJson(json['updatedAt'] as String),
@@ -28,7 +29,8 @@ _$BatchTransaction _$$BatchTransactionFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$BatchTransactionToJson(_$BatchTransaction instance) =>
+Map<String, dynamic> _$$BatchTransactionImplToJson(
+        _$BatchTransactionImpl instance) =>
     <String, dynamic>{
       'updatedAt': const TimestampConverter().toJson(instance.timestamp),
       '_id': instance.id,
@@ -42,8 +44,8 @@ Map<String, dynamic> _$$BatchTransactionToJson(_$BatchTransaction instance) =>
       'received': instance.received.map((e) => e.toJson()).toList(),
     };
 
-_$TokenTransfer _$$TokenTransferFromJson(Map<String, dynamic> json) =>
-    _$TokenTransfer(
+_$TokenTransferImpl _$$TokenTransferImplFromJson(Map<String, dynamic> json) =>
+    _$TokenTransferImpl(
       timestamp: json['updatedAt'] == null
           ? 0
           : const TimestampConverter().fromJson(json['updatedAt'] as String),
@@ -64,7 +66,7 @@ _$TokenTransfer _$$TokenTransferFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$TokenTransferToJson(_$TokenTransfer instance) =>
+Map<String, dynamic> _$$TokenTransferImplToJson(_$TokenTransferImpl instance) =>
     <String, dynamic>{
       'updatedAt': const TimestampConverter().toJson(instance.timestamp),
       '_id': instance.id,
@@ -78,7 +80,8 @@ Map<String, dynamic> _$$TokenTransferToJson(_$TokenTransfer instance) =>
       'received': instance.received.map((e) => e.toJson()).toList(),
     };
 
-_$SwapTokens _$$SwapTokensFromJson(Map<String, dynamic> json) => _$SwapTokens(
+_$SwapTokensImpl _$$SwapTokensImplFromJson(Map<String, dynamic> json) =>
+    _$SwapTokensImpl(
       timestamp: json['updatedAt'] == null
           ? 0
           : const TimestampConverter().fromJson(json['updatedAt'] as String),
@@ -99,7 +102,7 @@ _$SwapTokens _$$SwapTokensFromJson(Map<String, dynamic> json) => _$SwapTokens(
           const [],
     );
 
-Map<String, dynamic> _$$SwapTokensToJson(_$SwapTokens instance) =>
+Map<String, dynamic> _$$SwapTokensImplToJson(_$SwapTokensImpl instance) =>
     <String, dynamic>{
       'updatedAt': const TimestampConverter().toJson(instance.timestamp),
       '_id': instance.id,
@@ -113,8 +116,8 @@ Map<String, dynamic> _$$SwapTokensToJson(_$SwapTokens instance) =>
       'received': instance.received.map((e) => e.toJson()).toList(),
     };
 
-_$NftTransfer _$$NftTransferFromJson(Map<String, dynamic> json) =>
-    _$NftTransfer(
+_$NftTransferImpl _$$NftTransferImplFromJson(Map<String, dynamic> json) =>
+    _$NftTransferImpl(
       timestamp: json['updatedAt'] == null
           ? 0
           : const TimestampConverter().fromJson(json['updatedAt'] as String),
@@ -135,7 +138,7 @@ _$NftTransfer _$$NftTransferFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$NftTransferToJson(_$NftTransfer instance) =>
+Map<String, dynamic> _$$NftTransferImplToJson(_$NftTransferImpl instance) =>
     <String, dynamic>{
       'updatedAt': const TimestampConverter().toJson(instance.timestamp),
       '_id': instance.id,
@@ -149,8 +152,8 @@ Map<String, dynamic> _$$NftTransferToJson(_$NftTransfer instance) =>
       'received': instance.received.map((e) => e.toJson()).toList(),
     };
 
-_$ApproveToken _$$ApproveTokenFromJson(Map<String, dynamic> json) =>
-    _$ApproveToken(
+_$ApproveTokenImpl _$$ApproveTokenImplFromJson(Map<String, dynamic> json) =>
+    _$ApproveTokenImpl(
       timestamp: json['updatedAt'] == null
           ? 0
           : const TimestampConverter().fromJson(json['updatedAt'] as String),
@@ -165,9 +168,13 @@ _$ApproveToken _$$ApproveTokenFromJson(Map<String, dynamic> json) =>
               ?.map((e) => TokenEvent.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      received: (json['received'] as List<dynamic>?)
+              ?.map((e) => TokenEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
-Map<String, dynamic> _$$ApproveTokenToJson(_$ApproveToken instance) =>
+Map<String, dynamic> _$$ApproveTokenImplToJson(_$ApproveTokenImpl instance) =>
     <String, dynamic>{
       'updatedAt': const TimestampConverter().toJson(instance.timestamp),
       '_id': instance.id,
@@ -178,10 +185,12 @@ Map<String, dynamic> _$$ApproveTokenToJson(_$ApproveToken instance) =>
       'userOpHash': instance.userOpHash,
       'description': instance.description,
       'sent': instance.sent.map((e) => e.toJson()).toList(),
+      'received': instance.received.map((e) => e.toJson()).toList(),
     };
 
-_$StakeTokensAction _$$StakeTokensActionFromJson(Map<String, dynamic> json) =>
-    _$StakeTokensAction(
+_$StakeTokensActionImpl _$$StakeTokensActionImplFromJson(
+        Map<String, dynamic> json) =>
+    _$StakeTokensActionImpl(
       timestamp: json['updatedAt'] == null
           ? 0
           : const TimestampConverter().fromJson(json['updatedAt'] as String),
@@ -202,7 +211,8 @@ _$StakeTokensAction _$$StakeTokensActionFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$StakeTokensActionToJson(_$StakeTokensAction instance) =>
+Map<String, dynamic> _$$StakeTokensActionImplToJson(
+        _$StakeTokensActionImpl instance) =>
     <String, dynamic>{
       'updatedAt': const TimestampConverter().toJson(instance.timestamp),
       '_id': instance.id,
@@ -216,9 +226,9 @@ Map<String, dynamic> _$$StakeTokensActionToJson(_$StakeTokensAction instance) =>
       'received': instance.received.map((e) => e.toJson()).toList(),
     };
 
-_$UnstakeTokensAction _$$UnstakeTokensActionFromJson(
+_$UnstakeTokensActionImpl _$$UnstakeTokensActionImplFromJson(
         Map<String, dynamic> json) =>
-    _$UnstakeTokensAction(
+    _$UnstakeTokensActionImpl(
       timestamp: json['updatedAt'] == null
           ? 0
           : const TimestampConverter().fromJson(json['updatedAt'] as String),
@@ -239,8 +249,8 @@ _$UnstakeTokensAction _$$UnstakeTokensActionFromJson(
           const [],
     );
 
-Map<String, dynamic> _$$UnstakeTokensActionToJson(
-        _$UnstakeTokensAction instance) =>
+Map<String, dynamic> _$$UnstakeTokensActionImplToJson(
+        _$UnstakeTokensActionImpl instance) =>
     <String, dynamic>{
       'updatedAt': const TimestampConverter().toJson(instance.timestamp),
       '_id': instance.id,

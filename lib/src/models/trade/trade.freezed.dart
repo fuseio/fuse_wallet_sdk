@@ -110,9 +110,10 @@ class _$TradeCopyWithImpl<$Res, $Val extends Trade>
 }
 
 /// @nodoc
-abstract class _$$_TradeCopyWith<$Res> implements $TradeCopyWith<$Res> {
-  factory _$$_TradeCopyWith(_$_Trade value, $Res Function(_$_Trade) then) =
-      __$$_TradeCopyWithImpl<$Res>;
+abstract class _$$TradeImplCopyWith<$Res> implements $TradeCopyWith<$Res> {
+  factory _$$TradeImplCopyWith(
+          _$TradeImpl value, $Res Function(_$TradeImpl) then) =
+      __$$TradeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -127,9 +128,11 @@ abstract class _$$_TradeCopyWith<$Res> implements $TradeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TradeCopyWithImpl<$Res> extends _$TradeCopyWithImpl<$Res, _$_Trade>
-    implements _$$_TradeCopyWith<$Res> {
-  __$$_TradeCopyWithImpl(_$_Trade _value, $Res Function(_$_Trade) _then)
+class __$$TradeImplCopyWithImpl<$Res>
+    extends _$TradeCopyWithImpl<$Res, _$TradeImpl>
+    implements _$$TradeImplCopyWith<$Res> {
+  __$$TradeImplCopyWithImpl(
+      _$TradeImpl _value, $Res Function(_$TradeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -144,7 +147,7 @@ class __$$_TradeCopyWithImpl<$Res> extends _$TradeCopyWithImpl<$Res, _$_Trade>
     Object? nextMidPrice = null,
     Object? priceImpact = null,
   }) {
-    return _then(_$_Trade(
+    return _then(_$TradeImpl(
       inputAmount: null == inputAmount
           ? _value.inputAmount
           : inputAmount // ignore: cast_nullable_to_non_nullable
@@ -183,8 +186,8 @@ class __$$_TradeCopyWithImpl<$Res> extends _$TradeCopyWithImpl<$Res, _$_Trade>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Trade implements _Trade {
-  _$_Trade(
+class _$TradeImpl implements _Trade {
+  _$TradeImpl(
       {required this.inputAmount,
       required this.outputAmount,
       required this.route,
@@ -194,8 +197,8 @@ class _$_Trade implements _Trade {
       required this.nextMidPrice,
       required this.priceImpact});
 
-  factory _$_Trade.fromJson(Map<String, dynamic> json) =>
-      _$$_TradeFromJson(json);
+  factory _$TradeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TradeImplFromJson(json);
 
   @override
   final String inputAmount;
@@ -223,7 +226,7 @@ class _$_Trade implements _Trade {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Trade &&
+            other is _$TradeImpl &&
             (identical(other.inputAmount, inputAmount) ||
                 other.inputAmount == inputAmount) &&
             (identical(other.outputAmount, outputAmount) ||
@@ -257,12 +260,12 @@ class _$_Trade implements _Trade {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TradeCopyWith<_$_Trade> get copyWith =>
-      __$$_TradeCopyWithImpl<_$_Trade>(this, _$identity);
+  _$$TradeImplCopyWith<_$TradeImpl> get copyWith =>
+      __$$TradeImplCopyWithImpl<_$TradeImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TradeToJson(
+    return _$$TradeImplToJson(
       this,
     );
   }
@@ -277,9 +280,9 @@ abstract class _Trade implements Trade {
       required final String outputToken,
       required final String executionPrice,
       required final String nextMidPrice,
-      required final String priceImpact}) = _$_Trade;
+      required final String priceImpact}) = _$TradeImpl;
 
-  factory _Trade.fromJson(Map<String, dynamic> json) = _$_Trade.fromJson;
+  factory _Trade.fromJson(Map<String, dynamic> json) = _$TradeImpl.fromJson;
 
   @override
   String get inputAmount;
@@ -299,6 +302,6 @@ abstract class _Trade implements Trade {
   String get priceImpact;
   @override
   @JsonKey(ignore: true)
-  _$$_TradeCopyWith<_$_Trade> get copyWith =>
+  _$$TradeImplCopyWith<_$TradeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

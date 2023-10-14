@@ -140,6 +140,7 @@ class WalletAction with _$WalletAction implements Comparable<WalletAction> {
     required String userOpHash,
     required String description,
     @Default([]) List<TokenEvent> sent,
+    @Default([]) List<TokenEvent> received,
   }) = ApproveToken;
 
   /// Represents a token staking action on the blockchain.

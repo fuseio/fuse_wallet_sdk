@@ -6,13 +6,14 @@ part of 'transaction_options.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TxOptions _$$_TxOptionsFromJson(Map<String, dynamic> json) => _$_TxOptions(
+_$TxOptionsImpl _$$TxOptionsImplFromJson(Map<String, dynamic> json) =>
+    _$TxOptionsImpl(
       feePerGas: json['feePerGas'] as String,
       feeIncrementPercentage: json['feeIncrementPercentage'] as int? ?? 10,
       withRetry: json['withRetry'] as bool,
     );
 
-Map<String, dynamic> _$$_TxOptionsToJson(_$_TxOptions instance) =>
+Map<String, dynamic> _$$TxOptionsImplToJson(_$TxOptionsImpl instance) =>
     <String, dynamic>{
       'feePerGas': instance.feePerGas,
       'feeIncrementPercentage': instance.feeIncrementPercentage,

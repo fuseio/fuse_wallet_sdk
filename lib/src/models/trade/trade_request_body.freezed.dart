@@ -84,11 +84,11 @@ class _$TradeRequestBodyCopyWithImpl<$Res, $Val extends TradeRequestBody>
 }
 
 /// @nodoc
-abstract class _$$_TradeRequestBodyCopyWith<$Res>
+abstract class _$$TradeRequestBodyImplCopyWith<$Res>
     implements $TradeRequestBodyCopyWith<$Res> {
-  factory _$$_TradeRequestBodyCopyWith(
-          _$_TradeRequestBody value, $Res Function(_$_TradeRequestBody) then) =
-      __$$_TradeRequestBodyCopyWithImpl<$Res>;
+  factory _$$TradeRequestBodyImplCopyWith(_$TradeRequestBodyImpl value,
+          $Res Function(_$TradeRequestBodyImpl) then) =
+      __$$TradeRequestBodyImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -99,11 +99,11 @@ abstract class _$$_TradeRequestBodyCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TradeRequestBodyCopyWithImpl<$Res>
-    extends _$TradeRequestBodyCopyWithImpl<$Res, _$_TradeRequestBody>
-    implements _$$_TradeRequestBodyCopyWith<$Res> {
-  __$$_TradeRequestBodyCopyWithImpl(
-      _$_TradeRequestBody _value, $Res Function(_$_TradeRequestBody) _then)
+class __$$TradeRequestBodyImplCopyWithImpl<$Res>
+    extends _$TradeRequestBodyCopyWithImpl<$Res, _$TradeRequestBodyImpl>
+    implements _$$TradeRequestBodyImplCopyWith<$Res> {
+  __$$TradeRequestBodyImplCopyWithImpl(_$TradeRequestBodyImpl _value,
+      $Res Function(_$TradeRequestBodyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,7 +114,7 @@ class __$$_TradeRequestBodyCopyWithImpl<$Res>
     Object? amountIn = null,
     Object? recipient = null,
   }) {
-    return _then(_$_TradeRequestBody(
+    return _then(_$TradeRequestBodyImpl(
       currencyIn: null == currencyIn
           ? _value.currencyIn
           : currencyIn // ignore: cast_nullable_to_non_nullable
@@ -137,15 +137,15 @@ class __$$_TradeRequestBodyCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TradeRequestBody implements _TradeRequestBody {
-  _$_TradeRequestBody(
+class _$TradeRequestBodyImpl implements _TradeRequestBody {
+  _$TradeRequestBodyImpl(
       {this.currencyIn = '',
       this.currencyOut = '',
       this.amountIn = '',
       this.recipient = ''});
 
-  factory _$_TradeRequestBody.fromJson(Map<String, dynamic> json) =>
-      _$$_TradeRequestBodyFromJson(json);
+  factory _$TradeRequestBodyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TradeRequestBodyImplFromJson(json);
 
   @override
   @JsonKey()
@@ -169,7 +169,7 @@ class _$_TradeRequestBody implements _TradeRequestBody {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TradeRequestBody &&
+            other is _$TradeRequestBodyImpl &&
             (identical(other.currencyIn, currencyIn) ||
                 other.currencyIn == currencyIn) &&
             (identical(other.currencyOut, currencyOut) ||
@@ -188,12 +188,13 @@ class _$_TradeRequestBody implements _TradeRequestBody {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TradeRequestBodyCopyWith<_$_TradeRequestBody> get copyWith =>
-      __$$_TradeRequestBodyCopyWithImpl<_$_TradeRequestBody>(this, _$identity);
+  _$$TradeRequestBodyImplCopyWith<_$TradeRequestBodyImpl> get copyWith =>
+      __$$TradeRequestBodyImplCopyWithImpl<_$TradeRequestBodyImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TradeRequestBodyToJson(
+    return _$$TradeRequestBodyImplToJson(
       this,
     );
   }
@@ -204,10 +205,10 @@ abstract class _TradeRequestBody implements TradeRequestBody {
       {final String currencyIn,
       final String currencyOut,
       final String amountIn,
-      final String recipient}) = _$_TradeRequestBody;
+      final String recipient}) = _$TradeRequestBodyImpl;
 
   factory _TradeRequestBody.fromJson(Map<String, dynamic> json) =
-      _$_TradeRequestBody.fromJson;
+      _$TradeRequestBodyImpl.fromJson;
 
   @override
   String get currencyIn;
@@ -219,6 +220,6 @@ abstract class _TradeRequestBody implements TradeRequestBody {
   String get recipient;
   @override
   @JsonKey(ignore: true)
-  _$$_TradeRequestBodyCopyWith<_$_TradeRequestBody> get copyWith =>
+  _$$TradeRequestBodyImplCopyWith<_$TradeRequestBodyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

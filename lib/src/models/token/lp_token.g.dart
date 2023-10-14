@@ -6,16 +6,16 @@ part of 'lp_token.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LpUnderlyingTokens _$$_LpUnderlyingTokensFromJson(
+_$LpUnderlyingTokensImpl _$$LpUnderlyingTokensImplFromJson(
         Map<String, dynamic> json) =>
-    _$_LpUnderlyingTokens(
+    _$LpUnderlyingTokensImpl(
       symbol: json['symbol'] as String,
       name: nameFromJson(json['name'] as String),
       address: addressFromJson(json['address'] as String),
     );
 
-Map<String, dynamic> _$$_LpUnderlyingTokensToJson(
-        _$_LpUnderlyingTokens instance) =>
+Map<String, dynamic> _$$LpUnderlyingTokensImplToJson(
+        _$LpUnderlyingTokensImpl instance) =>
     <String, dynamic>{
       'symbol': instance.symbol,
       'name': instance.name,

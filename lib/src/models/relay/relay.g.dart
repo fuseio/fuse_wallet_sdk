@@ -6,7 +6,7 @@ part of 'relay.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Relay _$$_RelayFromJson(Map<String, dynamic> json) => _$_Relay(
+_$RelayImpl _$$RelayImplFromJson(Map<String, dynamic> json) => _$RelayImpl(
       network: json['network'] as String? ?? 'fuse',
       gasPrice: json['gasPrice'] as int? ?? 0,
       gasLimit: json['gasLimit'] as int? ?? 700000,
@@ -22,7 +22,8 @@ _$_Relay _$$_RelayFromJson(Map<String, dynamic> json) => _$_Relay(
       externalId: json['externalId'] as String?,
     );
 
-Map<String, dynamic> _$$_RelayToJson(_$_Relay instance) => <String, dynamic>{
+Map<String, dynamic> _$$RelayImplToJson(_$RelayImpl instance) =>
+    <String, dynamic>{
       'network': instance.network,
       'gasPrice': instance.gasPrice,
       'gasLimit': instance.gasLimit,

@@ -74,22 +74,22 @@ class _$UnstakeRequestBodyCopyWithImpl<$Res, $Val extends UnstakeRequestBody>
 }
 
 /// @nodoc
-abstract class _$$_UnstakeRequestBodyCopyWith<$Res>
+abstract class _$$UnstakeRequestBodyImplCopyWith<$Res>
     implements $UnstakeRequestBodyCopyWith<$Res> {
-  factory _$$_UnstakeRequestBodyCopyWith(_$_UnstakeRequestBody value,
-          $Res Function(_$_UnstakeRequestBody) then) =
-      __$$_UnstakeRequestBodyCopyWithImpl<$Res>;
+  factory _$$UnstakeRequestBodyImplCopyWith(_$UnstakeRequestBodyImpl value,
+          $Res Function(_$UnstakeRequestBodyImpl) then) =
+      __$$UnstakeRequestBodyImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String accountAddress, String tokenAmount, String tokenAddress});
 }
 
 /// @nodoc
-class __$$_UnstakeRequestBodyCopyWithImpl<$Res>
-    extends _$UnstakeRequestBodyCopyWithImpl<$Res, _$_UnstakeRequestBody>
-    implements _$$_UnstakeRequestBodyCopyWith<$Res> {
-  __$$_UnstakeRequestBodyCopyWithImpl(
-      _$_UnstakeRequestBody _value, $Res Function(_$_UnstakeRequestBody) _then)
+class __$$UnstakeRequestBodyImplCopyWithImpl<$Res>
+    extends _$UnstakeRequestBodyCopyWithImpl<$Res, _$UnstakeRequestBodyImpl>
+    implements _$$UnstakeRequestBodyImplCopyWith<$Res> {
+  __$$UnstakeRequestBodyImplCopyWithImpl(_$UnstakeRequestBodyImpl _value,
+      $Res Function(_$UnstakeRequestBodyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_UnstakeRequestBodyCopyWithImpl<$Res>
     Object? tokenAmount = null,
     Object? tokenAddress = null,
   }) {
-    return _then(_$_UnstakeRequestBody(
+    return _then(_$UnstakeRequestBodyImpl(
       accountAddress: null == accountAddress
           ? _value.accountAddress
           : accountAddress // ignore: cast_nullable_to_non_nullable
@@ -118,14 +118,14 @@ class __$$_UnstakeRequestBodyCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UnstakeRequestBody implements _UnstakeRequestBody {
-  _$_UnstakeRequestBody(
+class _$UnstakeRequestBodyImpl implements _UnstakeRequestBody {
+  _$UnstakeRequestBodyImpl(
       {required this.accountAddress,
       required this.tokenAmount,
       required this.tokenAddress});
 
-  factory _$_UnstakeRequestBody.fromJson(Map<String, dynamic> json) =>
-      _$$_UnstakeRequestBodyFromJson(json);
+  factory _$UnstakeRequestBodyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UnstakeRequestBodyImplFromJson(json);
 
   @override
   final String accountAddress;
@@ -143,7 +143,7 @@ class _$_UnstakeRequestBody implements _UnstakeRequestBody {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UnstakeRequestBody &&
+            other is _$UnstakeRequestBodyImpl &&
             (identical(other.accountAddress, accountAddress) ||
                 other.accountAddress == accountAddress) &&
             (identical(other.tokenAmount, tokenAmount) ||
@@ -160,13 +160,13 @@ class _$_UnstakeRequestBody implements _UnstakeRequestBody {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UnstakeRequestBodyCopyWith<_$_UnstakeRequestBody> get copyWith =>
-      __$$_UnstakeRequestBodyCopyWithImpl<_$_UnstakeRequestBody>(
+  _$$UnstakeRequestBodyImplCopyWith<_$UnstakeRequestBodyImpl> get copyWith =>
+      __$$UnstakeRequestBodyImplCopyWithImpl<_$UnstakeRequestBodyImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UnstakeRequestBodyToJson(
+    return _$$UnstakeRequestBodyImplToJson(
       this,
     );
   }
@@ -176,10 +176,10 @@ abstract class _UnstakeRequestBody implements UnstakeRequestBody {
   factory _UnstakeRequestBody(
       {required final String accountAddress,
       required final String tokenAmount,
-      required final String tokenAddress}) = _$_UnstakeRequestBody;
+      required final String tokenAddress}) = _$UnstakeRequestBodyImpl;
 
   factory _UnstakeRequestBody.fromJson(Map<String, dynamic> json) =
-      _$_UnstakeRequestBody.fromJson;
+      _$UnstakeRequestBodyImpl.fromJson;
 
   @override
   String get accountAddress;
@@ -189,7 +189,7 @@ abstract class _UnstakeRequestBody implements UnstakeRequestBody {
   String get tokenAddress;
   @override
   @JsonKey(ignore: true)
-  _$$_UnstakeRequestBodyCopyWith<_$_UnstakeRequestBody> get copyWith =>
+  _$$UnstakeRequestBodyImplCopyWith<_$UnstakeRequestBodyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -247,22 +247,22 @@ class _$UnstakeResponseBodyCopyWithImpl<$Res, $Val extends UnstakeResponseBody>
 }
 
 /// @nodoc
-abstract class _$$_UnstakeResponseBodyCopyWith<$Res>
+abstract class _$$UnstakeResponseBodyImplCopyWith<$Res>
     implements $UnstakeResponseBodyCopyWith<$Res> {
-  factory _$$_UnstakeResponseBodyCopyWith(_$_UnstakeResponseBody value,
-          $Res Function(_$_UnstakeResponseBody) then) =
-      __$$_UnstakeResponseBodyCopyWithImpl<$Res>;
+  factory _$$UnstakeResponseBodyImplCopyWith(_$UnstakeResponseBodyImpl value,
+          $Res Function(_$UnstakeResponseBodyImpl) then) =
+      __$$UnstakeResponseBodyImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String contractAddress, String encodedABI});
 }
 
 /// @nodoc
-class __$$_UnstakeResponseBodyCopyWithImpl<$Res>
-    extends _$UnstakeResponseBodyCopyWithImpl<$Res, _$_UnstakeResponseBody>
-    implements _$$_UnstakeResponseBodyCopyWith<$Res> {
-  __$$_UnstakeResponseBodyCopyWithImpl(_$_UnstakeResponseBody _value,
-      $Res Function(_$_UnstakeResponseBody) _then)
+class __$$UnstakeResponseBodyImplCopyWithImpl<$Res>
+    extends _$UnstakeResponseBodyCopyWithImpl<$Res, _$UnstakeResponseBodyImpl>
+    implements _$$UnstakeResponseBodyImplCopyWith<$Res> {
+  __$$UnstakeResponseBodyImplCopyWithImpl(_$UnstakeResponseBodyImpl _value,
+      $Res Function(_$UnstakeResponseBodyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -271,7 +271,7 @@ class __$$_UnstakeResponseBodyCopyWithImpl<$Res>
     Object? contractAddress = null,
     Object? encodedABI = null,
   }) {
-    return _then(_$_UnstakeResponseBody(
+    return _then(_$UnstakeResponseBodyImpl(
       contractAddress: null == contractAddress
           ? _value.contractAddress
           : contractAddress // ignore: cast_nullable_to_non_nullable
@@ -286,12 +286,12 @@ class __$$_UnstakeResponseBodyCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UnstakeResponseBody implements _UnstakeResponseBody {
-  _$_UnstakeResponseBody(
+class _$UnstakeResponseBodyImpl implements _UnstakeResponseBody {
+  _$UnstakeResponseBodyImpl(
       {required this.contractAddress, required this.encodedABI});
 
-  factory _$_UnstakeResponseBody.fromJson(Map<String, dynamic> json) =>
-      _$$_UnstakeResponseBodyFromJson(json);
+  factory _$UnstakeResponseBodyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UnstakeResponseBodyImplFromJson(json);
 
   @override
   final String contractAddress;
@@ -307,7 +307,7 @@ class _$_UnstakeResponseBody implements _UnstakeResponseBody {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UnstakeResponseBody &&
+            other is _$UnstakeResponseBodyImpl &&
             (identical(other.contractAddress, contractAddress) ||
                 other.contractAddress == contractAddress) &&
             (identical(other.encodedABI, encodedABI) ||
@@ -321,13 +321,13 @@ class _$_UnstakeResponseBody implements _UnstakeResponseBody {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UnstakeResponseBodyCopyWith<_$_UnstakeResponseBody> get copyWith =>
-      __$$_UnstakeResponseBodyCopyWithImpl<_$_UnstakeResponseBody>(
+  _$$UnstakeResponseBodyImplCopyWith<_$UnstakeResponseBodyImpl> get copyWith =>
+      __$$UnstakeResponseBodyImplCopyWithImpl<_$UnstakeResponseBodyImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UnstakeResponseBodyToJson(
+    return _$$UnstakeResponseBodyImplToJson(
       this,
     );
   }
@@ -336,10 +336,10 @@ class _$_UnstakeResponseBody implements _UnstakeResponseBody {
 abstract class _UnstakeResponseBody implements UnstakeResponseBody {
   factory _UnstakeResponseBody(
       {required final String contractAddress,
-      required final String encodedABI}) = _$_UnstakeResponseBody;
+      required final String encodedABI}) = _$UnstakeResponseBodyImpl;
 
   factory _UnstakeResponseBody.fromJson(Map<String, dynamic> json) =
-      _$_UnstakeResponseBody.fromJson;
+      _$UnstakeResponseBodyImpl.fromJson;
 
   @override
   String get contractAddress;
@@ -347,6 +347,6 @@ abstract class _UnstakeResponseBody implements UnstakeResponseBody {
   String get encodedABI;
   @override
   @JsonKey(ignore: true)
-  _$$_UnstakeResponseBodyCopyWith<_$_UnstakeResponseBody> get copyWith =>
+  _$$UnstakeResponseBodyImplCopyWith<_$UnstakeResponseBodyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

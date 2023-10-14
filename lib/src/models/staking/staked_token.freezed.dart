@@ -119,11 +119,11 @@ class _$StakedTokenCopyWithImpl<$Res, $Val extends StakedToken>
 }
 
 /// @nodoc
-abstract class _$$_StakedTokenCopyWith<$Res>
+abstract class _$$StakedTokenImplCopyWith<$Res>
     implements $StakedTokenCopyWith<$Res> {
-  factory _$$_StakedTokenCopyWith(
-          _$_StakedToken value, $Res Function(_$_StakedToken) then) =
-      __$$_StakedTokenCopyWithImpl<$Res>;
+  factory _$$StakedTokenImplCopyWith(
+          _$StakedTokenImpl value, $Res Function(_$StakedTokenImpl) then) =
+      __$$StakedTokenImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -139,11 +139,11 @@ abstract class _$$_StakedTokenCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_StakedTokenCopyWithImpl<$Res>
-    extends _$StakedTokenCopyWithImpl<$Res, _$_StakedToken>
-    implements _$$_StakedTokenCopyWith<$Res> {
-  __$$_StakedTokenCopyWithImpl(
-      _$_StakedToken _value, $Res Function(_$_StakedToken) _then)
+class __$$StakedTokenImplCopyWithImpl<$Res>
+    extends _$StakedTokenCopyWithImpl<$Res, _$StakedTokenImpl>
+    implements _$$StakedTokenImplCopyWith<$Res> {
+  __$$StakedTokenImplCopyWithImpl(
+      _$StakedTokenImpl _value, $Res Function(_$StakedTokenImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -159,7 +159,7 @@ class __$$_StakedTokenCopyWithImpl<$Res>
     Object? earnedAmountUSD = null,
     Object? stakingApr = null,
   }) {
-    return _then(_$_StakedToken(
+    return _then(_$StakedTokenImpl(
       tokenAddress: null == tokenAddress
           ? _value.tokenAddress
           : tokenAddress // ignore: cast_nullable_to_non_nullable
@@ -202,8 +202,8 @@ class __$$_StakedTokenCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_StakedToken implements _StakedToken {
-  _$_StakedToken(
+class _$StakedTokenImpl implements _StakedToken {
+  _$StakedTokenImpl(
       {required this.tokenAddress,
       required this.tokenSymbol,
       required this.tokenName,
@@ -214,8 +214,8 @@ class _$_StakedToken implements _StakedToken {
       required this.earnedAmountUSD,
       required this.stakingApr});
 
-  factory _$_StakedToken.fromJson(Map<String, dynamic> json) =>
-      _$$_StakedTokenFromJson(json);
+  factory _$StakedTokenImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StakedTokenImplFromJson(json);
 
   @override
   final String tokenAddress;
@@ -245,7 +245,7 @@ class _$_StakedToken implements _StakedToken {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StakedToken &&
+            other is _$StakedTokenImpl &&
             (identical(other.tokenAddress, tokenAddress) ||
                 other.tokenAddress == tokenAddress) &&
             (identical(other.tokenSymbol, tokenSymbol) ||
@@ -283,12 +283,12 @@ class _$_StakedToken implements _StakedToken {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StakedTokenCopyWith<_$_StakedToken> get copyWith =>
-      __$$_StakedTokenCopyWithImpl<_$_StakedToken>(this, _$identity);
+  _$$StakedTokenImplCopyWith<_$StakedTokenImpl> get copyWith =>
+      __$$StakedTokenImplCopyWithImpl<_$StakedTokenImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StakedTokenToJson(
+    return _$$StakedTokenImplToJson(
       this,
     );
   }
@@ -304,10 +304,10 @@ abstract class _StakedToken implements StakedToken {
       required final String unStakeTokenAddress,
       required final double stakedAmountUSD,
       required final double earnedAmountUSD,
-      required final double stakingApr}) = _$_StakedToken;
+      required final double stakingApr}) = _$StakedTokenImpl;
 
   factory _StakedToken.fromJson(Map<String, dynamic> json) =
-      _$_StakedToken.fromJson;
+      _$StakedTokenImpl.fromJson;
 
   @override
   String get tokenAddress;
@@ -329,7 +329,7 @@ abstract class _StakedToken implements StakedToken {
   double get stakingApr;
   @override
   @JsonKey(ignore: true)
-  _$$_StakedTokenCopyWith<_$_StakedToken> get copyWith =>
+  _$$StakedTokenImplCopyWith<_$StakedTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -396,11 +396,11 @@ class _$StakedTokenResponseCopyWithImpl<$Res, $Val extends StakedTokenResponse>
 }
 
 /// @nodoc
-abstract class _$$_StakedTokenResponseCopyWith<$Res>
+abstract class _$$StakedTokenResponseImplCopyWith<$Res>
     implements $StakedTokenResponseCopyWith<$Res> {
-  factory _$$_StakedTokenResponseCopyWith(_$_StakedTokenResponse value,
-          $Res Function(_$_StakedTokenResponse) then) =
-      __$$_StakedTokenResponseCopyWithImpl<$Res>;
+  factory _$$StakedTokenResponseImplCopyWith(_$StakedTokenResponseImpl value,
+          $Res Function(_$StakedTokenResponseImpl) then) =
+      __$$StakedTokenResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -410,11 +410,11 @@ abstract class _$$_StakedTokenResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_StakedTokenResponseCopyWithImpl<$Res>
-    extends _$StakedTokenResponseCopyWithImpl<$Res, _$_StakedTokenResponse>
-    implements _$$_StakedTokenResponseCopyWith<$Res> {
-  __$$_StakedTokenResponseCopyWithImpl(_$_StakedTokenResponse _value,
-      $Res Function(_$_StakedTokenResponse) _then)
+class __$$StakedTokenResponseImplCopyWithImpl<$Res>
+    extends _$StakedTokenResponseCopyWithImpl<$Res, _$StakedTokenResponseImpl>
+    implements _$$StakedTokenResponseImplCopyWith<$Res> {
+  __$$StakedTokenResponseImplCopyWithImpl(_$StakedTokenResponseImpl _value,
+      $Res Function(_$StakedTokenResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -424,7 +424,7 @@ class __$$_StakedTokenResponseCopyWithImpl<$Res>
     Object? totalEarnedAmountUSD = null,
     Object? stakedTokens = null,
   }) {
-    return _then(_$_StakedTokenResponse(
+    return _then(_$StakedTokenResponseImpl(
       totalStakedAmountUSD: null == totalStakedAmountUSD
           ? _value.totalStakedAmountUSD
           : totalStakedAmountUSD // ignore: cast_nullable_to_non_nullable
@@ -443,14 +443,14 @@ class __$$_StakedTokenResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_StakedTokenResponse implements _StakedTokenResponse {
-  _$_StakedTokenResponse(
+class _$StakedTokenResponseImpl implements _StakedTokenResponse {
+  _$StakedTokenResponseImpl(
       {required this.totalStakedAmountUSD,
       required this.totalEarnedAmountUSD,
       required this.stakedTokens});
 
-  factory _$_StakedTokenResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_StakedTokenResponseFromJson(json);
+  factory _$StakedTokenResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StakedTokenResponseImplFromJson(json);
 
   @override
   final double totalStakedAmountUSD;
@@ -468,7 +468,7 @@ class _$_StakedTokenResponse implements _StakedTokenResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StakedTokenResponse &&
+            other is _$StakedTokenResponseImpl &&
             (identical(other.totalStakedAmountUSD, totalStakedAmountUSD) ||
                 other.totalStakedAmountUSD == totalStakedAmountUSD) &&
             (identical(other.totalEarnedAmountUSD, totalEarnedAmountUSD) ||
@@ -485,13 +485,13 @@ class _$_StakedTokenResponse implements _StakedTokenResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StakedTokenResponseCopyWith<_$_StakedTokenResponse> get copyWith =>
-      __$$_StakedTokenResponseCopyWithImpl<_$_StakedTokenResponse>(
+  _$$StakedTokenResponseImplCopyWith<_$StakedTokenResponseImpl> get copyWith =>
+      __$$StakedTokenResponseImplCopyWithImpl<_$StakedTokenResponseImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StakedTokenResponseToJson(
+    return _$$StakedTokenResponseImplToJson(
       this,
     );
   }
@@ -499,12 +499,13 @@ class _$_StakedTokenResponse implements _StakedTokenResponse {
 
 abstract class _StakedTokenResponse implements StakedTokenResponse {
   factory _StakedTokenResponse(
-      {required final double totalStakedAmountUSD,
-      required final double totalEarnedAmountUSD,
-      required final List<StakedToken> stakedTokens}) = _$_StakedTokenResponse;
+          {required final double totalStakedAmountUSD,
+          required final double totalEarnedAmountUSD,
+          required final List<StakedToken> stakedTokens}) =
+      _$StakedTokenResponseImpl;
 
   factory _StakedTokenResponse.fromJson(Map<String, dynamic> json) =
-      _$_StakedTokenResponse.fromJson;
+      _$StakedTokenResponseImpl.fromJson;
 
   @override
   double get totalStakedAmountUSD;
@@ -514,6 +515,6 @@ abstract class _StakedTokenResponse implements StakedTokenResponse {
   List<StakedToken> get stakedTokens;
   @override
   @JsonKey(ignore: true)
-  _$$_StakedTokenResponseCopyWith<_$_StakedTokenResponse> get copyWith =>
+  _$$StakedTokenResponseImplCopyWith<_$StakedTokenResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

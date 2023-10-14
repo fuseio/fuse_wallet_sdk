@@ -3,9 +3,8 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
-import 'package:web3dart/crypto.dart';
-
 import 'package:fuse_wallet_sdk/src/modules/modules.dart';
+import 'package:web3dart/crypto.dart';
 import 'package:web3dart/json_rpc.dart';
 
 /// The main SDK class for interacting with FuseBox.

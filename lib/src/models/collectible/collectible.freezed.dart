@@ -148,11 +148,11 @@ class _$CollectibleCopyWithImpl<$Res, $Val extends Collectible>
 }
 
 /// @nodoc
-abstract class _$$_CollectibleCopyWith<$Res>
+abstract class _$$CollectibleImplCopyWith<$Res>
     implements $CollectibleCopyWith<$Res> {
-  factory _$$_CollectibleCopyWith(
-          _$_Collectible value, $Res Function(_$_Collectible) then) =
-      __$$_CollectibleCopyWithImpl<$Res>;
+  factory _$$CollectibleImplCopyWith(
+          _$CollectibleImpl value, $Res Function(_$CollectibleImpl) then) =
+      __$$CollectibleImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -175,11 +175,11 @@ abstract class _$$_CollectibleCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CollectibleCopyWithImpl<$Res>
-    extends _$CollectibleCopyWithImpl<$Res, _$_Collectible>
-    implements _$$_CollectibleCopyWith<$Res> {
-  __$$_CollectibleCopyWithImpl(
-      _$_Collectible _value, $Res Function(_$_Collectible) _then)
+class __$$CollectibleImplCopyWithImpl<$Res>
+    extends _$CollectibleCopyWithImpl<$Res, _$CollectibleImpl>
+    implements _$$CollectibleImplCopyWith<$Res> {
+  __$$CollectibleImplCopyWithImpl(
+      _$CollectibleImpl _value, $Res Function(_$CollectibleImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -195,7 +195,7 @@ class __$$_CollectibleCopyWithImpl<$Res>
     Object? owner = null,
     Object? creator = null,
   }) {
-    return _then(_$_Collectible(
+    return _then(_$CollectibleImpl(
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -238,8 +238,8 @@ class __$$_CollectibleCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Collectible extends _Collectible {
-  _$_Collectible(
+class _$CollectibleImpl extends _Collectible {
+  _$CollectibleImpl(
       {this.description,
       this.name,
       this.imageURL,
@@ -251,8 +251,8 @@ class _$_Collectible extends _Collectible {
       required this.creator})
       : super._();
 
-  factory _$_Collectible.fromJson(Map<String, dynamic> json) =>
-      _$$_CollectibleFromJson(json);
+  factory _$CollectibleImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CollectibleImplFromJson(json);
 
   @override
   final String? description;
@@ -283,7 +283,7 @@ class _$_Collectible extends _Collectible {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Collectible &&
+            other is _$CollectibleImpl &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.name, name) || other.name == name) &&
@@ -308,12 +308,12 @@ class _$_Collectible extends _Collectible {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CollectibleCopyWith<_$_Collectible> get copyWith =>
-      __$$_CollectibleCopyWithImpl<_$_Collectible>(this, _$identity);
+  _$$CollectibleImplCopyWith<_$CollectibleImpl> get copyWith =>
+      __$$CollectibleImplCopyWithImpl<_$CollectibleImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CollectibleToJson(
+    return _$$CollectibleImplToJson(
       this,
     );
   }
@@ -329,11 +329,11 @@ abstract class _Collectible extends Collectible {
       required final String tokenId,
       required final Collection collection,
       required final Address owner,
-      required final Address creator}) = _$_Collectible;
+      required final Address creator}) = _$CollectibleImpl;
   _Collectible._() : super._();
 
   factory _Collectible.fromJson(Map<String, dynamic> json) =
-      _$_Collectible.fromJson;
+      _$CollectibleImpl.fromJson;
 
   @override
   String? get description;
@@ -356,6 +356,6 @@ abstract class _Collectible extends Collectible {
   Address get creator;
   @override
   @JsonKey(ignore: true)
-  _$$_CollectibleCopyWith<_$_Collectible> get copyWith =>
+  _$$CollectibleImplCopyWith<_$CollectibleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -80,11 +80,11 @@ class _$CollectionCopyWithImpl<$Res, $Val extends Collection>
 }
 
 /// @nodoc
-abstract class _$$_CollectionCopyWith<$Res>
+abstract class _$$CollectionImplCopyWith<$Res>
     implements $CollectionCopyWith<$Res> {
-  factory _$$_CollectionCopyWith(
-          _$_Collection value, $Res Function(_$_Collection) then) =
-      __$$_CollectionCopyWithImpl<$Res>;
+  factory _$$CollectionImplCopyWith(
+          _$CollectionImpl value, $Res Function(_$CollectionImpl) then) =
+      __$$CollectionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_CollectionCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CollectionCopyWithImpl<$Res>
-    extends _$CollectionCopyWithImpl<$Res, _$_Collection>
-    implements _$$_CollectionCopyWith<$Res> {
-  __$$_CollectionCopyWithImpl(
-      _$_Collection _value, $Res Function(_$_Collection) _then)
+class __$$CollectionImplCopyWithImpl<$Res>
+    extends _$CollectionCopyWithImpl<$Res, _$CollectionImpl>
+    implements _$$CollectionImplCopyWith<$Res> {
+  __$$CollectionImplCopyWithImpl(
+      _$CollectionImpl _value, $Res Function(_$CollectionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -108,7 +108,7 @@ class __$$_CollectionCopyWithImpl<$Res>
     Object? symbol = null,
     Object? address = null,
   }) {
-    return _then(_$_Collection(
+    return _then(_$CollectionImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -127,14 +127,14 @@ class __$$_CollectionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Collection implements _Collection {
-  _$_Collection(
+class _$CollectionImpl implements _Collection {
+  _$CollectionImpl(
       {@JsonKey(name: 'collectionName') required this.name,
       @JsonKey(name: 'collectionSymbol') required this.symbol,
       @JsonKey(name: 'collectionAddress') required this.address});
 
-  factory _$_Collection.fromJson(Map<String, dynamic> json) =>
-      _$$_CollectionFromJson(json);
+  factory _$CollectionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CollectionImplFromJson(json);
 
   @override
   @JsonKey(name: 'collectionName')
@@ -155,7 +155,7 @@ class _$_Collection implements _Collection {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Collection &&
+            other is _$CollectionImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.symbol, symbol) || other.symbol == symbol) &&
             (identical(other.address, address) || other.address == address));
@@ -168,12 +168,12 @@ class _$_Collection implements _Collection {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CollectionCopyWith<_$_Collection> get copyWith =>
-      __$$_CollectionCopyWithImpl<_$_Collection>(this, _$identity);
+  _$$CollectionImplCopyWith<_$CollectionImpl> get copyWith =>
+      __$$CollectionImplCopyWithImpl<_$CollectionImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CollectionToJson(
+    return _$$CollectionImplToJson(
       this,
     );
   }
@@ -184,10 +184,10 @@ abstract class _Collection implements Collection {
           {@JsonKey(name: 'collectionName') required final String name,
           @JsonKey(name: 'collectionSymbol') required final String symbol,
           @JsonKey(name: 'collectionAddress') required final String address}) =
-      _$_Collection;
+      _$CollectionImpl;
 
   factory _Collection.fromJson(Map<String, dynamic> json) =
-      _$_Collection.fromJson;
+      _$CollectionImpl.fromJson;
 
   @override
   @JsonKey(name: 'collectionName')
@@ -200,6 +200,6 @@ abstract class _Collection implements Collection {
   String get address;
   @override
   @JsonKey(ignore: true)
-  _$$_CollectionCopyWith<_$_Collection> get copyWith =>
+  _$$CollectionImplCopyWith<_$CollectionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -51,6 +51,7 @@ mixin _$WalletAction {
   String get userOpHash => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<TokenEvent> get sent => throw _privateConstructorUsedError;
+  List<TokenEvent> get received => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -110,7 +111,8 @@ mixin _$WalletAction {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
         approveToken,
     required TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -197,7 +199,8 @@ mixin _$WalletAction {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -284,7 +287,8 @@ mixin _$WalletAction {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -368,7 +372,8 @@ abstract class $WalletActionCopyWith<$Res> {
       int? blockNumber,
       String userOpHash,
       String description,
-      List<TokenEvent> sent});
+      List<TokenEvent> sent,
+      List<TokenEvent> received});
 }
 
 /// @nodoc
@@ -393,6 +398,7 @@ class _$WalletActionCopyWithImpl<$Res, $Val extends WalletAction>
     Object? userOpHash = null,
     Object? description = null,
     Object? sent = null,
+    Object? received = null,
   }) {
     return _then(_value.copyWith(
       timestamp: null == timestamp
@@ -431,16 +437,20 @@ class _$WalletActionCopyWithImpl<$Res, $Val extends WalletAction>
           ? _value.sent
           : sent // ignore: cast_nullable_to_non_nullable
               as List<TokenEvent>,
+      received: null == received
+          ? _value.received
+          : received // ignore: cast_nullable_to_non_nullable
+              as List<TokenEvent>,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$BatchTransactionCopyWith<$Res>
+abstract class _$$BatchTransactionImplCopyWith<$Res>
     implements $WalletActionCopyWith<$Res> {
-  factory _$$BatchTransactionCopyWith(
-          _$BatchTransaction value, $Res Function(_$BatchTransaction) then) =
-      __$$BatchTransactionCopyWithImpl<$Res>;
+  factory _$$BatchTransactionImplCopyWith(_$BatchTransactionImpl value,
+          $Res Function(_$BatchTransactionImpl) then) =
+      __$$BatchTransactionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -457,11 +467,11 @@ abstract class _$$BatchTransactionCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$BatchTransactionCopyWithImpl<$Res>
-    extends _$WalletActionCopyWithImpl<$Res, _$BatchTransaction>
-    implements _$$BatchTransactionCopyWith<$Res> {
-  __$$BatchTransactionCopyWithImpl(
-      _$BatchTransaction _value, $Res Function(_$BatchTransaction) _then)
+class __$$BatchTransactionImplCopyWithImpl<$Res>
+    extends _$WalletActionCopyWithImpl<$Res, _$BatchTransactionImpl>
+    implements _$$BatchTransactionImplCopyWith<$Res> {
+  __$$BatchTransactionImplCopyWithImpl(_$BatchTransactionImpl _value,
+      $Res Function(_$BatchTransactionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -478,7 +488,7 @@ class __$$BatchTransactionCopyWithImpl<$Res>
     Object? sent = null,
     Object? received = null,
   }) {
-    return _then(_$BatchTransaction(
+    return _then(_$BatchTransactionImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -525,8 +535,8 @@ class __$$BatchTransactionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$BatchTransaction extends BatchTransaction {
-  const _$BatchTransaction(
+class _$BatchTransactionImpl extends BatchTransaction {
+  const _$BatchTransactionImpl(
       {@TimestampConverter() @JsonKey(name: 'updatedAt') this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'batchTransaction',
@@ -539,8 +549,8 @@ class _$BatchTransaction extends BatchTransaction {
       this.received = const []})
       : super._();
 
-  factory _$BatchTransaction.fromJson(Map<String, dynamic> json) =>
-      _$$BatchTransactionFromJson(json);
+  factory _$BatchTransactionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BatchTransactionImplFromJson(json);
 
   @override
   @TimestampConverter()
@@ -579,7 +589,7 @@ class _$BatchTransaction extends BatchTransaction {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BatchTransaction &&
+            other is _$BatchTransactionImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -614,8 +624,9 @@ class _$BatchTransaction extends BatchTransaction {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$BatchTransactionCopyWith<_$BatchTransaction> get copyWith =>
-      __$$BatchTransactionCopyWithImpl<_$BatchTransaction>(this, _$identity);
+  _$$BatchTransactionImplCopyWith<_$BatchTransactionImpl> get copyWith =>
+      __$$BatchTransactionImplCopyWithImpl<_$BatchTransactionImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -677,7 +688,8 @@ class _$BatchTransaction extends BatchTransaction {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
         approveToken,
     required TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -768,7 +780,8 @@ class _$BatchTransaction extends BatchTransaction {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -859,7 +872,8 @@ class _$BatchTransaction extends BatchTransaction {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -942,7 +956,7 @@ class _$BatchTransaction extends BatchTransaction {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$BatchTransactionToJson(
+    return _$$BatchTransactionImplToJson(
       this,
     );
   }
@@ -959,11 +973,11 @@ abstract class BatchTransaction extends WalletAction {
       required final String userOpHash,
       required final String description,
       final List<TokenEvent> sent,
-      final List<TokenEvent> received}) = _$BatchTransaction;
+      final List<TokenEvent> received}) = _$BatchTransactionImpl;
   const BatchTransaction._() : super._();
 
   factory BatchTransaction.fromJson(Map<String, dynamic> json) =
-      _$BatchTransaction.fromJson;
+      _$BatchTransactionImpl.fromJson;
 
   @override
   @TimestampConverter()
@@ -986,19 +1000,20 @@ abstract class BatchTransaction extends WalletAction {
   String get description;
   @override
   List<TokenEvent> get sent;
+  @override
   List<TokenEvent> get received;
   @override
   @JsonKey(ignore: true)
-  _$$BatchTransactionCopyWith<_$BatchTransaction> get copyWith =>
+  _$$BatchTransactionImplCopyWith<_$BatchTransactionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TokenTransferCopyWith<$Res>
+abstract class _$$TokenTransferImplCopyWith<$Res>
     implements $WalletActionCopyWith<$Res> {
-  factory _$$TokenTransferCopyWith(
-          _$TokenTransfer value, $Res Function(_$TokenTransfer) then) =
-      __$$TokenTransferCopyWithImpl<$Res>;
+  factory _$$TokenTransferImplCopyWith(
+          _$TokenTransferImpl value, $Res Function(_$TokenTransferImpl) then) =
+      __$$TokenTransferImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1015,11 +1030,11 @@ abstract class _$$TokenTransferCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$TokenTransferCopyWithImpl<$Res>
-    extends _$WalletActionCopyWithImpl<$Res, _$TokenTransfer>
-    implements _$$TokenTransferCopyWith<$Res> {
-  __$$TokenTransferCopyWithImpl(
-      _$TokenTransfer _value, $Res Function(_$TokenTransfer) _then)
+class __$$TokenTransferImplCopyWithImpl<$Res>
+    extends _$WalletActionCopyWithImpl<$Res, _$TokenTransferImpl>
+    implements _$$TokenTransferImplCopyWith<$Res> {
+  __$$TokenTransferImplCopyWithImpl(
+      _$TokenTransferImpl _value, $Res Function(_$TokenTransferImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1036,7 +1051,7 @@ class __$$TokenTransferCopyWithImpl<$Res>
     Object? sent = null,
     Object? received = null,
   }) {
-    return _then(_$TokenTransfer(
+    return _then(_$TokenTransferImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -1083,8 +1098,8 @@ class __$$TokenTransferCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TokenTransfer extends TokenTransfer {
-  const _$TokenTransfer(
+class _$TokenTransferImpl extends TokenTransfer {
+  const _$TokenTransferImpl(
       {@TimestampConverter() @JsonKey(name: 'updatedAt') this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'tokenTransfer',
@@ -1097,8 +1112,8 @@ class _$TokenTransfer extends TokenTransfer {
       this.received = const []})
       : super._();
 
-  factory _$TokenTransfer.fromJson(Map<String, dynamic> json) =>
-      _$$TokenTransferFromJson(json);
+  factory _$TokenTransferImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TokenTransferImplFromJson(json);
 
   @override
   @TimestampConverter()
@@ -1137,7 +1152,7 @@ class _$TokenTransfer extends TokenTransfer {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TokenTransfer &&
+            other is _$TokenTransferImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -1172,8 +1187,8 @@ class _$TokenTransfer extends TokenTransfer {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TokenTransferCopyWith<_$TokenTransfer> get copyWith =>
-      __$$TokenTransferCopyWithImpl<_$TokenTransfer>(this, _$identity);
+  _$$TokenTransferImplCopyWith<_$TokenTransferImpl> get copyWith =>
+      __$$TokenTransferImplCopyWithImpl<_$TokenTransferImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1235,7 +1250,8 @@ class _$TokenTransfer extends TokenTransfer {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
         approveToken,
     required TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -1326,7 +1342,8 @@ class _$TokenTransfer extends TokenTransfer {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -1417,7 +1434,8 @@ class _$TokenTransfer extends TokenTransfer {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -1500,7 +1518,7 @@ class _$TokenTransfer extends TokenTransfer {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TokenTransferToJson(
+    return _$$TokenTransferImplToJson(
       this,
     );
   }
@@ -1517,11 +1535,11 @@ abstract class TokenTransfer extends WalletAction {
       final int? blockNumber,
       required final String description,
       final List<TokenEvent> sent,
-      final List<TokenEvent> received}) = _$TokenTransfer;
+      final List<TokenEvent> received}) = _$TokenTransferImpl;
   const TokenTransfer._() : super._();
 
   factory TokenTransfer.fromJson(Map<String, dynamic> json) =
-      _$TokenTransfer.fromJson;
+      _$TokenTransferImpl.fromJson;
 
   @override
   @TimestampConverter()
@@ -1544,19 +1562,20 @@ abstract class TokenTransfer extends WalletAction {
   String get description;
   @override
   List<TokenEvent> get sent;
+  @override
   List<TokenEvent> get received;
   @override
   @JsonKey(ignore: true)
-  _$$TokenTransferCopyWith<_$TokenTransfer> get copyWith =>
+  _$$TokenTransferImplCopyWith<_$TokenTransferImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SwapTokensCopyWith<$Res>
+abstract class _$$SwapTokensImplCopyWith<$Res>
     implements $WalletActionCopyWith<$Res> {
-  factory _$$SwapTokensCopyWith(
-          _$SwapTokens value, $Res Function(_$SwapTokens) then) =
-      __$$SwapTokensCopyWithImpl<$Res>;
+  factory _$$SwapTokensImplCopyWith(
+          _$SwapTokensImpl value, $Res Function(_$SwapTokensImpl) then) =
+      __$$SwapTokensImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1573,11 +1592,11 @@ abstract class _$$SwapTokensCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$SwapTokensCopyWithImpl<$Res>
-    extends _$WalletActionCopyWithImpl<$Res, _$SwapTokens>
-    implements _$$SwapTokensCopyWith<$Res> {
-  __$$SwapTokensCopyWithImpl(
-      _$SwapTokens _value, $Res Function(_$SwapTokens) _then)
+class __$$SwapTokensImplCopyWithImpl<$Res>
+    extends _$WalletActionCopyWithImpl<$Res, _$SwapTokensImpl>
+    implements _$$SwapTokensImplCopyWith<$Res> {
+  __$$SwapTokensImplCopyWithImpl(
+      _$SwapTokensImpl _value, $Res Function(_$SwapTokensImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1594,7 +1613,7 @@ class __$$SwapTokensCopyWithImpl<$Res>
     Object? sent = null,
     Object? received = null,
   }) {
-    return _then(_$SwapTokens(
+    return _then(_$SwapTokensImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -1641,8 +1660,8 @@ class __$$SwapTokensCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SwapTokens extends SwapTokens {
-  const _$SwapTokens(
+class _$SwapTokensImpl extends SwapTokens {
+  const _$SwapTokensImpl(
       {@TimestampConverter() @JsonKey(name: 'updatedAt') this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'swapTokens',
@@ -1655,8 +1674,8 @@ class _$SwapTokens extends SwapTokens {
       this.received = const []})
       : super._();
 
-  factory _$SwapTokens.fromJson(Map<String, dynamic> json) =>
-      _$$SwapTokensFromJson(json);
+  factory _$SwapTokensImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SwapTokensImplFromJson(json);
 
   @override
   @TimestampConverter()
@@ -1695,7 +1714,7 @@ class _$SwapTokens extends SwapTokens {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SwapTokens &&
+            other is _$SwapTokensImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -1730,8 +1749,8 @@ class _$SwapTokens extends SwapTokens {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SwapTokensCopyWith<_$SwapTokens> get copyWith =>
-      __$$SwapTokensCopyWithImpl<_$SwapTokens>(this, _$identity);
+  _$$SwapTokensImplCopyWith<_$SwapTokensImpl> get copyWith =>
+      __$$SwapTokensImplCopyWithImpl<_$SwapTokensImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1793,7 +1812,8 @@ class _$SwapTokens extends SwapTokens {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
         approveToken,
     required TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -1884,7 +1904,8 @@ class _$SwapTokens extends SwapTokens {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -1975,7 +1996,8 @@ class _$SwapTokens extends SwapTokens {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -2058,7 +2080,7 @@ class _$SwapTokens extends SwapTokens {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SwapTokensToJson(
+    return _$$SwapTokensImplToJson(
       this,
     );
   }
@@ -2075,11 +2097,11 @@ abstract class SwapTokens extends WalletAction {
       required final String userOpHash,
       required final String description,
       final List<TokenEvent> sent,
-      final List<TokenEvent> received}) = _$SwapTokens;
+      final List<TokenEvent> received}) = _$SwapTokensImpl;
   const SwapTokens._() : super._();
 
   factory SwapTokens.fromJson(Map<String, dynamic> json) =
-      _$SwapTokens.fromJson;
+      _$SwapTokensImpl.fromJson;
 
   @override
   @TimestampConverter()
@@ -2102,19 +2124,20 @@ abstract class SwapTokens extends WalletAction {
   String get description;
   @override
   List<TokenEvent> get sent;
+  @override
   List<TokenEvent> get received;
   @override
   @JsonKey(ignore: true)
-  _$$SwapTokensCopyWith<_$SwapTokens> get copyWith =>
+  _$$SwapTokensImplCopyWith<_$SwapTokensImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$NftTransferCopyWith<$Res>
+abstract class _$$NftTransferImplCopyWith<$Res>
     implements $WalletActionCopyWith<$Res> {
-  factory _$$NftTransferCopyWith(
-          _$NftTransfer value, $Res Function(_$NftTransfer) then) =
-      __$$NftTransferCopyWithImpl<$Res>;
+  factory _$$NftTransferImplCopyWith(
+          _$NftTransferImpl value, $Res Function(_$NftTransferImpl) then) =
+      __$$NftTransferImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2131,11 +2154,11 @@ abstract class _$$NftTransferCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$NftTransferCopyWithImpl<$Res>
-    extends _$WalletActionCopyWithImpl<$Res, _$NftTransfer>
-    implements _$$NftTransferCopyWith<$Res> {
-  __$$NftTransferCopyWithImpl(
-      _$NftTransfer _value, $Res Function(_$NftTransfer) _then)
+class __$$NftTransferImplCopyWithImpl<$Res>
+    extends _$WalletActionCopyWithImpl<$Res, _$NftTransferImpl>
+    implements _$$NftTransferImplCopyWith<$Res> {
+  __$$NftTransferImplCopyWithImpl(
+      _$NftTransferImpl _value, $Res Function(_$NftTransferImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2152,7 +2175,7 @@ class __$$NftTransferCopyWithImpl<$Res>
     Object? sent = null,
     Object? received = null,
   }) {
-    return _then(_$NftTransfer(
+    return _then(_$NftTransferImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -2199,8 +2222,8 @@ class __$$NftTransferCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NftTransfer extends NftTransfer {
-  const _$NftTransfer(
+class _$NftTransferImpl extends NftTransfer {
+  const _$NftTransferImpl(
       {@TimestampConverter() @JsonKey(name: 'updatedAt') this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'nftTransfer',
@@ -2213,8 +2236,8 @@ class _$NftTransfer extends NftTransfer {
       this.received = const []})
       : super._();
 
-  factory _$NftTransfer.fromJson(Map<String, dynamic> json) =>
-      _$$NftTransferFromJson(json);
+  factory _$NftTransferImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NftTransferImplFromJson(json);
 
   @override
   @TimestampConverter()
@@ -2253,7 +2276,7 @@ class _$NftTransfer extends NftTransfer {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NftTransfer &&
+            other is _$NftTransferImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -2288,8 +2311,8 @@ class _$NftTransfer extends NftTransfer {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$NftTransferCopyWith<_$NftTransfer> get copyWith =>
-      __$$NftTransferCopyWithImpl<_$NftTransfer>(this, _$identity);
+  _$$NftTransferImplCopyWith<_$NftTransferImpl> get copyWith =>
+      __$$NftTransferImplCopyWithImpl<_$NftTransferImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2351,7 +2374,8 @@ class _$NftTransfer extends NftTransfer {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
         approveToken,
     required TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -2442,7 +2466,8 @@ class _$NftTransfer extends NftTransfer {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -2533,7 +2558,8 @@ class _$NftTransfer extends NftTransfer {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -2616,7 +2642,7 @@ class _$NftTransfer extends NftTransfer {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NftTransferToJson(
+    return _$$NftTransferImplToJson(
       this,
     );
   }
@@ -2633,11 +2659,11 @@ abstract class NftTransfer extends WalletAction {
       required final String userOpHash,
       required final String description,
       final List<TokenEvent> sent,
-      final List<TokenEvent> received}) = _$NftTransfer;
+      final List<TokenEvent> received}) = _$NftTransferImpl;
   const NftTransfer._() : super._();
 
   factory NftTransfer.fromJson(Map<String, dynamic> json) =
-      _$NftTransfer.fromJson;
+      _$NftTransferImpl.fromJson;
 
   @override
   @TimestampConverter()
@@ -2660,19 +2686,20 @@ abstract class NftTransfer extends WalletAction {
   String get description;
   @override
   List<TokenEvent> get sent;
+  @override
   List<TokenEvent> get received;
   @override
   @JsonKey(ignore: true)
-  _$$NftTransferCopyWith<_$NftTransfer> get copyWith =>
+  _$$NftTransferImplCopyWith<_$NftTransferImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ApproveTokenCopyWith<$Res>
+abstract class _$$ApproveTokenImplCopyWith<$Res>
     implements $WalletActionCopyWith<$Res> {
-  factory _$$ApproveTokenCopyWith(
-          _$ApproveToken value, $Res Function(_$ApproveToken) then) =
-      __$$ApproveTokenCopyWithImpl<$Res>;
+  factory _$$ApproveTokenImplCopyWith(
+          _$ApproveTokenImpl value, $Res Function(_$ApproveTokenImpl) then) =
+      __$$ApproveTokenImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2684,15 +2711,16 @@ abstract class _$$ApproveTokenCopyWith<$Res>
       int? blockNumber,
       String userOpHash,
       String description,
-      List<TokenEvent> sent});
+      List<TokenEvent> sent,
+      List<TokenEvent> received});
 }
 
 /// @nodoc
-class __$$ApproveTokenCopyWithImpl<$Res>
-    extends _$WalletActionCopyWithImpl<$Res, _$ApproveToken>
-    implements _$$ApproveTokenCopyWith<$Res> {
-  __$$ApproveTokenCopyWithImpl(
-      _$ApproveToken _value, $Res Function(_$ApproveToken) _then)
+class __$$ApproveTokenImplCopyWithImpl<$Res>
+    extends _$WalletActionCopyWithImpl<$Res, _$ApproveTokenImpl>
+    implements _$$ApproveTokenImplCopyWith<$Res> {
+  __$$ApproveTokenImplCopyWithImpl(
+      _$ApproveTokenImpl _value, $Res Function(_$ApproveTokenImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2707,8 +2735,9 @@ class __$$ApproveTokenCopyWithImpl<$Res>
     Object? userOpHash = null,
     Object? description = null,
     Object? sent = null,
+    Object? received = null,
   }) {
-    return _then(_$ApproveToken(
+    return _then(_$ApproveTokenImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -2745,14 +2774,18 @@ class __$$ApproveTokenCopyWithImpl<$Res>
           ? _value.sent
           : sent // ignore: cast_nullable_to_non_nullable
               as List<TokenEvent>,
+      received: null == received
+          ? _value.received
+          : received // ignore: cast_nullable_to_non_nullable
+              as List<TokenEvent>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ApproveToken extends ApproveToken {
-  const _$ApproveToken(
+class _$ApproveTokenImpl extends ApproveToken {
+  const _$ApproveTokenImpl(
       {@TimestampConverter() @JsonKey(name: 'updatedAt') this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'approveToken',
@@ -2761,11 +2794,12 @@ class _$ApproveToken extends ApproveToken {
       this.blockNumber = 0,
       required this.userOpHash,
       required this.description,
-      this.sent = const []})
+      this.sent = const [],
+      this.received = const []})
       : super._();
 
-  factory _$ApproveToken.fromJson(Map<String, dynamic> json) =>
-      _$$ApproveTokenFromJson(json);
+  factory _$ApproveTokenImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ApproveTokenImplFromJson(json);
 
   @override
   @TimestampConverter()
@@ -2791,17 +2825,20 @@ class _$ApproveToken extends ApproveToken {
   @override
   @JsonKey()
   final List<TokenEvent> sent;
+  @override
+  @JsonKey()
+  final List<TokenEvent> received;
 
   @override
   String toString() {
-    return 'WalletAction.approveToken(timestamp: $timestamp, id: $id, name: $name, txHash: $txHash, status: $status, blockNumber: $blockNumber, userOpHash: $userOpHash, description: $description, sent: $sent)';
+    return 'WalletAction.approveToken(timestamp: $timestamp, id: $id, name: $name, txHash: $txHash, status: $status, blockNumber: $blockNumber, userOpHash: $userOpHash, description: $description, sent: $sent, received: $received)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ApproveToken &&
+            other is _$ApproveTokenImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -2814,7 +2851,8 @@ class _$ApproveToken extends ApproveToken {
                 other.userOpHash == userOpHash) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            const DeepCollectionEquality().equals(other.sent, sent));
+            const DeepCollectionEquality().equals(other.sent, sent) &&
+            const DeepCollectionEquality().equals(other.received, received));
   }
 
   @JsonKey(ignore: true)
@@ -2829,13 +2867,14 @@ class _$ApproveToken extends ApproveToken {
       blockNumber,
       userOpHash,
       description,
-      const DeepCollectionEquality().hash(sent));
+      const DeepCollectionEquality().hash(sent),
+      const DeepCollectionEquality().hash(received));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ApproveTokenCopyWith<_$ApproveToken> get copyWith =>
-      __$$ApproveTokenCopyWithImpl<_$ApproveToken>(this, _$identity);
+  _$$ApproveTokenImplCopyWith<_$ApproveTokenImpl> get copyWith =>
+      __$$ApproveTokenImplCopyWithImpl<_$ApproveTokenImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2897,7 +2936,8 @@ class _$ApproveToken extends ApproveToken {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
         approveToken,
     required TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -2925,7 +2965,7 @@ class _$ApproveToken extends ApproveToken {
         unstakeTokens,
   }) {
     return approveToken(timestamp, id, name, txHash, status, blockNumber,
-        userOpHash, description, sent);
+        userOpHash, description, sent, received);
   }
 
   @override
@@ -2988,7 +3028,8 @@ class _$ApproveToken extends ApproveToken {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -3016,7 +3057,7 @@ class _$ApproveToken extends ApproveToken {
         unstakeTokens,
   }) {
     return approveToken?.call(timestamp, id, name, txHash, status, blockNumber,
-        userOpHash, description, sent);
+        userOpHash, description, sent, received);
   }
 
   @override
@@ -3079,7 +3120,8 @@ class _$ApproveToken extends ApproveToken {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -3109,7 +3151,7 @@ class _$ApproveToken extends ApproveToken {
   }) {
     if (approveToken != null) {
       return approveToken(timestamp, id, name, txHash, status, blockNumber,
-          userOpHash, description, sent);
+          userOpHash, description, sent, received);
     }
     return orElse();
   }
@@ -3162,7 +3204,7 @@ class _$ApproveToken extends ApproveToken {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ApproveTokenToJson(
+    return _$$ApproveTokenImplToJson(
       this,
     );
   }
@@ -3178,11 +3220,12 @@ abstract class ApproveToken extends WalletAction {
       final int? blockNumber,
       required final String userOpHash,
       required final String description,
-      final List<TokenEvent> sent}) = _$ApproveToken;
+      final List<TokenEvent> sent,
+      final List<TokenEvent> received}) = _$ApproveTokenImpl;
   const ApproveToken._() : super._();
 
   factory ApproveToken.fromJson(Map<String, dynamic> json) =
-      _$ApproveToken.fromJson;
+      _$ApproveTokenImpl.fromJson;
 
   @override
   @TimestampConverter()
@@ -3206,17 +3249,19 @@ abstract class ApproveToken extends WalletAction {
   @override
   List<TokenEvent> get sent;
   @override
+  List<TokenEvent> get received;
+  @override
   @JsonKey(ignore: true)
-  _$$ApproveTokenCopyWith<_$ApproveToken> get copyWith =>
+  _$$ApproveTokenImplCopyWith<_$ApproveTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$StakeTokensActionCopyWith<$Res>
+abstract class _$$StakeTokensActionImplCopyWith<$Res>
     implements $WalletActionCopyWith<$Res> {
-  factory _$$StakeTokensActionCopyWith(
-          _$StakeTokensAction value, $Res Function(_$StakeTokensAction) then) =
-      __$$StakeTokensActionCopyWithImpl<$Res>;
+  factory _$$StakeTokensActionImplCopyWith(_$StakeTokensActionImpl value,
+          $Res Function(_$StakeTokensActionImpl) then) =
+      __$$StakeTokensActionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -3233,11 +3278,11 @@ abstract class _$$StakeTokensActionCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$StakeTokensActionCopyWithImpl<$Res>
-    extends _$WalletActionCopyWithImpl<$Res, _$StakeTokensAction>
-    implements _$$StakeTokensActionCopyWith<$Res> {
-  __$$StakeTokensActionCopyWithImpl(
-      _$StakeTokensAction _value, $Res Function(_$StakeTokensAction) _then)
+class __$$StakeTokensActionImplCopyWithImpl<$Res>
+    extends _$WalletActionCopyWithImpl<$Res, _$StakeTokensActionImpl>
+    implements _$$StakeTokensActionImplCopyWith<$Res> {
+  __$$StakeTokensActionImplCopyWithImpl(_$StakeTokensActionImpl _value,
+      $Res Function(_$StakeTokensActionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3254,7 +3299,7 @@ class __$$StakeTokensActionCopyWithImpl<$Res>
     Object? sent = null,
     Object? received = null,
   }) {
-    return _then(_$StakeTokensAction(
+    return _then(_$StakeTokensActionImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -3301,8 +3346,8 @@ class __$$StakeTokensActionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$StakeTokensAction extends StakeTokensAction {
-  const _$StakeTokensAction(
+class _$StakeTokensActionImpl extends StakeTokensAction {
+  const _$StakeTokensActionImpl(
       {@TimestampConverter() @JsonKey(name: 'updatedAt') this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'stakeTokens',
@@ -3315,8 +3360,8 @@ class _$StakeTokensAction extends StakeTokensAction {
       this.received = const []})
       : super._();
 
-  factory _$StakeTokensAction.fromJson(Map<String, dynamic> json) =>
-      _$$StakeTokensActionFromJson(json);
+  factory _$StakeTokensActionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StakeTokensActionImplFromJson(json);
 
   @override
   @TimestampConverter()
@@ -3355,7 +3400,7 @@ class _$StakeTokensAction extends StakeTokensAction {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$StakeTokensAction &&
+            other is _$StakeTokensActionImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -3390,8 +3435,9 @@ class _$StakeTokensAction extends StakeTokensAction {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$StakeTokensActionCopyWith<_$StakeTokensAction> get copyWith =>
-      __$$StakeTokensActionCopyWithImpl<_$StakeTokensAction>(this, _$identity);
+  _$$StakeTokensActionImplCopyWith<_$StakeTokensActionImpl> get copyWith =>
+      __$$StakeTokensActionImplCopyWithImpl<_$StakeTokensActionImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3453,7 +3499,8 @@ class _$StakeTokensAction extends StakeTokensAction {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
         approveToken,
     required TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -3544,7 +3591,8 @@ class _$StakeTokensAction extends StakeTokensAction {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -3635,7 +3683,8 @@ class _$StakeTokensAction extends StakeTokensAction {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -3718,7 +3767,7 @@ class _$StakeTokensAction extends StakeTokensAction {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$StakeTokensActionToJson(
+    return _$$StakeTokensActionImplToJson(
       this,
     );
   }
@@ -3735,11 +3784,11 @@ abstract class StakeTokensAction extends WalletAction {
       required final String userOpHash,
       required final String description,
       final List<TokenEvent> sent,
-      final List<TokenEvent> received}) = _$StakeTokensAction;
+      final List<TokenEvent> received}) = _$StakeTokensActionImpl;
   const StakeTokensAction._() : super._();
 
   factory StakeTokensAction.fromJson(Map<String, dynamic> json) =
-      _$StakeTokensAction.fromJson;
+      _$StakeTokensActionImpl.fromJson;
 
   @override
   @TimestampConverter()
@@ -3762,19 +3811,20 @@ abstract class StakeTokensAction extends WalletAction {
   String get description;
   @override
   List<TokenEvent> get sent;
+  @override
   List<TokenEvent> get received;
   @override
   @JsonKey(ignore: true)
-  _$$StakeTokensActionCopyWith<_$StakeTokensAction> get copyWith =>
+  _$$StakeTokensActionImplCopyWith<_$StakeTokensActionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnstakeTokensActionCopyWith<$Res>
+abstract class _$$UnstakeTokensActionImplCopyWith<$Res>
     implements $WalletActionCopyWith<$Res> {
-  factory _$$UnstakeTokensActionCopyWith(_$UnstakeTokensAction value,
-          $Res Function(_$UnstakeTokensAction) then) =
-      __$$UnstakeTokensActionCopyWithImpl<$Res>;
+  factory _$$UnstakeTokensActionImplCopyWith(_$UnstakeTokensActionImpl value,
+          $Res Function(_$UnstakeTokensActionImpl) then) =
+      __$$UnstakeTokensActionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -3791,11 +3841,11 @@ abstract class _$$UnstakeTokensActionCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$UnstakeTokensActionCopyWithImpl<$Res>
-    extends _$WalletActionCopyWithImpl<$Res, _$UnstakeTokensAction>
-    implements _$$UnstakeTokensActionCopyWith<$Res> {
-  __$$UnstakeTokensActionCopyWithImpl(
-      _$UnstakeTokensAction _value, $Res Function(_$UnstakeTokensAction) _then)
+class __$$UnstakeTokensActionImplCopyWithImpl<$Res>
+    extends _$WalletActionCopyWithImpl<$Res, _$UnstakeTokensActionImpl>
+    implements _$$UnstakeTokensActionImplCopyWith<$Res> {
+  __$$UnstakeTokensActionImplCopyWithImpl(_$UnstakeTokensActionImpl _value,
+      $Res Function(_$UnstakeTokensActionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3812,7 +3862,7 @@ class __$$UnstakeTokensActionCopyWithImpl<$Res>
     Object? sent = null,
     Object? received = null,
   }) {
-    return _then(_$UnstakeTokensAction(
+    return _then(_$UnstakeTokensActionImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -3859,8 +3909,8 @@ class __$$UnstakeTokensActionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$UnstakeTokensAction extends UnstakeTokensAction {
-  const _$UnstakeTokensAction(
+class _$UnstakeTokensActionImpl extends UnstakeTokensAction {
+  const _$UnstakeTokensActionImpl(
       {@TimestampConverter() @JsonKey(name: 'updatedAt') this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'unstakeTokens',
@@ -3873,8 +3923,8 @@ class _$UnstakeTokensAction extends UnstakeTokensAction {
       this.received = const []})
       : super._();
 
-  factory _$UnstakeTokensAction.fromJson(Map<String, dynamic> json) =>
-      _$$UnstakeTokensActionFromJson(json);
+  factory _$UnstakeTokensActionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UnstakeTokensActionImplFromJson(json);
 
   @override
   @TimestampConverter()
@@ -3913,7 +3963,7 @@ class _$UnstakeTokensAction extends UnstakeTokensAction {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UnstakeTokensAction &&
+            other is _$UnstakeTokensActionImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -3948,8 +3998,8 @@ class _$UnstakeTokensAction extends UnstakeTokensAction {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UnstakeTokensActionCopyWith<_$UnstakeTokensAction> get copyWith =>
-      __$$UnstakeTokensActionCopyWithImpl<_$UnstakeTokensAction>(
+  _$$UnstakeTokensActionImplCopyWith<_$UnstakeTokensActionImpl> get copyWith =>
+      __$$UnstakeTokensActionImplCopyWithImpl<_$UnstakeTokensActionImpl>(
           this, _$identity);
 
   @override
@@ -4012,7 +4062,8 @@ class _$UnstakeTokensAction extends UnstakeTokensAction {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
         approveToken,
     required TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -4103,7 +4154,8 @@ class _$UnstakeTokensAction extends UnstakeTokensAction {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -4194,7 +4246,8 @@ class _$UnstakeTokensAction extends UnstakeTokensAction {
             int? blockNumber,
             String userOpHash,
             String description,
-            List<TokenEvent> sent)?
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
         approveToken,
     TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
@@ -4277,7 +4330,7 @@ class _$UnstakeTokensAction extends UnstakeTokensAction {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UnstakeTokensActionToJson(
+    return _$$UnstakeTokensActionImplToJson(
       this,
     );
   }
@@ -4294,11 +4347,11 @@ abstract class UnstakeTokensAction extends WalletAction {
       required final String userOpHash,
       required final String description,
       final List<TokenEvent> sent,
-      final List<TokenEvent> received}) = _$UnstakeTokensAction;
+      final List<TokenEvent> received}) = _$UnstakeTokensActionImpl;
   const UnstakeTokensAction._() : super._();
 
   factory UnstakeTokensAction.fromJson(Map<String, dynamic> json) =
-      _$UnstakeTokensAction.fromJson;
+      _$UnstakeTokensActionImpl.fromJson;
 
   @override
   @TimestampConverter()
@@ -4321,9 +4374,10 @@ abstract class UnstakeTokensAction extends WalletAction {
   String get description;
   @override
   List<TokenEvent> get sent;
+  @override
   List<TokenEvent> get received;
   @override
   @JsonKey(ignore: true)
-  _$$UnstakeTokensActionCopyWith<_$UnstakeTokensAction> get copyWith =>
+  _$$UnstakeTokensActionImplCopyWith<_$UnstakeTokensActionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

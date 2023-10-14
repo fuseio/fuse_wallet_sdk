@@ -130,11 +130,11 @@ class _$WalletActionResultCopyWithImpl<$Res, $Val extends WalletActionResult>
 }
 
 /// @nodoc
-abstract class _$$_WalletActionResultCopyWith<$Res>
+abstract class _$$WalletActionResultImplCopyWith<$Res>
     implements $WalletActionResultCopyWith<$Res> {
-  factory _$$_WalletActionResultCopyWith(_$_WalletActionResult value,
-          $Res Function(_$_WalletActionResult) then) =
-      __$$_WalletActionResultCopyWithImpl<$Res>;
+  factory _$$WalletActionResultImplCopyWith(_$WalletActionResultImpl value,
+          $Res Function(_$WalletActionResultImpl) then) =
+      __$$WalletActionResultImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -153,11 +153,11 @@ abstract class _$$_WalletActionResultCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_WalletActionResultCopyWithImpl<$Res>
-    extends _$WalletActionResultCopyWithImpl<$Res, _$_WalletActionResult>
-    implements _$$_WalletActionResultCopyWith<$Res> {
-  __$$_WalletActionResultCopyWithImpl(
-      _$_WalletActionResult _value, $Res Function(_$_WalletActionResult) _then)
+class __$$WalletActionResultImplCopyWithImpl<$Res>
+    extends _$WalletActionResultCopyWithImpl<$Res, _$WalletActionResultImpl>
+    implements _$$WalletActionResultImplCopyWith<$Res> {
+  __$$WalletActionResultImplCopyWithImpl(_$WalletActionResultImpl _value,
+      $Res Function(_$WalletActionResultImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -174,7 +174,7 @@ class __$$_WalletActionResultCopyWithImpl<$Res>
     Object? pagingCounter = null,
     Object? actions = null,
   }) {
-    return _then(_$_WalletActionResult(
+    return _then(_$WalletActionResultImpl(
       hasNextPage: null == hasNextPage
           ? _value.hasNextPage
           : hasNextPage // ignore: cast_nullable_to_non_nullable
@@ -221,8 +221,8 @@ class __$$_WalletActionResultCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_WalletActionResult implements _WalletActionResult {
-  _$_WalletActionResult(
+class _$WalletActionResultImpl implements _WalletActionResult {
+  _$WalletActionResultImpl(
       {required this.hasNextPage,
       required this.hasPrevPage,
       required this.nextPage,
@@ -234,8 +234,8 @@ class _$_WalletActionResult implements _WalletActionResult {
       required this.pagingCounter,
       @WalletActionsConverter() @JsonKey(name: 'docs') required this.actions});
 
-  factory _$_WalletActionResult.fromJson(Map<String, dynamic> json) =>
-      _$$_WalletActionResultFromJson(json);
+  factory _$WalletActionResultImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WalletActionResultImplFromJson(json);
 
   @override
   final bool hasNextPage;
@@ -269,7 +269,7 @@ class _$_WalletActionResult implements _WalletActionResult {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_WalletActionResult &&
+            other is _$WalletActionResultImpl &&
             (identical(other.hasNextPage, hasNextPage) ||
                 other.hasNextPage == hasNextPage) &&
             (identical(other.hasPrevPage, hasPrevPage) ||
@@ -307,13 +307,13 @@ class _$_WalletActionResult implements _WalletActionResult {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_WalletActionResultCopyWith<_$_WalletActionResult> get copyWith =>
-      __$$_WalletActionResultCopyWithImpl<_$_WalletActionResult>(
+  _$$WalletActionResultImplCopyWith<_$WalletActionResultImpl> get copyWith =>
+      __$$WalletActionResultImplCopyWithImpl<_$WalletActionResultImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_WalletActionResultToJson(
+    return _$$WalletActionResultImplToJson(
       this,
     );
   }
@@ -332,10 +332,10 @@ abstract class _WalletActionResult implements WalletActionResult {
       required final num pagingCounter,
       @WalletActionsConverter()
       @JsonKey(name: 'docs')
-      required final List<WalletAction> actions}) = _$_WalletActionResult;
+      required final List<WalletAction> actions}) = _$WalletActionResultImpl;
 
   factory _WalletActionResult.fromJson(Map<String, dynamic> json) =
-      _$_WalletActionResult.fromJson;
+      _$WalletActionResultImpl.fromJson;
 
   @override
   bool get hasNextPage;
@@ -361,6 +361,6 @@ abstract class _WalletActionResult implements WalletActionResult {
   List<WalletAction> get actions;
   @override
   @JsonKey(ignore: true)
-  _$$_WalletActionResultCopyWith<_$_WalletActionResult> get copyWith =>
+  _$$WalletActionResultImplCopyWith<_$WalletActionResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

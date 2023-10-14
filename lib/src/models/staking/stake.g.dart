@@ -6,28 +6,31 @@ part of 'stake.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_StakeRequestBody _$$_StakeRequestBodyFromJson(Map<String, dynamic> json) =>
-    _$_StakeRequestBody(
+_$StakeRequestBodyImpl _$$StakeRequestBodyImplFromJson(
+        Map<String, dynamic> json) =>
+    _$StakeRequestBodyImpl(
       accountAddress: json['accountAddress'] as String,
       tokenAmount: json['tokenAmount'] as String,
       tokenAddress: json['tokenAddress'] as String,
     );
 
-Map<String, dynamic> _$$_StakeRequestBodyToJson(_$_StakeRequestBody instance) =>
+Map<String, dynamic> _$$StakeRequestBodyImplToJson(
+        _$StakeRequestBodyImpl instance) =>
     <String, dynamic>{
       'accountAddress': instance.accountAddress,
       'tokenAmount': instance.tokenAmount,
       'tokenAddress': instance.tokenAddress,
     };
 
-_$_StakeResponseBody _$$_StakeResponseBodyFromJson(Map<String, dynamic> json) =>
-    _$_StakeResponseBody(
+_$StakeResponseBodyImpl _$$StakeResponseBodyImplFromJson(
+        Map<String, dynamic> json) =>
+    _$StakeResponseBodyImpl(
       contractAddress: json['contractAddress'] as String,
       encodedABI: json['encodedABI'] as String,
     );
 
-Map<String, dynamic> _$$_StakeResponseBodyToJson(
-        _$_StakeResponseBody instance) =>
+Map<String, dynamic> _$$StakeResponseBodyImplToJson(
+        _$StakeResponseBodyImpl instance) =>
     <String, dynamic>{
       'contractAddress': instance.contractAddress,
       'encodedABI': instance.encodedABI,

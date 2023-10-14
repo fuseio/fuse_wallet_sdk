@@ -6,8 +6,8 @@ part of 'token_event.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$NativeToken _$$NativeTokenFromJson(Map<String, dynamic> json) =>
-    _$NativeToken(
+_$NativeTokenImpl _$$NativeTokenImplFromJson(Map<String, dynamic> json) =>
+    _$NativeTokenImpl(
       symbol: json['symbol'] as String? ?? 'FUSE',
       name: json['name'] as String? ?? 'Fuse Token',
       decimals: json['decimals'] as int? ?? 18,
@@ -16,7 +16,7 @@ _$NativeToken _$$NativeTokenFromJson(Map<String, dynamic> json) =>
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$NativeTokenToJson(_$NativeToken instance) =>
+Map<String, dynamic> _$$NativeTokenImplToJson(_$NativeTokenImpl instance) =>
     <String, dynamic>{
       'symbol': instance.symbol,
       'name': instance.name,
@@ -26,8 +26,8 @@ Map<String, dynamic> _$$NativeTokenToJson(_$NativeToken instance) =>
       'type': instance.$type,
     };
 
-_$ERC20Transfer _$$ERC20TransferFromJson(Map<String, dynamic> json) =>
-    _$ERC20Transfer(
+_$ERC20TransferImpl _$$ERC20TransferImplFromJson(Map<String, dynamic> json) =>
+    _$ERC20TransferImpl(
       symbol: json['symbol'] as String,
       name: nameFromJson(json['name'] as String),
       decimals: json['decimals'] as int,
@@ -36,7 +36,7 @@ _$ERC20Transfer _$$ERC20TransferFromJson(Map<String, dynamic> json) =>
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$ERC20TransferToJson(_$ERC20Transfer instance) =>
+Map<String, dynamic> _$$ERC20TransferImplToJson(_$ERC20TransferImpl instance) =>
     <String, dynamic>{
       'symbol': instance.symbol,
       'name': instance.name,
@@ -46,8 +46,8 @@ Map<String, dynamic> _$$ERC20TransferToJson(_$ERC20Transfer instance) =>
       'type': instance.$type,
     };
 
-_$ERC721Transfer _$$ERC721TransferFromJson(Map<String, dynamic> json) =>
-    _$ERC721Transfer(
+_$ERC721TransferImpl _$$ERC721TransferImplFromJson(Map<String, dynamic> json) =>
+    _$ERC721TransferImpl(
       symbol: json['symbol'] as String,
       name: nameFromJson(json['name'] as String),
       address: addressFromJson(json['address'] as String),
@@ -57,7 +57,8 @@ _$ERC721Transfer _$$ERC721TransferFromJson(Map<String, dynamic> json) =>
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$ERC721TransferToJson(_$ERC721Transfer instance) =>
+Map<String, dynamic> _$$ERC721TransferImplToJson(
+        _$ERC721TransferImpl instance) =>
     <String, dynamic>{
       'symbol': instance.symbol,
       'name': instance.name,

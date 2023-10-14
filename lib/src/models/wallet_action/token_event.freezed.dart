@@ -184,11 +184,11 @@ class _$TokenEventCopyWithImpl<$Res, $Val extends TokenEvent>
 }
 
 /// @nodoc
-abstract class _$$NativeTokenCopyWith<$Res>
+abstract class _$$NativeTokenImplCopyWith<$Res>
     implements $TokenEventCopyWith<$Res> {
-  factory _$$NativeTokenCopyWith(
-          _$NativeToken value, $Res Function(_$NativeToken) then) =
-      __$$NativeTokenCopyWithImpl<$Res>;
+  factory _$$NativeTokenImplCopyWith(
+          _$NativeTokenImpl value, $Res Function(_$NativeTokenImpl) then) =
+      __$$NativeTokenImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -200,11 +200,11 @@ abstract class _$$NativeTokenCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$NativeTokenCopyWithImpl<$Res>
-    extends _$TokenEventCopyWithImpl<$Res, _$NativeToken>
-    implements _$$NativeTokenCopyWith<$Res> {
-  __$$NativeTokenCopyWithImpl(
-      _$NativeToken _value, $Res Function(_$NativeToken) _then)
+class __$$NativeTokenImplCopyWithImpl<$Res>
+    extends _$TokenEventCopyWithImpl<$Res, _$NativeTokenImpl>
+    implements _$$NativeTokenImplCopyWith<$Res> {
+  __$$NativeTokenImplCopyWithImpl(
+      _$NativeTokenImpl _value, $Res Function(_$NativeTokenImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -216,7 +216,7 @@ class __$$NativeTokenCopyWithImpl<$Res>
     Object? address = null,
     Object? value = null,
   }) {
-    return _then(_$NativeToken(
+    return _then(_$NativeTokenImpl(
       symbol: null == symbol
           ? _value.symbol
           : symbol // ignore: cast_nullable_to_non_nullable
@@ -243,8 +243,8 @@ class __$$NativeTokenCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NativeToken extends NativeToken {
-  const _$NativeToken(
+class _$NativeTokenImpl extends NativeToken {
+  const _$NativeTokenImpl(
       {this.symbol = 'FUSE',
       this.name = 'Fuse Token',
       this.decimals = 18,
@@ -254,8 +254,8 @@ class _$NativeToken extends NativeToken {
       : $type = $type ?? 'native',
         super._();
 
-  factory _$NativeToken.fromJson(Map<String, dynamic> json) =>
-      _$$NativeTokenFromJson(json);
+  factory _$NativeTokenImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NativeTokenImplFromJson(json);
 
   @override
   @JsonKey()
@@ -285,7 +285,7 @@ class _$NativeToken extends NativeToken {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NativeToken &&
+            other is _$NativeTokenImpl &&
             (identical(other.symbol, symbol) || other.symbol == symbol) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.decimals, decimals) ||
@@ -302,8 +302,8 @@ class _$NativeToken extends NativeToken {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$NativeTokenCopyWith<_$NativeToken> get copyWith =>
-      __$$NativeTokenCopyWithImpl<_$NativeToken>(this, _$identity);
+  _$$NativeTokenImplCopyWith<_$NativeTokenImpl> get copyWith =>
+      __$$NativeTokenImplCopyWithImpl<_$NativeTokenImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -420,7 +420,7 @@ class _$NativeToken extends NativeToken {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NativeTokenToJson(
+    return _$$NativeTokenImplToJson(
       this,
     );
   }
@@ -433,11 +433,11 @@ abstract class NativeToken extends TokenEvent {
           final int decimals,
           final String address,
           @JsonKey(fromJson: amountFromJson) required final BigInt value}) =
-      _$NativeToken;
+      _$NativeTokenImpl;
   const NativeToken._() : super._();
 
   factory NativeToken.fromJson(Map<String, dynamic> json) =
-      _$NativeToken.fromJson;
+      _$NativeTokenImpl.fromJson;
 
   @override
   String get symbol;
@@ -451,16 +451,16 @@ abstract class NativeToken extends TokenEvent {
   BigInt get value;
   @override
   @JsonKey(ignore: true)
-  _$$NativeTokenCopyWith<_$NativeToken> get copyWith =>
+  _$$NativeTokenImplCopyWith<_$NativeTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ERC20TransferCopyWith<$Res>
+abstract class _$$ERC20TransferImplCopyWith<$Res>
     implements $TokenEventCopyWith<$Res> {
-  factory _$$ERC20TransferCopyWith(
-          _$ERC20Transfer value, $Res Function(_$ERC20Transfer) then) =
-      __$$ERC20TransferCopyWithImpl<$Res>;
+  factory _$$ERC20TransferImplCopyWith(
+          _$ERC20TransferImpl value, $Res Function(_$ERC20TransferImpl) then) =
+      __$$ERC20TransferImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -472,11 +472,11 @@ abstract class _$$ERC20TransferCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ERC20TransferCopyWithImpl<$Res>
-    extends _$TokenEventCopyWithImpl<$Res, _$ERC20Transfer>
-    implements _$$ERC20TransferCopyWith<$Res> {
-  __$$ERC20TransferCopyWithImpl(
-      _$ERC20Transfer _value, $Res Function(_$ERC20Transfer) _then)
+class __$$ERC20TransferImplCopyWithImpl<$Res>
+    extends _$TokenEventCopyWithImpl<$Res, _$ERC20TransferImpl>
+    implements _$$ERC20TransferImplCopyWith<$Res> {
+  __$$ERC20TransferImplCopyWithImpl(
+      _$ERC20TransferImpl _value, $Res Function(_$ERC20TransferImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -488,7 +488,7 @@ class __$$ERC20TransferCopyWithImpl<$Res>
     Object? address = null,
     Object? value = null,
   }) {
-    return _then(_$ERC20Transfer(
+    return _then(_$ERC20TransferImpl(
       symbol: null == symbol
           ? _value.symbol
           : symbol // ignore: cast_nullable_to_non_nullable
@@ -515,8 +515,8 @@ class __$$ERC20TransferCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ERC20Transfer extends ERC20Transfer {
-  const _$ERC20Transfer(
+class _$ERC20TransferImpl extends ERC20Transfer {
+  const _$ERC20TransferImpl(
       {required this.symbol,
       @JsonKey(fromJson: nameFromJson) required this.name,
       required this.decimals,
@@ -526,8 +526,8 @@ class _$ERC20Transfer extends ERC20Transfer {
       : $type = $type ?? 'ERC-20',
         super._();
 
-  factory _$ERC20Transfer.fromJson(Map<String, dynamic> json) =>
-      _$$ERC20TransferFromJson(json);
+  factory _$ERC20TransferImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ERC20TransferImplFromJson(json);
 
   @override
   final String symbol;
@@ -554,7 +554,7 @@ class _$ERC20Transfer extends ERC20Transfer {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ERC20Transfer &&
+            other is _$ERC20TransferImpl &&
             (identical(other.symbol, symbol) || other.symbol == symbol) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.decimals, decimals) ||
@@ -571,8 +571,8 @@ class _$ERC20Transfer extends ERC20Transfer {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ERC20TransferCopyWith<_$ERC20Transfer> get copyWith =>
-      __$$ERC20TransferCopyWithImpl<_$ERC20Transfer>(this, _$identity);
+  _$$ERC20TransferImplCopyWith<_$ERC20TransferImpl> get copyWith =>
+      __$$ERC20TransferImplCopyWithImpl<_$ERC20TransferImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -689,7 +689,7 @@ class _$ERC20Transfer extends ERC20Transfer {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ERC20TransferToJson(
+    return _$$ERC20TransferImplToJson(
       this,
     );
   }
@@ -701,11 +701,11 @@ abstract class ERC20Transfer extends TokenEvent {
       @JsonKey(fromJson: nameFromJson) required final String name,
       required final int decimals,
       @JsonKey(fromJson: addressFromJson) required final String address,
-      required final BigInt value}) = _$ERC20Transfer;
+      required final BigInt value}) = _$ERC20TransferImpl;
   const ERC20Transfer._() : super._();
 
   factory ERC20Transfer.fromJson(Map<String, dynamic> json) =
-      _$ERC20Transfer.fromJson;
+      _$ERC20TransferImpl.fromJson;
 
   @override
   String get symbol;
@@ -720,16 +720,16 @@ abstract class ERC20Transfer extends TokenEvent {
   BigInt get value;
   @override
   @JsonKey(ignore: true)
-  _$$ERC20TransferCopyWith<_$ERC20Transfer> get copyWith =>
+  _$$ERC20TransferImplCopyWith<_$ERC20TransferImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ERC721TransferCopyWith<$Res>
+abstract class _$$ERC721TransferImplCopyWith<$Res>
     implements $TokenEventCopyWith<$Res> {
-  factory _$$ERC721TransferCopyWith(
-          _$ERC721Transfer value, $Res Function(_$ERC721Transfer) then) =
-      __$$ERC721TransferCopyWithImpl<$Res>;
+  factory _$$ERC721TransferImplCopyWith(_$ERC721TransferImpl value,
+          $Res Function(_$ERC721TransferImpl) then) =
+      __$$ERC721TransferImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -742,11 +742,11 @@ abstract class _$$ERC721TransferCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ERC721TransferCopyWithImpl<$Res>
-    extends _$TokenEventCopyWithImpl<$Res, _$ERC721Transfer>
-    implements _$$ERC721TransferCopyWith<$Res> {
-  __$$ERC721TransferCopyWithImpl(
-      _$ERC721Transfer _value, $Res Function(_$ERC721Transfer) _then)
+class __$$ERC721TransferImplCopyWithImpl<$Res>
+    extends _$TokenEventCopyWithImpl<$Res, _$ERC721TransferImpl>
+    implements _$$ERC721TransferImplCopyWith<$Res> {
+  __$$ERC721TransferImplCopyWithImpl(
+      _$ERC721TransferImpl _value, $Res Function(_$ERC721TransferImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -759,7 +759,7 @@ class __$$ERC721TransferCopyWithImpl<$Res>
     Object? tokenId = null,
     Object? to = null,
   }) {
-    return _then(_$ERC721Transfer(
+    return _then(_$ERC721TransferImpl(
       symbol: null == symbol
           ? _value.symbol
           : symbol // ignore: cast_nullable_to_non_nullable
@@ -790,8 +790,8 @@ class __$$ERC721TransferCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ERC721Transfer extends ERC721Transfer {
-  const _$ERC721Transfer(
+class _$ERC721TransferImpl extends ERC721Transfer {
+  const _$ERC721TransferImpl(
       {required this.symbol,
       @JsonKey(fromJson: nameFromJson) required this.name,
       @JsonKey(fromJson: addressFromJson) required this.address,
@@ -802,8 +802,8 @@ class _$ERC721Transfer extends ERC721Transfer {
       : $type = $type ?? 'ERC-721',
         super._();
 
-  factory _$ERC721Transfer.fromJson(Map<String, dynamic> json) =>
-      _$$ERC721TransferFromJson(json);
+  factory _$ERC721TransferImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ERC721TransferImplFromJson(json);
 
   @override
   final String symbol;
@@ -832,7 +832,7 @@ class _$ERC721Transfer extends ERC721Transfer {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ERC721Transfer &&
+            other is _$ERC721TransferImpl &&
             (identical(other.symbol, symbol) || other.symbol == symbol) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.address, address) || other.address == address) &&
@@ -849,8 +849,9 @@ class _$ERC721Transfer extends ERC721Transfer {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ERC721TransferCopyWith<_$ERC721Transfer> get copyWith =>
-      __$$ERC721TransferCopyWithImpl<_$ERC721Transfer>(this, _$identity);
+  _$$ERC721TransferImplCopyWith<_$ERC721TransferImpl> get copyWith =>
+      __$$ERC721TransferImplCopyWithImpl<_$ERC721TransferImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -967,7 +968,7 @@ class _$ERC721Transfer extends ERC721Transfer {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ERC721TransferToJson(
+    return _$$ERC721TransferImplToJson(
       this,
     );
   }
@@ -980,11 +981,11 @@ abstract class ERC721Transfer extends TokenEvent {
       @JsonKey(fromJson: addressFromJson) required final String address,
       required final BigInt value,
       required final BigInt tokenId,
-      required final BigInt to}) = _$ERC721Transfer;
+      required final BigInt to}) = _$ERC721TransferImpl;
   const ERC721Transfer._() : super._();
 
   factory ERC721Transfer.fromJson(Map<String, dynamic> json) =
-      _$ERC721Transfer.fromJson;
+      _$ERC721TransferImpl.fromJson;
 
   @override
   String get symbol;
@@ -1000,6 +1001,6 @@ abstract class ERC721Transfer extends TokenEvent {
   BigInt get to;
   @override
   @JsonKey(ignore: true)
-  _$$ERC721TransferCopyWith<_$ERC721Transfer> get copyWith =>
+  _$$ERC721TransferImplCopyWith<_$ERC721TransferImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,9 +6,9 @@ part of 'wallet_action_result.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_WalletActionResult _$$_WalletActionResultFromJson(
+_$WalletActionResultImpl _$$WalletActionResultImplFromJson(
         Map<String, dynamic> json) =>
-    _$_WalletActionResult(
+    _$WalletActionResultImpl(
       hasNextPage: json['hasNextPage'] as bool,
       hasPrevPage: json['hasPrevPage'] as bool,
       nextPage: json['nextPage'] as num?,
@@ -21,8 +21,8 @@ _$_WalletActionResult _$$_WalletActionResultFromJson(
       actions: const WalletActionsConverter().fromJson(json['docs'] as List),
     );
 
-Map<String, dynamic> _$$_WalletActionResultToJson(
-        _$_WalletActionResult instance) =>
+Map<String, dynamic> _$$WalletActionResultImplToJson(
+        _$WalletActionResultImpl instance) =>
     <String, dynamic>{
       'hasNextPage': instance.hasNextPage,
       'hasPrevPage': instance.hasPrevPage,
