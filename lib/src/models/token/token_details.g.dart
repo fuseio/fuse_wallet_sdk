@@ -6,7 +6,7 @@ part of 'token_details.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$NativeImpl _$$NativeImplFromJson(Map<String, dynamic> json) => _$NativeImpl(
+_$Native _$$NativeFromJson(Map<String, dynamic> json) => _$Native(
       symbol: json['symbol'] as String? ?? 'FUSE',
       name: json['name'] as String? ?? 'Fuse Token',
       decimals: json['decimals'] as int? ?? 18,
@@ -15,8 +15,7 @@ _$NativeImpl _$$NativeImplFromJson(Map<String, dynamic> json) => _$NativeImpl(
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$NativeImplToJson(_$NativeImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$NativeToJson(_$Native instance) => <String, dynamic>{
       'symbol': instance.symbol,
       'name': instance.name,
       'decimals': instance.decimals,
@@ -25,9 +24,8 @@ Map<String, dynamic> _$$NativeImplToJson(_$NativeImpl instance) =>
       'type': instance.$type,
     };
 
-_$LiquidityPoolTokenImpl _$$LiquidityPoolTokenImplFromJson(
-        Map<String, dynamic> json) =>
-    _$LiquidityPoolTokenImpl(
+_$LiquidityPoolToken _$$LiquidityPoolTokenFromJson(Map<String, dynamic> json) =>
+    _$LiquidityPoolToken(
       symbol: json['symbol'] as String,
       decimals: json['decimals'] as int,
       name: nameFromJson(json['name'] as String),
@@ -38,8 +36,8 @@ _$LiquidityPoolTokenImpl _$$LiquidityPoolTokenImplFromJson(
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$LiquidityPoolTokenImplToJson(
-        _$LiquidityPoolTokenImpl instance) =>
+Map<String, dynamic> _$$LiquidityPoolTokenToJson(
+        _$LiquidityPoolToken instance) =>
     <String, dynamic>{
       'symbol': instance.symbol,
       'decimals': instance.decimals,
@@ -50,8 +48,8 @@ Map<String, dynamic> _$$LiquidityPoolTokenImplToJson(
       'type': instance.$type,
     };
 
-_$BridgedTokenImpl _$$BridgedTokenImplFromJson(Map<String, dynamic> json) =>
-    _$BridgedTokenImpl(
+_$BridgedToken _$$BridgedTokenFromJson(Map<String, dynamic> json) =>
+    _$BridgedToken(
       symbol: json['symbol'] as String,
       logoURI: json['logoURI'] as String,
       decimals: json['decimals'] as int,
@@ -60,7 +58,7 @@ _$BridgedTokenImpl _$$BridgedTokenImplFromJson(Map<String, dynamic> json) =>
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$BridgedTokenImplToJson(_$BridgedTokenImpl instance) =>
+Map<String, dynamic> _$$BridgedTokenToJson(_$BridgedToken instance) =>
     <String, dynamic>{
       'symbol': instance.symbol,
       'logoURI': instance.logoURI,
@@ -70,8 +68,7 @@ Map<String, dynamic> _$$BridgedTokenImplToJson(_$BridgedTokenImpl instance) =>
       'type': instance.$type,
     };
 
-_$MiscTokenImpl _$$MiscTokenImplFromJson(Map<String, dynamic> json) =>
-    _$MiscTokenImpl(
+_$MiscToken _$$MiscTokenFromJson(Map<String, dynamic> json) => _$MiscToken(
       symbol: json['symbol'] as String,
       logoURI: json['logoURI'] as String,
       decimals: json['decimals'] as int,
@@ -80,7 +77,7 @@ _$MiscTokenImpl _$$MiscTokenImplFromJson(Map<String, dynamic> json) =>
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$MiscTokenImplToJson(_$MiscTokenImpl instance) =>
+Map<String, dynamic> _$$MiscTokenToJson(_$MiscToken instance) =>
     <String, dynamic>{
       'symbol': instance.symbol,
       'logoURI': instance.logoURI,
@@ -90,7 +87,7 @@ Map<String, dynamic> _$$MiscTokenImplToJson(_$MiscTokenImpl instance) =>
       'type': instance.$type,
     };
 
-_$ERC20Impl _$$ERC20ImplFromJson(Map<String, dynamic> json) => _$ERC20Impl(
+_$ERC20 _$$ERC20FromJson(Map<String, dynamic> json) => _$ERC20(
       symbol: json['symbol'] as String,
       name: nameFromJson(json['name'] as String),
       decimals: json['decimals'] == null
@@ -101,8 +98,7 @@ _$ERC20Impl _$$ERC20ImplFromJson(Map<String, dynamic> json) => _$ERC20Impl(
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$ERC20ImplToJson(_$ERC20Impl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$ERC20ToJson(_$ERC20 instance) => <String, dynamic>{
       'symbol': instance.symbol,
       'name': instance.name,
       'decimals': instance.decimals,
@@ -111,7 +107,7 @@ Map<String, dynamic> _$$ERC20ImplToJson(_$ERC20Impl instance) =>
       'type': instance.$type,
     };
 
-_$ERC721Impl _$$ERC721ImplFromJson(Map<String, dynamic> json) => _$ERC721Impl(
+_$ERC721 _$$ERC721FromJson(Map<String, dynamic> json) => _$ERC721(
       symbol: json['symbol'] as String,
       name: nameFromJson(json['name'] as String),
       decimals: _decimalsFromJson(json['decimals'] as String?),
@@ -120,8 +116,7 @@ _$ERC721Impl _$$ERC721ImplFromJson(Map<String, dynamic> json) => _$ERC721Impl(
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$ERC721ImplToJson(_$ERC721Impl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$ERC721ToJson(_$ERC721 instance) => <String, dynamic>{
       'symbol': instance.symbol,
       'name': instance.name,
       'decimals': instance.decimals,
