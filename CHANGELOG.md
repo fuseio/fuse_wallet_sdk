@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [0.2.4]
+
+### Changed
+- Upgraded to the latest version of userop.
+- The details of the userop is printed to the console before sending it.
+
 ## [0.2.3]
 
 ### Fixed
