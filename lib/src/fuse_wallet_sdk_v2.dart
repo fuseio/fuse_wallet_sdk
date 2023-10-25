@@ -413,27 +413,29 @@ class FuseSDK {
     StakeRequestBody stakeRequestBody, [
     TxOptions? options,
   ]) async {
-    final response = await _stakingModule.stake(stakeRequestBody);
-    _handleModuleError(response);
+    var DC(:data, :error, :hasError) =
+        await _stakingModule.stake(stakeRequestBody);
 
-    final tokenDetails = await getERC20TokenDetails(
-      EthereumAddress.fromHex(stakeRequestBody.tokenAddress),
+    if (hasError) {
+      throw error!;
+    }
+
+    var StakeRequestBody(:tokenAmount, :tokenAddress) = stakeRequestBody;
+
+    var StakeResponseBody(:contractAddress, :encodedABI) = data!;
+
+    var TokenDetails(:decimals) = await getERC20TokenDetails(
+      EthereumAddress.fromHex(tokenAddress),
     );
 
-    final amount = AmountFormat.toBigInt(
-      stakeRequestBody.tokenAmount,
-      tokenDetails.decimals,
-    );
-    final stakeCallData = hexToBytes(
-      response.data!.encodedABI,
-    );
+    final amount = AmountFormat.toBigInt(tokenAmount, decimals);
 
-    final spender = EthereumAddress.fromHex(
-      response.data!.contractAddress,
-    );
+    final stakeCallData = hexToBytes(encodedABI);
+
+    final spender = EthereumAddress.fromHex(contractAddress);
 
     return _processOperation(
-      tokenAddress: EthereumAddress.fromHex(stakeRequestBody.tokenAddress),
+      tokenAddress: EthereumAddress.fromHex(tokenAddress),
       spender: spender,
       callData: stakeCallData,
       amount: amount,
