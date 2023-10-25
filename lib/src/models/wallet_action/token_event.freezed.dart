@@ -24,7 +24,8 @@ TokenEvent _$TokenEventFromJson(Map<String, dynamic> json) {
       return ERC721Transfer.fromJson(json);
 
     default:
-      return NativeToken.fromJson(json);
+      throw CheckedFromJsonException(
+          json, 'type', 'TokenEvent', 'Invalid union type "${json['type']}"!');
   }
 }
 
