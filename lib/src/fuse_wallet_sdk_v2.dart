@@ -596,6 +596,7 @@ class FuseSDK {
 
     try {
       final userOp = await wallet.execute(call);
+      print(userOp.getOp().toJson());
 
       return await client.sendUserOperation(userOp);
     } on RPCError catch (e) {
