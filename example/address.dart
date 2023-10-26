@@ -9,6 +9,8 @@ void main() async {
   final fuseSDK = await FuseSDK.init(
     publicApiKey,
     credentials,
+    // You can specify the baseUrl. If it's not specified, api.fuse.io is used.
+    baseUrl: "api.alpha.fuse.io",
   );
 
   print('Smart contract wallet address: ${fuseSDK.wallet.getSender()}');
