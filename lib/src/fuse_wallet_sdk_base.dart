@@ -40,10 +40,11 @@ class FuseWalletSDK {
   /// [rpcUrl] is the URL of the Ethereum JSON-RPC endpoint. Default value is taken from [Variables.FUSE_RPC_URL].
   FuseWalletSDK(
     this.publicApiKey, {
+    String baseUrl = Variables.BASE_URL,
     String rpcUrl = Variables.FUSE_RPC_URL,
   })  : _dio = Dio(
           BaseOptions(
-            baseUrl: Uri.https(Variables.BASE_URL, '/api').toString(),
+            baseUrl: Uri.https(baseUrl, '/api').toString(),
             headers: {
               'Content-Type': 'application/json',
             },

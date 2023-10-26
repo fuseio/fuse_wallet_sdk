@@ -6,7 +6,6 @@ class Variables {
   static const int DEFAULT_GAS_LIMIT = 1000000;
   static const String NATIVE_TOKEN_ADDRESS =
       '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'; // For sending native (ETH/FUSE) tokens
-  static const BASE_URL =
-      'api.alpha.fuse.io'; //'api.staging.fuse.io'; //'api.fuse.io';
+  static const BASE_URL = 'api.fuse.io';
   static const SOCKET_SERVER_URL = 'wss://ws.fuse.io/connection/websocket';
 }

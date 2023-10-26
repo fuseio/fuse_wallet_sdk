@@ -14,11 +14,10 @@ class FuseSDK {
   /// Creates a new instance of the SDK.
   ///
   /// [publicApiKey] is required to authenticate with the Fuse API.
-  FuseSDK(
-    String publicApiKey,
-  ) : _dio = Dio(
+  FuseSDK(String publicApiKey, {String baseUrl = Variables.BASE_URL})
+      : _dio = Dio(
           BaseOptions(
-            baseUrl: Uri.https(Variables.BASE_URL, '/api').toString(),
+            baseUrl: Uri.https(baseUrl, '/api').toString(),
             headers: {
               'Content-Type': 'application/json',
             },
@@ -83,6 +82,7 @@ class FuseSDK {
   static Future<FuseSDK> init(
     String publicApiKey,
     EthPrivateKey credentials, {
+    String baseUrl = Variables.BASE_URL,
     bool withPaymaster = false,
     Map<String, dynamic>? paymasterContext,
     IPresetBuilderOpts? opts,
@@ -94,6 +94,7 @@ class FuseSDK {
     if (withPaymaster) {
       paymasterMiddleware = _getPaymasterMiddleware(
         publicApiKey,
+        baseUrl,
         paymasterContext,
       );
     }
@@ -101,6 +102,7 @@ class FuseSDK {
     fuseSDK.wallet = await _initializeWallet(
       credentials,
       publicApiKey,
+      baseUrl,
       opts,
       paymasterMiddleware,
     );
@@ -108,7 +110,7 @@ class FuseSDK {
     await fuseSDK.authenticate(credentials);
 
     fuseSDK.client = await Client.init(
-      _getBundlerRpc(publicApiKey),
+      _getBundlerRpc(publicApiKey: publicApiKey, baseUrl: baseUrl),
       opts: clientOpts,
     );
 
@@ -720,9 +722,10 @@ class FuseSDK {
   /// [paymasterContext] provides additional context for the paymaster.
   static UserOperationMiddlewareFn? _getPaymasterMiddleware(
     String publicApiKey,
+    String baseUrl,
     Map<String, dynamic>? paymasterContext,
   ) {
-    final paymasterRpc = Uri.https(Variables.BASE_URL, '/api/v0/paymaster', {
+    final paymasterRpc = Uri.https(baseUrl, '/api/v0/paymaster', {
       'apiKey': publicApiKey,
     }).toString();
 
@@ -738,12 +741,13 @@ class FuseSDK {
   static Future<EtherspotWallet> _initializeWallet(
     EthPrivateKey credentials,
     String publicApiKey,
+    String baseUrl,
     IPresetBuilderOpts? opts,
     UserOperationMiddlewareFn? paymasterMiddleware,
   ) {
     return EtherspotWallet.init(
       credentials,
-      _getBundlerRpc(publicApiKey),
+      _getBundlerRpc(publicApiKey: publicApiKey, baseUrl: baseUrl),
       opts: IPresetBuilderOpts()
         ..entryPoint = opts?.entryPoint
         ..salt = opts?.salt
@@ -754,8 +758,11 @@ class FuseSDK {
   }
 
   /// Retrieves the bundler RPC URL for the provided [publicApiKey].
-  static String _getBundlerRpc(String publicApiKey) {
-    return Uri.https(Variables.BASE_URL, '/api/v0/bundler', {
+  static String _getBundlerRpc({
+    required String publicApiKey,
+    required String baseUrl,
+  }) {
+    return Uri.https(baseUrl, '/api/v0/bundler', {
       'apiKey': publicApiKey,
     }).toString();
   }
