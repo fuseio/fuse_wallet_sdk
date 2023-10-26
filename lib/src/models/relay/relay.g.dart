@@ -9,7 +9,7 @@ part of 'relay.dart';
 _$RelayImpl _$$RelayImplFromJson(Map<String, dynamic> json) => _$RelayImpl(
       network: json['network'] as String? ?? 'fuse',
       gasPrice: json['gasPrice'] as int? ?? 0,
-      gasLimit: json['gasLimit'] as int? ?? 700000,
+      gasLimit: json['gasLimit'] as int? ?? 1000000,
       transactionBody:
           json['transactionBody'] as Map<String, dynamic>? ?? const {},
       walletAddress: json['walletAddress'] as String,

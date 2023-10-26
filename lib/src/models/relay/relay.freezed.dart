@@ -243,7 +243,7 @@ class _$RelayImpl implements _Relay {
   _$RelayImpl(
       {this.network = 'fuse',
       this.gasPrice = 0,
-      this.gasLimit = 700000,
+      this.gasLimit = 1000000,
       this.transactionBody = const {},
       required this.walletAddress,
       required this.walletModuleAddress,
