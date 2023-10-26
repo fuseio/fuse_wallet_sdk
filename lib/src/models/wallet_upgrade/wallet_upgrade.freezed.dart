@@ -113,11 +113,11 @@ class _$WalletUpgradeCopyWithImpl<$Res, $Val extends WalletUpgrade>
 }
 
 /// @nodoc
-abstract class _$$_WalletUpgradeCopyWith<$Res>
+abstract class _$$WalletUpgradeImplCopyWith<$Res>
     implements $WalletUpgradeCopyWith<$Res> {
-  factory _$$_WalletUpgradeCopyWith(
-          _$_WalletUpgrade value, $Res Function(_$_WalletUpgrade) then) =
-      __$$_WalletUpgradeCopyWithImpl<$Res>;
+  factory _$$WalletUpgradeImplCopyWith(
+          _$WalletUpgradeImpl value, $Res Function(_$WalletUpgradeImpl) then) =
+      __$$WalletUpgradeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -132,11 +132,11 @@ abstract class _$$_WalletUpgradeCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_WalletUpgradeCopyWithImpl<$Res>
-    extends _$WalletUpgradeCopyWithImpl<$Res, _$_WalletUpgrade>
-    implements _$$_WalletUpgradeCopyWith<$Res> {
-  __$$_WalletUpgradeCopyWithImpl(
-      _$_WalletUpgrade _value, $Res Function(_$_WalletUpgrade) _then)
+class __$$WalletUpgradeImplCopyWithImpl<$Res>
+    extends _$WalletUpgradeCopyWithImpl<$Res, _$WalletUpgradeImpl>
+    implements _$$WalletUpgradeImplCopyWith<$Res> {
+  __$$WalletUpgradeImplCopyWithImpl(
+      _$WalletUpgradeImpl _value, $Res Function(_$WalletUpgradeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -151,7 +151,7 @@ class __$$_WalletUpgradeCopyWithImpl<$Res>
     Object? updatedAt = null,
     Object? id = null,
   }) {
-    return _then(_$_WalletUpgrade(
+    return _then(_$WalletUpgradeImpl(
       version: freezed == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
@@ -190,8 +190,8 @@ class __$$_WalletUpgradeCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_WalletUpgrade extends _WalletUpgrade {
-  _$_WalletUpgrade(
+class _$WalletUpgradeImpl extends _WalletUpgrade {
+  _$WalletUpgradeImpl(
       {this.version,
       required this.contractAddress,
       this.paddedVersion,
@@ -202,8 +202,8 @@ class _$_WalletUpgrade extends _WalletUpgrade {
       @JsonKey(name: '_id') required this.id})
       : super._();
 
-  factory _$_WalletUpgrade.fromJson(Map<String, dynamic> json) =>
-      _$$_WalletUpgradeFromJson(json);
+  factory _$WalletUpgradeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WalletUpgradeImplFromJson(json);
 
   @override
   final String? version;
@@ -232,7 +232,7 @@ class _$_WalletUpgrade extends _WalletUpgrade {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_WalletUpgrade &&
+            other is _$WalletUpgradeImpl &&
             (identical(other.version, version) || other.version == version) &&
             (identical(other.contractAddress, contractAddress) ||
                 other.contractAddress == contractAddress) &&
@@ -265,12 +265,12 @@ class _$_WalletUpgrade extends _WalletUpgrade {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_WalletUpgradeCopyWith<_$_WalletUpgrade> get copyWith =>
-      __$$_WalletUpgradeCopyWithImpl<_$_WalletUpgrade>(this, _$identity);
+  _$$WalletUpgradeImplCopyWith<_$WalletUpgradeImpl> get copyWith =>
+      __$$WalletUpgradeImplCopyWithImpl<_$WalletUpgradeImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_WalletUpgradeToJson(
+    return _$$WalletUpgradeImplToJson(
       this,
     );
   }
@@ -285,11 +285,11 @@ abstract class _WalletUpgrade extends WalletUpgrade {
       required final Map<String, String> enabledModules,
       required final DateTime createdAt,
       required final DateTime updatedAt,
-      @JsonKey(name: '_id') required final String id}) = _$_WalletUpgrade;
+      @JsonKey(name: '_id') required final String id}) = _$WalletUpgradeImpl;
   _WalletUpgrade._() : super._();
 
   factory _WalletUpgrade.fromJson(Map<String, dynamic> json) =
-      _$_WalletUpgrade.fromJson;
+      _$WalletUpgradeImpl.fromJson;
 
   @override
   String? get version;
@@ -310,6 +310,6 @@ abstract class _WalletUpgrade extends WalletUpgrade {
   String get id;
   @override
   @JsonKey(ignore: true)
-  _$$_WalletUpgradeCopyWith<_$_WalletUpgrade> get copyWith =>
+  _$$WalletUpgradeImplCopyWith<_$WalletUpgradeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

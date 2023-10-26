@@ -6,8 +6,8 @@ part of 'wallet_upgrade.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_WalletUpgrade _$$_WalletUpgradeFromJson(Map<String, dynamic> json) =>
-    _$_WalletUpgrade(
+_$WalletUpgradeImpl _$$WalletUpgradeImplFromJson(Map<String, dynamic> json) =>
+    _$WalletUpgradeImpl(
       version: json['version'] as String?,
       contractAddress: json['contractAddress'] as String,
       paddedVersion: json['paddedVersion'] as String?,
@@ -18,7 +18,7 @@ _$_WalletUpgrade _$$_WalletUpgradeFromJson(Map<String, dynamic> json) =>
       id: json['_id'] as String,
     );
 
-Map<String, dynamic> _$$_WalletUpgradeToJson(_$_WalletUpgrade instance) =>
+Map<String, dynamic> _$$WalletUpgradeImplToJson(_$WalletUpgradeImpl instance) =>
     <String, dynamic>{
       'version': instance.version,
       'contractAddress': instance.contractAddress,

@@ -79,11 +79,11 @@ class _$LpUnderlyingTokensCopyWithImpl<$Res, $Val extends LpUnderlyingTokens>
 }
 
 /// @nodoc
-abstract class _$$_LpUnderlyingTokensCopyWith<$Res>
+abstract class _$$LpUnderlyingTokensImplCopyWith<$Res>
     implements $LpUnderlyingTokensCopyWith<$Res> {
-  factory _$$_LpUnderlyingTokensCopyWith(_$_LpUnderlyingTokens value,
-          $Res Function(_$_LpUnderlyingTokens) then) =
-      __$$_LpUnderlyingTokensCopyWithImpl<$Res>;
+  factory _$$LpUnderlyingTokensImplCopyWith(_$LpUnderlyingTokensImpl value,
+          $Res Function(_$LpUnderlyingTokensImpl) then) =
+      __$$LpUnderlyingTokensImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -93,11 +93,11 @@ abstract class _$$_LpUnderlyingTokensCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LpUnderlyingTokensCopyWithImpl<$Res>
-    extends _$LpUnderlyingTokensCopyWithImpl<$Res, _$_LpUnderlyingTokens>
-    implements _$$_LpUnderlyingTokensCopyWith<$Res> {
-  __$$_LpUnderlyingTokensCopyWithImpl(
-      _$_LpUnderlyingTokens _value, $Res Function(_$_LpUnderlyingTokens) _then)
+class __$$LpUnderlyingTokensImplCopyWithImpl<$Res>
+    extends _$LpUnderlyingTokensCopyWithImpl<$Res, _$LpUnderlyingTokensImpl>
+    implements _$$LpUnderlyingTokensImplCopyWith<$Res> {
+  __$$LpUnderlyingTokensImplCopyWithImpl(_$LpUnderlyingTokensImpl _value,
+      $Res Function(_$LpUnderlyingTokensImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -107,7 +107,7 @@ class __$$_LpUnderlyingTokensCopyWithImpl<$Res>
     Object? name = null,
     Object? address = null,
   }) {
-    return _then(_$_LpUnderlyingTokens(
+    return _then(_$LpUnderlyingTokensImpl(
       symbol: null == symbol
           ? _value.symbol
           : symbol // ignore: cast_nullable_to_non_nullable
@@ -126,14 +126,14 @@ class __$$_LpUnderlyingTokensCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_LpUnderlyingTokens implements _LpUnderlyingTokens {
-  _$_LpUnderlyingTokens(
+class _$LpUnderlyingTokensImpl implements _LpUnderlyingTokens {
+  _$LpUnderlyingTokensImpl(
       {required this.symbol,
       @JsonKey(fromJson: nameFromJson) required this.name,
       @JsonKey(fromJson: addressFromJson) required this.address});
 
-  factory _$_LpUnderlyingTokens.fromJson(Map<String, dynamic> json) =>
-      _$$_LpUnderlyingTokensFromJson(json);
+  factory _$LpUnderlyingTokensImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LpUnderlyingTokensImplFromJson(json);
 
   @override
   final String symbol;
@@ -153,7 +153,7 @@ class _$_LpUnderlyingTokens implements _LpUnderlyingTokens {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LpUnderlyingTokens &&
+            other is _$LpUnderlyingTokensImpl &&
             (identical(other.symbol, symbol) || other.symbol == symbol) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.address, address) || other.address == address));
@@ -166,13 +166,13 @@ class _$_LpUnderlyingTokens implements _LpUnderlyingTokens {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LpUnderlyingTokensCopyWith<_$_LpUnderlyingTokens> get copyWith =>
-      __$$_LpUnderlyingTokensCopyWithImpl<_$_LpUnderlyingTokens>(
+  _$$LpUnderlyingTokensImplCopyWith<_$LpUnderlyingTokensImpl> get copyWith =>
+      __$$LpUnderlyingTokensImplCopyWithImpl<_$LpUnderlyingTokensImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LpUnderlyingTokensToJson(
+    return _$$LpUnderlyingTokensImplToJson(
       this,
     );
   }
@@ -183,10 +183,10 @@ abstract class _LpUnderlyingTokens implements LpUnderlyingTokens, IToken {
           {required final String symbol,
           @JsonKey(fromJson: nameFromJson) required final String name,
           @JsonKey(fromJson: addressFromJson) required final String address}) =
-      _$_LpUnderlyingTokens;
+      _$LpUnderlyingTokensImpl;
 
   factory _LpUnderlyingTokens.fromJson(Map<String, dynamic> json) =
-      _$_LpUnderlyingTokens.fromJson;
+      _$LpUnderlyingTokensImpl.fromJson;
 
   @override
   String get symbol;
@@ -198,6 +198,6 @@ abstract class _LpUnderlyingTokens implements LpUnderlyingTokens, IToken {
   String get address;
   @override
   @JsonKey(ignore: true)
-  _$$_LpUnderlyingTokensCopyWith<_$_LpUnderlyingTokens> get copyWith =>
+  _$$LpUnderlyingTokensImplCopyWith<_$LpUnderlyingTokensImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

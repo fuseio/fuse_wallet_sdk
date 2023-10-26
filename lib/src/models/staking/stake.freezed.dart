@@ -74,22 +74,22 @@ class _$StakeRequestBodyCopyWithImpl<$Res, $Val extends StakeRequestBody>
 }
 
 /// @nodoc
-abstract class _$$_StakeRequestBodyCopyWith<$Res>
+abstract class _$$StakeRequestBodyImplCopyWith<$Res>
     implements $StakeRequestBodyCopyWith<$Res> {
-  factory _$$_StakeRequestBodyCopyWith(
-          _$_StakeRequestBody value, $Res Function(_$_StakeRequestBody) then) =
-      __$$_StakeRequestBodyCopyWithImpl<$Res>;
+  factory _$$StakeRequestBodyImplCopyWith(_$StakeRequestBodyImpl value,
+          $Res Function(_$StakeRequestBodyImpl) then) =
+      __$$StakeRequestBodyImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String accountAddress, String tokenAmount, String tokenAddress});
 }
 
 /// @nodoc
-class __$$_StakeRequestBodyCopyWithImpl<$Res>
-    extends _$StakeRequestBodyCopyWithImpl<$Res, _$_StakeRequestBody>
-    implements _$$_StakeRequestBodyCopyWith<$Res> {
-  __$$_StakeRequestBodyCopyWithImpl(
-      _$_StakeRequestBody _value, $Res Function(_$_StakeRequestBody) _then)
+class __$$StakeRequestBodyImplCopyWithImpl<$Res>
+    extends _$StakeRequestBodyCopyWithImpl<$Res, _$StakeRequestBodyImpl>
+    implements _$$StakeRequestBodyImplCopyWith<$Res> {
+  __$$StakeRequestBodyImplCopyWithImpl(_$StakeRequestBodyImpl _value,
+      $Res Function(_$StakeRequestBodyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_StakeRequestBodyCopyWithImpl<$Res>
     Object? tokenAmount = null,
     Object? tokenAddress = null,
   }) {
-    return _then(_$_StakeRequestBody(
+    return _then(_$StakeRequestBodyImpl(
       accountAddress: null == accountAddress
           ? _value.accountAddress
           : accountAddress // ignore: cast_nullable_to_non_nullable
@@ -118,14 +118,14 @@ class __$$_StakeRequestBodyCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_StakeRequestBody implements _StakeRequestBody {
-  _$_StakeRequestBody(
+class _$StakeRequestBodyImpl implements _StakeRequestBody {
+  _$StakeRequestBodyImpl(
       {required this.accountAddress,
       required this.tokenAmount,
       required this.tokenAddress});
 
-  factory _$_StakeRequestBody.fromJson(Map<String, dynamic> json) =>
-      _$$_StakeRequestBodyFromJson(json);
+  factory _$StakeRequestBodyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StakeRequestBodyImplFromJson(json);
 
   @override
   final String accountAddress;
@@ -143,7 +143,7 @@ class _$_StakeRequestBody implements _StakeRequestBody {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StakeRequestBody &&
+            other is _$StakeRequestBodyImpl &&
             (identical(other.accountAddress, accountAddress) ||
                 other.accountAddress == accountAddress) &&
             (identical(other.tokenAmount, tokenAmount) ||
@@ -160,12 +160,13 @@ class _$_StakeRequestBody implements _StakeRequestBody {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StakeRequestBodyCopyWith<_$_StakeRequestBody> get copyWith =>
-      __$$_StakeRequestBodyCopyWithImpl<_$_StakeRequestBody>(this, _$identity);
+  _$$StakeRequestBodyImplCopyWith<_$StakeRequestBodyImpl> get copyWith =>
+      __$$StakeRequestBodyImplCopyWithImpl<_$StakeRequestBodyImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StakeRequestBodyToJson(
+    return _$$StakeRequestBodyImplToJson(
       this,
     );
   }
@@ -175,10 +176,10 @@ abstract class _StakeRequestBody implements StakeRequestBody {
   factory _StakeRequestBody(
       {required final String accountAddress,
       required final String tokenAmount,
-      required final String tokenAddress}) = _$_StakeRequestBody;
+      required final String tokenAddress}) = _$StakeRequestBodyImpl;
 
   factory _StakeRequestBody.fromJson(Map<String, dynamic> json) =
-      _$_StakeRequestBody.fromJson;
+      _$StakeRequestBodyImpl.fromJson;
 
   @override
   String get accountAddress;
@@ -188,7 +189,7 @@ abstract class _StakeRequestBody implements StakeRequestBody {
   String get tokenAddress;
   @override
   @JsonKey(ignore: true)
-  _$$_StakeRequestBodyCopyWith<_$_StakeRequestBody> get copyWith =>
+  _$$StakeRequestBodyImplCopyWith<_$StakeRequestBodyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -246,22 +247,22 @@ class _$StakeResponseBodyCopyWithImpl<$Res, $Val extends StakeResponseBody>
 }
 
 /// @nodoc
-abstract class _$$_StakeResponseBodyCopyWith<$Res>
+abstract class _$$StakeResponseBodyImplCopyWith<$Res>
     implements $StakeResponseBodyCopyWith<$Res> {
-  factory _$$_StakeResponseBodyCopyWith(_$_StakeResponseBody value,
-          $Res Function(_$_StakeResponseBody) then) =
-      __$$_StakeResponseBodyCopyWithImpl<$Res>;
+  factory _$$StakeResponseBodyImplCopyWith(_$StakeResponseBodyImpl value,
+          $Res Function(_$StakeResponseBodyImpl) then) =
+      __$$StakeResponseBodyImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String contractAddress, String encodedABI});
 }
 
 /// @nodoc
-class __$$_StakeResponseBodyCopyWithImpl<$Res>
-    extends _$StakeResponseBodyCopyWithImpl<$Res, _$_StakeResponseBody>
-    implements _$$_StakeResponseBodyCopyWith<$Res> {
-  __$$_StakeResponseBodyCopyWithImpl(
-      _$_StakeResponseBody _value, $Res Function(_$_StakeResponseBody) _then)
+class __$$StakeResponseBodyImplCopyWithImpl<$Res>
+    extends _$StakeResponseBodyCopyWithImpl<$Res, _$StakeResponseBodyImpl>
+    implements _$$StakeResponseBodyImplCopyWith<$Res> {
+  __$$StakeResponseBodyImplCopyWithImpl(_$StakeResponseBodyImpl _value,
+      $Res Function(_$StakeResponseBodyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -270,7 +271,7 @@ class __$$_StakeResponseBodyCopyWithImpl<$Res>
     Object? contractAddress = null,
     Object? encodedABI = null,
   }) {
-    return _then(_$_StakeResponseBody(
+    return _then(_$StakeResponseBodyImpl(
       contractAddress: null == contractAddress
           ? _value.contractAddress
           : contractAddress // ignore: cast_nullable_to_non_nullable
@@ -285,12 +286,12 @@ class __$$_StakeResponseBodyCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_StakeResponseBody implements _StakeResponseBody {
-  _$_StakeResponseBody(
+class _$StakeResponseBodyImpl implements _StakeResponseBody {
+  _$StakeResponseBodyImpl(
       {required this.contractAddress, required this.encodedABI});
 
-  factory _$_StakeResponseBody.fromJson(Map<String, dynamic> json) =>
-      _$$_StakeResponseBodyFromJson(json);
+  factory _$StakeResponseBodyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StakeResponseBodyImplFromJson(json);
 
   @override
   final String contractAddress;
@@ -306,7 +307,7 @@ class _$_StakeResponseBody implements _StakeResponseBody {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StakeResponseBody &&
+            other is _$StakeResponseBodyImpl &&
             (identical(other.contractAddress, contractAddress) ||
                 other.contractAddress == contractAddress) &&
             (identical(other.encodedABI, encodedABI) ||
@@ -320,13 +321,13 @@ class _$_StakeResponseBody implements _StakeResponseBody {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StakeResponseBodyCopyWith<_$_StakeResponseBody> get copyWith =>
-      __$$_StakeResponseBodyCopyWithImpl<_$_StakeResponseBody>(
+  _$$StakeResponseBodyImplCopyWith<_$StakeResponseBodyImpl> get copyWith =>
+      __$$StakeResponseBodyImplCopyWithImpl<_$StakeResponseBodyImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StakeResponseBodyToJson(
+    return _$$StakeResponseBodyImplToJson(
       this,
     );
   }
@@ -335,10 +336,10 @@ class _$_StakeResponseBody implements _StakeResponseBody {
 abstract class _StakeResponseBody implements StakeResponseBody {
   factory _StakeResponseBody(
       {required final String contractAddress,
-      required final String encodedABI}) = _$_StakeResponseBody;
+      required final String encodedABI}) = _$StakeResponseBodyImpl;
 
   factory _StakeResponseBody.fromJson(Map<String, dynamic> json) =
-      _$_StakeResponseBody.fromJson;
+      _$StakeResponseBodyImpl.fromJson;
 
   @override
   String get contractAddress;
@@ -346,6 +347,6 @@ abstract class _StakeResponseBody implements StakeResponseBody {
   String get encodedABI;
   @override
   @JsonKey(ignore: true)
-  _$$_StakeResponseBodyCopyWith<_$_StakeResponseBody> get copyWith =>
+  _$$StakeResponseBodyImplCopyWith<_$StakeResponseBodyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

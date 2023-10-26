@@ -6,7 +6,8 @@ part of 'token_list.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TokenList _$$_TokenListFromJson(Map<String, dynamic> json) => _$_TokenList(
+_$TokenListImpl _$$TokenListImplFromJson(Map<String, dynamic> json) =>
+    _$TokenListImpl(
       message: json['message'] as String,
       status: json['status'] as String,
       result: (json['result'] as List<dynamic>)
@@ -14,7 +15,7 @@ _$_TokenList _$$_TokenListFromJson(Map<String, dynamic> json) => _$_TokenList(
           .toList(),
     );
 
-Map<String, dynamic> _$$_TokenListToJson(_$_TokenList instance) =>
+Map<String, dynamic> _$$TokenListImplToJson(_$TokenListImpl instance) =>
     <String, dynamic>{
       'message': instance.message,
       'status': instance.status,

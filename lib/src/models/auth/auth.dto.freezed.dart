@@ -82,10 +82,10 @@ class _$AuthDtoCopyWithImpl<$Res, $Val extends AuthDto>
 }
 
 /// @nodoc
-abstract class _$$_AuthDtoCopyWith<$Res> implements $AuthDtoCopyWith<$Res> {
-  factory _$$_AuthDtoCopyWith(
-          _$_AuthDto value, $Res Function(_$_AuthDto) then) =
-      __$$_AuthDtoCopyWithImpl<$Res>;
+abstract class _$$AuthDtoImplCopyWith<$Res> implements $AuthDtoCopyWith<$Res> {
+  factory _$$AuthDtoImplCopyWith(
+          _$AuthDtoImpl value, $Res Function(_$AuthDtoImpl) then) =
+      __$$AuthDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -96,10 +96,11 @@ abstract class _$$_AuthDtoCopyWith<$Res> implements $AuthDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AuthDtoCopyWithImpl<$Res>
-    extends _$AuthDtoCopyWithImpl<$Res, _$_AuthDto>
-    implements _$$_AuthDtoCopyWith<$Res> {
-  __$$_AuthDtoCopyWithImpl(_$_AuthDto _value, $Res Function(_$_AuthDto) _then)
+class __$$AuthDtoImplCopyWithImpl<$Res>
+    extends _$AuthDtoCopyWithImpl<$Res, _$AuthDtoImpl>
+    implements _$$AuthDtoImplCopyWith<$Res> {
+  __$$AuthDtoImplCopyWithImpl(
+      _$AuthDtoImpl _value, $Res Function(_$AuthDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -110,7 +111,7 @@ class __$$_AuthDtoCopyWithImpl<$Res>
     Object? signature = null,
     Object? hash = null,
   }) {
-    return _then(_$_AuthDto(
+    return _then(_$AuthDtoImpl(
       ownerAddress: null == ownerAddress
           ? _value.ownerAddress
           : ownerAddress // ignore: cast_nullable_to_non_nullable
@@ -134,15 +135,15 @@ class __$$_AuthDtoCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(includeIfNull: false)
-class _$_AuthDto implements _AuthDto {
-  _$_AuthDto(
+class _$AuthDtoImpl implements _AuthDto {
+  _$AuthDtoImpl(
       {required this.ownerAddress,
       this.smartWalletAddress,
       required this.signature,
       required this.hash});
 
-  factory _$_AuthDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AuthDtoFromJson(json);
+  factory _$AuthDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AuthDtoImplFromJson(json);
 
   @override
   final String ownerAddress;
@@ -162,7 +163,7 @@ class _$_AuthDto implements _AuthDto {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AuthDto &&
+            other is _$AuthDtoImpl &&
             (identical(other.ownerAddress, ownerAddress) ||
                 other.ownerAddress == ownerAddress) &&
             (identical(other.smartWalletAddress, smartWalletAddress) ||
@@ -180,12 +181,12 @@ class _$_AuthDto implements _AuthDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AuthDtoCopyWith<_$_AuthDto> get copyWith =>
-      __$$_AuthDtoCopyWithImpl<_$_AuthDto>(this, _$identity);
+  _$$AuthDtoImplCopyWith<_$AuthDtoImpl> get copyWith =>
+      __$$AuthDtoImplCopyWithImpl<_$AuthDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AuthDtoToJson(
+    return _$$AuthDtoImplToJson(
       this,
     );
   }
@@ -196,9 +197,9 @@ abstract class _AuthDto implements AuthDto {
       {required final String ownerAddress,
       final String? smartWalletAddress,
       required final String signature,
-      required final String hash}) = _$_AuthDto;
+      required final String hash}) = _$AuthDtoImpl;
 
-  factory _AuthDto.fromJson(Map<String, dynamic> json) = _$_AuthDto.fromJson;
+  factory _AuthDto.fromJson(Map<String, dynamic> json) = _$AuthDtoImpl.fromJson;
 
   @override
   String get ownerAddress;
@@ -210,6 +211,6 @@ abstract class _AuthDto implements AuthDto {
   String get hash;
   @override
   @JsonKey(ignore: true)
-  _$$_AuthDtoCopyWith<_$_AuthDto> get copyWith =>
+  _$$AuthDtoImplCopyWith<_$AuthDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

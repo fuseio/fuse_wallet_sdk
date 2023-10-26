@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'action_result.dart';
+part of 'wallet_action_result.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,33 +14,36 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ActionResult _$ActionResultFromJson(Map<String, dynamic> json) {
-  return _ActionResult.fromJson(json);
+WalletActionResult _$WalletActionResultFromJson(Map<String, dynamic> json) {
+  return _WalletActionResult.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ActionResult {
+mixin _$WalletActionResult {
   bool get hasNextPage => throw _privateConstructorUsedError;
   bool get hasPrevPage => throw _privateConstructorUsedError;
   num? get nextPage => throw _privateConstructorUsedError;
   num? get prevPage => throw _privateConstructorUsedError;
   num? get page => throw _privateConstructorUsedError;
+  num get totalDocs => throw _privateConstructorUsedError;
+  num get limit => throw _privateConstructorUsedError;
   num get totalPages => throw _privateConstructorUsedError;
-  @ActionsConverter()
+  num get pagingCounter => throw _privateConstructorUsedError;
+  @WalletActionsConverter()
   @JsonKey(name: 'docs')
-  List<Action> get actions => throw _privateConstructorUsedError;
+  List<WalletAction> get actions => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ActionResultCopyWith<ActionResult> get copyWith =>
+  $WalletActionResultCopyWith<WalletActionResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ActionResultCopyWith<$Res> {
-  factory $ActionResultCopyWith(
-          ActionResult value, $Res Function(ActionResult) then) =
-      _$ActionResultCopyWithImpl<$Res, ActionResult>;
+abstract class $WalletActionResultCopyWith<$Res> {
+  factory $WalletActionResultCopyWith(
+          WalletActionResult value, $Res Function(WalletActionResult) then) =
+      _$WalletActionResultCopyWithImpl<$Res, WalletActionResult>;
   @useResult
   $Res call(
       {bool hasNextPage,
@@ -48,14 +51,19 @@ abstract class $ActionResultCopyWith<$Res> {
       num? nextPage,
       num? prevPage,
       num? page,
+      num totalDocs,
+      num limit,
       num totalPages,
-      @ActionsConverter() @JsonKey(name: 'docs') List<Action> actions});
+      num pagingCounter,
+      @WalletActionsConverter()
+      @JsonKey(name: 'docs')
+      List<WalletAction> actions});
 }
 
 /// @nodoc
-class _$ActionResultCopyWithImpl<$Res, $Val extends ActionResult>
-    implements $ActionResultCopyWith<$Res> {
-  _$ActionResultCopyWithImpl(this._value, this._then);
+class _$WalletActionResultCopyWithImpl<$Res, $Val extends WalletActionResult>
+    implements $WalletActionResultCopyWith<$Res> {
+  _$WalletActionResultCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -70,7 +78,10 @@ class _$ActionResultCopyWithImpl<$Res, $Val extends ActionResult>
     Object? nextPage = freezed,
     Object? prevPage = freezed,
     Object? page = freezed,
+    Object? totalDocs = null,
+    Object? limit = null,
     Object? totalPages = null,
+    Object? pagingCounter = null,
     Object? actions = null,
   }) {
     return _then(_value.copyWith(
@@ -94,24 +105,36 @@ class _$ActionResultCopyWithImpl<$Res, $Val extends ActionResult>
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as num?,
+      totalDocs: null == totalDocs
+          ? _value.totalDocs
+          : totalDocs // ignore: cast_nullable_to_non_nullable
+              as num,
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as num,
       totalPages: null == totalPages
           ? _value.totalPages
           : totalPages // ignore: cast_nullable_to_non_nullable
               as num,
+      pagingCounter: null == pagingCounter
+          ? _value.pagingCounter
+          : pagingCounter // ignore: cast_nullable_to_non_nullable
+              as num,
       actions: null == actions
           ? _value.actions
           : actions // ignore: cast_nullable_to_non_nullable
-              as List<Action>,
+              as List<WalletAction>,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$ActionResultImplCopyWith<$Res>
-    implements $ActionResultCopyWith<$Res> {
-  factory _$$ActionResultImplCopyWith(
-          _$ActionResultImpl value, $Res Function(_$ActionResultImpl) then) =
-      __$$ActionResultImplCopyWithImpl<$Res>;
+abstract class _$$WalletActionResultImplCopyWith<$Res>
+    implements $WalletActionResultCopyWith<$Res> {
+  factory _$$WalletActionResultImplCopyWith(_$WalletActionResultImpl value,
+          $Res Function(_$WalletActionResultImpl) then) =
+      __$$WalletActionResultImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -120,16 +143,21 @@ abstract class _$$ActionResultImplCopyWith<$Res>
       num? nextPage,
       num? prevPage,
       num? page,
+      num totalDocs,
+      num limit,
       num totalPages,
-      @ActionsConverter() @JsonKey(name: 'docs') List<Action> actions});
+      num pagingCounter,
+      @WalletActionsConverter()
+      @JsonKey(name: 'docs')
+      List<WalletAction> actions});
 }
 
 /// @nodoc
-class __$$ActionResultImplCopyWithImpl<$Res>
-    extends _$ActionResultCopyWithImpl<$Res, _$ActionResultImpl>
-    implements _$$ActionResultImplCopyWith<$Res> {
-  __$$ActionResultImplCopyWithImpl(
-      _$ActionResultImpl _value, $Res Function(_$ActionResultImpl) _then)
+class __$$WalletActionResultImplCopyWithImpl<$Res>
+    extends _$WalletActionResultCopyWithImpl<$Res, _$WalletActionResultImpl>
+    implements _$$WalletActionResultImplCopyWith<$Res> {
+  __$$WalletActionResultImplCopyWithImpl(_$WalletActionResultImpl _value,
+      $Res Function(_$WalletActionResultImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -140,10 +168,13 @@ class __$$ActionResultImplCopyWithImpl<$Res>
     Object? nextPage = freezed,
     Object? prevPage = freezed,
     Object? page = freezed,
+    Object? totalDocs = null,
+    Object? limit = null,
     Object? totalPages = null,
+    Object? pagingCounter = null,
     Object? actions = null,
   }) {
-    return _then(_$ActionResultImpl(
+    return _then(_$WalletActionResultImpl(
       hasNextPage: null == hasNextPage
           ? _value.hasNextPage
           : hasNextPage // ignore: cast_nullable_to_non_nullable
@@ -164,32 +195,47 @@ class __$$ActionResultImplCopyWithImpl<$Res>
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as num?,
+      totalDocs: null == totalDocs
+          ? _value.totalDocs
+          : totalDocs // ignore: cast_nullable_to_non_nullable
+              as num,
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as num,
       totalPages: null == totalPages
           ? _value.totalPages
           : totalPages // ignore: cast_nullable_to_non_nullable
               as num,
+      pagingCounter: null == pagingCounter
+          ? _value.pagingCounter
+          : pagingCounter // ignore: cast_nullable_to_non_nullable
+              as num,
       actions: null == actions
           ? _value.actions
           : actions // ignore: cast_nullable_to_non_nullable
-              as List<Action>,
+              as List<WalletAction>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ActionResultImpl implements _ActionResult {
-  _$ActionResultImpl(
+class _$WalletActionResultImpl implements _WalletActionResult {
+  _$WalletActionResultImpl(
       {required this.hasNextPage,
       required this.hasPrevPage,
       required this.nextPage,
       required this.prevPage,
       required this.page,
+      required this.totalDocs,
+      required this.limit,
       required this.totalPages,
-      @ActionsConverter() @JsonKey(name: 'docs') required this.actions});
+      required this.pagingCounter,
+      @WalletActionsConverter() @JsonKey(name: 'docs') required this.actions});
 
-  factory _$ActionResultImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ActionResultImplFromJson(json);
+  factory _$WalletActionResultImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WalletActionResultImplFromJson(json);
 
   @override
   final bool hasNextPage;
@@ -202,22 +248,28 @@ class _$ActionResultImpl implements _ActionResult {
   @override
   final num? page;
   @override
+  final num totalDocs;
+  @override
+  final num limit;
+  @override
   final num totalPages;
   @override
-  @ActionsConverter()
+  final num pagingCounter;
+  @override
+  @WalletActionsConverter()
   @JsonKey(name: 'docs')
-  final List<Action> actions;
+  final List<WalletAction> actions;
 
   @override
   String toString() {
-    return 'ActionResult(hasNextPage: $hasNextPage, hasPrevPage: $hasPrevPage, nextPage: $nextPage, prevPage: $prevPage, page: $page, totalPages: $totalPages, actions: $actions)';
+    return 'WalletActionResult(hasNextPage: $hasNextPage, hasPrevPage: $hasPrevPage, nextPage: $nextPage, prevPage: $prevPage, page: $page, totalDocs: $totalDocs, limit: $limit, totalPages: $totalPages, pagingCounter: $pagingCounter, actions: $actions)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ActionResultImpl &&
+            other is _$WalletActionResultImpl &&
             (identical(other.hasNextPage, hasNextPage) ||
                 other.hasNextPage == hasNextPage) &&
             (identical(other.hasPrevPage, hasPrevPage) ||
@@ -227,8 +279,13 @@ class _$ActionResultImpl implements _ActionResult {
             (identical(other.prevPage, prevPage) ||
                 other.prevPage == prevPage) &&
             (identical(other.page, page) || other.page == page) &&
+            (identical(other.totalDocs, totalDocs) ||
+                other.totalDocs == totalDocs) &&
+            (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.totalPages, totalPages) ||
                 other.totalPages == totalPages) &&
+            (identical(other.pagingCounter, pagingCounter) ||
+                other.pagingCounter == pagingCounter) &&
             const DeepCollectionEquality().equals(other.actions, actions));
   }
 
@@ -241,37 +298,44 @@ class _$ActionResultImpl implements _ActionResult {
       nextPage,
       prevPage,
       page,
+      totalDocs,
+      limit,
       totalPages,
+      pagingCounter,
       const DeepCollectionEquality().hash(actions));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ActionResultImplCopyWith<_$ActionResultImpl> get copyWith =>
-      __$$ActionResultImplCopyWithImpl<_$ActionResultImpl>(this, _$identity);
+  _$$WalletActionResultImplCopyWith<_$WalletActionResultImpl> get copyWith =>
+      __$$WalletActionResultImplCopyWithImpl<_$WalletActionResultImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ActionResultImplToJson(
+    return _$$WalletActionResultImplToJson(
       this,
     );
   }
 }
 
-abstract class _ActionResult implements ActionResult {
-  factory _ActionResult(
+abstract class _WalletActionResult implements WalletActionResult {
+  factory _WalletActionResult(
       {required final bool hasNextPage,
       required final bool hasPrevPage,
       required final num? nextPage,
       required final num? prevPage,
       required final num? page,
+      required final num totalDocs,
+      required final num limit,
       required final num totalPages,
-      @ActionsConverter()
+      required final num pagingCounter,
+      @WalletActionsConverter()
       @JsonKey(name: 'docs')
-      required final List<Action> actions}) = _$ActionResultImpl;
+      required final List<WalletAction> actions}) = _$WalletActionResultImpl;
 
-  factory _ActionResult.fromJson(Map<String, dynamic> json) =
-      _$ActionResultImpl.fromJson;
+  factory _WalletActionResult.fromJson(Map<String, dynamic> json) =
+      _$WalletActionResultImpl.fromJson;
 
   @override
   bool get hasNextPage;
@@ -284,13 +348,19 @@ abstract class _ActionResult implements ActionResult {
   @override
   num? get page;
   @override
+  num get totalDocs;
+  @override
+  num get limit;
+  @override
   num get totalPages;
   @override
-  @ActionsConverter()
+  num get pagingCounter;
+  @override
+  @WalletActionsConverter()
   @JsonKey(name: 'docs')
-  List<Action> get actions;
+  List<WalletAction> get actions;
   @override
   @JsonKey(ignore: true)
-  _$$ActionResultImplCopyWith<_$ActionResultImpl> get copyWith =>
+  _$$WalletActionResultImplCopyWith<_$WalletActionResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

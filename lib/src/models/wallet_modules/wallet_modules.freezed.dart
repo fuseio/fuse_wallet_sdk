@@ -136,11 +136,11 @@ class _$WalletModulesCopyWithImpl<$Res, $Val extends WalletModules>
 }
 
 /// @nodoc
-abstract class _$$_WalletModulesCopyWith<$Res>
+abstract class _$$WalletModulesImplCopyWith<$Res>
     implements $WalletModulesCopyWith<$Res> {
-  factory _$$_WalletModulesCopyWith(
-          _$_WalletModules value, $Res Function(_$_WalletModules) then) =
-      __$$_WalletModulesCopyWithImpl<$Res>;
+  factory _$$WalletModulesImplCopyWith(
+          _$WalletModulesImpl value, $Res Function(_$WalletModulesImpl) then) =
+      __$$WalletModulesImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -157,11 +157,11 @@ abstract class _$$_WalletModulesCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_WalletModulesCopyWithImpl<$Res>
-    extends _$WalletModulesCopyWithImpl<$Res, _$_WalletModules>
-    implements _$$_WalletModulesCopyWith<$Res> {
-  __$$_WalletModulesCopyWithImpl(
-      _$_WalletModules _value, $Res Function(_$_WalletModules) _then)
+class __$$WalletModulesImplCopyWithImpl<$Res>
+    extends _$WalletModulesCopyWithImpl<$Res, _$WalletModulesImpl>
+    implements _$$WalletModulesImplCopyWith<$Res> {
+  __$$WalletModulesImplCopyWithImpl(
+      _$WalletModulesImpl _value, $Res Function(_$WalletModulesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -178,7 +178,7 @@ class __$$_WalletModulesCopyWithImpl<$Res>
     Object? transferManager = null,
     Object? nftTransfer = freezed,
   }) {
-    return _then(_$_WalletModules(
+    return _then(_$WalletModulesImpl(
       guardianManager: null == guardianManager
           ? _value.guardianManager
           : guardianManager // ignore: cast_nullable_to_non_nullable
@@ -225,8 +225,8 @@ class __$$_WalletModulesCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_WalletModules implements _WalletModules {
-  _$_WalletModules(
+class _$WalletModulesImpl implements _WalletModules {
+  _$WalletModulesImpl(
       {@JsonKey(name: 'GuardianManager') required this.guardianManager,
       @JsonKey(name: 'LockManager') required this.lockManager,
       @JsonKey(name: 'RecoveryManager') required this.recoveryManager,
@@ -239,8 +239,8 @@ class _$_WalletModules implements _WalletModules {
       @JsonKey(name: 'TransferManager') required this.transferManager,
       @JsonKey(name: 'NftTransfer') this.nftTransfer});
 
-  factory _$_WalletModules.fromJson(Map<String, dynamic> json) =>
-      _$$_WalletModulesFromJson(json);
+  factory _$WalletModulesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WalletModulesImplFromJson(json);
 
   @override
   @JsonKey(name: 'GuardianManager')
@@ -282,7 +282,7 @@ class _$_WalletModules implements _WalletModules {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_WalletModules &&
+            other is _$WalletModulesImpl &&
             (identical(other.guardianManager, guardianManager) ||
                 other.guardianManager == guardianManager) &&
             (identical(other.lockManager, lockManager) ||
@@ -323,12 +323,12 @@ class _$_WalletModules implements _WalletModules {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_WalletModulesCopyWith<_$_WalletModules> get copyWith =>
-      __$$_WalletModulesCopyWithImpl<_$_WalletModules>(this, _$identity);
+  _$$WalletModulesImplCopyWith<_$WalletModulesImpl> get copyWith =>
+      __$$WalletModulesImplCopyWithImpl<_$WalletModulesImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_WalletModulesToJson(
+    return _$$WalletModulesImplToJson(
       this,
     );
   }
@@ -347,10 +347,10 @@ abstract class _WalletModules implements WalletModules {
       @JsonKey(name: 'DAIPointsManager') final String? daiPointsManager,
       @JsonKey(name: 'TransferManager') required final String transferManager,
       @JsonKey(name: 'NftTransfer')
-      final String? nftTransfer}) = _$_WalletModules;
+      final String? nftTransfer}) = _$WalletModulesImpl;
 
   factory _WalletModules.fromJson(Map<String, dynamic> json) =
-      _$_WalletModules.fromJson;
+      _$WalletModulesImpl.fromJson;
 
   @override
   @JsonKey(name: 'GuardianManager')
@@ -384,6 +384,6 @@ abstract class _WalletModules implements WalletModules {
   String? get nftTransfer;
   @override
   @JsonKey(ignore: true)
-  _$$_WalletModulesCopyWith<_$_WalletModules> get copyWith =>
+  _$$WalletModulesImplCopyWith<_$WalletModulesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

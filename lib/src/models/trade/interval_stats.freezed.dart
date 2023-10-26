@@ -84,11 +84,11 @@ class _$IntervalStatsCopyWithImpl<$Res, $Val extends IntervalStats>
 }
 
 /// @nodoc
-abstract class _$$_IntervalStatsCopyWith<$Res>
+abstract class _$$IntervalStatsImplCopyWith<$Res>
     implements $IntervalStatsCopyWith<$Res> {
-  factory _$$_IntervalStatsCopyWith(
-          _$_IntervalStats value, $Res Function(_$_IntervalStats) then) =
-      __$$_IntervalStatsCopyWithImpl<$Res>;
+  factory _$$IntervalStatsImplCopyWith(
+          _$IntervalStatsImpl value, $Res Function(_$IntervalStatsImpl) then) =
+      __$$IntervalStatsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -99,11 +99,11 @@ abstract class _$$_IntervalStatsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_IntervalStatsCopyWithImpl<$Res>
-    extends _$IntervalStatsCopyWithImpl<$Res, _$_IntervalStats>
-    implements _$$_IntervalStatsCopyWith<$Res> {
-  __$$_IntervalStatsCopyWithImpl(
-      _$_IntervalStats _value, $Res Function(_$_IntervalStats) _then)
+class __$$IntervalStatsImplCopyWithImpl<$Res>
+    extends _$IntervalStatsCopyWithImpl<$Res, _$IntervalStatsImpl>
+    implements _$$IntervalStatsImplCopyWith<$Res> {
+  __$$IntervalStatsImplCopyWithImpl(
+      _$IntervalStatsImpl _value, $Res Function(_$IntervalStatsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,7 +114,7 @@ class __$$_IntervalStatsCopyWithImpl<$Res>
     Object? previousPrice = null,
     Object? currentPrice = null,
   }) {
-    return _then(_$_IntervalStats(
+    return _then(_$IntervalStatsImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -137,15 +137,15 @@ class __$$_IntervalStatsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_IntervalStats implements _IntervalStats {
-  _$_IntervalStats(
+class _$IntervalStatsImpl implements _IntervalStats {
+  _$IntervalStatsImpl(
       {required this.timestamp,
       required this.priceChange,
       required this.previousPrice,
       required this.currentPrice});
 
-  factory _$_IntervalStats.fromJson(Map<String, dynamic> json) =>
-      _$$_IntervalStatsFromJson(json);
+  factory _$IntervalStatsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$IntervalStatsImplFromJson(json);
 
   @override
   final num timestamp;
@@ -165,7 +165,7 @@ class _$_IntervalStats implements _IntervalStats {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_IntervalStats &&
+            other is _$IntervalStatsImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.priceChange, priceChange) ||
@@ -184,12 +184,12 @@ class _$_IntervalStats implements _IntervalStats {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_IntervalStatsCopyWith<_$_IntervalStats> get copyWith =>
-      __$$_IntervalStatsCopyWithImpl<_$_IntervalStats>(this, _$identity);
+  _$$IntervalStatsImplCopyWith<_$IntervalStatsImpl> get copyWith =>
+      __$$IntervalStatsImplCopyWithImpl<_$IntervalStatsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IntervalStatsToJson(
+    return _$$IntervalStatsImplToJson(
       this,
     );
   }
@@ -200,10 +200,10 @@ abstract class _IntervalStats implements IntervalStats {
       {required final num timestamp,
       required final double priceChange,
       required final double previousPrice,
-      required final double currentPrice}) = _$_IntervalStats;
+      required final double currentPrice}) = _$IntervalStatsImpl;
 
   factory _IntervalStats.fromJson(Map<String, dynamic> json) =
-      _$_IntervalStats.fromJson;
+      _$IntervalStatsImpl.fromJson;
 
   @override
   num get timestamp;
@@ -215,6 +215,6 @@ abstract class _IntervalStats implements IntervalStats {
   double get currentPrice;
   @override
   @JsonKey(ignore: true)
-  _$$_IntervalStatsCopyWith<_$_IntervalStats> get copyWith =>
+  _$$IntervalStatsImplCopyWith<_$IntervalStatsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

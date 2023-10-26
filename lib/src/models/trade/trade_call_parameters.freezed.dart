@@ -84,11 +84,11 @@ class _$TradeCallParametersCopyWithImpl<$Res, $Val extends TradeCallParameters>
 }
 
 /// @nodoc
-abstract class _$$_TradeCallParametersCopyWith<$Res>
+abstract class _$$TradeCallParametersImplCopyWith<$Res>
     implements $TradeCallParametersCopyWith<$Res> {
-  factory _$$_TradeCallParametersCopyWith(_$_TradeCallParameters value,
-          $Res Function(_$_TradeCallParameters) then) =
-      __$$_TradeCallParametersCopyWithImpl<$Res>;
+  factory _$$TradeCallParametersImplCopyWith(_$TradeCallParametersImpl value,
+          $Res Function(_$TradeCallParametersImpl) then) =
+      __$$TradeCallParametersImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -99,11 +99,11 @@ abstract class _$$_TradeCallParametersCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TradeCallParametersCopyWithImpl<$Res>
-    extends _$TradeCallParametersCopyWithImpl<$Res, _$_TradeCallParameters>
-    implements _$$_TradeCallParametersCopyWith<$Res> {
-  __$$_TradeCallParametersCopyWithImpl(_$_TradeCallParameters _value,
-      $Res Function(_$_TradeCallParameters) _then)
+class __$$TradeCallParametersImplCopyWithImpl<$Res>
+    extends _$TradeCallParametersCopyWithImpl<$Res, _$TradeCallParametersImpl>
+    implements _$$TradeCallParametersImplCopyWith<$Res> {
+  __$$TradeCallParametersImplCopyWithImpl(_$TradeCallParametersImpl _value,
+      $Res Function(_$TradeCallParametersImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,7 +114,7 @@ class __$$_TradeCallParametersCopyWithImpl<$Res>
     Object? value = null,
     Object? rawTxn = null,
   }) {
-    return _then(_$_TradeCallParameters(
+    return _then(_$TradeCallParametersImpl(
       methodName: null == methodName
           ? _value.methodName
           : methodName // ignore: cast_nullable_to_non_nullable
@@ -137,15 +137,15 @@ class __$$_TradeCallParametersCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TradeCallParameters implements _TradeCallParameters {
-  _$_TradeCallParameters(
+class _$TradeCallParametersImpl implements _TradeCallParameters {
+  _$TradeCallParametersImpl(
       {required this.methodName,
       required this.args,
       required this.value,
       required this.rawTxn});
 
-  factory _$_TradeCallParameters.fromJson(Map<String, dynamic> json) =>
-      _$$_TradeCallParametersFromJson(json);
+  factory _$TradeCallParametersImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TradeCallParametersImplFromJson(json);
 
   @override
   final String methodName;
@@ -165,7 +165,7 @@ class _$_TradeCallParameters implements _TradeCallParameters {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TradeCallParameters &&
+            other is _$TradeCallParametersImpl &&
             (identical(other.methodName, methodName) ||
                 other.methodName == methodName) &&
             const DeepCollectionEquality().equals(other.args, args) &&
@@ -185,13 +185,13 @@ class _$_TradeCallParameters implements _TradeCallParameters {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TradeCallParametersCopyWith<_$_TradeCallParameters> get copyWith =>
-      __$$_TradeCallParametersCopyWithImpl<_$_TradeCallParameters>(
+  _$$TradeCallParametersImplCopyWith<_$TradeCallParametersImpl> get copyWith =>
+      __$$TradeCallParametersImplCopyWithImpl<_$TradeCallParametersImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TradeCallParametersToJson(
+    return _$$TradeCallParametersImplToJson(
       this,
     );
   }
@@ -202,10 +202,10 @@ abstract class _TradeCallParameters implements TradeCallParameters {
       {required final String methodName,
       required final List<dynamic> args,
       required final String value,
-      required final Map<String, dynamic> rawTxn}) = _$_TradeCallParameters;
+      required final Map<String, dynamic> rawTxn}) = _$TradeCallParametersImpl;
 
   factory _TradeCallParameters.fromJson(Map<String, dynamic> json) =
-      _$_TradeCallParameters.fromJson;
+      _$TradeCallParametersImpl.fromJson;
 
   @override
   String get methodName;
@@ -217,6 +217,6 @@ abstract class _TradeCallParameters implements TradeCallParameters {
   Map<String, dynamic> get rawTxn;
   @override
   @JsonKey(ignore: true)
-  _$$_TradeCallParametersCopyWith<_$_TradeCallParameters> get copyWith =>
+  _$$TradeCallParametersImplCopyWith<_$TradeCallParametersImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

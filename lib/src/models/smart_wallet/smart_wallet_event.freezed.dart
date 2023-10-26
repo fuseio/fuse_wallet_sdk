@@ -72,11 +72,11 @@ class _$SmartWalletEventCopyWithImpl<$Res, $Val extends SmartWalletEvent>
 }
 
 /// @nodoc
-abstract class _$$_SmartWalletEventCopyWith<$Res>
+abstract class _$$SmartWalletEventImplCopyWith<$Res>
     implements $SmartWalletEventCopyWith<$Res> {
-  factory _$$_SmartWalletEventCopyWith(
-          _$_SmartWalletEvent value, $Res Function(_$_SmartWalletEvent) then) =
-      __$$_SmartWalletEventCopyWithImpl<$Res>;
+  factory _$$SmartWalletEventImplCopyWith(_$SmartWalletEventImpl value,
+          $Res Function(_$SmartWalletEventImpl) then) =
+      __$$SmartWalletEventImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -85,11 +85,11 @@ abstract class _$$_SmartWalletEventCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SmartWalletEventCopyWithImpl<$Res>
-    extends _$SmartWalletEventCopyWithImpl<$Res, _$_SmartWalletEvent>
-    implements _$$_SmartWalletEventCopyWith<$Res> {
-  __$$_SmartWalletEventCopyWithImpl(
-      _$_SmartWalletEvent _value, $Res Function(_$_SmartWalletEvent) _then)
+class __$$SmartWalletEventImplCopyWithImpl<$Res>
+    extends _$SmartWalletEventCopyWithImpl<$Res, _$SmartWalletEventImpl>
+    implements _$$SmartWalletEventImplCopyWith<$Res> {
+  __$$SmartWalletEventImplCopyWithImpl(_$SmartWalletEventImpl _value,
+      $Res Function(_$SmartWalletEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -98,7 +98,7 @@ class __$$_SmartWalletEventCopyWithImpl<$Res>
     Object? name = null,
     Object? data = null,
   }) {
-    return _then(_$_SmartWalletEvent(
+    return _then(_$SmartWalletEventImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -113,13 +113,13 @@ class __$$_SmartWalletEventCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SmartWalletEvent implements _SmartWalletEvent {
-  _$_SmartWalletEvent(
+class _$SmartWalletEventImpl implements _SmartWalletEvent {
+  _$SmartWalletEventImpl(
       {@JsonKey(name: 'eventName') required this.name,
       @JsonKey(name: 'eventData') required this.data});
 
-  factory _$_SmartWalletEvent.fromJson(Map<String, dynamic> json) =>
-      _$$_SmartWalletEventFromJson(json);
+  factory _$SmartWalletEventImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SmartWalletEventImplFromJson(json);
 
   @override
   @JsonKey(name: 'eventName')
@@ -137,7 +137,7 @@ class _$_SmartWalletEvent implements _SmartWalletEvent {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SmartWalletEvent &&
+            other is _$SmartWalletEventImpl &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other.data, data));
   }
@@ -150,12 +150,13 @@ class _$_SmartWalletEvent implements _SmartWalletEvent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SmartWalletEventCopyWith<_$_SmartWalletEvent> get copyWith =>
-      __$$_SmartWalletEventCopyWithImpl<_$_SmartWalletEvent>(this, _$identity);
+  _$$SmartWalletEventImplCopyWith<_$SmartWalletEventImpl> get copyWith =>
+      __$$SmartWalletEventImplCopyWithImpl<_$SmartWalletEventImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SmartWalletEventToJson(
+    return _$$SmartWalletEventImplToJson(
       this,
     );
   }
@@ -165,10 +166,10 @@ abstract class _SmartWalletEvent implements SmartWalletEvent {
   factory _SmartWalletEvent(
       {@JsonKey(name: 'eventName') required final String name,
       @JsonKey(name: 'eventData')
-      required final Map<String, dynamic> data}) = _$_SmartWalletEvent;
+      required final Map<String, dynamic> data}) = _$SmartWalletEventImpl;
 
   factory _SmartWalletEvent.fromJson(Map<String, dynamic> json) =
-      _$_SmartWalletEvent.fromJson;
+      _$SmartWalletEventImpl.fromJson;
 
   @override
   @JsonKey(name: 'eventName')
@@ -178,6 +179,6 @@ abstract class _SmartWalletEvent implements SmartWalletEvent {
   Map<String, dynamic> get data;
   @override
   @JsonKey(ignore: true)
-  _$$_SmartWalletEventCopyWith<_$_SmartWalletEvent> get copyWith =>
+  _$$SmartWalletEventImplCopyWith<_$SmartWalletEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

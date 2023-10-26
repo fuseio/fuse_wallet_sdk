@@ -3,9 +3,8 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
-import 'package:web3dart/crypto.dart';
-
 import 'package:fuse_wallet_sdk/src/modules/modules.dart';
+import 'package:web3dart/crypto.dart';
 import 'package:web3dart/json_rpc.dart';
 
 /// The main SDK class for interacting with FuseBox.
@@ -15,11 +14,10 @@ class FuseSDK {
   /// Creates a new instance of the SDK.
   ///
   /// [publicApiKey] is required to authenticate with the Fuse API.
-  FuseSDK(
-    String publicApiKey,
-  ) : _dio = Dio(
+  FuseSDK(String publicApiKey, {String baseUrl = Variables.BASE_URL})
+      : _dio = Dio(
           BaseOptions(
-            baseUrl: Uri.https(Variables.BASE_URL, '/api').toString(),
+            baseUrl: Uri.https(baseUrl, '/api').toString(),
             headers: {
               'Content-Type': 'application/json',
             },
@@ -84,6 +82,7 @@ class FuseSDK {
   static Future<FuseSDK> init(
     String publicApiKey,
     EthPrivateKey credentials, {
+    String baseUrl = Variables.BASE_URL,
     bool withPaymaster = false,
     Map<String, dynamic>? paymasterContext,
     IPresetBuilderOpts? opts,
@@ -95,6 +94,7 @@ class FuseSDK {
     if (withPaymaster) {
       paymasterMiddleware = _getPaymasterMiddleware(
         publicApiKey,
+        baseUrl,
         paymasterContext,
       );
     }
@@ -102,6 +102,7 @@ class FuseSDK {
     fuseSDK.wallet = await _initializeWallet(
       credentials,
       publicApiKey,
+      baseUrl,
       opts,
       paymasterMiddleware,
     );
@@ -109,7 +110,7 @@ class FuseSDK {
     await fuseSDK.authenticate(credentials);
 
     fuseSDK.client = await Client.init(
-      _getBundlerRpc(publicApiKey),
+      _getBundlerRpc(publicApiKey: publicApiKey, baseUrl: baseUrl),
       opts: clientOpts,
     );
 
@@ -133,6 +134,43 @@ class FuseSDK {
     _jwtToken = data['jwt'];
 
     return data['jwt'];
+  }
+
+  /// Retrieves historical actions for a smart wallet, with optional filtering by token address and update time.
+  ///
+  /// Parameters:
+  /// - [page] (optional) – The page number to retrieve, default is 1.
+  /// - [limit] (optional) – Number of items in each page, default is 10.
+  /// - [updatedAt] (optional) – Filter actions updated at or after the specified Unix timestamp.
+  /// - [tokenAddress] (optional) – Filter actions related to the specified token address.
+  ///
+  /// Returns a Future that completes with an [WalletActionResult] object containing the historical wallets actions.
+  Future<WalletActionResult> getWalletActions({
+    int page = 1,
+    int limit = 10,
+    int? updatedAt,
+    String? tokenAddress,
+  }) async {
+    final Map<String, dynamic> queryParameters = {
+      'page': page,
+      'limit': limit,
+    };
+
+    if (tokenAddress != null) {
+      queryParameters.putIfAbsent('tokenAddress', () => tokenAddress);
+    }
+
+    final Response response = await _dio.get(
+      '/v2/smart-wallets/actions',
+      queryParameters: queryParameters,
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $_jwtToken',
+        },
+      ),
+    );
+
+    return WalletActionResult.fromJson(response.data);
   }
 
   /// Transfers a specified [amount] of tokens from the user's address to the [recipientAddress].
@@ -695,9 +733,10 @@ class FuseSDK {
   /// [paymasterContext] provides additional context for the paymaster.
   static UserOperationMiddlewareFn? _getPaymasterMiddleware(
     String publicApiKey,
+    String baseUrl,
     Map<String, dynamic>? paymasterContext,
   ) {
-    final paymasterRpc = Uri.https(Variables.BASE_URL, '/api/v0/paymaster', {
+    final paymasterRpc = Uri.https(baseUrl, '/api/v0/paymaster', {
       'apiKey': publicApiKey,
     }).toString();
 
@@ -713,12 +752,13 @@ class FuseSDK {
   static Future<EtherspotWallet> _initializeWallet(
     EthPrivateKey credentials,
     String publicApiKey,
+    String baseUrl,
     IPresetBuilderOpts? opts,
     UserOperationMiddlewareFn? paymasterMiddleware,
   ) {
     return EtherspotWallet.init(
       credentials,
-      _getBundlerRpc(publicApiKey),
+      _getBundlerRpc(publicApiKey: publicApiKey, baseUrl: baseUrl),
       opts: IPresetBuilderOpts()
         ..entryPoint = opts?.entryPoint
         ..salt = opts?.salt
@@ -729,8 +769,11 @@ class FuseSDK {
   }
 
   /// Retrieves the bundler RPC URL for the provided [publicApiKey].
-  static String _getBundlerRpc(String publicApiKey) {
-    return Uri.https(Variables.BASE_URL, '/api/v0/bundler', {
+  static String _getBundlerRpc({
+    required String publicApiKey,
+    required String baseUrl,
+  }) {
+    return Uri.https(baseUrl, '/api/v0/bundler', {
       'apiKey': publicApiKey,
     }).toString();
   }

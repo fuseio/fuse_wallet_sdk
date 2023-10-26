@@ -6,31 +6,31 @@ part of 'unstake.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UnstakeRequestBody _$$_UnstakeRequestBodyFromJson(
+_$UnstakeRequestBodyImpl _$$UnstakeRequestBodyImplFromJson(
         Map<String, dynamic> json) =>
-    _$_UnstakeRequestBody(
+    _$UnstakeRequestBodyImpl(
       accountAddress: json['accountAddress'] as String,
       tokenAmount: json['tokenAmount'] as String,
       tokenAddress: json['tokenAddress'] as String,
     );
 
-Map<String, dynamic> _$$_UnstakeRequestBodyToJson(
-        _$_UnstakeRequestBody instance) =>
+Map<String, dynamic> _$$UnstakeRequestBodyImplToJson(
+        _$UnstakeRequestBodyImpl instance) =>
     <String, dynamic>{
       'accountAddress': instance.accountAddress,
       'tokenAmount': instance.tokenAmount,
       'tokenAddress': instance.tokenAddress,
     };
 
-_$_UnstakeResponseBody _$$_UnstakeResponseBodyFromJson(
+_$UnstakeResponseBodyImpl _$$UnstakeResponseBodyImplFromJson(
         Map<String, dynamic> json) =>
-    _$_UnstakeResponseBody(
+    _$UnstakeResponseBodyImpl(
       contractAddress: json['contractAddress'] as String,
       encodedABI: json['encodedABI'] as String,
     );
 
-Map<String, dynamic> _$$_UnstakeResponseBodyToJson(
-        _$_UnstakeResponseBody instance) =>
+Map<String, dynamic> _$$UnstakeResponseBodyImplToJson(
+        _$UnstakeResponseBodyImpl instance) =>
     <String, dynamic>{
       'contractAddress': instance.contractAddress,
       'encodedABI': instance.encodedABI,

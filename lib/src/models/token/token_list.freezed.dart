@@ -73,21 +73,22 @@ class _$TokenListCopyWithImpl<$Res, $Val extends TokenList>
 }
 
 /// @nodoc
-abstract class _$$_TokenListCopyWith<$Res> implements $TokenListCopyWith<$Res> {
-  factory _$$_TokenListCopyWith(
-          _$_TokenList value, $Res Function(_$_TokenList) then) =
-      __$$_TokenListCopyWithImpl<$Res>;
+abstract class _$$TokenListImplCopyWith<$Res>
+    implements $TokenListCopyWith<$Res> {
+  factory _$$TokenListImplCopyWith(
+          _$TokenListImpl value, $Res Function(_$TokenListImpl) then) =
+      __$$TokenListImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message, String status, List<TokenDetails> result});
 }
 
 /// @nodoc
-class __$$_TokenListCopyWithImpl<$Res>
-    extends _$TokenListCopyWithImpl<$Res, _$_TokenList>
-    implements _$$_TokenListCopyWith<$Res> {
-  __$$_TokenListCopyWithImpl(
-      _$_TokenList _value, $Res Function(_$_TokenList) _then)
+class __$$TokenListImplCopyWithImpl<$Res>
+    extends _$TokenListCopyWithImpl<$Res, _$TokenListImpl>
+    implements _$$TokenListImplCopyWith<$Res> {
+  __$$TokenListImplCopyWithImpl(
+      _$TokenListImpl _value, $Res Function(_$TokenListImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -97,7 +98,7 @@ class __$$_TokenListCopyWithImpl<$Res>
     Object? status = null,
     Object? result = null,
   }) {
-    return _then(_$_TokenList(
+    return _then(_$TokenListImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -116,12 +117,12 @@ class __$$_TokenListCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TokenList implements _TokenList {
-  _$_TokenList(
+class _$TokenListImpl implements _TokenList {
+  _$TokenListImpl(
       {required this.message, required this.status, required this.result});
 
-  factory _$_TokenList.fromJson(Map<String, dynamic> json) =>
-      _$$_TokenListFromJson(json);
+  factory _$TokenListImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TokenListImplFromJson(json);
 
   @override
   final String message;
@@ -139,7 +140,7 @@ class _$_TokenList implements _TokenList {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TokenList &&
+            other is _$TokenListImpl &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other.result, result));
@@ -153,12 +154,12 @@ class _$_TokenList implements _TokenList {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TokenListCopyWith<_$_TokenList> get copyWith =>
-      __$$_TokenListCopyWithImpl<_$_TokenList>(this, _$identity);
+  _$$TokenListImplCopyWith<_$TokenListImpl> get copyWith =>
+      __$$TokenListImplCopyWithImpl<_$TokenListImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TokenListToJson(
+    return _$$TokenListImplToJson(
       this,
     );
   }
@@ -168,10 +169,10 @@ abstract class _TokenList implements TokenList {
   factory _TokenList(
       {required final String message,
       required final String status,
-      required final List<TokenDetails> result}) = _$_TokenList;
+      required final List<TokenDetails> result}) = _$TokenListImpl;
 
   factory _TokenList.fromJson(Map<String, dynamic> json) =
-      _$_TokenList.fromJson;
+      _$TokenListImpl.fromJson;
 
   @override
   String get message;
@@ -181,6 +182,6 @@ abstract class _TokenList implements TokenList {
   List<TokenDetails> get result;
   @override
   @JsonKey(ignore: true)
-  _$$_TokenListCopyWith<_$_TokenList> get copyWith =>
+  _$$TokenListImplCopyWith<_$TokenListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,14 +6,15 @@ part of 'auth.dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AuthDto _$$_AuthDtoFromJson(Map<String, dynamic> json) => _$_AuthDto(
+_$AuthDtoImpl _$$AuthDtoImplFromJson(Map<String, dynamic> json) =>
+    _$AuthDtoImpl(
       ownerAddress: json['ownerAddress'] as String,
       smartWalletAddress: json['smartWalletAddress'] as String?,
       signature: json['signature'] as String,
       hash: json['hash'] as String,
     );
 
-Map<String, dynamic> _$$_AuthDtoToJson(_$_AuthDto instance) {
+Map<String, dynamic> _$$AuthDtoImplToJson(_$AuthDtoImpl instance) {
   final val = <String, dynamic>{
     'ownerAddress': instance.ownerAddress,
   };

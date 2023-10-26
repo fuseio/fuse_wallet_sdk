@@ -108,11 +108,11 @@ class _$SmartWalletCopyWithImpl<$Res, $Val extends SmartWallet>
 }
 
 /// @nodoc
-abstract class _$$_SmartWalletCopyWith<$Res>
+abstract class _$$SmartWalletImplCopyWith<$Res>
     implements $SmartWalletCopyWith<$Res> {
-  factory _$$_SmartWalletCopyWith(
-          _$_SmartWallet value, $Res Function(_$_SmartWallet) then) =
-      __$$_SmartWalletCopyWithImpl<$Res>;
+  factory _$$SmartWalletImplCopyWith(
+          _$SmartWalletImpl value, $Res Function(_$SmartWalletImpl) then) =
+      __$$SmartWalletImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -128,11 +128,11 @@ abstract class _$$_SmartWalletCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SmartWalletCopyWithImpl<$Res>
-    extends _$SmartWalletCopyWithImpl<$Res, _$_SmartWallet>
-    implements _$$_SmartWalletCopyWith<$Res> {
-  __$$_SmartWalletCopyWithImpl(
-      _$_SmartWallet _value, $Res Function(_$_SmartWallet) _then)
+class __$$SmartWalletImplCopyWithImpl<$Res>
+    extends _$SmartWalletCopyWithImpl<$Res, _$SmartWalletImpl>
+    implements _$$SmartWalletImplCopyWith<$Res> {
+  __$$SmartWalletImplCopyWithImpl(
+      _$SmartWalletImpl _value, $Res Function(_$SmartWalletImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -145,7 +145,7 @@ class __$$_SmartWalletCopyWithImpl<$Res>
     Object? version = null,
     Object? networks = null,
   }) {
-    return _then(_$_SmartWallet(
+    return _then(_$SmartWalletImpl(
       ownerAddress: null == ownerAddress
           ? _value.ownerAddress
           : ownerAddress // ignore: cast_nullable_to_non_nullable
@@ -176,8 +176,8 @@ class __$$_SmartWalletCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SmartWallet implements _SmartWallet {
-  _$_SmartWallet(
+class _$SmartWalletImpl implements _SmartWallet {
+  _$SmartWalletImpl(
       {required this.ownerAddress,
       required this.smartWalletAddress,
       required this.walletModules,
@@ -185,8 +185,8 @@ class _$_SmartWallet implements _SmartWallet {
       required this.version,
       this.networks = const ['fuse']});
 
-  factory _$_SmartWallet.fromJson(Map<String, dynamic> json) =>
-      _$$_SmartWalletFromJson(json);
+  factory _$SmartWalletImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SmartWalletImplFromJson(json);
 
   @override
   final String ownerAddress;
@@ -211,7 +211,7 @@ class _$_SmartWallet implements _SmartWallet {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SmartWallet &&
+            other is _$SmartWalletImpl &&
             (identical(other.ownerAddress, ownerAddress) ||
                 other.ownerAddress == ownerAddress) &&
             (identical(other.smartWalletAddress, smartWalletAddress) ||
@@ -238,12 +238,12 @@ class _$_SmartWallet implements _SmartWallet {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SmartWalletCopyWith<_$_SmartWallet> get copyWith =>
-      __$$_SmartWalletCopyWithImpl<_$_SmartWallet>(this, _$identity);
+  _$$SmartWalletImplCopyWith<_$SmartWalletImpl> get copyWith =>
+      __$$SmartWalletImplCopyWithImpl<_$SmartWalletImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SmartWalletToJson(
+    return _$$SmartWalletImplToJson(
       this,
     );
   }
@@ -256,10 +256,10 @@ abstract class _SmartWallet implements SmartWallet {
       required final WalletModules walletModules,
       required final String paddedVersion,
       required final String version,
-      final List<String> networks}) = _$_SmartWallet;
+      final List<String> networks}) = _$SmartWalletImpl;
 
   factory _SmartWallet.fromJson(Map<String, dynamic> json) =
-      _$_SmartWallet.fromJson;
+      _$SmartWalletImpl.fromJson;
 
   @override
   String get ownerAddress;
@@ -275,6 +275,6 @@ abstract class _SmartWallet implements SmartWallet {
   List<String> get networks;
   @override
   @JsonKey(ignore: true)
-  _$$_SmartWalletCopyWith<_$_SmartWallet> get copyWith =>
+  _$$SmartWalletImplCopyWith<_$SmartWalletImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -260,9 +260,11 @@ class _$TokenDetailsCopyWithImpl<$Res, $Val extends TokenDetails>
 }
 
 /// @nodoc
-abstract class _$$NativeCopyWith<$Res> implements $TokenDetailsCopyWith<$Res> {
-  factory _$$NativeCopyWith(_$Native value, $Res Function(_$Native) then) =
-      __$$NativeCopyWithImpl<$Res>;
+abstract class _$$NativeImplCopyWith<$Res>
+    implements $TokenDetailsCopyWith<$Res> {
+  factory _$$NativeImplCopyWith(
+          _$NativeImpl value, $Res Function(_$NativeImpl) then) =
+      __$$NativeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -274,10 +276,11 @@ abstract class _$$NativeCopyWith<$Res> implements $TokenDetailsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$NativeCopyWithImpl<$Res>
-    extends _$TokenDetailsCopyWithImpl<$Res, _$Native>
-    implements _$$NativeCopyWith<$Res> {
-  __$$NativeCopyWithImpl(_$Native _value, $Res Function(_$Native) _then)
+class __$$NativeImplCopyWithImpl<$Res>
+    extends _$TokenDetailsCopyWithImpl<$Res, _$NativeImpl>
+    implements _$$NativeImplCopyWith<$Res> {
+  __$$NativeImplCopyWithImpl(
+      _$NativeImpl _value, $Res Function(_$NativeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -289,7 +292,7 @@ class __$$NativeCopyWithImpl<$Res>
     Object? address = null,
     Object? amount = null,
   }) {
-    return _then(_$Native(
+    return _then(_$NativeImpl(
       symbol: null == symbol
           ? _value.symbol
           : symbol // ignore: cast_nullable_to_non_nullable
@@ -316,8 +319,8 @@ class __$$NativeCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$Native extends Native {
-  const _$Native(
+class _$NativeImpl extends Native {
+  const _$NativeImpl(
       {this.symbol = 'FUSE',
       this.name = 'Fuse Token',
       this.decimals = 18,
@@ -327,8 +330,8 @@ class _$Native extends Native {
       : $type = $type ?? 'native',
         super._();
 
-  factory _$Native.fromJson(Map<String, dynamic> json) =>
-      _$$NativeFromJson(json);
+  factory _$NativeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NativeImplFromJson(json);
 
   @override
   @JsonKey()
@@ -358,7 +361,7 @@ class _$Native extends Native {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Native &&
+            other is _$NativeImpl &&
             (identical(other.symbol, symbol) || other.symbol == symbol) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.decimals, decimals) ||
@@ -375,8 +378,8 @@ class _$Native extends Native {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$NativeCopyWith<_$Native> get copyWith =>
-      __$$NativeCopyWithImpl<_$Native>(this, _$identity);
+  _$$NativeImplCopyWith<_$NativeImpl> get copyWith =>
+      __$$NativeImplCopyWithImpl<_$NativeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -568,7 +571,7 @@ class _$Native extends Native {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NativeToJson(
+    return _$$NativeImplToJson(
       this,
     );
   }
@@ -581,10 +584,10 @@ abstract class Native extends TokenDetails implements IToken {
           final int decimals,
           final String address,
           @JsonKey(fromJson: amountFromJson) required final BigInt amount}) =
-      _$Native;
+      _$NativeImpl;
   const Native._() : super._();
 
-  factory Native.fromJson(Map<String, dynamic> json) = _$Native.fromJson;
+  factory Native.fromJson(Map<String, dynamic> json) = _$NativeImpl.fromJson;
 
   @override
   String get symbol;
@@ -598,16 +601,16 @@ abstract class Native extends TokenDetails implements IToken {
   BigInt get amount;
   @override
   @JsonKey(ignore: true)
-  _$$NativeCopyWith<_$Native> get copyWith =>
+  _$$NativeImplCopyWith<_$NativeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LiquidityPoolTokenCopyWith<$Res>
+abstract class _$$LiquidityPoolTokenImplCopyWith<$Res>
     implements $TokenDetailsCopyWith<$Res> {
-  factory _$$LiquidityPoolTokenCopyWith(_$LiquidityPoolToken value,
-          $Res Function(_$LiquidityPoolToken) then) =
-      __$$LiquidityPoolTokenCopyWithImpl<$Res>;
+  factory _$$LiquidityPoolTokenImplCopyWith(_$LiquidityPoolTokenImpl value,
+          $Res Function(_$LiquidityPoolTokenImpl) then) =
+      __$$LiquidityPoolTokenImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -619,11 +622,11 @@ abstract class _$$LiquidityPoolTokenCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$LiquidityPoolTokenCopyWithImpl<$Res>
-    extends _$TokenDetailsCopyWithImpl<$Res, _$LiquidityPoolToken>
-    implements _$$LiquidityPoolTokenCopyWith<$Res> {
-  __$$LiquidityPoolTokenCopyWithImpl(
-      _$LiquidityPoolToken _value, $Res Function(_$LiquidityPoolToken) _then)
+class __$$LiquidityPoolTokenImplCopyWithImpl<$Res>
+    extends _$TokenDetailsCopyWithImpl<$Res, _$LiquidityPoolTokenImpl>
+    implements _$$LiquidityPoolTokenImplCopyWith<$Res> {
+  __$$LiquidityPoolTokenImplCopyWithImpl(_$LiquidityPoolTokenImpl _value,
+      $Res Function(_$LiquidityPoolTokenImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -635,7 +638,7 @@ class __$$LiquidityPoolTokenCopyWithImpl<$Res>
     Object? address = null,
     Object? underlyingTokens = null,
   }) {
-    return _then(_$LiquidityPoolToken(
+    return _then(_$LiquidityPoolTokenImpl(
       symbol: null == symbol
           ? _value.symbol
           : symbol // ignore: cast_nullable_to_non_nullable
@@ -662,8 +665,8 @@ class __$$LiquidityPoolTokenCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$LiquidityPoolToken extends LiquidityPoolToken {
-  const _$LiquidityPoolToken(
+class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
+  const _$LiquidityPoolTokenImpl(
       {required this.symbol,
       required this.decimals,
       @JsonKey(fromJson: nameFromJson) required this.name,
@@ -673,8 +676,8 @@ class _$LiquidityPoolToken extends LiquidityPoolToken {
       : $type = $type ?? 'lp',
         super._();
 
-  factory _$LiquidityPoolToken.fromJson(Map<String, dynamic> json) =>
-      _$$LiquidityPoolTokenFromJson(json);
+  factory _$LiquidityPoolTokenImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LiquidityPoolTokenImplFromJson(json);
 
   @override
   final String symbol;
@@ -701,7 +704,7 @@ class _$LiquidityPoolToken extends LiquidityPoolToken {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LiquidityPoolToken &&
+            other is _$LiquidityPoolTokenImpl &&
             (identical(other.symbol, symbol) || other.symbol == symbol) &&
             (identical(other.decimals, decimals) ||
                 other.decimals == decimals) &&
@@ -719,8 +722,8 @@ class _$LiquidityPoolToken extends LiquidityPoolToken {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LiquidityPoolTokenCopyWith<_$LiquidityPoolToken> get copyWith =>
-      __$$LiquidityPoolTokenCopyWithImpl<_$LiquidityPoolToken>(
+  _$$LiquidityPoolTokenImplCopyWith<_$LiquidityPoolTokenImpl> get copyWith =>
+      __$$LiquidityPoolTokenImplCopyWithImpl<_$LiquidityPoolTokenImpl>(
           this, _$identity);
 
   @override
@@ -916,7 +919,7 @@ class _$LiquidityPoolToken extends LiquidityPoolToken {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LiquidityPoolTokenToJson(
+    return _$$LiquidityPoolTokenImplToJson(
       this,
     );
   }
@@ -929,11 +932,11 @@ abstract class LiquidityPoolToken extends TokenDetails implements IToken {
           @JsonKey(fromJson: nameFromJson) required final String name,
           @JsonKey(fromJson: addressFromJson) required final String address,
           required final List<LpUnderlyingTokens> underlyingTokens}) =
-      _$LiquidityPoolToken;
+      _$LiquidityPoolTokenImpl;
   const LiquidityPoolToken._() : super._();
 
   factory LiquidityPoolToken.fromJson(Map<String, dynamic> json) =
-      _$LiquidityPoolToken.fromJson;
+      _$LiquidityPoolTokenImpl.fromJson;
 
   @override
   String get symbol;
@@ -948,16 +951,16 @@ abstract class LiquidityPoolToken extends TokenDetails implements IToken {
   List<LpUnderlyingTokens> get underlyingTokens;
   @override
   @JsonKey(ignore: true)
-  _$$LiquidityPoolTokenCopyWith<_$LiquidityPoolToken> get copyWith =>
+  _$$LiquidityPoolTokenImplCopyWith<_$LiquidityPoolTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$BridgedTokenCopyWith<$Res>
+abstract class _$$BridgedTokenImplCopyWith<$Res>
     implements $TokenDetailsCopyWith<$Res> {
-  factory _$$BridgedTokenCopyWith(
-          _$BridgedToken value, $Res Function(_$BridgedToken) then) =
-      __$$BridgedTokenCopyWithImpl<$Res>;
+  factory _$$BridgedTokenImplCopyWith(
+          _$BridgedTokenImpl value, $Res Function(_$BridgedTokenImpl) then) =
+      __$$BridgedTokenImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -969,11 +972,11 @@ abstract class _$$BridgedTokenCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$BridgedTokenCopyWithImpl<$Res>
-    extends _$TokenDetailsCopyWithImpl<$Res, _$BridgedToken>
-    implements _$$BridgedTokenCopyWith<$Res> {
-  __$$BridgedTokenCopyWithImpl(
-      _$BridgedToken _value, $Res Function(_$BridgedToken) _then)
+class __$$BridgedTokenImplCopyWithImpl<$Res>
+    extends _$TokenDetailsCopyWithImpl<$Res, _$BridgedTokenImpl>
+    implements _$$BridgedTokenImplCopyWith<$Res> {
+  __$$BridgedTokenImplCopyWithImpl(
+      _$BridgedTokenImpl _value, $Res Function(_$BridgedTokenImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -985,7 +988,7 @@ class __$$BridgedTokenCopyWithImpl<$Res>
     Object? name = null,
     Object? address = null,
   }) {
-    return _then(_$BridgedToken(
+    return _then(_$BridgedTokenImpl(
       symbol: null == symbol
           ? _value.symbol
           : symbol // ignore: cast_nullable_to_non_nullable
@@ -1012,8 +1015,8 @@ class __$$BridgedTokenCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$BridgedToken extends BridgedToken {
-  const _$BridgedToken(
+class _$BridgedTokenImpl extends BridgedToken {
+  const _$BridgedTokenImpl(
       {required this.symbol,
       required this.logoURI,
       required this.decimals,
@@ -1023,8 +1026,8 @@ class _$BridgedToken extends BridgedToken {
       : $type = $type ?? 'bridged',
         super._();
 
-  factory _$BridgedToken.fromJson(Map<String, dynamic> json) =>
-      _$$BridgedTokenFromJson(json);
+  factory _$BridgedTokenImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BridgedTokenImplFromJson(json);
 
   @override
   final String symbol;
@@ -1051,7 +1054,7 @@ class _$BridgedToken extends BridgedToken {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BridgedToken &&
+            other is _$BridgedTokenImpl &&
             (identical(other.symbol, symbol) || other.symbol == symbol) &&
             (identical(other.logoURI, logoURI) || other.logoURI == logoURI) &&
             (identical(other.decimals, decimals) ||
@@ -1068,8 +1071,8 @@ class _$BridgedToken extends BridgedToken {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$BridgedTokenCopyWith<_$BridgedToken> get copyWith =>
-      __$$BridgedTokenCopyWithImpl<_$BridgedToken>(this, _$identity);
+  _$$BridgedTokenImplCopyWith<_$BridgedTokenImpl> get copyWith =>
+      __$$BridgedTokenImplCopyWithImpl<_$BridgedTokenImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1261,7 +1264,7 @@ class _$BridgedToken extends BridgedToken {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$BridgedTokenToJson(
+    return _$$BridgedTokenImplToJson(
       this,
     );
   }
@@ -1274,11 +1277,11 @@ abstract class BridgedToken extends TokenDetails implements IToken {
           required final int decimals,
           @JsonKey(fromJson: nameFromJson) required final String name,
           @JsonKey(fromJson: addressFromJson) required final String address}) =
-      _$BridgedToken;
+      _$BridgedTokenImpl;
   const BridgedToken._() : super._();
 
   factory BridgedToken.fromJson(Map<String, dynamic> json) =
-      _$BridgedToken.fromJson;
+      _$BridgedTokenImpl.fromJson;
 
   @override
   String get symbol;
@@ -1293,16 +1296,16 @@ abstract class BridgedToken extends TokenDetails implements IToken {
   String get address;
   @override
   @JsonKey(ignore: true)
-  _$$BridgedTokenCopyWith<_$BridgedToken> get copyWith =>
+  _$$BridgedTokenImplCopyWith<_$BridgedTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$MiscTokenCopyWith<$Res>
+abstract class _$$MiscTokenImplCopyWith<$Res>
     implements $TokenDetailsCopyWith<$Res> {
-  factory _$$MiscTokenCopyWith(
-          _$MiscToken value, $Res Function(_$MiscToken) then) =
-      __$$MiscTokenCopyWithImpl<$Res>;
+  factory _$$MiscTokenImplCopyWith(
+          _$MiscTokenImpl value, $Res Function(_$MiscTokenImpl) then) =
+      __$$MiscTokenImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1314,11 +1317,11 @@ abstract class _$$MiscTokenCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$MiscTokenCopyWithImpl<$Res>
-    extends _$TokenDetailsCopyWithImpl<$Res, _$MiscToken>
-    implements _$$MiscTokenCopyWith<$Res> {
-  __$$MiscTokenCopyWithImpl(
-      _$MiscToken _value, $Res Function(_$MiscToken) _then)
+class __$$MiscTokenImplCopyWithImpl<$Res>
+    extends _$TokenDetailsCopyWithImpl<$Res, _$MiscTokenImpl>
+    implements _$$MiscTokenImplCopyWith<$Res> {
+  __$$MiscTokenImplCopyWithImpl(
+      _$MiscTokenImpl _value, $Res Function(_$MiscTokenImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1330,7 +1333,7 @@ class __$$MiscTokenCopyWithImpl<$Res>
     Object? name = null,
     Object? address = null,
   }) {
-    return _then(_$MiscToken(
+    return _then(_$MiscTokenImpl(
       symbol: null == symbol
           ? _value.symbol
           : symbol // ignore: cast_nullable_to_non_nullable
@@ -1357,8 +1360,8 @@ class __$$MiscTokenCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MiscToken extends MiscToken {
-  const _$MiscToken(
+class _$MiscTokenImpl extends MiscToken {
+  const _$MiscTokenImpl(
       {required this.symbol,
       required this.logoURI,
       required this.decimals,
@@ -1368,8 +1371,8 @@ class _$MiscToken extends MiscToken {
       : $type = $type ?? 'misc',
         super._();
 
-  factory _$MiscToken.fromJson(Map<String, dynamic> json) =>
-      _$$MiscTokenFromJson(json);
+  factory _$MiscTokenImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MiscTokenImplFromJson(json);
 
   @override
   final String symbol;
@@ -1396,7 +1399,7 @@ class _$MiscToken extends MiscToken {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MiscToken &&
+            other is _$MiscTokenImpl &&
             (identical(other.symbol, symbol) || other.symbol == symbol) &&
             (identical(other.logoURI, logoURI) || other.logoURI == logoURI) &&
             (identical(other.decimals, decimals) ||
@@ -1413,8 +1416,8 @@ class _$MiscToken extends MiscToken {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$MiscTokenCopyWith<_$MiscToken> get copyWith =>
-      __$$MiscTokenCopyWithImpl<_$MiscToken>(this, _$identity);
+  _$$MiscTokenImplCopyWith<_$MiscTokenImpl> get copyWith =>
+      __$$MiscTokenImplCopyWithImpl<_$MiscTokenImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1606,7 +1609,7 @@ class _$MiscToken extends MiscToken {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MiscTokenToJson(
+    return _$$MiscTokenImplToJson(
       this,
     );
   }
@@ -1619,10 +1622,11 @@ abstract class MiscToken extends TokenDetails implements IToken {
           required final int decimals,
           @JsonKey(fromJson: nameFromJson) required final String name,
           @JsonKey(fromJson: addressFromJson) required final String address}) =
-      _$MiscToken;
+      _$MiscTokenImpl;
   const MiscToken._() : super._();
 
-  factory MiscToken.fromJson(Map<String, dynamic> json) = _$MiscToken.fromJson;
+  factory MiscToken.fromJson(Map<String, dynamic> json) =
+      _$MiscTokenImpl.fromJson;
 
   @override
   String get symbol;
@@ -1637,14 +1641,16 @@ abstract class MiscToken extends TokenDetails implements IToken {
   String get address;
   @override
   @JsonKey(ignore: true)
-  _$$MiscTokenCopyWith<_$MiscToken> get copyWith =>
+  _$$MiscTokenImplCopyWith<_$MiscTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ERC20CopyWith<$Res> implements $TokenDetailsCopyWith<$Res> {
-  factory _$$ERC20CopyWith(_$ERC20 value, $Res Function(_$ERC20) then) =
-      __$$ERC20CopyWithImpl<$Res>;
+abstract class _$$ERC20ImplCopyWith<$Res>
+    implements $TokenDetailsCopyWith<$Res> {
+  factory _$$ERC20ImplCopyWith(
+          _$ERC20Impl value, $Res Function(_$ERC20Impl) then) =
+      __$$ERC20ImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1657,10 +1663,11 @@ abstract class _$$ERC20CopyWith<$Res> implements $TokenDetailsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ERC20CopyWithImpl<$Res>
-    extends _$TokenDetailsCopyWithImpl<$Res, _$ERC20>
-    implements _$$ERC20CopyWith<$Res> {
-  __$$ERC20CopyWithImpl(_$ERC20 _value, $Res Function(_$ERC20) _then)
+class __$$ERC20ImplCopyWithImpl<$Res>
+    extends _$TokenDetailsCopyWithImpl<$Res, _$ERC20Impl>
+    implements _$$ERC20ImplCopyWith<$Res> {
+  __$$ERC20ImplCopyWithImpl(
+      _$ERC20Impl _value, $Res Function(_$ERC20Impl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1672,7 +1679,7 @@ class __$$ERC20CopyWithImpl<$Res>
     Object? address = null,
     Object? amount = null,
   }) {
-    return _then(_$ERC20(
+    return _then(_$ERC20Impl(
       symbol: null == symbol
           ? _value.symbol
           : symbol // ignore: cast_nullable_to_non_nullable
@@ -1699,8 +1706,8 @@ class __$$ERC20CopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ERC20 extends ERC20 {
-  const _$ERC20(
+class _$ERC20Impl extends ERC20 {
+  const _$ERC20Impl(
       {required this.symbol,
       @JsonKey(fromJson: nameFromJson) required this.name,
       @JsonKey(fromJson: _decimalsFromJson) this.decimals = 0,
@@ -1711,7 +1718,8 @@ class _$ERC20 extends ERC20 {
       : $type = $type ?? 'ERC-20',
         super._();
 
-  factory _$ERC20.fromJson(Map<String, dynamic> json) => _$$ERC20FromJson(json);
+  factory _$ERC20Impl.fromJson(Map<String, dynamic> json) =>
+      _$$ERC20ImplFromJson(json);
 
   @override
   final String symbol;
@@ -1740,7 +1748,7 @@ class _$ERC20 extends ERC20 {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ERC20 &&
+            other is _$ERC20Impl &&
             (identical(other.symbol, symbol) || other.symbol == symbol) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.decimals, decimals) ||
@@ -1757,8 +1765,8 @@ class _$ERC20 extends ERC20 {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ERC20CopyWith<_$ERC20> get copyWith =>
-      __$$ERC20CopyWithImpl<_$ERC20>(this, _$identity);
+  _$$ERC20ImplCopyWith<_$ERC20Impl> get copyWith =>
+      __$$ERC20ImplCopyWithImpl<_$ERC20Impl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1950,7 +1958,7 @@ class _$ERC20 extends ERC20 {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ERC20ToJson(
+    return _$$ERC20ImplToJson(
       this,
     );
   }
@@ -1963,10 +1971,10 @@ abstract class ERC20 extends TokenDetails implements IToken {
       @JsonKey(fromJson: _decimalsFromJson) final int decimals,
       @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
       required final String address,
-      @JsonKey(name: 'balance') required final BigInt amount}) = _$ERC20;
+      @JsonKey(name: 'balance') required final BigInt amount}) = _$ERC20Impl;
   const ERC20._() : super._();
 
-  factory ERC20.fromJson(Map<String, dynamic> json) = _$ERC20.fromJson;
+  factory ERC20.fromJson(Map<String, dynamic> json) = _$ERC20Impl.fromJson;
 
   @override
   String get symbol;
@@ -1983,13 +1991,16 @@ abstract class ERC20 extends TokenDetails implements IToken {
   BigInt get amount;
   @override
   @JsonKey(ignore: true)
-  _$$ERC20CopyWith<_$ERC20> get copyWith => throw _privateConstructorUsedError;
+  _$$ERC20ImplCopyWith<_$ERC20Impl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ERC721CopyWith<$Res> implements $TokenDetailsCopyWith<$Res> {
-  factory _$$ERC721CopyWith(_$ERC721 value, $Res Function(_$ERC721) then) =
-      __$$ERC721CopyWithImpl<$Res>;
+abstract class _$$ERC721ImplCopyWith<$Res>
+    implements $TokenDetailsCopyWith<$Res> {
+  factory _$$ERC721ImplCopyWith(
+          _$ERC721Impl value, $Res Function(_$ERC721Impl) then) =
+      __$$ERC721ImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2002,10 +2013,11 @@ abstract class _$$ERC721CopyWith<$Res> implements $TokenDetailsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ERC721CopyWithImpl<$Res>
-    extends _$TokenDetailsCopyWithImpl<$Res, _$ERC721>
-    implements _$$ERC721CopyWith<$Res> {
-  __$$ERC721CopyWithImpl(_$ERC721 _value, $Res Function(_$ERC721) _then)
+class __$$ERC721ImplCopyWithImpl<$Res>
+    extends _$TokenDetailsCopyWithImpl<$Res, _$ERC721Impl>
+    implements _$$ERC721ImplCopyWith<$Res> {
+  __$$ERC721ImplCopyWithImpl(
+      _$ERC721Impl _value, $Res Function(_$ERC721Impl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2017,7 +2029,7 @@ class __$$ERC721CopyWithImpl<$Res>
     Object? address = null,
     Object? amount = null,
   }) {
-    return _then(_$ERC721(
+    return _then(_$ERC721Impl(
       symbol: null == symbol
           ? _value.symbol
           : symbol // ignore: cast_nullable_to_non_nullable
@@ -2044,8 +2056,8 @@ class __$$ERC721CopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ERC721 extends ERC721 {
-  const _$ERC721(
+class _$ERC721Impl extends ERC721 {
+  const _$ERC721Impl(
       {required this.symbol,
       @JsonKey(fromJson: nameFromJson) required this.name,
       @JsonKey(fromJson: _decimalsFromJson) required this.decimals,
@@ -2056,8 +2068,8 @@ class _$ERC721 extends ERC721 {
       : $type = $type ?? 'ERC-721',
         super._();
 
-  factory _$ERC721.fromJson(Map<String, dynamic> json) =>
-      _$$ERC721FromJson(json);
+  factory _$ERC721Impl.fromJson(Map<String, dynamic> json) =>
+      _$$ERC721ImplFromJson(json);
 
   @override
   final String symbol;
@@ -2086,7 +2098,7 @@ class _$ERC721 extends ERC721 {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ERC721 &&
+            other is _$ERC721Impl &&
             (identical(other.symbol, symbol) || other.symbol == symbol) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.decimals, decimals) ||
@@ -2103,8 +2115,8 @@ class _$ERC721 extends ERC721 {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ERC721CopyWith<_$ERC721> get copyWith =>
-      __$$ERC721CopyWithImpl<_$ERC721>(this, _$identity);
+  _$$ERC721ImplCopyWith<_$ERC721Impl> get copyWith =>
+      __$$ERC721ImplCopyWithImpl<_$ERC721Impl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2296,7 +2308,7 @@ class _$ERC721 extends ERC721 {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ERC721ToJson(
+    return _$$ERC721ImplToJson(
       this,
     );
   }
@@ -2309,10 +2321,10 @@ abstract class ERC721 extends TokenDetails implements IToken {
       @JsonKey(fromJson: _decimalsFromJson) required final int decimals,
       @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
       required final String address,
-      @JsonKey(name: 'balance') required final BigInt amount}) = _$ERC721;
+      @JsonKey(name: 'balance') required final BigInt amount}) = _$ERC721Impl;
   const ERC721._() : super._();
 
-  factory ERC721.fromJson(Map<String, dynamic> json) = _$ERC721.fromJson;
+  factory ERC721.fromJson(Map<String, dynamic> json) = _$ERC721Impl.fromJson;
 
   @override
   String get symbol;
@@ -2329,6 +2341,6 @@ abstract class ERC721 extends TokenDetails implements IToken {
   BigInt get amount;
   @override
   @JsonKey(ignore: true)
-  _$$ERC721CopyWith<_$ERC721> get copyWith =>
+  _$$ERC721ImplCopyWith<_$ERC721Impl> get copyWith =>
       throw _privateConstructorUsedError;
 }

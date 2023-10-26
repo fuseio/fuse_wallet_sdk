@@ -470,10 +470,11 @@ class _$ActionCopyWithImpl<$Res, $Val extends Action>
 }
 
 /// @nodoc
-abstract class _$$CreateWalletCopyWith<$Res> implements $ActionCopyWith<$Res> {
-  factory _$$CreateWalletCopyWith(
-          _$CreateWallet value, $Res Function(_$CreateWallet) then) =
-      __$$CreateWalletCopyWithImpl<$Res>;
+abstract class _$$CreateWalletImplCopyWith<$Res>
+    implements $ActionCopyWith<$Res> {
+  factory _$$CreateWalletImplCopyWith(
+          _$CreateWalletImpl value, $Res Function(_$CreateWalletImpl) then) =
+      __$$CreateWalletImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -486,11 +487,11 @@ abstract class _$$CreateWalletCopyWith<$Res> implements $ActionCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$CreateWalletCopyWithImpl<$Res>
-    extends _$ActionCopyWithImpl<$Res, _$CreateWallet>
-    implements _$$CreateWalletCopyWith<$Res> {
-  __$$CreateWalletCopyWithImpl(
-      _$CreateWallet _value, $Res Function(_$CreateWallet) _then)
+class __$$CreateWalletImplCopyWithImpl<$Res>
+    extends _$ActionCopyWithImpl<$Res, _$CreateWalletImpl>
+    implements _$$CreateWalletImplCopyWith<$Res> {
+  __$$CreateWalletImplCopyWithImpl(
+      _$CreateWalletImpl _value, $Res Function(_$CreateWalletImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -503,7 +504,7 @@ class __$$CreateWalletCopyWithImpl<$Res>
     Object? status = null,
     Object? blockNumber = freezed,
   }) {
-    return _then(_$CreateWallet(
+    return _then(_$CreateWalletImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -534,8 +535,8 @@ class __$$CreateWalletCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CreateWallet extends CreateWallet {
-  const _$CreateWallet(
+class _$CreateWalletImpl extends CreateWallet {
+  const _$CreateWalletImpl(
       {this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'createWallet',
@@ -544,8 +545,8 @@ class _$CreateWallet extends CreateWallet {
       this.blockNumber = 0})
       : super._();
 
-  factory _$CreateWallet.fromJson(Map<String, dynamic> json) =>
-      _$$CreateWalletFromJson(json);
+  factory _$CreateWalletImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CreateWalletImplFromJson(json);
 
   @override
   @JsonKey()
@@ -573,7 +574,7 @@ class _$CreateWallet extends CreateWallet {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CreateWallet &&
+            other is _$CreateWalletImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -592,8 +593,8 @@ class _$CreateWallet extends CreateWallet {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CreateWalletCopyWith<_$CreateWallet> get copyWith =>
-      __$$CreateWalletCopyWithImpl<_$CreateWallet>(this, _$identity);
+  _$$CreateWalletImplCopyWith<_$CreateWalletImpl> get copyWith =>
+      __$$CreateWalletImplCopyWithImpl<_$CreateWalletImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -974,7 +975,7 @@ class _$CreateWallet extends CreateWallet {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CreateWalletToJson(
+    return _$$CreateWalletImplToJson(
       this,
     );
   }
@@ -987,11 +988,11 @@ abstract class CreateWallet extends Action {
       final String name,
       final String? txHash,
       required final String status,
-      final int? blockNumber}) = _$CreateWallet;
+      final int? blockNumber}) = _$CreateWalletImpl;
   const CreateWallet._() : super._();
 
   factory CreateWallet.fromJson(Map<String, dynamic> json) =
-      _$CreateWallet.fromJson;
+      _$CreateWalletImpl.fromJson;
 
   @override
   int get timestamp;
@@ -1008,15 +1009,16 @@ abstract class CreateWallet extends Action {
   int? get blockNumber;
   @override
   @JsonKey(ignore: true)
-  _$$CreateWalletCopyWith<_$CreateWallet> get copyWith =>
+  _$$CreateWalletImplCopyWith<_$CreateWalletImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FiatDepositCopyWith<$Res> implements $ActionCopyWith<$Res> {
-  factory _$$FiatDepositCopyWith(
-          _$FiatDeposit value, $Res Function(_$FiatDeposit) then) =
-      __$$FiatDepositCopyWithImpl<$Res>;
+abstract class _$$FiatDepositImplCopyWith<$Res>
+    implements $ActionCopyWith<$Res> {
+  factory _$$FiatDepositImplCopyWith(
+          _$FiatDepositImpl value, $Res Function(_$FiatDepositImpl) then) =
+      __$$FiatDepositImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1036,11 +1038,11 @@ abstract class _$$FiatDepositCopyWith<$Res> implements $ActionCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$FiatDepositCopyWithImpl<$Res>
-    extends _$ActionCopyWithImpl<$Res, _$FiatDeposit>
-    implements _$$FiatDepositCopyWith<$Res> {
-  __$$FiatDepositCopyWithImpl(
-      _$FiatDeposit _value, $Res Function(_$FiatDeposit) _then)
+class __$$FiatDepositImplCopyWithImpl<$Res>
+    extends _$ActionCopyWithImpl<$Res, _$FiatDepositImpl>
+    implements _$$FiatDepositImplCopyWith<$Res> {
+  __$$FiatDepositImplCopyWithImpl(
+      _$FiatDepositImpl _value, $Res Function(_$FiatDepositImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1060,7 +1062,7 @@ class __$$FiatDepositCopyWithImpl<$Res>
     Object? tokenSymbol = null,
     Object? tokenDecimal = null,
   }) {
-    return _then(_$FiatDeposit(
+    return _then(_$FiatDepositImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -1119,8 +1121,8 @@ class __$$FiatDepositCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$FiatDeposit extends FiatDeposit {
-  const _$FiatDeposit(
+class _$FiatDepositImpl extends FiatDeposit {
+  const _$FiatDepositImpl(
       {this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'fiat-deposit',
@@ -1136,8 +1138,8 @@ class _$FiatDeposit extends FiatDeposit {
       required this.tokenDecimal})
       : super._();
 
-  factory _$FiatDeposit.fromJson(Map<String, dynamic> json) =>
-      _$$FiatDepositFromJson(json);
+  factory _$FiatDepositImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FiatDepositImplFromJson(json);
 
   @override
   @JsonKey()
@@ -1179,7 +1181,7 @@ class _$FiatDeposit extends FiatDeposit {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FiatDeposit &&
+            other is _$FiatDepositImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -1222,8 +1224,8 @@ class _$FiatDeposit extends FiatDeposit {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FiatDepositCopyWith<_$FiatDeposit> get copyWith =>
-      __$$FiatDepositCopyWithImpl<_$FiatDeposit>(this, _$identity);
+  _$$FiatDepositImplCopyWith<_$FiatDepositImpl> get copyWith =>
+      __$$FiatDepositImplCopyWithImpl<_$FiatDepositImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1607,7 +1609,7 @@ class _$FiatDeposit extends FiatDeposit {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$FiatDepositToJson(
+    return _$$FiatDepositImplToJson(
       this,
     );
   }
@@ -1627,11 +1629,11 @@ abstract class FiatDeposit extends Action {
       required final BigInt value,
       required final String tokenName,
       required final String tokenSymbol,
-      required final int tokenDecimal}) = _$FiatDeposit;
+      required final int tokenDecimal}) = _$FiatDepositImpl;
   const FiatDeposit._() : super._();
 
   factory FiatDeposit.fromJson(Map<String, dynamic> json) =
-      _$FiatDeposit.fromJson;
+      _$FiatDepositImpl.fromJson;
 
   @override
   int get timestamp;
@@ -1655,14 +1657,15 @@ abstract class FiatDeposit extends Action {
   int get tokenDecimal;
   @override
   @JsonKey(ignore: true)
-  _$$FiatDepositCopyWith<_$FiatDeposit> get copyWith =>
+  _$$FiatDepositImplCopyWith<_$FiatDepositImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SendCopyWith<$Res> implements $ActionCopyWith<$Res> {
-  factory _$$SendCopyWith(_$Send value, $Res Function(_$Send) then) =
-      __$$SendCopyWithImpl<$Res>;
+abstract class _$$SendImplCopyWith<$Res> implements $ActionCopyWith<$Res> {
+  factory _$$SendImplCopyWith(
+          _$SendImpl value, $Res Function(_$SendImpl) then) =
+      __$$SendImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1682,9 +1685,10 @@ abstract class _$$SendCopyWith<$Res> implements $ActionCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$SendCopyWithImpl<$Res> extends _$ActionCopyWithImpl<$Res, _$Send>
-    implements _$$SendCopyWith<$Res> {
-  __$$SendCopyWithImpl(_$Send _value, $Res Function(_$Send) _then)
+class __$$SendImplCopyWithImpl<$Res>
+    extends _$ActionCopyWithImpl<$Res, _$SendImpl>
+    implements _$$SendImplCopyWith<$Res> {
+  __$$SendImplCopyWithImpl(_$SendImpl _value, $Res Function(_$SendImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1704,7 +1708,7 @@ class __$$SendCopyWithImpl<$Res> extends _$ActionCopyWithImpl<$Res, _$Send>
     Object? tokenSymbol = null,
     Object? tokenDecimal = null,
   }) {
-    return _then(_$Send(
+    return _then(_$SendImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -1763,8 +1767,8 @@ class __$$SendCopyWithImpl<$Res> extends _$ActionCopyWithImpl<$Res, _$Send>
 
 /// @nodoc
 @JsonSerializable()
-class _$Send extends Send {
-  const _$Send(
+class _$SendImpl extends Send {
+  const _$SendImpl(
       {this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'sendTokens',
@@ -1780,7 +1784,8 @@ class _$Send extends Send {
       required this.tokenDecimal})
       : super._();
 
-  factory _$Send.fromJson(Map<String, dynamic> json) => _$$SendFromJson(json);
+  factory _$SendImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SendImplFromJson(json);
 
   @override
   @JsonKey()
@@ -1822,7 +1827,7 @@ class _$Send extends Send {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Send &&
+            other is _$SendImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -1865,8 +1870,8 @@ class _$Send extends Send {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SendCopyWith<_$Send> get copyWith =>
-      __$$SendCopyWithImpl<_$Send>(this, _$identity);
+  _$$SendImplCopyWith<_$SendImpl> get copyWith =>
+      __$$SendImplCopyWithImpl<_$SendImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2250,7 +2255,7 @@ class _$Send extends Send {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SendToJson(
+    return _$$SendImplToJson(
       this,
     );
   }
@@ -2270,10 +2275,10 @@ abstract class Send extends Action {
       required final BigInt value,
       required final String tokenName,
       required final String tokenSymbol,
-      required final int tokenDecimal}) = _$Send;
+      required final int tokenDecimal}) = _$SendImpl;
   const Send._() : super._();
 
-  factory Send.fromJson(Map<String, dynamic> json) = _$Send.fromJson;
+  factory Send.fromJson(Map<String, dynamic> json) = _$SendImpl.fromJson;
 
   @override
   int get timestamp;
@@ -2297,13 +2302,15 @@ abstract class Send extends Action {
   int get tokenDecimal;
   @override
   @JsonKey(ignore: true)
-  _$$SendCopyWith<_$Send> get copyWith => throw _privateConstructorUsedError;
+  _$$SendImplCopyWith<_$SendImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ReceiveCopyWith<$Res> implements $ActionCopyWith<$Res> {
-  factory _$$ReceiveCopyWith(_$Receive value, $Res Function(_$Receive) then) =
-      __$$ReceiveCopyWithImpl<$Res>;
+abstract class _$$ReceiveImplCopyWith<$Res> implements $ActionCopyWith<$Res> {
+  factory _$$ReceiveImplCopyWith(
+          _$ReceiveImpl value, $Res Function(_$ReceiveImpl) then) =
+      __$$ReceiveImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2323,10 +2330,11 @@ abstract class _$$ReceiveCopyWith<$Res> implements $ActionCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ReceiveCopyWithImpl<$Res>
-    extends _$ActionCopyWithImpl<$Res, _$Receive>
-    implements _$$ReceiveCopyWith<$Res> {
-  __$$ReceiveCopyWithImpl(_$Receive _value, $Res Function(_$Receive) _then)
+class __$$ReceiveImplCopyWithImpl<$Res>
+    extends _$ActionCopyWithImpl<$Res, _$ReceiveImpl>
+    implements _$$ReceiveImplCopyWith<$Res> {
+  __$$ReceiveImplCopyWithImpl(
+      _$ReceiveImpl _value, $Res Function(_$ReceiveImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2346,7 +2354,7 @@ class __$$ReceiveCopyWithImpl<$Res>
     Object? tokenSymbol = null,
     Object? tokenDecimal = null,
   }) {
-    return _then(_$Receive(
+    return _then(_$ReceiveImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -2405,8 +2413,8 @@ class __$$ReceiveCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$Receive extends Receive {
-  const _$Receive(
+class _$ReceiveImpl extends Receive {
+  const _$ReceiveImpl(
       {this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'receiveTokens',
@@ -2422,8 +2430,8 @@ class _$Receive extends Receive {
       required this.tokenDecimal})
       : super._();
 
-  factory _$Receive.fromJson(Map<String, dynamic> json) =>
-      _$$ReceiveFromJson(json);
+  factory _$ReceiveImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReceiveImplFromJson(json);
 
   @override
   @JsonKey()
@@ -2465,7 +2473,7 @@ class _$Receive extends Receive {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Receive &&
+            other is _$ReceiveImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -2508,8 +2516,8 @@ class _$Receive extends Receive {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ReceiveCopyWith<_$Receive> get copyWith =>
-      __$$ReceiveCopyWithImpl<_$Receive>(this, _$identity);
+  _$$ReceiveImplCopyWith<_$ReceiveImpl> get copyWith =>
+      __$$ReceiveImplCopyWithImpl<_$ReceiveImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2893,7 +2901,7 @@ class _$Receive extends Receive {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ReceiveToJson(
+    return _$$ReceiveImplToJson(
       this,
     );
   }
@@ -2913,10 +2921,10 @@ abstract class Receive extends Action {
       required final BigInt value,
       required final String tokenName,
       required final String tokenSymbol,
-      required final int tokenDecimal}) = _$Receive;
+      required final int tokenDecimal}) = _$ReceiveImpl;
   const Receive._() : super._();
 
-  factory Receive.fromJson(Map<String, dynamic> json) = _$Receive.fromJson;
+  factory Receive.fromJson(Map<String, dynamic> json) = _$ReceiveImpl.fromJson;
 
   @override
   int get timestamp;
@@ -2940,14 +2948,15 @@ abstract class Receive extends Action {
   int get tokenDecimal;
   @override
   @JsonKey(ignore: true)
-  _$$ReceiveCopyWith<_$Receive> get copyWith =>
+  _$$ReceiveImplCopyWith<_$ReceiveImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SwapCopyWith<$Res> implements $ActionCopyWith<$Res> {
-  factory _$$SwapCopyWith(_$Swap value, $Res Function(_$Swap) then) =
-      __$$SwapCopyWithImpl<$Res>;
+abstract class _$$SwapImplCopyWith<$Res> implements $ActionCopyWith<$Res> {
+  factory _$$SwapImplCopyWith(
+          _$SwapImpl value, $Res Function(_$SwapImpl) then) =
+      __$$SwapImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2963,9 +2972,10 @@ abstract class _$$SwapCopyWith<$Res> implements $ActionCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$SwapCopyWithImpl<$Res> extends _$ActionCopyWithImpl<$Res, _$Swap>
-    implements _$$SwapCopyWith<$Res> {
-  __$$SwapCopyWithImpl(_$Swap _value, $Res Function(_$Swap) _then)
+class __$$SwapImplCopyWithImpl<$Res>
+    extends _$ActionCopyWithImpl<$Res, _$SwapImpl>
+    implements _$$SwapImplCopyWith<$Res> {
+  __$$SwapImplCopyWithImpl(_$SwapImpl _value, $Res Function(_$SwapImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2979,7 +2989,7 @@ class __$$SwapCopyWithImpl<$Res> extends _$ActionCopyWithImpl<$Res, _$Swap>
     Object? blockNumber = freezed,
     Object? tradeInfo = freezed,
   }) {
-    return _then(_$Swap(
+    return _then(_$SwapImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -3026,8 +3036,8 @@ class __$$SwapCopyWithImpl<$Res> extends _$ActionCopyWithImpl<$Res, _$Swap>
 
 /// @nodoc
 @JsonSerializable()
-class _$Swap extends Swap {
-  const _$Swap(
+class _$SwapImpl extends Swap {
+  const _$SwapImpl(
       {this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'swapTokens',
@@ -3037,7 +3047,8 @@ class _$Swap extends Swap {
       @JsonKey(name: 'metadata') this.tradeInfo})
       : super._();
 
-  factory _$Swap.fromJson(Map<String, dynamic> json) => _$$SwapFromJson(json);
+  factory _$SwapImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SwapImplFromJson(json);
 
   @override
   @JsonKey()
@@ -3068,7 +3079,7 @@ class _$Swap extends Swap {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Swap &&
+            other is _$SwapImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -3089,8 +3100,8 @@ class _$Swap extends Swap {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SwapCopyWith<_$Swap> get copyWith =>
-      __$$SwapCopyWithImpl<_$Swap>(this, _$identity);
+  _$$SwapImplCopyWith<_$SwapImpl> get copyWith =>
+      __$$SwapImplCopyWithImpl<_$SwapImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3472,7 +3483,7 @@ class _$Swap extends Swap {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SwapToJson(
+    return _$$SwapImplToJson(
       this,
     );
   }
@@ -3486,10 +3497,10 @@ abstract class Swap extends Action {
       final String? txHash,
       required final String status,
       final int? blockNumber,
-      @JsonKey(name: 'metadata') final Trade? tradeInfo}) = _$Swap;
+      @JsonKey(name: 'metadata') final Trade? tradeInfo}) = _$SwapImpl;
   const Swap._() : super._();
 
-  factory Swap.fromJson(Map<String, dynamic> json) = _$Swap.fromJson;
+  factory Swap.fromJson(Map<String, dynamic> json) = _$SwapImpl.fromJson;
 
   @override
   int get timestamp;
@@ -3508,14 +3519,16 @@ abstract class Swap extends Action {
   Trade? get tradeInfo;
   @override
   @JsonKey(ignore: true)
-  _$$SwapCopyWith<_$Swap> get copyWith => throw _privateConstructorUsedError;
+  _$$SwapImplCopyWith<_$SwapImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ReceiveNFTCopyWith<$Res> implements $ActionCopyWith<$Res> {
-  factory _$$ReceiveNFTCopyWith(
-          _$ReceiveNFT value, $Res Function(_$ReceiveNFT) then) =
-      __$$ReceiveNFTCopyWithImpl<$Res>;
+abstract class _$$ReceiveNFTImplCopyWith<$Res>
+    implements $ActionCopyWith<$Res> {
+  factory _$$ReceiveNFTImplCopyWith(
+          _$ReceiveNFTImpl value, $Res Function(_$ReceiveNFTImpl) then) =
+      __$$ReceiveNFTImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -3534,11 +3547,11 @@ abstract class _$$ReceiveNFTCopyWith<$Res> implements $ActionCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ReceiveNFTCopyWithImpl<$Res>
-    extends _$ActionCopyWithImpl<$Res, _$ReceiveNFT>
-    implements _$$ReceiveNFTCopyWith<$Res> {
-  __$$ReceiveNFTCopyWithImpl(
-      _$ReceiveNFT _value, $Res Function(_$ReceiveNFT) _then)
+class __$$ReceiveNFTImplCopyWithImpl<$Res>
+    extends _$ActionCopyWithImpl<$Res, _$ReceiveNFTImpl>
+    implements _$$ReceiveNFTImplCopyWith<$Res> {
+  __$$ReceiveNFTImplCopyWithImpl(
+      _$ReceiveNFTImpl _value, $Res Function(_$ReceiveNFTImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3557,7 +3570,7 @@ class __$$ReceiveNFTCopyWithImpl<$Res>
     Object? tokenSymbol = null,
     Object? tokenDecimal = null,
   }) {
-    return _then(_$ReceiveNFT(
+    return _then(_$ReceiveNFTImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -3612,8 +3625,8 @@ class __$$ReceiveNFTCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ReceiveNFT extends ReceiveNFT {
-  const _$ReceiveNFT(
+class _$ReceiveNFTImpl extends ReceiveNFT {
+  const _$ReceiveNFTImpl(
       {this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'receiveNFT',
@@ -3628,8 +3641,8 @@ class _$ReceiveNFT extends ReceiveNFT {
       required this.tokenDecimal})
       : super._();
 
-  factory _$ReceiveNFT.fromJson(Map<String, dynamic> json) =>
-      _$$ReceiveNFTFromJson(json);
+  factory _$ReceiveNFTImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReceiveNFTImplFromJson(json);
 
   @override
   @JsonKey()
@@ -3669,7 +3682,7 @@ class _$ReceiveNFT extends ReceiveNFT {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ReceiveNFT &&
+            other is _$ReceiveNFTImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -3710,8 +3723,8 @@ class _$ReceiveNFT extends ReceiveNFT {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ReceiveNFTCopyWith<_$ReceiveNFT> get copyWith =>
-      __$$ReceiveNFTCopyWithImpl<_$ReceiveNFT>(this, _$identity);
+  _$$ReceiveNFTImplCopyWith<_$ReceiveNFTImpl> get copyWith =>
+      __$$ReceiveNFTImplCopyWithImpl<_$ReceiveNFTImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4095,7 +4108,7 @@ class _$ReceiveNFT extends ReceiveNFT {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ReceiveNFTToJson(
+    return _$$ReceiveNFTImplToJson(
       this,
     );
   }
@@ -4114,11 +4127,11 @@ abstract class ReceiveNFT extends Action {
       required final String to,
       required final String tokenName,
       required final String tokenSymbol,
-      required final int tokenDecimal}) = _$ReceiveNFT;
+      required final int tokenDecimal}) = _$ReceiveNFTImpl;
   const ReceiveNFT._() : super._();
 
   factory ReceiveNFT.fromJson(Map<String, dynamic> json) =
-      _$ReceiveNFT.fromJson;
+      _$ReceiveNFTImpl.fromJson;
 
   @override
   int get timestamp;
@@ -4141,15 +4154,16 @@ abstract class ReceiveNFT extends Action {
   int get tokenDecimal;
   @override
   @JsonKey(ignore: true)
-  _$$ReceiveNFTCopyWith<_$ReceiveNFT> get copyWith =>
+  _$$ReceiveNFTImplCopyWith<_$ReceiveNFTImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$StakeTokensCopyWith<$Res> implements $ActionCopyWith<$Res> {
-  factory _$$StakeTokensCopyWith(
-          _$StakeTokens value, $Res Function(_$StakeTokens) then) =
-      __$$StakeTokensCopyWithImpl<$Res>;
+abstract class _$$StakeTokensImplCopyWith<$Res>
+    implements $ActionCopyWith<$Res> {
+  factory _$$StakeTokensImplCopyWith(
+          _$StakeTokensImpl value, $Res Function(_$StakeTokensImpl) then) =
+      __$$StakeTokensImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -4169,11 +4183,11 @@ abstract class _$$StakeTokensCopyWith<$Res> implements $ActionCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$StakeTokensCopyWithImpl<$Res>
-    extends _$ActionCopyWithImpl<$Res, _$StakeTokens>
-    implements _$$StakeTokensCopyWith<$Res> {
-  __$$StakeTokensCopyWithImpl(
-      _$StakeTokens _value, $Res Function(_$StakeTokens) _then)
+class __$$StakeTokensImplCopyWithImpl<$Res>
+    extends _$ActionCopyWithImpl<$Res, _$StakeTokensImpl>
+    implements _$$StakeTokensImplCopyWith<$Res> {
+  __$$StakeTokensImplCopyWithImpl(
+      _$StakeTokensImpl _value, $Res Function(_$StakeTokensImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -4193,7 +4207,7 @@ class __$$StakeTokensCopyWithImpl<$Res>
     Object? tokenSymbol = null,
     Object? tokenDecimal = null,
   }) {
-    return _then(_$StakeTokens(
+    return _then(_$StakeTokensImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -4252,8 +4266,8 @@ class __$$StakeTokensCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$StakeTokens extends StakeTokens {
-  const _$StakeTokens(
+class _$StakeTokensImpl extends StakeTokens {
+  const _$StakeTokensImpl(
       {this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'stakeTokens',
@@ -4269,8 +4283,8 @@ class _$StakeTokens extends StakeTokens {
       required this.tokenDecimal})
       : super._();
 
-  factory _$StakeTokens.fromJson(Map<String, dynamic> json) =>
-      _$$StakeTokensFromJson(json);
+  factory _$StakeTokensImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StakeTokensImplFromJson(json);
 
   @override
   @JsonKey()
@@ -4312,7 +4326,7 @@ class _$StakeTokens extends StakeTokens {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$StakeTokens &&
+            other is _$StakeTokensImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -4355,8 +4369,8 @@ class _$StakeTokens extends StakeTokens {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$StakeTokensCopyWith<_$StakeTokens> get copyWith =>
-      __$$StakeTokensCopyWithImpl<_$StakeTokens>(this, _$identity);
+  _$$StakeTokensImplCopyWith<_$StakeTokensImpl> get copyWith =>
+      __$$StakeTokensImplCopyWithImpl<_$StakeTokensImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4740,7 +4754,7 @@ class _$StakeTokens extends StakeTokens {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$StakeTokensToJson(
+    return _$$StakeTokensImplToJson(
       this,
     );
   }
@@ -4760,11 +4774,11 @@ abstract class StakeTokens extends Action {
       required final BigInt value,
       required final String tokenName,
       required final String tokenSymbol,
-      required final int tokenDecimal}) = _$StakeTokens;
+      required final int tokenDecimal}) = _$StakeTokensImpl;
   const StakeTokens._() : super._();
 
   factory StakeTokens.fromJson(Map<String, dynamic> json) =
-      _$StakeTokens.fromJson;
+      _$StakeTokensImpl.fromJson;
 
   @override
   int get timestamp;
@@ -4788,15 +4802,16 @@ abstract class StakeTokens extends Action {
   int get tokenDecimal;
   @override
   @JsonKey(ignore: true)
-  _$$StakeTokensCopyWith<_$StakeTokens> get copyWith =>
+  _$$StakeTokensImplCopyWith<_$StakeTokensImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnstakeTokensCopyWith<$Res> implements $ActionCopyWith<$Res> {
-  factory _$$UnstakeTokensCopyWith(
-          _$UnstakeTokens value, $Res Function(_$UnstakeTokens) then) =
-      __$$UnstakeTokensCopyWithImpl<$Res>;
+abstract class _$$UnstakeTokensImplCopyWith<$Res>
+    implements $ActionCopyWith<$Res> {
+  factory _$$UnstakeTokensImplCopyWith(
+          _$UnstakeTokensImpl value, $Res Function(_$UnstakeTokensImpl) then) =
+      __$$UnstakeTokensImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -4816,11 +4831,11 @@ abstract class _$$UnstakeTokensCopyWith<$Res> implements $ActionCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$UnstakeTokensCopyWithImpl<$Res>
-    extends _$ActionCopyWithImpl<$Res, _$UnstakeTokens>
-    implements _$$UnstakeTokensCopyWith<$Res> {
-  __$$UnstakeTokensCopyWithImpl(
-      _$UnstakeTokens _value, $Res Function(_$UnstakeTokens) _then)
+class __$$UnstakeTokensImplCopyWithImpl<$Res>
+    extends _$ActionCopyWithImpl<$Res, _$UnstakeTokensImpl>
+    implements _$$UnstakeTokensImplCopyWith<$Res> {
+  __$$UnstakeTokensImplCopyWithImpl(
+      _$UnstakeTokensImpl _value, $Res Function(_$UnstakeTokensImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -4840,7 +4855,7 @@ class __$$UnstakeTokensCopyWithImpl<$Res>
     Object? tokenSymbol = null,
     Object? tokenDecimal = null,
   }) {
-    return _then(_$UnstakeTokens(
+    return _then(_$UnstakeTokensImpl(
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -4899,8 +4914,8 @@ class __$$UnstakeTokensCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$UnstakeTokens extends UnstakeTokens {
-  const _$UnstakeTokens(
+class _$UnstakeTokensImpl extends UnstakeTokens {
+  const _$UnstakeTokensImpl(
       {this.timestamp = 0,
       @JsonKey(name: '_id') required this.id,
       this.name = 'unstakeTokens',
@@ -4916,8 +4931,8 @@ class _$UnstakeTokens extends UnstakeTokens {
       required this.tokenDecimal})
       : super._();
 
-  factory _$UnstakeTokens.fromJson(Map<String, dynamic> json) =>
-      _$$UnstakeTokensFromJson(json);
+  factory _$UnstakeTokensImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UnstakeTokensImplFromJson(json);
 
   @override
   @JsonKey()
@@ -4959,7 +4974,7 @@ class _$UnstakeTokens extends UnstakeTokens {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UnstakeTokens &&
+            other is _$UnstakeTokensImpl &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id) &&
@@ -5002,8 +5017,8 @@ class _$UnstakeTokens extends UnstakeTokens {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UnstakeTokensCopyWith<_$UnstakeTokens> get copyWith =>
-      __$$UnstakeTokensCopyWithImpl<_$UnstakeTokens>(this, _$identity);
+  _$$UnstakeTokensImplCopyWith<_$UnstakeTokensImpl> get copyWith =>
+      __$$UnstakeTokensImplCopyWithImpl<_$UnstakeTokensImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -5387,7 +5402,7 @@ class _$UnstakeTokens extends UnstakeTokens {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UnstakeTokensToJson(
+    return _$$UnstakeTokensImplToJson(
       this,
     );
   }
@@ -5407,11 +5422,11 @@ abstract class UnstakeTokens extends Action {
       required final BigInt value,
       required final String tokenName,
       required final String tokenSymbol,
-      required final int tokenDecimal}) = _$UnstakeTokens;
+      required final int tokenDecimal}) = _$UnstakeTokensImpl;
   const UnstakeTokens._() : super._();
 
   factory UnstakeTokens.fromJson(Map<String, dynamic> json) =
-      _$UnstakeTokens.fromJson;
+      _$UnstakeTokensImpl.fromJson;
 
   @override
   int get timestamp;
@@ -5435,6 +5450,6 @@ abstract class UnstakeTokens extends Action {
   int get tokenDecimal;
   @override
   @JsonKey(ignore: true)
-  _$$UnstakeTokensCopyWith<_$UnstakeTokens> get copyWith =>
+  _$$UnstakeTokensImplCopyWith<_$UnstakeTokensImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

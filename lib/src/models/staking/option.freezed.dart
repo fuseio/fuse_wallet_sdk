@@ -105,11 +105,11 @@ class _$StakingOptionCopyWithImpl<$Res, $Val extends StakingOption>
 }
 
 /// @nodoc
-abstract class _$$_StakingOptionCopyWith<$Res>
+abstract class _$$StakingOptionImplCopyWith<$Res>
     implements $StakingOptionCopyWith<$Res> {
-  factory _$$_StakingOptionCopyWith(
-          _$_StakingOption value, $Res Function(_$_StakingOption) then) =
-      __$$_StakingOptionCopyWithImpl<$Res>;
+  factory _$$StakingOptionImplCopyWith(
+          _$StakingOptionImpl value, $Res Function(_$StakingOptionImpl) then) =
+      __$$StakingOptionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -123,11 +123,11 @@ abstract class _$$_StakingOptionCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_StakingOptionCopyWithImpl<$Res>
-    extends _$StakingOptionCopyWithImpl<$Res, _$_StakingOption>
-    implements _$$_StakingOptionCopyWith<$Res> {
-  __$$_StakingOptionCopyWithImpl(
-      _$_StakingOption _value, $Res Function(_$_StakingOption) _then)
+class __$$StakingOptionImplCopyWithImpl<$Res>
+    extends _$StakingOptionCopyWithImpl<$Res, _$StakingOptionImpl>
+    implements _$$StakingOptionImplCopyWith<$Res> {
+  __$$StakingOptionImplCopyWithImpl(
+      _$StakingOptionImpl _value, $Res Function(_$StakingOptionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -141,7 +141,7 @@ class __$$_StakingOptionCopyWithImpl<$Res>
     Object? stakingApr = null,
     Object? tvl = null,
   }) {
-    return _then(_$_StakingOption(
+    return _then(_$StakingOptionImpl(
       tokenAddress: null == tokenAddress
           ? _value.tokenAddress
           : tokenAddress // ignore: cast_nullable_to_non_nullable
@@ -176,8 +176,8 @@ class __$$_StakingOptionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_StakingOption extends _StakingOption {
-  _$_StakingOption(
+class _$StakingOptionImpl extends _StakingOption {
+  _$StakingOptionImpl(
       {required this.tokenAddress,
       required this.tokenSymbol,
       required this.tokenName,
@@ -187,8 +187,8 @@ class _$_StakingOption extends _StakingOption {
       required this.tvl})
       : super._();
 
-  factory _$_StakingOption.fromJson(Map<String, dynamic> json) =>
-      _$$_StakingOptionFromJson(json);
+  factory _$StakingOptionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StakingOptionImplFromJson(json);
 
   @override
   final String tokenAddress;
@@ -214,7 +214,7 @@ class _$_StakingOption extends _StakingOption {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StakingOption &&
+            other is _$StakingOptionImpl &&
             (identical(other.tokenAddress, tokenAddress) ||
                 other.tokenAddress == tokenAddress) &&
             (identical(other.tokenSymbol, tokenSymbol) ||
@@ -238,12 +238,12 @@ class _$_StakingOption extends _StakingOption {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StakingOptionCopyWith<_$_StakingOption> get copyWith =>
-      __$$_StakingOptionCopyWithImpl<_$_StakingOption>(this, _$identity);
+  _$$StakingOptionImplCopyWith<_$StakingOptionImpl> get copyWith =>
+      __$$StakingOptionImplCopyWithImpl<_$StakingOptionImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StakingOptionToJson(
+    return _$$StakingOptionImplToJson(
       this,
     );
   }
@@ -257,11 +257,11 @@ abstract class _StakingOption extends StakingOption {
       required final String tokenLogoURI,
       required final String unStakeTokenAddress,
       required final double stakingApr,
-      required final double tvl}) = _$_StakingOption;
+      required final double tvl}) = _$StakingOptionImpl;
   _StakingOption._() : super._();
 
   factory _StakingOption.fromJson(Map<String, dynamic> json) =
-      _$_StakingOption.fromJson;
+      _$StakingOptionImpl.fromJson;
 
   @override
   String get tokenAddress;
@@ -279,6 +279,6 @@ abstract class _StakingOption extends StakingOption {
   double get tvl;
   @override
   @JsonKey(ignore: true)
-  _$$_StakingOptionCopyWith<_$_StakingOption> get copyWith =>
+  _$$StakingOptionImplCopyWith<_$StakingOptionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

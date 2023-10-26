@@ -6,17 +6,17 @@ part of 'trade_call_parameters.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TradeCallParameters _$$_TradeCallParametersFromJson(
+_$TradeCallParametersImpl _$$TradeCallParametersImplFromJson(
         Map<String, dynamic> json) =>
-    _$_TradeCallParameters(
+    _$TradeCallParametersImpl(
       methodName: json['methodName'] as String,
       args: json['args'] as List<dynamic>,
       value: json['value'] as String,
       rawTxn: json['rawTxn'] as Map<String, dynamic>,
     );
 
-Map<String, dynamic> _$$_TradeCallParametersToJson(
-        _$_TradeCallParameters instance) =>
+Map<String, dynamic> _$$TradeCallParametersImplToJson(
+        _$TradeCallParametersImpl instance) =>
     <String, dynamic>{
       'methodName': instance.methodName,
       'args': instance.args,

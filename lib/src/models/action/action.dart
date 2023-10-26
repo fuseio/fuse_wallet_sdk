@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import 'package:fuse_wallet_sdk/src/models/trade/trade.dart';
 
 part 'action.freezed.dart';

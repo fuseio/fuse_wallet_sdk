@@ -139,9 +139,10 @@ class _$RelayCopyWithImpl<$Res, $Val extends Relay>
 }
 
 /// @nodoc
-abstract class _$$_RelayCopyWith<$Res> implements $RelayCopyWith<$Res> {
-  factory _$$_RelayCopyWith(_$_Relay value, $Res Function(_$_Relay) then) =
-      __$$_RelayCopyWithImpl<$Res>;
+abstract class _$$RelayImplCopyWith<$Res> implements $RelayCopyWith<$Res> {
+  factory _$$RelayImplCopyWith(
+          _$RelayImpl value, $Res Function(_$RelayImpl) then) =
+      __$$RelayImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -160,9 +161,11 @@ abstract class _$$_RelayCopyWith<$Res> implements $RelayCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_RelayCopyWithImpl<$Res> extends _$RelayCopyWithImpl<$Res, _$_Relay>
-    implements _$$_RelayCopyWith<$Res> {
-  __$$_RelayCopyWithImpl(_$_Relay _value, $Res Function(_$_Relay) _then)
+class __$$RelayImplCopyWithImpl<$Res>
+    extends _$RelayCopyWithImpl<$Res, _$RelayImpl>
+    implements _$$RelayImplCopyWith<$Res> {
+  __$$RelayImplCopyWithImpl(
+      _$RelayImpl _value, $Res Function(_$RelayImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -181,7 +184,7 @@ class __$$_RelayCopyWithImpl<$Res> extends _$RelayCopyWithImpl<$Res, _$_Relay>
     Object? walletModule = null,
     Object? externalId = freezed,
   }) {
-    return _then(_$_Relay(
+    return _then(_$RelayImpl(
       network: null == network
           ? _value.network
           : network // ignore: cast_nullable_to_non_nullable
@@ -236,11 +239,11 @@ class __$$_RelayCopyWithImpl<$Res> extends _$RelayCopyWithImpl<$Res, _$_Relay>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Relay implements _Relay {
-  _$_Relay(
+class _$RelayImpl implements _Relay {
+  _$RelayImpl(
       {this.network = 'fuse',
       this.gasPrice = 0,
-      this.gasLimit = 700000,
+      this.gasLimit = 1000000,
       this.transactionBody = const {},
       required this.walletAddress,
       required this.walletModuleAddress,
@@ -251,8 +254,8 @@ class _$_Relay implements _Relay {
       required this.walletModule,
       this.externalId});
 
-  factory _$_Relay.fromJson(Map<String, dynamic> json) =>
-      _$$_RelayFromJson(json);
+  factory _$RelayImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RelayImplFromJson(json);
 
   @override
   @JsonKey()
@@ -292,7 +295,7 @@ class _$_Relay implements _Relay {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Relay &&
+            other is _$RelayImpl &&
             (identical(other.network, network) || other.network == network) &&
             (identical(other.gasPrice, gasPrice) ||
                 other.gasPrice == gasPrice) &&
@@ -336,12 +339,12 @@ class _$_Relay implements _Relay {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RelayCopyWith<_$_Relay> get copyWith =>
-      __$$_RelayCopyWithImpl<_$_Relay>(this, _$identity);
+  _$$RelayImplCopyWith<_$RelayImpl> get copyWith =>
+      __$$RelayImplCopyWithImpl<_$RelayImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RelayToJson(
+    return _$$RelayImplToJson(
       this,
     );
   }
@@ -360,9 +363,9 @@ abstract class _Relay implements Relay {
       required final String methodName,
       required final String signature,
       required final String walletModule,
-      final String? externalId}) = _$_Relay;
+      final String? externalId}) = _$RelayImpl;
 
-  factory _Relay.fromJson(Map<String, dynamic> json) = _$_Relay.fromJson;
+  factory _Relay.fromJson(Map<String, dynamic> json) = _$RelayImpl.fromJson;
 
   @override
   String get network;
@@ -390,6 +393,6 @@ abstract class _Relay implements Relay {
   String? get externalId;
   @override
   @JsonKey(ignore: true)
-  _$$_RelayCopyWith<_$_Relay> get copyWith =>
+  _$$RelayImplCopyWith<_$RelayImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
