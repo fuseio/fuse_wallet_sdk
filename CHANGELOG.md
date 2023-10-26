@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [0.2.5]
+
+### Added
+- Get wallet actions of the ERC-4337 - Account Abstraction wallets.
+
+### Changed
+- The base URL can now be provided into the SDK. With this, you can get early access to features
+that are not yet available in production.
+
 ## [0.2.4]
 
 ### Changed
