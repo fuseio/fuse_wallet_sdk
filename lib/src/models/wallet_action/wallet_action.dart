@@ -98,6 +98,36 @@ class WalletAction with _$WalletAction implements Comparable<WalletAction> {
     @Default([]) List<TokenEvent> received,
   }) = TokenTransfer;
 
+  /// Represents a token receive action on the blockchain.
+  @FreezedUnionValue('tokenReceive')
+  const factory WalletAction.tokenReceive({
+    @TimestampConverter() @JsonKey(name: 'updatedAt') @Default(0) int timestamp,
+    @JsonKey(name: '_id') required String id,
+    @Default('tokenReceive') String name,
+    String? txHash,
+    String? userOpHash,
+    required String status,
+    @Default(0) int? blockNumber,
+    required String description,
+    @Default([]) List<TokenEvent> sent,
+    @Default([]) List<TokenEvent> received,
+  }) = TokenReceive;
+
+  /// Represents a NFT receive action on the blockchain.
+  @FreezedUnionValue('nftReceive')
+  const factory WalletAction.nftReceive({
+    @TimestampConverter() @JsonKey(name: 'updatedAt') @Default(0) int timestamp,
+    @JsonKey(name: '_id') required String id,
+    @Default('nftReceive') String name,
+    String? txHash,
+    String? userOpHash,
+    required String status,
+    @Default(0) int? blockNumber,
+    required String description,
+    @Default([]) List<TokenEvent> sent,
+    @Default([]) List<TokenEvent> received,
+  }) = NftReceive;
+
   /// Represents a token swap action on the blockchain.
   @FreezedUnionValue('swapTokens')
   const factory WalletAction.swapTokens({

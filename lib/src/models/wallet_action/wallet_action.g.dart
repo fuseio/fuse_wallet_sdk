@@ -80,6 +80,78 @@ Map<String, dynamic> _$$TokenTransferImplToJson(_$TokenTransferImpl instance) =>
       'received': instance.received.map((e) => e.toJson()).toList(),
     };
 
+_$TokenReceiveImpl _$$TokenReceiveImplFromJson(Map<String, dynamic> json) =>
+    _$TokenReceiveImpl(
+      timestamp: json['updatedAt'] == null
+          ? 0
+          : const TimestampConverter().fromJson(json['updatedAt'] as String),
+      id: json['_id'] as String,
+      name: json['name'] as String? ?? 'tokenReceive',
+      txHash: json['txHash'] as String?,
+      userOpHash: json['userOpHash'] as String?,
+      status: json['status'] as String,
+      blockNumber: json['blockNumber'] as int? ?? 0,
+      description: json['description'] as String,
+      sent: (json['sent'] as List<dynamic>?)
+              ?.map((e) => TokenEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      received: (json['received'] as List<dynamic>?)
+              ?.map((e) => TokenEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$$TokenReceiveImplToJson(_$TokenReceiveImpl instance) =>
+    <String, dynamic>{
+      'updatedAt': const TimestampConverter().toJson(instance.timestamp),
+      '_id': instance.id,
+      'name': instance.name,
+      'txHash': instance.txHash,
+      'userOpHash': instance.userOpHash,
+      'status': instance.status,
+      'blockNumber': instance.blockNumber,
+      'description': instance.description,
+      'sent': instance.sent.map((e) => e.toJson()).toList(),
+      'received': instance.received.map((e) => e.toJson()).toList(),
+    };
+
+_$NftReceiveImpl _$$NftReceiveImplFromJson(Map<String, dynamic> json) =>
+    _$NftReceiveImpl(
+      timestamp: json['updatedAt'] == null
+          ? 0
+          : const TimestampConverter().fromJson(json['updatedAt'] as String),
+      id: json['_id'] as String,
+      name: json['name'] as String? ?? 'nftReceive',
+      txHash: json['txHash'] as String?,
+      userOpHash: json['userOpHash'] as String?,
+      status: json['status'] as String,
+      blockNumber: json['blockNumber'] as int? ?? 0,
+      description: json['description'] as String,
+      sent: (json['sent'] as List<dynamic>?)
+              ?.map((e) => TokenEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      received: (json['received'] as List<dynamic>?)
+              ?.map((e) => TokenEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$$NftReceiveImplToJson(_$NftReceiveImpl instance) =>
+    <String, dynamic>{
+      'updatedAt': const TimestampConverter().toJson(instance.timestamp),
+      '_id': instance.id,
+      'name': instance.name,
+      'txHash': instance.txHash,
+      'userOpHash': instance.userOpHash,
+      'status': instance.status,
+      'blockNumber': instance.blockNumber,
+      'description': instance.description,
+      'sent': instance.sent.map((e) => e.toJson()).toList(),
+      'received': instance.received.map((e) => e.toJson()).toList(),
+    };
+
 _$SwapTokensImpl _$$SwapTokensImplFromJson(Map<String, dynamic> json) =>
     _$SwapTokensImpl(
       timestamp: json['updatedAt'] == null
