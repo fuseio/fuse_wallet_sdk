@@ -52,7 +52,9 @@ _$ERC721TransferImpl _$$ERC721TransferImplFromJson(Map<String, dynamic> json) =>
       name: nameFromJson(json['name'] as String),
       address: addressFromJson(json['address'] as String),
       value: amountFromJson(json['value'] as String?),
-      tokenId: BigInt.parse(json['tokenId'] as String),
+      tokenId: json['tokenId'] == null
+          ? null
+          : BigInt.parse(json['tokenId'] as String),
       to: BigInt.parse(json['to'] as String),
       $type: json['type'] as String?,
     );
@@ -64,7 +66,7 @@ Map<String, dynamic> _$$ERC721TransferImplToJson(
       'name': instance.name,
       'address': instance.address,
       'value': instance.value.toString(),
-      'tokenId': instance.tokenId.toString(),
+      'tokenId': instance.tokenId?.toString(),
       'to': instance.to.toString(),
       'type': instance.$type,
     };

@@ -53,7 +53,7 @@ mixin _$TokenEvent {
             @JsonKey(fromJson: nameFromJson) String name,
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
-            BigInt tokenId,
+            BigInt? tokenId,
             BigInt to)
         erc721Transfer,
   }) =>
@@ -75,7 +75,7 @@ mixin _$TokenEvent {
             @JsonKey(fromJson: nameFromJson) String name,
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
-            BigInt tokenId,
+            BigInt? tokenId,
             BigInt to)?
         erc721Transfer,
   }) =>
@@ -97,7 +97,7 @@ mixin _$TokenEvent {
             @JsonKey(fromJson: nameFromJson) String name,
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
-            BigInt tokenId,
+            BigInt? tokenId,
             BigInt to)?
         erc721Transfer,
     required TResult orElse(),
@@ -323,7 +323,7 @@ class _$NativeTokenImpl extends NativeToken {
             @JsonKey(fromJson: nameFromJson) String name,
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
-            BigInt tokenId,
+            BigInt? tokenId,
             BigInt to)
         erc721Transfer,
   }) {
@@ -348,7 +348,7 @@ class _$NativeTokenImpl extends NativeToken {
             @JsonKey(fromJson: nameFromJson) String name,
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
-            BigInt tokenId,
+            BigInt? tokenId,
             BigInt to)?
         erc721Transfer,
   }) {
@@ -373,7 +373,7 @@ class _$NativeTokenImpl extends NativeToken {
             @JsonKey(fromJson: nameFromJson) String name,
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
-            BigInt tokenId,
+            BigInt? tokenId,
             BigInt to)?
         erc721Transfer,
     required TResult orElse(),
@@ -592,7 +592,7 @@ class _$ERC20TransferImpl extends ERC20Transfer {
             @JsonKey(fromJson: nameFromJson) String name,
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
-            BigInt tokenId,
+            BigInt? tokenId,
             BigInt to)
         erc721Transfer,
   }) {
@@ -617,7 +617,7 @@ class _$ERC20TransferImpl extends ERC20Transfer {
             @JsonKey(fromJson: nameFromJson) String name,
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
-            BigInt tokenId,
+            BigInt? tokenId,
             BigInt to)?
         erc721Transfer,
   }) {
@@ -642,7 +642,7 @@ class _$ERC20TransferImpl extends ERC20Transfer {
             @JsonKey(fromJson: nameFromJson) String name,
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
-            BigInt tokenId,
+            BigInt? tokenId,
             BigInt to)?
         erc721Transfer,
     required TResult orElse(),
@@ -737,7 +737,7 @@ abstract class _$$ERC721TransferImplCopyWith<$Res>
       @JsonKey(fromJson: nameFromJson) String name,
       @JsonKey(fromJson: addressFromJson) String address,
       BigInt value,
-      BigInt tokenId,
+      BigInt? tokenId,
       BigInt to});
 }
 
@@ -756,7 +756,7 @@ class __$$ERC721TransferImplCopyWithImpl<$Res>
     Object? name = null,
     Object? address = null,
     Object? value = null,
-    Object? tokenId = null,
+    Object? tokenId = freezed,
     Object? to = null,
   }) {
     return _then(_$ERC721TransferImpl(
@@ -776,10 +776,10 @@ class __$$ERC721TransferImplCopyWithImpl<$Res>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as BigInt,
-      tokenId: null == tokenId
+      tokenId: freezed == tokenId
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
-              as BigInt,
+              as BigInt?,
       to: null == to
           ? _value.to
           : to // ignore: cast_nullable_to_non_nullable
@@ -796,7 +796,7 @@ class _$ERC721TransferImpl extends ERC721Transfer {
       @JsonKey(fromJson: nameFromJson) required this.name,
       @JsonKey(fromJson: addressFromJson) required this.address,
       required this.value,
-      required this.tokenId,
+      this.tokenId,
       required this.to,
       final String? $type})
       : $type = $type ?? 'ERC-721',
@@ -816,7 +816,7 @@ class _$ERC721TransferImpl extends ERC721Transfer {
   @override
   final BigInt value;
   @override
-  final BigInt tokenId;
+  final BigInt? tokenId;
   @override
   final BigInt to;
 
@@ -871,7 +871,7 @@ class _$ERC721TransferImpl extends ERC721Transfer {
             @JsonKey(fromJson: nameFromJson) String name,
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
-            BigInt tokenId,
+            BigInt? tokenId,
             BigInt to)
         erc721Transfer,
   }) {
@@ -896,7 +896,7 @@ class _$ERC721TransferImpl extends ERC721Transfer {
             @JsonKey(fromJson: nameFromJson) String name,
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
-            BigInt tokenId,
+            BigInt? tokenId,
             BigInt to)?
         erc721Transfer,
   }) {
@@ -921,7 +921,7 @@ class _$ERC721TransferImpl extends ERC721Transfer {
             @JsonKey(fromJson: nameFromJson) String name,
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
-            BigInt tokenId,
+            BigInt? tokenId,
             BigInt to)?
         erc721Transfer,
     required TResult orElse(),
@@ -980,7 +980,7 @@ abstract class ERC721Transfer extends TokenEvent {
       @JsonKey(fromJson: nameFromJson) required final String name,
       @JsonKey(fromJson: addressFromJson) required final String address,
       required final BigInt value,
-      required final BigInt tokenId,
+      final BigInt? tokenId,
       required final BigInt to}) = _$ERC721TransferImpl;
   const ERC721Transfer._() : super._();
 
@@ -997,7 +997,7 @@ abstract class ERC721Transfer extends TokenEvent {
   String get address;
   @override
   BigInt get value;
-  BigInt get tokenId;
+  BigInt? get tokenId;
   BigInt get to;
   @override
   @JsonKey(ignore: true)
