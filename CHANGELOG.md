@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## [0.2.6]
+
+### Fixed
+- The receive wallet actions are parsed correctly.
+
+### Changed
+- The default `gasLimit` used in the legacy SDK is now `700000`.
+
 ## [0.2.5]
 
 ### Added
