@@ -24,7 +24,7 @@ class Relay with _$Relay {
   factory Relay({
     @Default('fuse') String network,
     @Default(0) int gasPrice,
-    @Default(1000000) int gasLimit,
+    @Default(700000) int gasLimit,
     @Default({}) Map<String, dynamic>? transactionBody,
     required String walletAddress,
     required String walletModuleAddress,
