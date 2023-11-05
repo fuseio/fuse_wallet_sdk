@@ -20,6 +20,10 @@ WalletAction _$WalletActionFromJson(Map<String, dynamic> json) {
       return BatchTransaction.fromJson(json);
     case 'tokenTransfer':
       return TokenTransfer.fromJson(json);
+    case 'tokenReceive':
+      return TokenReceive.fromJson(json);
+    case 'nftReceive':
+      return NftReceive.fromJson(json);
     case 'swapTokens':
       return SwapTokens.fromJson(json);
     case 'nftTransfer':
@@ -48,7 +52,7 @@ mixin _$WalletAction {
   String? get txHash => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   int? get blockNumber => throw _privateConstructorUsedError;
-  String get userOpHash => throw _privateConstructorUsedError;
+  String? get userOpHash => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<TokenEvent> get sent => throw _privateConstructorUsedError;
   List<TokenEvent> get received => throw _privateConstructorUsedError;
@@ -78,6 +82,30 @@ mixin _$WalletAction {
             List<TokenEvent> sent,
             List<TokenEvent> received)
         tokenTransfer,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        tokenReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        nftReceive,
     required TResult Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
             @JsonKey(name: '_id') String id,
@@ -171,6 +199,30 @@ mixin _$WalletAction {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -259,6 +311,30 @@ mixin _$WalletAction {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -321,6 +397,8 @@ mixin _$WalletAction {
   TResult map<TResult extends Object?>({
     required TResult Function(BatchTransaction value) batchTransaction,
     required TResult Function(TokenTransfer value) tokenTransfer,
+    required TResult Function(TokenReceive value) tokenReceive,
+    required TResult Function(NftReceive value) nftReceive,
     required TResult Function(SwapTokens value) swapTokens,
     required TResult Function(NftTransfer value) nftTransfer,
     required TResult Function(ApproveToken value) approveToken,
@@ -332,6 +410,8 @@ mixin _$WalletAction {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BatchTransaction value)? batchTransaction,
     TResult? Function(TokenTransfer value)? tokenTransfer,
+    TResult? Function(TokenReceive value)? tokenReceive,
+    TResult? Function(NftReceive value)? nftReceive,
     TResult? Function(SwapTokens value)? swapTokens,
     TResult? Function(NftTransfer value)? nftTransfer,
     TResult? Function(ApproveToken value)? approveToken,
@@ -343,6 +423,8 @@ mixin _$WalletAction {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BatchTransaction value)? batchTransaction,
     TResult Function(TokenTransfer value)? tokenTransfer,
+    TResult Function(TokenReceive value)? tokenReceive,
+    TResult Function(NftReceive value)? nftReceive,
     TResult Function(SwapTokens value)? swapTokens,
     TResult Function(NftTransfer value)? nftTransfer,
     TResult Function(ApproveToken value)? approveToken,
@@ -426,7 +508,7 @@ class _$WalletActionCopyWithImpl<$Res, $Val extends WalletAction>
           : blockNumber // ignore: cast_nullable_to_non_nullable
               as int?,
       userOpHash: null == userOpHash
-          ? _value.userOpHash
+          ? _value.userOpHash!
           : userOpHash // ignore: cast_nullable_to_non_nullable
               as String,
       description: null == description
@@ -660,6 +742,30 @@ class _$BatchTransactionImpl extends BatchTransaction {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        tokenReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        nftReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -747,6 +853,30 @@ class _$BatchTransactionImpl extends BatchTransaction {
             List<TokenEvent> sent,
             List<TokenEvent> received)?
         tokenTransfer,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
             @JsonKey(name: '_id') String id,
@@ -844,6 +974,30 @@ class _$BatchTransactionImpl extends BatchTransaction {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -913,6 +1067,8 @@ class _$BatchTransactionImpl extends BatchTransaction {
   TResult map<TResult extends Object?>({
     required TResult Function(BatchTransaction value) batchTransaction,
     required TResult Function(TokenTransfer value) tokenTransfer,
+    required TResult Function(TokenReceive value) tokenReceive,
+    required TResult Function(NftReceive value) nftReceive,
     required TResult Function(SwapTokens value) swapTokens,
     required TResult Function(NftTransfer value) nftTransfer,
     required TResult Function(ApproveToken value) approveToken,
@@ -927,6 +1083,8 @@ class _$BatchTransactionImpl extends BatchTransaction {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BatchTransaction value)? batchTransaction,
     TResult? Function(TokenTransfer value)? tokenTransfer,
+    TResult? Function(TokenReceive value)? tokenReceive,
+    TResult? Function(NftReceive value)? nftReceive,
     TResult? Function(SwapTokens value)? swapTokens,
     TResult? Function(NftTransfer value)? nftTransfer,
     TResult? Function(ApproveToken value)? approveToken,
@@ -941,6 +1099,8 @@ class _$BatchTransactionImpl extends BatchTransaction {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BatchTransaction value)? batchTransaction,
     TResult Function(TokenTransfer value)? tokenTransfer,
+    TResult Function(TokenReceive value)? tokenReceive,
+    TResult Function(NftReceive value)? nftReceive,
     TResult Function(SwapTokens value)? swapTokens,
     TResult Function(NftTransfer value)? nftTransfer,
     TResult Function(ApproveToken value)? approveToken,
@@ -1222,6 +1382,30 @@ class _$TokenTransferImpl extends TokenTransfer {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        tokenReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        nftReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -1309,6 +1493,30 @@ class _$TokenTransferImpl extends TokenTransfer {
             List<TokenEvent> sent,
             List<TokenEvent> received)?
         tokenTransfer,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
             @JsonKey(name: '_id') String id,
@@ -1406,6 +1614,30 @@ class _$TokenTransferImpl extends TokenTransfer {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -1475,6 +1707,8 @@ class _$TokenTransferImpl extends TokenTransfer {
   TResult map<TResult extends Object?>({
     required TResult Function(BatchTransaction value) batchTransaction,
     required TResult Function(TokenTransfer value) tokenTransfer,
+    required TResult Function(TokenReceive value) tokenReceive,
+    required TResult Function(NftReceive value) nftReceive,
     required TResult Function(SwapTokens value) swapTokens,
     required TResult Function(NftTransfer value) nftTransfer,
     required TResult Function(ApproveToken value) approveToken,
@@ -1489,6 +1723,8 @@ class _$TokenTransferImpl extends TokenTransfer {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BatchTransaction value)? batchTransaction,
     TResult? Function(TokenTransfer value)? tokenTransfer,
+    TResult? Function(TokenReceive value)? tokenReceive,
+    TResult? Function(NftReceive value)? nftReceive,
     TResult? Function(SwapTokens value)? swapTokens,
     TResult? Function(NftTransfer value)? nftTransfer,
     TResult? Function(ApproveToken value)? approveToken,
@@ -1503,6 +1739,8 @@ class _$TokenTransferImpl extends TokenTransfer {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BatchTransaction value)? batchTransaction,
     TResult Function(TokenTransfer value)? tokenTransfer,
+    TResult Function(TokenReceive value)? tokenReceive,
+    TResult Function(NftReceive value)? nftReceive,
     TResult Function(SwapTokens value)? swapTokens,
     TResult Function(NftTransfer value)? nftTransfer,
     TResult Function(ApproveToken value)? approveToken,
@@ -1567,6 +1805,1286 @@ abstract class TokenTransfer extends WalletAction {
   @override
   @JsonKey(ignore: true)
   _$$TokenTransferImplCopyWith<_$TokenTransferImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TokenReceiveImplCopyWith<$Res>
+    implements $WalletActionCopyWith<$Res> {
+  factory _$$TokenReceiveImplCopyWith(
+          _$TokenReceiveImpl value, $Res Function(_$TokenReceiveImpl) then) =
+      __$$TokenReceiveImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+      @JsonKey(name: '_id') String id,
+      String name,
+      String? txHash,
+      String? userOpHash,
+      String status,
+      int? blockNumber,
+      String description,
+      List<TokenEvent> sent,
+      List<TokenEvent> received});
+}
+
+/// @nodoc
+class __$$TokenReceiveImplCopyWithImpl<$Res>
+    extends _$WalletActionCopyWithImpl<$Res, _$TokenReceiveImpl>
+    implements _$$TokenReceiveImplCopyWith<$Res> {
+  __$$TokenReceiveImplCopyWithImpl(
+      _$TokenReceiveImpl _value, $Res Function(_$TokenReceiveImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? timestamp = null,
+    Object? id = null,
+    Object? name = null,
+    Object? txHash = freezed,
+    Object? userOpHash = freezed,
+    Object? status = null,
+    Object? blockNumber = freezed,
+    Object? description = null,
+    Object? sent = null,
+    Object? received = null,
+  }) {
+    return _then(_$TokenReceiveImpl(
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      txHash: freezed == txHash
+          ? _value.txHash
+          : txHash // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userOpHash: freezed == userOpHash
+          ? _value.userOpHash
+          : userOpHash // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      blockNumber: freezed == blockNumber
+          ? _value.blockNumber
+          : blockNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      sent: null == sent
+          ? _value.sent
+          : sent // ignore: cast_nullable_to_non_nullable
+              as List<TokenEvent>,
+      received: null == received
+          ? _value.received
+          : received // ignore: cast_nullable_to_non_nullable
+              as List<TokenEvent>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$TokenReceiveImpl extends TokenReceive {
+  const _$TokenReceiveImpl(
+      {@TimestampConverter() @JsonKey(name: 'updatedAt') this.timestamp = 0,
+      @JsonKey(name: '_id') required this.id,
+      this.name = 'tokenReceive',
+      this.txHash,
+      this.userOpHash,
+      required this.status,
+      this.blockNumber = 0,
+      required this.description,
+      this.sent = const [],
+      this.received = const []})
+      : super._();
+
+  factory _$TokenReceiveImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TokenReceiveImplFromJson(json);
+
+  @override
+  @TimestampConverter()
+  @JsonKey(name: 'updatedAt')
+  final int timestamp;
+  @override
+  @JsonKey(name: '_id')
+  final String id;
+  @override
+  @JsonKey()
+  final String name;
+  @override
+  final String? txHash;
+  @override
+  final String? userOpHash;
+  @override
+  final String status;
+  @override
+  @JsonKey()
+  final int? blockNumber;
+  @override
+  final String description;
+  @override
+  @JsonKey()
+  final List<TokenEvent> sent;
+  @override
+  @JsonKey()
+  final List<TokenEvent> received;
+
+  @override
+  String toString() {
+    return 'WalletAction.tokenReceive(timestamp: $timestamp, id: $id, name: $name, txHash: $txHash, userOpHash: $userOpHash, status: $status, blockNumber: $blockNumber, description: $description, sent: $sent, received: $received)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TokenReceiveImpl &&
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.txHash, txHash) || other.txHash == txHash) &&
+            (identical(other.userOpHash, userOpHash) ||
+                other.userOpHash == userOpHash) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.blockNumber, blockNumber) ||
+                other.blockNumber == blockNumber) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality().equals(other.sent, sent) &&
+            const DeepCollectionEquality().equals(other.received, received));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      timestamp,
+      id,
+      name,
+      txHash,
+      userOpHash,
+      status,
+      blockNumber,
+      description,
+      const DeepCollectionEquality().hash(sent),
+      const DeepCollectionEquality().hash(received));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TokenReceiveImplCopyWith<_$TokenReceiveImpl> get copyWith =>
+      __$$TokenReceiveImplCopyWithImpl<_$TokenReceiveImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        batchTransaction,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        tokenTransfer,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        tokenReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        nftReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        swapTokens,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        nftTransfer,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        approveToken,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        stakeTokens,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        unstakeTokens,
+  }) {
+    return tokenReceive(timestamp, id, name, txHash, userOpHash, status,
+        blockNumber, description, sent, received);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        batchTransaction,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenTransfer,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        swapTokens,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftTransfer,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        approveToken,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        stakeTokens,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        unstakeTokens,
+  }) {
+    return tokenReceive?.call(timestamp, id, name, txHash, userOpHash, status,
+        blockNumber, description, sent, received);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        batchTransaction,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenTransfer,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        swapTokens,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftTransfer,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        approveToken,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        stakeTokens,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        unstakeTokens,
+    required TResult orElse(),
+  }) {
+    if (tokenReceive != null) {
+      return tokenReceive(timestamp, id, name, txHash, userOpHash, status,
+          blockNumber, description, sent, received);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BatchTransaction value) batchTransaction,
+    required TResult Function(TokenTransfer value) tokenTransfer,
+    required TResult Function(TokenReceive value) tokenReceive,
+    required TResult Function(NftReceive value) nftReceive,
+    required TResult Function(SwapTokens value) swapTokens,
+    required TResult Function(NftTransfer value) nftTransfer,
+    required TResult Function(ApproveToken value) approveToken,
+    required TResult Function(StakeTokensAction value) stakeTokens,
+    required TResult Function(UnstakeTokensAction value) unstakeTokens,
+  }) {
+    return tokenReceive(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BatchTransaction value)? batchTransaction,
+    TResult? Function(TokenTransfer value)? tokenTransfer,
+    TResult? Function(TokenReceive value)? tokenReceive,
+    TResult? Function(NftReceive value)? nftReceive,
+    TResult? Function(SwapTokens value)? swapTokens,
+    TResult? Function(NftTransfer value)? nftTransfer,
+    TResult? Function(ApproveToken value)? approveToken,
+    TResult? Function(StakeTokensAction value)? stakeTokens,
+    TResult? Function(UnstakeTokensAction value)? unstakeTokens,
+  }) {
+    return tokenReceive?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BatchTransaction value)? batchTransaction,
+    TResult Function(TokenTransfer value)? tokenTransfer,
+    TResult Function(TokenReceive value)? tokenReceive,
+    TResult Function(NftReceive value)? nftReceive,
+    TResult Function(SwapTokens value)? swapTokens,
+    TResult Function(NftTransfer value)? nftTransfer,
+    TResult Function(ApproveToken value)? approveToken,
+    TResult Function(StakeTokensAction value)? stakeTokens,
+    TResult Function(UnstakeTokensAction value)? unstakeTokens,
+    required TResult orElse(),
+  }) {
+    if (tokenReceive != null) {
+      return tokenReceive(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TokenReceiveImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class TokenReceive extends WalletAction {
+  const factory TokenReceive(
+      {@TimestampConverter() @JsonKey(name: 'updatedAt') final int timestamp,
+      @JsonKey(name: '_id') required final String id,
+      final String name,
+      final String? txHash,
+      final String? userOpHash,
+      required final String status,
+      final int? blockNumber,
+      required final String description,
+      final List<TokenEvent> sent,
+      final List<TokenEvent> received}) = _$TokenReceiveImpl;
+  const TokenReceive._() : super._();
+
+  factory TokenReceive.fromJson(Map<String, dynamic> json) =
+      _$TokenReceiveImpl.fromJson;
+
+  @override
+  @TimestampConverter()
+  @JsonKey(name: 'updatedAt')
+  int get timestamp;
+  @override
+  @JsonKey(name: '_id')
+  String get id;
+  @override
+  String get name;
+  @override
+  String? get txHash;
+  @override
+  String? get userOpHash;
+  @override
+  String get status;
+  @override
+  int? get blockNumber;
+  @override
+  String get description;
+  @override
+  List<TokenEvent> get sent;
+  @override
+  List<TokenEvent> get received;
+  @override
+  @JsonKey(ignore: true)
+  _$$TokenReceiveImplCopyWith<_$TokenReceiveImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$NftReceiveImplCopyWith<$Res>
+    implements $WalletActionCopyWith<$Res> {
+  factory _$$NftReceiveImplCopyWith(
+          _$NftReceiveImpl value, $Res Function(_$NftReceiveImpl) then) =
+      __$$NftReceiveImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+      @JsonKey(name: '_id') String id,
+      String name,
+      String? txHash,
+      String? userOpHash,
+      String status,
+      int? blockNumber,
+      String description,
+      List<TokenEvent> sent,
+      List<TokenEvent> received});
+}
+
+/// @nodoc
+class __$$NftReceiveImplCopyWithImpl<$Res>
+    extends _$WalletActionCopyWithImpl<$Res, _$NftReceiveImpl>
+    implements _$$NftReceiveImplCopyWith<$Res> {
+  __$$NftReceiveImplCopyWithImpl(
+      _$NftReceiveImpl _value, $Res Function(_$NftReceiveImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? timestamp = null,
+    Object? id = null,
+    Object? name = null,
+    Object? txHash = freezed,
+    Object? userOpHash = freezed,
+    Object? status = null,
+    Object? blockNumber = freezed,
+    Object? description = null,
+    Object? sent = null,
+    Object? received = null,
+  }) {
+    return _then(_$NftReceiveImpl(
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      txHash: freezed == txHash
+          ? _value.txHash
+          : txHash // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userOpHash: freezed == userOpHash
+          ? _value.userOpHash
+          : userOpHash // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      blockNumber: freezed == blockNumber
+          ? _value.blockNumber
+          : blockNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      sent: null == sent
+          ? _value.sent
+          : sent // ignore: cast_nullable_to_non_nullable
+              as List<TokenEvent>,
+      received: null == received
+          ? _value.received
+          : received // ignore: cast_nullable_to_non_nullable
+              as List<TokenEvent>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$NftReceiveImpl extends NftReceive {
+  const _$NftReceiveImpl(
+      {@TimestampConverter() @JsonKey(name: 'updatedAt') this.timestamp = 0,
+      @JsonKey(name: '_id') required this.id,
+      this.name = 'nftReceive',
+      this.txHash,
+      this.userOpHash,
+      required this.status,
+      this.blockNumber = 0,
+      required this.description,
+      this.sent = const [],
+      this.received = const []})
+      : super._();
+
+  factory _$NftReceiveImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NftReceiveImplFromJson(json);
+
+  @override
+  @TimestampConverter()
+  @JsonKey(name: 'updatedAt')
+  final int timestamp;
+  @override
+  @JsonKey(name: '_id')
+  final String id;
+  @override
+  @JsonKey()
+  final String name;
+  @override
+  final String? txHash;
+  @override
+  final String? userOpHash;
+  @override
+  final String status;
+  @override
+  @JsonKey()
+  final int? blockNumber;
+  @override
+  final String description;
+  @override
+  @JsonKey()
+  final List<TokenEvent> sent;
+  @override
+  @JsonKey()
+  final List<TokenEvent> received;
+
+  @override
+  String toString() {
+    return 'WalletAction.nftReceive(timestamp: $timestamp, id: $id, name: $name, txHash: $txHash, userOpHash: $userOpHash, status: $status, blockNumber: $blockNumber, description: $description, sent: $sent, received: $received)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NftReceiveImpl &&
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.txHash, txHash) || other.txHash == txHash) &&
+            (identical(other.userOpHash, userOpHash) ||
+                other.userOpHash == userOpHash) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.blockNumber, blockNumber) ||
+                other.blockNumber == blockNumber) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality().equals(other.sent, sent) &&
+            const DeepCollectionEquality().equals(other.received, received));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      timestamp,
+      id,
+      name,
+      txHash,
+      userOpHash,
+      status,
+      blockNumber,
+      description,
+      const DeepCollectionEquality().hash(sent),
+      const DeepCollectionEquality().hash(received));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NftReceiveImplCopyWith<_$NftReceiveImpl> get copyWith =>
+      __$$NftReceiveImplCopyWithImpl<_$NftReceiveImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        batchTransaction,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        tokenTransfer,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        tokenReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        nftReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        swapTokens,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        nftTransfer,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        approveToken,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        stakeTokens,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        unstakeTokens,
+  }) {
+    return nftReceive(timestamp, id, name, txHash, userOpHash, status,
+        blockNumber, description, sent, received);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        batchTransaction,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenTransfer,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        swapTokens,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftTransfer,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        approveToken,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        stakeTokens,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        unstakeTokens,
+  }) {
+    return nftReceive?.call(timestamp, id, name, txHash, userOpHash, status,
+        blockNumber, description, sent, received);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        batchTransaction,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenTransfer,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        swapTokens,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftTransfer,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        approveToken,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        stakeTokens,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String status,
+            int? blockNumber,
+            String userOpHash,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        unstakeTokens,
+    required TResult orElse(),
+  }) {
+    if (nftReceive != null) {
+      return nftReceive(timestamp, id, name, txHash, userOpHash, status,
+          blockNumber, description, sent, received);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BatchTransaction value) batchTransaction,
+    required TResult Function(TokenTransfer value) tokenTransfer,
+    required TResult Function(TokenReceive value) tokenReceive,
+    required TResult Function(NftReceive value) nftReceive,
+    required TResult Function(SwapTokens value) swapTokens,
+    required TResult Function(NftTransfer value) nftTransfer,
+    required TResult Function(ApproveToken value) approveToken,
+    required TResult Function(StakeTokensAction value) stakeTokens,
+    required TResult Function(UnstakeTokensAction value) unstakeTokens,
+  }) {
+    return nftReceive(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BatchTransaction value)? batchTransaction,
+    TResult? Function(TokenTransfer value)? tokenTransfer,
+    TResult? Function(TokenReceive value)? tokenReceive,
+    TResult? Function(NftReceive value)? nftReceive,
+    TResult? Function(SwapTokens value)? swapTokens,
+    TResult? Function(NftTransfer value)? nftTransfer,
+    TResult? Function(ApproveToken value)? approveToken,
+    TResult? Function(StakeTokensAction value)? stakeTokens,
+    TResult? Function(UnstakeTokensAction value)? unstakeTokens,
+  }) {
+    return nftReceive?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BatchTransaction value)? batchTransaction,
+    TResult Function(TokenTransfer value)? tokenTransfer,
+    TResult Function(TokenReceive value)? tokenReceive,
+    TResult Function(NftReceive value)? nftReceive,
+    TResult Function(SwapTokens value)? swapTokens,
+    TResult Function(NftTransfer value)? nftTransfer,
+    TResult Function(ApproveToken value)? approveToken,
+    TResult Function(StakeTokensAction value)? stakeTokens,
+    TResult Function(UnstakeTokensAction value)? unstakeTokens,
+    required TResult orElse(),
+  }) {
+    if (nftReceive != null) {
+      return nftReceive(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NftReceiveImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class NftReceive extends WalletAction {
+  const factory NftReceive(
+      {@TimestampConverter() @JsonKey(name: 'updatedAt') final int timestamp,
+      @JsonKey(name: '_id') required final String id,
+      final String name,
+      final String? txHash,
+      final String? userOpHash,
+      required final String status,
+      final int? blockNumber,
+      required final String description,
+      final List<TokenEvent> sent,
+      final List<TokenEvent> received}) = _$NftReceiveImpl;
+  const NftReceive._() : super._();
+
+  factory NftReceive.fromJson(Map<String, dynamic> json) =
+      _$NftReceiveImpl.fromJson;
+
+  @override
+  @TimestampConverter()
+  @JsonKey(name: 'updatedAt')
+  int get timestamp;
+  @override
+  @JsonKey(name: '_id')
+  String get id;
+  @override
+  String get name;
+  @override
+  String? get txHash;
+  @override
+  String? get userOpHash;
+  @override
+  String get status;
+  @override
+  int? get blockNumber;
+  @override
+  String get description;
+  @override
+  List<TokenEvent> get sent;
+  @override
+  List<TokenEvent> get received;
+  @override
+  @JsonKey(ignore: true)
+  _$$NftReceiveImplCopyWith<_$NftReceiveImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1784,6 +3302,30 @@ class _$SwapTokensImpl extends SwapTokens {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        tokenReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        nftReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -1871,6 +3413,30 @@ class _$SwapTokensImpl extends SwapTokens {
             List<TokenEvent> sent,
             List<TokenEvent> received)?
         tokenTransfer,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
             @JsonKey(name: '_id') String id,
@@ -1968,6 +3534,30 @@ class _$SwapTokensImpl extends SwapTokens {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -2037,6 +3627,8 @@ class _$SwapTokensImpl extends SwapTokens {
   TResult map<TResult extends Object?>({
     required TResult Function(BatchTransaction value) batchTransaction,
     required TResult Function(TokenTransfer value) tokenTransfer,
+    required TResult Function(TokenReceive value) tokenReceive,
+    required TResult Function(NftReceive value) nftReceive,
     required TResult Function(SwapTokens value) swapTokens,
     required TResult Function(NftTransfer value) nftTransfer,
     required TResult Function(ApproveToken value) approveToken,
@@ -2051,6 +3643,8 @@ class _$SwapTokensImpl extends SwapTokens {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BatchTransaction value)? batchTransaction,
     TResult? Function(TokenTransfer value)? tokenTransfer,
+    TResult? Function(TokenReceive value)? tokenReceive,
+    TResult? Function(NftReceive value)? nftReceive,
     TResult? Function(SwapTokens value)? swapTokens,
     TResult? Function(NftTransfer value)? nftTransfer,
     TResult? Function(ApproveToken value)? approveToken,
@@ -2065,6 +3659,8 @@ class _$SwapTokensImpl extends SwapTokens {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BatchTransaction value)? batchTransaction,
     TResult Function(TokenTransfer value)? tokenTransfer,
+    TResult Function(TokenReceive value)? tokenReceive,
+    TResult Function(NftReceive value)? nftReceive,
     TResult Function(SwapTokens value)? swapTokens,
     TResult Function(NftTransfer value)? nftTransfer,
     TResult Function(ApproveToken value)? approveToken,
@@ -2346,6 +3942,30 @@ class _$NftTransferImpl extends NftTransfer {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        tokenReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        nftReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -2433,6 +4053,30 @@ class _$NftTransferImpl extends NftTransfer {
             List<TokenEvent> sent,
             List<TokenEvent> received)?
         tokenTransfer,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
             @JsonKey(name: '_id') String id,
@@ -2530,6 +4174,30 @@ class _$NftTransferImpl extends NftTransfer {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -2599,6 +4267,8 @@ class _$NftTransferImpl extends NftTransfer {
   TResult map<TResult extends Object?>({
     required TResult Function(BatchTransaction value) batchTransaction,
     required TResult Function(TokenTransfer value) tokenTransfer,
+    required TResult Function(TokenReceive value) tokenReceive,
+    required TResult Function(NftReceive value) nftReceive,
     required TResult Function(SwapTokens value) swapTokens,
     required TResult Function(NftTransfer value) nftTransfer,
     required TResult Function(ApproveToken value) approveToken,
@@ -2613,6 +4283,8 @@ class _$NftTransferImpl extends NftTransfer {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BatchTransaction value)? batchTransaction,
     TResult? Function(TokenTransfer value)? tokenTransfer,
+    TResult? Function(TokenReceive value)? tokenReceive,
+    TResult? Function(NftReceive value)? nftReceive,
     TResult? Function(SwapTokens value)? swapTokens,
     TResult? Function(NftTransfer value)? nftTransfer,
     TResult? Function(ApproveToken value)? approveToken,
@@ -2627,6 +4299,8 @@ class _$NftTransferImpl extends NftTransfer {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BatchTransaction value)? batchTransaction,
     TResult Function(TokenTransfer value)? tokenTransfer,
+    TResult Function(TokenReceive value)? tokenReceive,
+    TResult Function(NftReceive value)? nftReceive,
     TResult Function(SwapTokens value)? swapTokens,
     TResult Function(NftTransfer value)? nftTransfer,
     TResult Function(ApproveToken value)? approveToken,
@@ -2908,6 +4582,30 @@ class _$ApproveTokenImpl extends ApproveToken {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        tokenReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        nftReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -2995,6 +4693,30 @@ class _$ApproveTokenImpl extends ApproveToken {
             List<TokenEvent> sent,
             List<TokenEvent> received)?
         tokenTransfer,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
             @JsonKey(name: '_id') String id,
@@ -3092,6 +4814,30 @@ class _$ApproveTokenImpl extends ApproveToken {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -3161,6 +4907,8 @@ class _$ApproveTokenImpl extends ApproveToken {
   TResult map<TResult extends Object?>({
     required TResult Function(BatchTransaction value) batchTransaction,
     required TResult Function(TokenTransfer value) tokenTransfer,
+    required TResult Function(TokenReceive value) tokenReceive,
+    required TResult Function(NftReceive value) nftReceive,
     required TResult Function(SwapTokens value) swapTokens,
     required TResult Function(NftTransfer value) nftTransfer,
     required TResult Function(ApproveToken value) approveToken,
@@ -3175,6 +4923,8 @@ class _$ApproveTokenImpl extends ApproveToken {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BatchTransaction value)? batchTransaction,
     TResult? Function(TokenTransfer value)? tokenTransfer,
+    TResult? Function(TokenReceive value)? tokenReceive,
+    TResult? Function(NftReceive value)? nftReceive,
     TResult? Function(SwapTokens value)? swapTokens,
     TResult? Function(NftTransfer value)? nftTransfer,
     TResult? Function(ApproveToken value)? approveToken,
@@ -3189,6 +4939,8 @@ class _$ApproveTokenImpl extends ApproveToken {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BatchTransaction value)? batchTransaction,
     TResult Function(TokenTransfer value)? tokenTransfer,
+    TResult Function(TokenReceive value)? tokenReceive,
+    TResult Function(NftReceive value)? nftReceive,
     TResult Function(SwapTokens value)? swapTokens,
     TResult Function(NftTransfer value)? nftTransfer,
     TResult Function(ApproveToken value)? approveToken,
@@ -3471,6 +5223,30 @@ class _$StakeTokensActionImpl extends StakeTokensAction {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        tokenReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        nftReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -3558,6 +5334,30 @@ class _$StakeTokensActionImpl extends StakeTokensAction {
             List<TokenEvent> sent,
             List<TokenEvent> received)?
         tokenTransfer,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
             @JsonKey(name: '_id') String id,
@@ -3655,6 +5455,30 @@ class _$StakeTokensActionImpl extends StakeTokensAction {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -3724,6 +5548,8 @@ class _$StakeTokensActionImpl extends StakeTokensAction {
   TResult map<TResult extends Object?>({
     required TResult Function(BatchTransaction value) batchTransaction,
     required TResult Function(TokenTransfer value) tokenTransfer,
+    required TResult Function(TokenReceive value) tokenReceive,
+    required TResult Function(NftReceive value) nftReceive,
     required TResult Function(SwapTokens value) swapTokens,
     required TResult Function(NftTransfer value) nftTransfer,
     required TResult Function(ApproveToken value) approveToken,
@@ -3738,6 +5564,8 @@ class _$StakeTokensActionImpl extends StakeTokensAction {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BatchTransaction value)? batchTransaction,
     TResult? Function(TokenTransfer value)? tokenTransfer,
+    TResult? Function(TokenReceive value)? tokenReceive,
+    TResult? Function(NftReceive value)? nftReceive,
     TResult? Function(SwapTokens value)? swapTokens,
     TResult? Function(NftTransfer value)? nftTransfer,
     TResult? Function(ApproveToken value)? approveToken,
@@ -3752,6 +5580,8 @@ class _$StakeTokensActionImpl extends StakeTokensAction {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BatchTransaction value)? batchTransaction,
     TResult Function(TokenTransfer value)? tokenTransfer,
+    TResult Function(TokenReceive value)? tokenReceive,
+    TResult Function(NftReceive value)? nftReceive,
     TResult Function(SwapTokens value)? swapTokens,
     TResult Function(NftTransfer value)? nftTransfer,
     TResult Function(ApproveToken value)? approveToken,
@@ -4034,6 +5864,30 @@ class _$UnstakeTokensActionImpl extends UnstakeTokensAction {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        tokenReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)
+        nftReceive,
+    required TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -4121,6 +5975,30 @@ class _$UnstakeTokensActionImpl extends UnstakeTokensAction {
             List<TokenEvent> sent,
             List<TokenEvent> received)?
         tokenTransfer,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult? Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
     TResult? Function(
             @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
             @JsonKey(name: '_id') String id,
@@ -4218,6 +6096,30 @@ class _$UnstakeTokensActionImpl extends UnstakeTokensAction {
             @JsonKey(name: '_id') String id,
             String name,
             String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        tokenReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
+            String? userOpHash,
+            String status,
+            int? blockNumber,
+            String description,
+            List<TokenEvent> sent,
+            List<TokenEvent> received)?
+        nftReceive,
+    TResult Function(
+            @TimestampConverter() @JsonKey(name: 'updatedAt') int timestamp,
+            @JsonKey(name: '_id') String id,
+            String name,
+            String? txHash,
             String status,
             int? blockNumber,
             String userOpHash,
@@ -4287,6 +6189,8 @@ class _$UnstakeTokensActionImpl extends UnstakeTokensAction {
   TResult map<TResult extends Object?>({
     required TResult Function(BatchTransaction value) batchTransaction,
     required TResult Function(TokenTransfer value) tokenTransfer,
+    required TResult Function(TokenReceive value) tokenReceive,
+    required TResult Function(NftReceive value) nftReceive,
     required TResult Function(SwapTokens value) swapTokens,
     required TResult Function(NftTransfer value) nftTransfer,
     required TResult Function(ApproveToken value) approveToken,
@@ -4301,6 +6205,8 @@ class _$UnstakeTokensActionImpl extends UnstakeTokensAction {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BatchTransaction value)? batchTransaction,
     TResult? Function(TokenTransfer value)? tokenTransfer,
+    TResult? Function(TokenReceive value)? tokenReceive,
+    TResult? Function(NftReceive value)? nftReceive,
     TResult? Function(SwapTokens value)? swapTokens,
     TResult? Function(NftTransfer value)? nftTransfer,
     TResult? Function(ApproveToken value)? approveToken,
@@ -4315,6 +6221,8 @@ class _$UnstakeTokensActionImpl extends UnstakeTokensAction {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BatchTransaction value)? batchTransaction,
     TResult Function(TokenTransfer value)? tokenTransfer,
+    TResult Function(TokenReceive value)? tokenReceive,
+    TResult Function(NftReceive value)? nftReceive,
     TResult Function(SwapTokens value)? swapTokens,
     TResult Function(NftTransfer value)? nftTransfer,
     TResult Function(ApproveToken value)? approveToken,

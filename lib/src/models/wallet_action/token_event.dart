@@ -77,7 +77,7 @@ class TokenEvent with _$TokenEvent {
     )
     required String address,
     required BigInt value,
-    required BigInt tokenId,
+    BigInt? tokenId,
     required BigInt to,
   }) = ERC721Transfer;
 

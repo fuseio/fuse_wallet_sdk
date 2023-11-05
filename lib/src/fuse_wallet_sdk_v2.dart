@@ -88,7 +88,7 @@ class FuseSDK {
     IPresetBuilderOpts? opts,
     IClientOpts? clientOpts,
   }) async {
-    final fuseSDK = FuseSDK(publicApiKey);
+    final fuseSDK = FuseSDK(publicApiKey, baseUrl: baseUrl);
 
     UserOperationMiddlewareFn? paymasterMiddleware;
     if (withPaymaster) {
