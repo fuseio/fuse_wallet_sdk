@@ -31,6 +31,8 @@ class FuseWalletSDK {
   /// The Web3 client used for sending requests over an HTTP JSON-RPC API endpoint to Ethereum clients.
   final Web3Client web3client;
 
+  final String websocketServerURL;
+
   WebSocketConnection? webSocketConnection;
 
   /// Constructs a new instance of [FuseWalletSDK].
@@ -42,6 +44,7 @@ class FuseWalletSDK {
     this.publicApiKey, {
     String baseUrl = Variables.BASE_URL,
     String rpcUrl = Variables.FUSE_RPC_URL,
+    this.websocketServerURL = Variables.DEFAULT_SOCKET_SERVER_URL,
   })  : _dio = Dio(
           BaseOptions(
             baseUrl: Uri.https(baseUrl, '/api').toString(),
@@ -106,7 +109,12 @@ class FuseWalletSDK {
       );
       final String jwt = response.data['jwt'];
       jwtToken = jwt;
-      webSocketConnection = await WebSocketConnection.init(jwt);
+
+      webSocketConnection = await WebSocketConnection.init(
+        jwtToken: jwt,
+        websocketServerURL: websocketServerURL,
+      );
+
       return DC.data(jwt);
     } catch (e) {
       return DC.error(Exception(e.toString()));

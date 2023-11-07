@@ -28,18 +28,21 @@ class WebSocketConnection {
   /// This method takes a JWT token as input, parses it to extract the necessary data, and uses it to create a new
   /// Client instance with the Centrifuge package. It then connects the client to the server and returns a new
   /// WebSocketConnection instance.
-  static Future<WebSocketConnection> init(String jwtToken) async {
+  static Future<WebSocketConnection> init({
+    required String jwtToken,
+    required String websocketServerURL,
+  }) async {
     final Map<String, dynamic> data = JwtParser.parseJwt(jwtToken);
+
     final Client client = createClient(
-      Variables.SOCKET_SERVER_URL,
-      ClientConfig(
-        name: data['sub'],
-        token: jwtToken,
-      ),
+      websocketServerURL,
+      ClientConfig(name: data['sub'], token: jwtToken),
     );
+
     await client.connect();
     await client.ready();
     _instance = WebSocketConnection(client);
+
     return _instance!;
   }
 }
