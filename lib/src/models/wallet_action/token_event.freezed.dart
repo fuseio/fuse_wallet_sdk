@@ -36,17 +36,27 @@ mixin _$TokenEvent {
   String get address => throw _privateConstructorUsedError;
   @JsonKey(fromJson: amountFromJson)
   BigInt get value => throw _privateConstructorUsedError;
+  String? get to => throw _privateConstructorUsedError;
+  String? get from => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String symbol, String name, int decimals,
-            String address, @JsonKey(fromJson: amountFromJson) BigInt value)
+    required TResult Function(
+            String symbol,
+            String name,
+            int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt value,
+            String? to,
+            String? from)
         nativeToken,
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
             int decimals,
             @JsonKey(fromJson: addressFromJson) String address,
-            BigInt value)
+            BigInt value,
+            String? to,
+            String? from)
         erc20Transfer,
     required TResult Function(
             String symbol,
@@ -54,21 +64,30 @@ mixin _$TokenEvent {
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
             BigInt? tokenId,
-            BigInt to)
+            String? to,
+            String? from)
         erc721Transfer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String symbol, String name, int decimals, String address,
-            @JsonKey(fromJson: amountFromJson) BigInt value)?
+    TResult? Function(
+            String symbol,
+            String name,
+            int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt value,
+            String? to,
+            String? from)?
         nativeToken,
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
             int decimals,
             @JsonKey(fromJson: addressFromJson) String address,
-            BigInt value)?
+            BigInt value,
+            String? to,
+            String? from)?
         erc20Transfer,
     TResult? Function(
             String symbol,
@@ -76,21 +95,30 @@ mixin _$TokenEvent {
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
             BigInt? tokenId,
-            BigInt to)?
+            String? to,
+            String? from)?
         erc721Transfer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String symbol, String name, int decimals, String address,
-            @JsonKey(fromJson: amountFromJson) BigInt value)?
+    TResult Function(
+            String symbol,
+            String name,
+            int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt value,
+            String? to,
+            String? from)?
         nativeToken,
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
             int decimals,
             @JsonKey(fromJson: addressFromJson) String address,
-            BigInt value)?
+            BigInt value,
+            String? to,
+            String? from)?
         erc20Transfer,
     TResult Function(
             String symbol,
@@ -98,7 +126,8 @@ mixin _$TokenEvent {
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
             BigInt? tokenId,
-            BigInt to)?
+            String? to,
+            String? from)?
         erc721Transfer,
     required TResult orElse(),
   }) =>
@@ -141,7 +170,9 @@ abstract class $TokenEventCopyWith<$Res> {
       {String symbol,
       String name,
       String address,
-      @JsonKey(fromJson: amountFromJson) BigInt value});
+      @JsonKey(fromJson: amountFromJson) BigInt value,
+      String? to,
+      String? from});
 }
 
 /// @nodoc
@@ -161,6 +192,8 @@ class _$TokenEventCopyWithImpl<$Res, $Val extends TokenEvent>
     Object? name = null,
     Object? address = null,
     Object? value = null,
+    Object? to = freezed,
+    Object? from = freezed,
   }) {
     return _then(_value.copyWith(
       symbol: null == symbol
@@ -179,6 +212,14 @@ class _$TokenEventCopyWithImpl<$Res, $Val extends TokenEvent>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as BigInt,
+      to: freezed == to
+          ? _value.to
+          : to // ignore: cast_nullable_to_non_nullable
+              as String?,
+      from: freezed == from
+          ? _value.from
+          : from // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -196,7 +237,9 @@ abstract class _$$NativeTokenImplCopyWith<$Res>
       String name,
       int decimals,
       String address,
-      @JsonKey(fromJson: amountFromJson) BigInt value});
+      @JsonKey(fromJson: amountFromJson) BigInt value,
+      String? to,
+      String? from});
 }
 
 /// @nodoc
@@ -215,6 +258,8 @@ class __$$NativeTokenImplCopyWithImpl<$Res>
     Object? decimals = null,
     Object? address = null,
     Object? value = null,
+    Object? to = freezed,
+    Object? from = freezed,
   }) {
     return _then(_$NativeTokenImpl(
       symbol: null == symbol
@@ -237,6 +282,14 @@ class __$$NativeTokenImplCopyWithImpl<$Res>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as BigInt,
+      to: freezed == to
+          ? _value.to
+          : to // ignore: cast_nullable_to_non_nullable
+              as String?,
+      from: freezed == from
+          ? _value.from
+          : from // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -250,6 +303,8 @@ class _$NativeTokenImpl extends NativeToken {
       this.decimals = 18,
       this.address = Variables.NATIVE_TOKEN_ADDRESS,
       @JsonKey(fromJson: amountFromJson) required this.value,
+      this.to,
+      this.from,
       final String? $type})
       : $type = $type ?? 'native',
         super._();
@@ -272,13 +327,17 @@ class _$NativeTokenImpl extends NativeToken {
   @override
   @JsonKey(fromJson: amountFromJson)
   final BigInt value;
+  @override
+  final String? to;
+  @override
+  final String? from;
 
   @JsonKey(name: 'type')
   final String $type;
 
   @override
   String toString() {
-    return 'TokenEvent.nativeToken(symbol: $symbol, name: $name, decimals: $decimals, address: $address, value: $value)';
+    return 'TokenEvent.nativeToken(symbol: $symbol, name: $name, decimals: $decimals, address: $address, value: $value, to: $to, from: $from)';
   }
 
   @override
@@ -291,13 +350,15 @@ class _$NativeTokenImpl extends NativeToken {
             (identical(other.decimals, decimals) ||
                 other.decimals == decimals) &&
             (identical(other.address, address) || other.address == address) &&
-            (identical(other.value, value) || other.value == value));
+            (identical(other.value, value) || other.value == value) &&
+            (identical(other.to, to) || other.to == to) &&
+            (identical(other.from, from) || other.from == from));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, symbol, name, decimals, address, value);
+  int get hashCode => Object.hash(
+      runtimeType, symbol, name, decimals, address, value, to, from);
 
   @JsonKey(ignore: true)
   @override
@@ -308,15 +369,23 @@ class _$NativeTokenImpl extends NativeToken {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String symbol, String name, int decimals,
-            String address, @JsonKey(fromJson: amountFromJson) BigInt value)
+    required TResult Function(
+            String symbol,
+            String name,
+            int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt value,
+            String? to,
+            String? from)
         nativeToken,
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
             int decimals,
             @JsonKey(fromJson: addressFromJson) String address,
-            BigInt value)
+            BigInt value,
+            String? to,
+            String? from)
         erc20Transfer,
     required TResult Function(
             String symbol,
@@ -324,24 +393,33 @@ class _$NativeTokenImpl extends NativeToken {
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
             BigInt? tokenId,
-            BigInt to)
+            String? to,
+            String? from)
         erc721Transfer,
   }) {
-    return nativeToken(symbol, name, decimals, address, value);
+    return nativeToken(symbol, name, decimals, address, value, to, from);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String symbol, String name, int decimals, String address,
-            @JsonKey(fromJson: amountFromJson) BigInt value)?
+    TResult? Function(
+            String symbol,
+            String name,
+            int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt value,
+            String? to,
+            String? from)?
         nativeToken,
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
             int decimals,
             @JsonKey(fromJson: addressFromJson) String address,
-            BigInt value)?
+            BigInt value,
+            String? to,
+            String? from)?
         erc20Transfer,
     TResult? Function(
             String symbol,
@@ -349,24 +427,33 @@ class _$NativeTokenImpl extends NativeToken {
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
             BigInt? tokenId,
-            BigInt to)?
+            String? to,
+            String? from)?
         erc721Transfer,
   }) {
-    return nativeToken?.call(symbol, name, decimals, address, value);
+    return nativeToken?.call(symbol, name, decimals, address, value, to, from);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String symbol, String name, int decimals, String address,
-            @JsonKey(fromJson: amountFromJson) BigInt value)?
+    TResult Function(
+            String symbol,
+            String name,
+            int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt value,
+            String? to,
+            String? from)?
         nativeToken,
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
             int decimals,
             @JsonKey(fromJson: addressFromJson) String address,
-            BigInt value)?
+            BigInt value,
+            String? to,
+            String? from)?
         erc20Transfer,
     TResult Function(
             String symbol,
@@ -374,12 +461,13 @@ class _$NativeTokenImpl extends NativeToken {
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
             BigInt? tokenId,
-            BigInt to)?
+            String? to,
+            String? from)?
         erc721Transfer,
     required TResult orElse(),
   }) {
     if (nativeToken != null) {
-      return nativeToken(symbol, name, decimals, address, value);
+      return nativeToken(symbol, name, decimals, address, value, to, from);
     }
     return orElse();
   }
@@ -428,12 +516,13 @@ class _$NativeTokenImpl extends NativeToken {
 
 abstract class NativeToken extends TokenEvent {
   const factory NativeToken(
-          {final String symbol,
-          final String name,
-          final int decimals,
-          final String address,
-          @JsonKey(fromJson: amountFromJson) required final BigInt value}) =
-      _$NativeTokenImpl;
+      {final String symbol,
+      final String name,
+      final int decimals,
+      final String address,
+      @JsonKey(fromJson: amountFromJson) required final BigInt value,
+      final String? to,
+      final String? from}) = _$NativeTokenImpl;
   const NativeToken._() : super._();
 
   factory NativeToken.fromJson(Map<String, dynamic> json) =
@@ -449,6 +538,10 @@ abstract class NativeToken extends TokenEvent {
   @override
   @JsonKey(fromJson: amountFromJson)
   BigInt get value;
+  @override
+  String? get to;
+  @override
+  String? get from;
   @override
   @JsonKey(ignore: true)
   _$$NativeTokenImplCopyWith<_$NativeTokenImpl> get copyWith =>
@@ -468,7 +561,9 @@ abstract class _$$ERC20TransferImplCopyWith<$Res>
       @JsonKey(fromJson: nameFromJson) String name,
       int decimals,
       @JsonKey(fromJson: addressFromJson) String address,
-      BigInt value});
+      BigInt value,
+      String? to,
+      String? from});
 }
 
 /// @nodoc
@@ -487,6 +582,8 @@ class __$$ERC20TransferImplCopyWithImpl<$Res>
     Object? decimals = null,
     Object? address = null,
     Object? value = null,
+    Object? to = freezed,
+    Object? from = freezed,
   }) {
     return _then(_$ERC20TransferImpl(
       symbol: null == symbol
@@ -509,6 +606,14 @@ class __$$ERC20TransferImplCopyWithImpl<$Res>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as BigInt,
+      to: freezed == to
+          ? _value.to
+          : to // ignore: cast_nullable_to_non_nullable
+              as String?,
+      from: freezed == from
+          ? _value.from
+          : from // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -522,6 +627,8 @@ class _$ERC20TransferImpl extends ERC20Transfer {
       required this.decimals,
       @JsonKey(fromJson: addressFromJson) required this.address,
       required this.value,
+      this.to,
+      this.from,
       final String? $type})
       : $type = $type ?? 'ERC-20',
         super._();
@@ -541,13 +648,17 @@ class _$ERC20TransferImpl extends ERC20Transfer {
   final String address;
   @override
   final BigInt value;
+  @override
+  final String? to;
+  @override
+  final String? from;
 
   @JsonKey(name: 'type')
   final String $type;
 
   @override
   String toString() {
-    return 'TokenEvent.erc20Transfer(symbol: $symbol, name: $name, decimals: $decimals, address: $address, value: $value)';
+    return 'TokenEvent.erc20Transfer(symbol: $symbol, name: $name, decimals: $decimals, address: $address, value: $value, to: $to, from: $from)';
   }
 
   @override
@@ -560,13 +671,15 @@ class _$ERC20TransferImpl extends ERC20Transfer {
             (identical(other.decimals, decimals) ||
                 other.decimals == decimals) &&
             (identical(other.address, address) || other.address == address) &&
-            (identical(other.value, value) || other.value == value));
+            (identical(other.value, value) || other.value == value) &&
+            (identical(other.to, to) || other.to == to) &&
+            (identical(other.from, from) || other.from == from));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, symbol, name, decimals, address, value);
+  int get hashCode => Object.hash(
+      runtimeType, symbol, name, decimals, address, value, to, from);
 
   @JsonKey(ignore: true)
   @override
@@ -577,15 +690,23 @@ class _$ERC20TransferImpl extends ERC20Transfer {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String symbol, String name, int decimals,
-            String address, @JsonKey(fromJson: amountFromJson) BigInt value)
+    required TResult Function(
+            String symbol,
+            String name,
+            int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt value,
+            String? to,
+            String? from)
         nativeToken,
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
             int decimals,
             @JsonKey(fromJson: addressFromJson) String address,
-            BigInt value)
+            BigInt value,
+            String? to,
+            String? from)
         erc20Transfer,
     required TResult Function(
             String symbol,
@@ -593,24 +714,33 @@ class _$ERC20TransferImpl extends ERC20Transfer {
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
             BigInt? tokenId,
-            BigInt to)
+            String? to,
+            String? from)
         erc721Transfer,
   }) {
-    return erc20Transfer(symbol, name, decimals, address, value);
+    return erc20Transfer(symbol, name, decimals, address, value, to, from);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String symbol, String name, int decimals, String address,
-            @JsonKey(fromJson: amountFromJson) BigInt value)?
+    TResult? Function(
+            String symbol,
+            String name,
+            int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt value,
+            String? to,
+            String? from)?
         nativeToken,
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
             int decimals,
             @JsonKey(fromJson: addressFromJson) String address,
-            BigInt value)?
+            BigInt value,
+            String? to,
+            String? from)?
         erc20Transfer,
     TResult? Function(
             String symbol,
@@ -618,24 +748,34 @@ class _$ERC20TransferImpl extends ERC20Transfer {
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
             BigInt? tokenId,
-            BigInt to)?
+            String? to,
+            String? from)?
         erc721Transfer,
   }) {
-    return erc20Transfer?.call(symbol, name, decimals, address, value);
+    return erc20Transfer?.call(
+        symbol, name, decimals, address, value, to, from);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String symbol, String name, int decimals, String address,
-            @JsonKey(fromJson: amountFromJson) BigInt value)?
+    TResult Function(
+            String symbol,
+            String name,
+            int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt value,
+            String? to,
+            String? from)?
         nativeToken,
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
             int decimals,
             @JsonKey(fromJson: addressFromJson) String address,
-            BigInt value)?
+            BigInt value,
+            String? to,
+            String? from)?
         erc20Transfer,
     TResult Function(
             String symbol,
@@ -643,12 +783,13 @@ class _$ERC20TransferImpl extends ERC20Transfer {
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
             BigInt? tokenId,
-            BigInt to)?
+            String? to,
+            String? from)?
         erc721Transfer,
     required TResult orElse(),
   }) {
     if (erc20Transfer != null) {
-      return erc20Transfer(symbol, name, decimals, address, value);
+      return erc20Transfer(symbol, name, decimals, address, value, to, from);
     }
     return orElse();
   }
@@ -701,7 +842,9 @@ abstract class ERC20Transfer extends TokenEvent {
       @JsonKey(fromJson: nameFromJson) required final String name,
       required final int decimals,
       @JsonKey(fromJson: addressFromJson) required final String address,
-      required final BigInt value}) = _$ERC20TransferImpl;
+      required final BigInt value,
+      final String? to,
+      final String? from}) = _$ERC20TransferImpl;
   const ERC20Transfer._() : super._();
 
   factory ERC20Transfer.fromJson(Map<String, dynamic> json) =
@@ -718,6 +861,10 @@ abstract class ERC20Transfer extends TokenEvent {
   String get address;
   @override
   BigInt get value;
+  @override
+  String? get to;
+  @override
+  String? get from;
   @override
   @JsonKey(ignore: true)
   _$$ERC20TransferImplCopyWith<_$ERC20TransferImpl> get copyWith =>
@@ -738,7 +885,8 @@ abstract class _$$ERC721TransferImplCopyWith<$Res>
       @JsonKey(fromJson: addressFromJson) String address,
       BigInt value,
       BigInt? tokenId,
-      BigInt to});
+      String? to,
+      String? from});
 }
 
 /// @nodoc
@@ -757,7 +905,8 @@ class __$$ERC721TransferImplCopyWithImpl<$Res>
     Object? address = null,
     Object? value = null,
     Object? tokenId = freezed,
-    Object? to = null,
+    Object? to = freezed,
+    Object? from = freezed,
   }) {
     return _then(_$ERC721TransferImpl(
       symbol: null == symbol
@@ -780,10 +929,14 @@ class __$$ERC721TransferImplCopyWithImpl<$Res>
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
               as BigInt?,
-      to: null == to
+      to: freezed == to
           ? _value.to
           : to // ignore: cast_nullable_to_non_nullable
-              as BigInt,
+              as String?,
+      from: freezed == from
+          ? _value.from
+          : from // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -797,7 +950,8 @@ class _$ERC721TransferImpl extends ERC721Transfer {
       @JsonKey(fromJson: addressFromJson) required this.address,
       required this.value,
       this.tokenId,
-      required this.to,
+      this.to,
+      this.from,
       final String? $type})
       : $type = $type ?? 'ERC-721',
         super._();
@@ -818,14 +972,16 @@ class _$ERC721TransferImpl extends ERC721Transfer {
   @override
   final BigInt? tokenId;
   @override
-  final BigInt to;
+  final String? to;
+  @override
+  final String? from;
 
   @JsonKey(name: 'type')
   final String $type;
 
   @override
   String toString() {
-    return 'TokenEvent.erc721Transfer(symbol: $symbol, name: $name, address: $address, value: $value, tokenId: $tokenId, to: $to)';
+    return 'TokenEvent.erc721Transfer(symbol: $symbol, name: $name, address: $address, value: $value, tokenId: $tokenId, to: $to, from: $from)';
   }
 
   @override
@@ -838,13 +994,14 @@ class _$ERC721TransferImpl extends ERC721Transfer {
             (identical(other.address, address) || other.address == address) &&
             (identical(other.value, value) || other.value == value) &&
             (identical(other.tokenId, tokenId) || other.tokenId == tokenId) &&
-            (identical(other.to, to) || other.to == to));
+            (identical(other.to, to) || other.to == to) &&
+            (identical(other.from, from) || other.from == from));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, symbol, name, address, value, tokenId, to);
+      Object.hash(runtimeType, symbol, name, address, value, tokenId, to, from);
 
   @JsonKey(ignore: true)
   @override
@@ -856,15 +1013,23 @@ class _$ERC721TransferImpl extends ERC721Transfer {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String symbol, String name, int decimals,
-            String address, @JsonKey(fromJson: amountFromJson) BigInt value)
+    required TResult Function(
+            String symbol,
+            String name,
+            int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt value,
+            String? to,
+            String? from)
         nativeToken,
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
             int decimals,
             @JsonKey(fromJson: addressFromJson) String address,
-            BigInt value)
+            BigInt value,
+            String? to,
+            String? from)
         erc20Transfer,
     required TResult Function(
             String symbol,
@@ -872,24 +1037,33 @@ class _$ERC721TransferImpl extends ERC721Transfer {
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
             BigInt? tokenId,
-            BigInt to)
+            String? to,
+            String? from)
         erc721Transfer,
   }) {
-    return erc721Transfer(symbol, name, address, value, tokenId, to);
+    return erc721Transfer(symbol, name, address, value, tokenId, to, from);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String symbol, String name, int decimals, String address,
-            @JsonKey(fromJson: amountFromJson) BigInt value)?
+    TResult? Function(
+            String symbol,
+            String name,
+            int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt value,
+            String? to,
+            String? from)?
         nativeToken,
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
             int decimals,
             @JsonKey(fromJson: addressFromJson) String address,
-            BigInt value)?
+            BigInt value,
+            String? to,
+            String? from)?
         erc20Transfer,
     TResult? Function(
             String symbol,
@@ -897,24 +1071,34 @@ class _$ERC721TransferImpl extends ERC721Transfer {
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
             BigInt? tokenId,
-            BigInt to)?
+            String? to,
+            String? from)?
         erc721Transfer,
   }) {
-    return erc721Transfer?.call(symbol, name, address, value, tokenId, to);
+    return erc721Transfer?.call(
+        symbol, name, address, value, tokenId, to, from);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String symbol, String name, int decimals, String address,
-            @JsonKey(fromJson: amountFromJson) BigInt value)?
+    TResult Function(
+            String symbol,
+            String name,
+            int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt value,
+            String? to,
+            String? from)?
         nativeToken,
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
             int decimals,
             @JsonKey(fromJson: addressFromJson) String address,
-            BigInt value)?
+            BigInt value,
+            String? to,
+            String? from)?
         erc20Transfer,
     TResult Function(
             String symbol,
@@ -922,12 +1106,13 @@ class _$ERC721TransferImpl extends ERC721Transfer {
             @JsonKey(fromJson: addressFromJson) String address,
             BigInt value,
             BigInt? tokenId,
-            BigInt to)?
+            String? to,
+            String? from)?
         erc721Transfer,
     required TResult orElse(),
   }) {
     if (erc721Transfer != null) {
-      return erc721Transfer(symbol, name, address, value, tokenId, to);
+      return erc721Transfer(symbol, name, address, value, tokenId, to, from);
     }
     return orElse();
   }
@@ -981,7 +1166,8 @@ abstract class ERC721Transfer extends TokenEvent {
       @JsonKey(fromJson: addressFromJson) required final String address,
       required final BigInt value,
       final BigInt? tokenId,
-      required final BigInt to}) = _$ERC721TransferImpl;
+      final String? to,
+      final String? from}) = _$ERC721TransferImpl;
   const ERC721Transfer._() : super._();
 
   factory ERC721Transfer.fromJson(Map<String, dynamic> json) =
@@ -998,7 +1184,10 @@ abstract class ERC721Transfer extends TokenEvent {
   @override
   BigInt get value;
   BigInt? get tokenId;
-  BigInt get to;
+  @override
+  String? get to;
+  @override
+  String? get from;
   @override
   @JsonKey(ignore: true)
   _$$ERC721TransferImplCopyWith<_$ERC721TransferImpl> get copyWith =>

@@ -13,6 +13,8 @@ _$NativeTokenImpl _$$NativeTokenImplFromJson(Map<String, dynamic> json) =>
       decimals: json['decimals'] as int? ?? 18,
       address: json['address'] as String? ?? Variables.NATIVE_TOKEN_ADDRESS,
       value: amountFromJson(json['value'] as String?),
+      to: json['to'] as String?,
+      from: json['from'] as String?,
       $type: json['type'] as String?,
     );
 
@@ -23,6 +25,8 @@ Map<String, dynamic> _$$NativeTokenImplToJson(_$NativeTokenImpl instance) =>
       'decimals': instance.decimals,
       'address': instance.address,
       'value': instance.value.toString(),
+      'to': instance.to,
+      'from': instance.from,
       'type': instance.$type,
     };
 
@@ -33,6 +37,8 @@ _$ERC20TransferImpl _$$ERC20TransferImplFromJson(Map<String, dynamic> json) =>
       decimals: json['decimals'] as int,
       address: addressFromJson(json['address'] as String),
       value: amountFromJson(json['value'] as String?),
+      to: json['to'] as String?,
+      from: json['from'] as String?,
       $type: json['type'] as String?,
     );
 
@@ -43,6 +49,8 @@ Map<String, dynamic> _$$ERC20TransferImplToJson(_$ERC20TransferImpl instance) =>
       'decimals': instance.decimals,
       'address': instance.address,
       'value': instance.value.toString(),
+      'to': instance.to,
+      'from': instance.from,
       'type': instance.$type,
     };
 
@@ -55,7 +63,8 @@ _$ERC721TransferImpl _$$ERC721TransferImplFromJson(Map<String, dynamic> json) =>
       tokenId: json['tokenId'] == null
           ? null
           : BigInt.parse(json['tokenId'] as String),
-      to: BigInt.parse(json['to'] as String),
+      to: json['to'] as String?,
+      from: json['from'] as String?,
       $type: json['type'] as String?,
     );
 
@@ -67,6 +76,7 @@ Map<String, dynamic> _$$ERC721TransferImplToJson(
       'address': instance.address,
       'value': instance.value.toString(),
       'tokenId': instance.tokenId?.toString(),
-      'to': instance.to.toString(),
+      'to': instance.to,
+      'from': instance.from,
       'type': instance.$type,
     };
