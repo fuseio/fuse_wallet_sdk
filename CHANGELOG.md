@@ -3,6 +3,11 @@
 ## [0.2.7]
 
 ### Added
+- The `from` and `to` fields are now available in `TokenEvent` instances. 
+
+## [0.2.7]
+
+### Added
 - The Websocket server url can now be provided into the SDK.
 - The `createWallet` method has been brought back along with
 its corresponding example `create_wallet.dart`.
