@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [0.2.7]
+## [0.2.8]
 
 ### Added
 - The `from` and `to` fields are now available in `TokenEvent` instances. 
