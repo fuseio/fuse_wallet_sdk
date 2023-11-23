@@ -31,6 +31,8 @@ class TokenEvent with _$TokenEvent {
       fromJson: amountFromJson,
     )
     required BigInt value,
+    String? to,
+    String? from,
   }) = NativeToken;
 
   /// Represents an ERC-20 token transfer event.
@@ -54,6 +56,8 @@ class TokenEvent with _$TokenEvent {
     )
     required String address,
     required BigInt value,
+    String? to,
+    String? from,
   }) = ERC20Transfer;
 
   /// Represents an ERC-721 token transfer event.
@@ -78,7 +82,8 @@ class TokenEvent with _$TokenEvent {
     required String address,
     required BigInt value,
     BigInt? tokenId,
-    required BigInt to,
+    String? to,
+    String? from,
   }) = ERC721Transfer;
 
   /// Constructs a new TokenEvent instance from the provided JSON object.
