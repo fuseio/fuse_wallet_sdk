@@ -2,6 +2,12 @@
 
 ## [0.2.8]
 
+### Fixed
+- Fixed an issue that causes getting 404 status code while getting
+native token balance for newly created ERC-4337 wallets.
+
+## [0.2.8]
+
 ### Added
 - The `from` and `to` fields are now available in `TokenEvent` instances. 
 
