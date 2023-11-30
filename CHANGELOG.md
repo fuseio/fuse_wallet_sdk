@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [0.2.8]
+## [0.2.9]
 
 ### Fixed
 - Fixed an issue that causes getting 404 status code while getting
