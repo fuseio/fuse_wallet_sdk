@@ -29,7 +29,7 @@ class ExplorerModule {
   ) async {
     try {
       final Response response = await _dio.get(
-        '/v0/explorer?module=account&action=eth_get_balance&address=$walletAddress',
+        '/v0/explorer?module=account&action=balance&address=$walletAddress',
       );
       return DC.data(BigInt.parse(response.data['result']));
     } catch (e) {
