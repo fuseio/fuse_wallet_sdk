@@ -166,7 +166,7 @@ class _$TradeRequestBodyImpl implements _TradeRequestBody {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TradeRequestBodyImpl &&

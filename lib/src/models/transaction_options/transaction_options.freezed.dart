@@ -140,7 +140,7 @@ class _$TxOptionsImpl implements _TxOptions {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TxOptionsImpl &&

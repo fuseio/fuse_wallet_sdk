@@ -571,7 +571,7 @@ class _$CreateWalletImpl extends CreateWallet {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateWalletImpl &&
@@ -1178,7 +1178,7 @@ class _$FiatDepositImpl extends FiatDeposit {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FiatDepositImpl &&
@@ -1824,7 +1824,7 @@ class _$SendImpl extends Send {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SendImpl &&
@@ -2470,7 +2470,7 @@ class _$ReceiveImpl extends Receive {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ReceiveImpl &&
@@ -3076,7 +3076,7 @@ class _$SwapImpl extends Swap {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SwapImpl &&
@@ -3679,7 +3679,7 @@ class _$ReceiveNFTImpl extends ReceiveNFT {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ReceiveNFTImpl &&
@@ -4323,7 +4323,7 @@ class _$StakeTokensImpl extends StakeTokens {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StakeTokensImpl &&
@@ -4971,7 +4971,7 @@ class _$UnstakeTokensImpl extends UnstakeTokens {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnstakeTokensImpl &&

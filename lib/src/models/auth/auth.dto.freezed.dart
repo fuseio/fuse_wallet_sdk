@@ -160,7 +160,7 @@ class _$AuthDtoImpl implements _AuthDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthDtoImpl &&

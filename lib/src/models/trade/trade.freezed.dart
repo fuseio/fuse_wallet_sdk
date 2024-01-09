@@ -223,7 +223,7 @@ class _$TradeImpl implements _Trade {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TradeImpl &&

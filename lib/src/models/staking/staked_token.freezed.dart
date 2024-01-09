@@ -242,7 +242,7 @@ class _$StakedTokenImpl implements _StakedToken {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StakedTokenImpl &&
@@ -465,7 +465,7 @@ class _$StakedTokenResponseImpl implements _StakedTokenResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StakedTokenResponseImpl &&

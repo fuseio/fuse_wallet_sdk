@@ -341,7 +341,7 @@ class _$NativeTokenImpl extends NativeToken {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NativeTokenImpl &&
@@ -662,7 +662,7 @@ class _$ERC20TransferImpl extends ERC20Transfer {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ERC20TransferImpl &&
@@ -985,7 +985,7 @@ class _$ERC721TransferImpl extends ERC721Transfer {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ERC721TransferImpl &&

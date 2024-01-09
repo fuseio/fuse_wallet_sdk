@@ -140,7 +140,7 @@ class _$UnstakeRequestBodyImpl implements _UnstakeRequestBody {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnstakeRequestBodyImpl &&
@@ -304,7 +304,7 @@ class _$UnstakeResponseBodyImpl implements _UnstakeResponseBody {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnstakeResponseBodyImpl &&
