@@ -668,7 +668,7 @@ class _$BatchTransactionImpl extends BatchTransaction {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BatchTransactionImpl &&
@@ -1309,7 +1309,7 @@ class _$TokenTransferImpl extends TokenTransfer {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TokenTransferImpl &&
@@ -1949,7 +1949,7 @@ class _$TokenReceiveImpl extends TokenReceive {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TokenReceiveImpl &&
@@ -2589,7 +2589,7 @@ class _$NftReceiveImpl extends NftReceive {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NftReceiveImpl &&
@@ -3229,7 +3229,7 @@ class _$SwapTokensImpl extends SwapTokens {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SwapTokensImpl &&
@@ -3869,7 +3869,7 @@ class _$NftTransferImpl extends NftTransfer {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NftTransferImpl &&
@@ -4509,7 +4509,7 @@ class _$ApproveTokenImpl extends ApproveToken {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ApproveTokenImpl &&
@@ -5149,7 +5149,7 @@ class _$StakeTokensActionImpl extends StakeTokensAction {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StakeTokensActionImpl &&
@@ -5790,7 +5790,7 @@ class _$UnstakeTokensActionImpl extends UnstakeTokensAction {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnstakeTokensActionImpl &&

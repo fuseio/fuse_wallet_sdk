@@ -1,4 +1,7 @@
-# CHANGELOG
+## [0.2.10]
+
+### Changed
+- Increased the default `feePerGas` setting to 10 Gwei.
 
 ## [0.2.9]
 

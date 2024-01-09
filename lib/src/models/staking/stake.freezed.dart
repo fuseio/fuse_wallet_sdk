@@ -140,7 +140,7 @@ class _$StakeRequestBodyImpl implements _StakeRequestBody {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StakeRequestBodyImpl &&
@@ -304,7 +304,7 @@ class _$StakeResponseBodyImpl implements _StakeResponseBody {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StakeResponseBodyImpl &&

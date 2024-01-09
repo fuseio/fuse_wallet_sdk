@@ -214,7 +214,7 @@ class _$ActionResultImpl implements _ActionResult {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ActionResultImpl &&

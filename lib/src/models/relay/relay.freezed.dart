@@ -292,7 +292,7 @@ class _$RelayImpl implements _Relay {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RelayImpl &&

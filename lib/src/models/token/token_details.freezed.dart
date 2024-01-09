@@ -358,7 +358,7 @@ class _$NativeImpl extends Native {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NativeImpl &&
@@ -701,7 +701,7 @@ class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LiquidityPoolTokenImpl &&
@@ -1051,7 +1051,7 @@ class _$BridgedTokenImpl extends BridgedToken {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BridgedTokenImpl &&
@@ -1396,7 +1396,7 @@ class _$MiscTokenImpl extends MiscToken {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MiscTokenImpl &&
@@ -1745,7 +1745,7 @@ class _$ERC20Impl extends ERC20 {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ERC20Impl &&
@@ -2095,7 +2095,7 @@ class _$ERC721Impl extends ERC721 {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ERC721Impl &&

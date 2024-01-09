@@ -134,7 +134,7 @@ class _$SmartWalletEventImpl implements _SmartWalletEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SmartWalletEventImpl &&

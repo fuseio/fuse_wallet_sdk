@@ -150,7 +150,7 @@ class _$LpUnderlyingTokensImpl implements _LpUnderlyingTokens {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LpUnderlyingTokensImpl &&

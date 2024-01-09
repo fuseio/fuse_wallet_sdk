@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:centrifuge/centrifuge.dart';
 
-import 'package:fuse_wallet_sdk/src/constants/variables.dart';
 import 'package:fuse_wallet_sdk/src/utils/jwt.dart';
 
 /// A class that represents a WebSocket connection using the Centrifuge client library.
