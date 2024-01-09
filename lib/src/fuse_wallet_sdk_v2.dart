@@ -33,7 +33,7 @@ class FuseSDK {
 
   /// Default transaction options.
   static final TxOptions defaultTxOptions = TxOptions(
-    feePerGas: '1000000',
+    feePerGas: '10000000000',
     feeIncrementPercentage: 10,
     withRetry: false,
   );
