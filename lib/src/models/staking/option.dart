@@ -15,6 +15,7 @@ class StakingOption with _$StakingOption {
   /// - [tokenSymbol] – The symbol of the staking token.
   /// - [tokenName] – The name of the staking token.
   /// - [tokenLogoURI] – The URI for the logo of the staking token.
+  /// - [expired] - The status of the staking option.
   /// - [unStakeTokenAddress] – The address of the unstaking token.
   /// - [stakingApr] – The annual percentage rate (APR) for staking.
   /// - [tvl] – The total value locked in the contract.
@@ -23,6 +24,7 @@ class StakingOption with _$StakingOption {
     required String tokenSymbol,
     required String tokenName,
     required String tokenLogoURI,
+    required bool expired,
     required String unStakeTokenAddress,
     required double stakingApr,
     required double tvl,

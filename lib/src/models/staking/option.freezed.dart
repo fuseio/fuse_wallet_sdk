@@ -24,6 +24,7 @@ mixin _$StakingOption {
   String get tokenSymbol => throw _privateConstructorUsedError;
   String get tokenName => throw _privateConstructorUsedError;
   String get tokenLogoURI => throw _privateConstructorUsedError;
+  bool get expired => throw _privateConstructorUsedError;
   String get unStakeTokenAddress => throw _privateConstructorUsedError;
   double get stakingApr => throw _privateConstructorUsedError;
   double get tvl => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $StakingOptionCopyWith<$Res> {
       String tokenSymbol,
       String tokenName,
       String tokenLogoURI,
+      bool expired,
       String unStakeTokenAddress,
       double stakingApr,
       double tvl});
@@ -67,6 +69,7 @@ class _$StakingOptionCopyWithImpl<$Res, $Val extends StakingOption>
     Object? tokenSymbol = null,
     Object? tokenName = null,
     Object? tokenLogoURI = null,
+    Object? expired = null,
     Object? unStakeTokenAddress = null,
     Object? stakingApr = null,
     Object? tvl = null,
@@ -88,6 +91,10 @@ class _$StakingOptionCopyWithImpl<$Res, $Val extends StakingOption>
           ? _value.tokenLogoURI
           : tokenLogoURI // ignore: cast_nullable_to_non_nullable
               as String,
+      expired: null == expired
+          ? _value.expired
+          : expired // ignore: cast_nullable_to_non_nullable
+              as bool,
       unStakeTokenAddress: null == unStakeTokenAddress
           ? _value.unStakeTokenAddress
           : unStakeTokenAddress // ignore: cast_nullable_to_non_nullable
@@ -117,6 +124,7 @@ abstract class _$$StakingOptionImplCopyWith<$Res>
       String tokenSymbol,
       String tokenName,
       String tokenLogoURI,
+      bool expired,
       String unStakeTokenAddress,
       double stakingApr,
       double tvl});
@@ -137,6 +145,7 @@ class __$$StakingOptionImplCopyWithImpl<$Res>
     Object? tokenSymbol = null,
     Object? tokenName = null,
     Object? tokenLogoURI = null,
+    Object? expired = null,
     Object? unStakeTokenAddress = null,
     Object? stakingApr = null,
     Object? tvl = null,
@@ -158,6 +167,10 @@ class __$$StakingOptionImplCopyWithImpl<$Res>
           ? _value.tokenLogoURI
           : tokenLogoURI // ignore: cast_nullable_to_non_nullable
               as String,
+      expired: null == expired
+          ? _value.expired
+          : expired // ignore: cast_nullable_to_non_nullable
+              as bool,
       unStakeTokenAddress: null == unStakeTokenAddress
           ? _value.unStakeTokenAddress
           : unStakeTokenAddress // ignore: cast_nullable_to_non_nullable
@@ -182,6 +195,7 @@ class _$StakingOptionImpl extends _StakingOption {
       required this.tokenSymbol,
       required this.tokenName,
       required this.tokenLogoURI,
+      required this.expired,
       required this.unStakeTokenAddress,
       required this.stakingApr,
       required this.tvl})
@@ -199,6 +213,8 @@ class _$StakingOptionImpl extends _StakingOption {
   @override
   final String tokenLogoURI;
   @override
+  final bool expired;
+  @override
   final String unStakeTokenAddress;
   @override
   final double stakingApr;
@@ -207,7 +223,7 @@ class _$StakingOptionImpl extends _StakingOption {
 
   @override
   String toString() {
-    return 'StakingOption(tokenAddress: $tokenAddress, tokenSymbol: $tokenSymbol, tokenName: $tokenName, tokenLogoURI: $tokenLogoURI, unStakeTokenAddress: $unStakeTokenAddress, stakingApr: $stakingApr, tvl: $tvl)';
+    return 'StakingOption(tokenAddress: $tokenAddress, tokenSymbol: $tokenSymbol, tokenName: $tokenName, tokenLogoURI: $tokenLogoURI, expired: $expired, unStakeTokenAddress: $unStakeTokenAddress, stakingApr: $stakingApr, tvl: $tvl)';
   }
 
   @override
@@ -223,6 +239,7 @@ class _$StakingOptionImpl extends _StakingOption {
                 other.tokenName == tokenName) &&
             (identical(other.tokenLogoURI, tokenLogoURI) ||
                 other.tokenLogoURI == tokenLogoURI) &&
+            (identical(other.expired, expired) || other.expired == expired) &&
             (identical(other.unStakeTokenAddress, unStakeTokenAddress) ||
                 other.unStakeTokenAddress == unStakeTokenAddress) &&
             (identical(other.stakingApr, stakingApr) ||
@@ -233,7 +250,7 @@ class _$StakingOptionImpl extends _StakingOption {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, tokenAddress, tokenSymbol,
-      tokenName, tokenLogoURI, unStakeTokenAddress, stakingApr, tvl);
+      tokenName, tokenLogoURI, expired, unStakeTokenAddress, stakingApr, tvl);
 
   @JsonKey(ignore: true)
   @override
@@ -255,6 +272,7 @@ abstract class _StakingOption extends StakingOption {
       required final String tokenSymbol,
       required final String tokenName,
       required final String tokenLogoURI,
+      required final bool expired,
       required final String unStakeTokenAddress,
       required final double stakingApr,
       required final double tvl}) = _$StakingOptionImpl;
@@ -271,6 +289,8 @@ abstract class _StakingOption extends StakingOption {
   String get tokenName;
   @override
   String get tokenLogoURI;
+  @override
+  bool get expired;
   @override
   String get unStakeTokenAddress;
   @override

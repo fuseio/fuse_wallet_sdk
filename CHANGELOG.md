@@ -1,3 +1,8 @@
+## [0.2.11]
+
+### Added
+- An expired property to the `StakingOption` model. This property indicates whether the staking option has expired or not.
+
 ## [0.2.10]
 
 ### Changed
