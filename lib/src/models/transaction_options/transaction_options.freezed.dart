@@ -22,6 +22,7 @@ TxOptions _$TxOptionsFromJson(Map<String, dynamic> json) {
 mixin _$TxOptions {
   String get feePerGas => throw _privateConstructorUsedError;
   int get feeIncrementPercentage => throw _privateConstructorUsedError;
+  bool get isIndependentTransaction => throw _privateConstructorUsedError;
   bool get withRetry => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +36,11 @@ abstract class $TxOptionsCopyWith<$Res> {
   factory $TxOptionsCopyWith(TxOptions value, $Res Function(TxOptions) then) =
       _$TxOptionsCopyWithImpl<$Res, TxOptions>;
   @useResult
-  $Res call({String feePerGas, int feeIncrementPercentage, bool withRetry});
+  $Res call(
+      {String feePerGas,
+      int feeIncrementPercentage,
+      bool isIndependentTransaction,
+      bool withRetry});
 }
 
 /// @nodoc
@@ -53,6 +58,7 @@ class _$TxOptionsCopyWithImpl<$Res, $Val extends TxOptions>
   $Res call({
     Object? feePerGas = null,
     Object? feeIncrementPercentage = null,
+    Object? isIndependentTransaction = null,
     Object? withRetry = null,
   }) {
     return _then(_value.copyWith(
@@ -64,6 +70,10 @@ class _$TxOptionsCopyWithImpl<$Res, $Val extends TxOptions>
           ? _value.feeIncrementPercentage
           : feeIncrementPercentage // ignore: cast_nullable_to_non_nullable
               as int,
+      isIndependentTransaction: null == isIndependentTransaction
+          ? _value.isIndependentTransaction
+          : isIndependentTransaction // ignore: cast_nullable_to_non_nullable
+              as bool,
       withRetry: null == withRetry
           ? _value.withRetry
           : withRetry // ignore: cast_nullable_to_non_nullable
@@ -80,7 +90,11 @@ abstract class _$$TxOptionsImplCopyWith<$Res>
       __$$TxOptionsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String feePerGas, int feeIncrementPercentage, bool withRetry});
+  $Res call(
+      {String feePerGas,
+      int feeIncrementPercentage,
+      bool isIndependentTransaction,
+      bool withRetry});
 }
 
 /// @nodoc
@@ -96,6 +110,7 @@ class __$$TxOptionsImplCopyWithImpl<$Res>
   $Res call({
     Object? feePerGas = null,
     Object? feeIncrementPercentage = null,
+    Object? isIndependentTransaction = null,
     Object? withRetry = null,
   }) {
     return _then(_$TxOptionsImpl(
@@ -107,6 +122,10 @@ class __$$TxOptionsImplCopyWithImpl<$Res>
           ? _value.feeIncrementPercentage
           : feeIncrementPercentage // ignore: cast_nullable_to_non_nullable
               as int,
+      isIndependentTransaction: null == isIndependentTransaction
+          ? _value.isIndependentTransaction
+          : isIndependentTransaction // ignore: cast_nullable_to_non_nullable
+              as bool,
       withRetry: null == withRetry
           ? _value.withRetry
           : withRetry // ignore: cast_nullable_to_non_nullable
@@ -121,6 +140,7 @@ class _$TxOptionsImpl implements _TxOptions {
   _$TxOptionsImpl(
       {required this.feePerGas,
       this.feeIncrementPercentage = 10,
+      this.isIndependentTransaction = false,
       required this.withRetry});
 
   factory _$TxOptionsImpl.fromJson(Map<String, dynamic> json) =>
@@ -132,11 +152,14 @@ class _$TxOptionsImpl implements _TxOptions {
   @JsonKey()
   final int feeIncrementPercentage;
   @override
+  @JsonKey()
+  final bool isIndependentTransaction;
+  @override
   final bool withRetry;
 
   @override
   String toString() {
-    return 'TxOptions(feePerGas: $feePerGas, feeIncrementPercentage: $feeIncrementPercentage, withRetry: $withRetry)';
+    return 'TxOptions(feePerGas: $feePerGas, feeIncrementPercentage: $feeIncrementPercentage, isIndependentTransaction: $isIndependentTransaction, withRetry: $withRetry)';
   }
 
   @override
@@ -148,14 +171,17 @@ class _$TxOptionsImpl implements _TxOptions {
                 other.feePerGas == feePerGas) &&
             (identical(other.feeIncrementPercentage, feeIncrementPercentage) ||
                 other.feeIncrementPercentage == feeIncrementPercentage) &&
+            (identical(
+                    other.isIndependentTransaction, isIndependentTransaction) ||
+                other.isIndependentTransaction == isIndependentTransaction) &&
             (identical(other.withRetry, withRetry) ||
                 other.withRetry == withRetry));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, feePerGas, feeIncrementPercentage, withRetry);
+  int get hashCode => Object.hash(runtimeType, feePerGas,
+      feeIncrementPercentage, isIndependentTransaction, withRetry);
 
   @JsonKey(ignore: true)
   @override
@@ -175,6 +201,7 @@ abstract class _TxOptions implements TxOptions {
   factory _TxOptions(
       {required final String feePerGas,
       final int feeIncrementPercentage,
+      final bool isIndependentTransaction,
       required final bool withRetry}) = _$TxOptionsImpl;
 
   factory _TxOptions.fromJson(Map<String, dynamic> json) =
@@ -184,6 +211,8 @@ abstract class _TxOptions implements TxOptions {
   String get feePerGas;
   @override
   int get feeIncrementPercentage;
+  @override
+  bool get isIndependentTransaction;
   @override
   bool get withRetry;
   @override
