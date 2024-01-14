@@ -10,6 +10,7 @@ _$TxOptionsImpl _$$TxOptionsImplFromJson(Map<String, dynamic> json) =>
     _$TxOptionsImpl(
       feePerGas: json['feePerGas'] as String,
       feeIncrementPercentage: json['feeIncrementPercentage'] as int? ?? 10,
+      useNonceSequence: json['useNonceSequence'] as bool? ?? false,
       withRetry: json['withRetry'] as bool,
     );
 
@@ -17,5 +18,6 @@ Map<String, dynamic> _$$TxOptionsImplToJson(_$TxOptionsImpl instance) =>
     <String, dynamic>{
       'feePerGas': instance.feePerGas,
       'feeIncrementPercentage': instance.feeIncrementPercentage,
+      'useNonceSequence': instance.useNonceSequence,
       'withRetry': instance.withRetry,
     };

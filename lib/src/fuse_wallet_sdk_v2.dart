@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 import 'package:fuse_wallet_sdk/src/modules/modules.dart';
+import 'package:fuse_wallet_sdk/src/utils/nonce_manager.dart';
 import 'package:web3dart/crypto.dart';
 import 'package:web3dart/json_rpc.dart';
 
@@ -26,6 +27,7 @@ class FuseSDK {
             },
           ),
         ) {
+    _nonceManager = NonceManager();
     _initializeModules();
   }
 
@@ -50,6 +52,7 @@ class FuseSDK {
   late TradeModule _tradeModule;
   late StakingModule _stakingModule;
   late NftModule _nftModule;
+  late final NonceManager _nonceManager;
 
   /// Provides access to the explorer module.
   ExplorerModule get explorerModule => _explorerModule;
@@ -249,6 +252,11 @@ class FuseSDK {
     options ??= defaultTxOptions;
     final initialFee = BigInt.parse(options.feePerGas);
     setWalletFees(initialFee);
+
+    if (options.useNonceSequence) {
+      _nonceManager.increment();
+      wallet.nonceKey = _nonceManager.retrieve();
+    }
 
     try {
       final userOp = await wallet.executeBatch(calls);
@@ -632,9 +640,13 @@ class FuseSDK {
     final initialFee = BigInt.parse(options.feePerGas);
     setWalletFees(initialFee);
 
+    if (options.useNonceSequence) {
+      _nonceManager.increment();
+      wallet.nonceKey = _nonceManager.retrieve();
+    }
+
     try {
       final userOp = await wallet.execute(call);
-      print(userOp.getOp().toJson());
 
       return await client.sendUserOperation(userOp);
     } on RPCError catch (e) {
@@ -764,6 +776,7 @@ class FuseSDK {
         ..salt = opts?.salt
         ..factoryAddress = opts?.factoryAddress
         ..paymasterMiddleware = opts?.paymasterMiddleware ?? paymasterMiddleware
+        ..nonceKey = opts?.nonceKey
         ..overrideBundlerRpc = opts?.overrideBundlerRpc,
     );
   }

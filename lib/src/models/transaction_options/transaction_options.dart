@@ -22,6 +22,14 @@ class TxOptions with _$TxOptions {
   /// dictates how much more expensive the retry should be, in terms of gas. Note: The
   /// protocol generally mandates that the new gas price should be at least 10% higher
   /// than the previous to ensure a retry gets picked up by miners.
+  /// 
+  /// - [useNonceSequence]: This flag indicates whether a transaction should be sent
+  /// in parallel.
+  /// This maintains the security and order of transactions (like preventing 
+  /// replay attacks) while giving users more control over how their transactions 
+  /// are processed and organized. This is particularly useful for complex accounts,
+  /// like smart contract wallets, which might need to manage different types of
+  /// transactions in different ways.
   ///
   /// - [withRetry]: This flag indicates whether a transaction should be reattempted
   /// if it fails initially. If set to `true`, the transaction fee (or gas price)
@@ -29,6 +37,7 @@ class TxOptions with _$TxOptions {
   factory TxOptions({
     required String feePerGas,
     @Default(10) int feeIncrementPercentage,
+    @Default(false) bool useNonceSequence,
     required bool withRetry,
   }) = _TxOptions;
 

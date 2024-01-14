@@ -1,3 +1,8 @@
+## [0.2.12]
+
+### Added
+- Introduced a new property, `useNonceSequence`, to `TxOptions` for facilitating the use of two-dimensional nonces.
+
 ## [0.2.11]
 
 ### Added
