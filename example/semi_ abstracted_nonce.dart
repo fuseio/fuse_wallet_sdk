@@ -11,7 +11,7 @@ void main() async {
     credentials,
   );
 
-  final res = await fuseSDK.transferToken(
+  await fuseSDK.transferToken(
     EthereumAddress.fromHex(Variables.NATIVE_TOKEN_ADDRESS),
     EthereumAddress.fromHex('RECIPIENT_ADDRESS'),
     BigInt.parse('AMOUNT_IN_WEI'),
@@ -19,10 +19,14 @@ void main() async {
       useNonceSequence: true,
     ),
   );
-  print('UserOpHash: ${res.userOpHash}');
+  await fuseSDK.transferToken(
+    EthereumAddress.fromHex(Variables.NATIVE_TOKEN_ADDRESS),
+    EthereumAddress.fromHex('RECIPIENT_ADDRESS'),
+    BigInt.parse('AMOUNT_IN_WEI'),
+    FuseSDK.defaultTxOptions.copyWith(
+      useNonceSequence: true,
+    ),
+  );
 
-  print('Waiting for transaction...');
-  final ev = await res.wait();
-  print('Transaction hash: ${ev?.transactionHash}');
   exit(1);
 }
