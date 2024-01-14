@@ -29,7 +29,7 @@ class TxOptions with _$TxOptions {
   factory TxOptions({
     required String feePerGas,
     @Default(10) int feeIncrementPercentage,
-    @Default(false) bool isIndependentTransaction,
+    @Default(false) bool useNonceSequence,
     required bool withRetry,
   }) = _TxOptions;
 

@@ -16,7 +16,7 @@ void main() async {
     EthereumAddress.fromHex('RECIPIENT_ADDRESS'),
     BigInt.parse('AMOUNT_IN_WEI'),
     FuseSDK.defaultTxOptions.copyWith(
-      isIndependentTransaction: true,
+      useNonceSequence: true,
     ),
   );
   print('UserOpHash: ${res.userOpHash}');

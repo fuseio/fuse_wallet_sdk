@@ -253,7 +253,7 @@ class FuseSDK {
     final initialFee = BigInt.parse(options.feePerGas);
     setWalletFees(initialFee);
 
-    if (options.isIndependentTransaction) {
+    if (options.useNonceSequence) {
       _nonceManager.increment();
       wallet.nonceKey = _nonceManager.retrieve();
     }
@@ -640,7 +640,7 @@ class FuseSDK {
     final initialFee = BigInt.parse(options.feePerGas);
     setWalletFees(initialFee);
 
-    if (options.isIndependentTransaction) {
+    if (options.useNonceSequence) {
       _nonceManager.increment();
       wallet.nonceKey = _nonceManager.retrieve();
     }
