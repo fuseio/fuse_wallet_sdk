@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:synchronized/synchronized.dart';
+import 'package:web3dart/crypto.dart';
+import 'package:web3dart/json_rpc.dart';
+
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 import 'package:fuse_wallet_sdk/src/modules/modules.dart';
 import 'package:fuse_wallet_sdk/src/utils/nonce_manager.dart';
-import 'package:web3dart/crypto.dart';
-import 'package:web3dart/json_rpc.dart';
 
 /// The main SDK class for interacting with FuseBox.
 ///
@@ -27,7 +29,6 @@ class FuseSDK {
             },
           ),
         ) {
-    _nonceManager = NonceManager();
     _initializeModules();
   }
 
@@ -53,6 +54,7 @@ class FuseSDK {
   late StakingModule _stakingModule;
   late NftModule _nftModule;
   late final NonceManager _nonceManager;
+  late final Lock _nonceLock;
 
   /// Provides access to the explorer module.
   ExplorerModule get explorerModule => _explorerModule;
@@ -68,6 +70,8 @@ class FuseSDK {
 
   /// Initializes the modules.
   void _initializeModules() {
+    _nonceLock = Lock();
+    _nonceManager = NonceManager();
     _tradeModule = TradeModule(_dio);
     _explorerModule = ExplorerModule(_dio);
     _stakingModule = StakingModule(_dio);
@@ -248,39 +252,47 @@ class FuseSDK {
   Future<ISendUserOperationResponse> executeBatch(
     List<Call> calls, [
     TxOptions? options,
-  ]) async {
-    options ??= defaultTxOptions;
-    final initialFee = BigInt.parse(options.feePerGas);
-    setWalletFees(initialFee);
-
-    if (options.useNonceSequence) {
-      _nonceManager.increment();
-      wallet.nonceKey = _nonceManager.retrieve();
-    }
-
-    try {
-      final userOp = await wallet.executeBatch(calls);
-
-      return await client.sendUserOperation(userOp);
-    } on RPCError catch (e) {
-      if (e.message.contains(_feeTooLowError) && options.withRetry) {
-        final increasedFee = _increaseFeeByPercentage(
-          initialFee,
-          options.feeIncrementPercentage,
+  ]) {
+    return _nonceLock.synchronized(
+      () async {
+        options ??= defaultTxOptions;
+        final initialFee = BigInt.parse(
+          options?.feePerGas ?? defaultTxOptions.feePerGas,
         );
-        setWalletFees(increasedFee);
+        setWalletFees(initialFee);
+
+        if (options?.useNonceSequence ?? defaultTxOptions.useNonceSequence) {
+          _nonceManager.increment();
+          wallet.nonceKey = _nonceManager.retrieve();
+        }
 
         try {
-          final userOpRetry = await wallet.executeBatch(calls);
+          final userOp = await wallet.executeBatch(calls);
 
-          return await client.sendUserOperation(userOpRetry);
-        } catch (e) {
-          rethrow;
+          return await client.sendUserOperation(userOp);
+        } on RPCError catch (e) {
+          if ((options?.withRetry ?? defaultTxOptions.withRetry) &&
+              e.message.contains(_feeTooLowError)) {
+            final increasedFee = _increaseFeeByPercentage(
+              initialFee,
+              options?.feeIncrementPercentage ??
+                  defaultTxOptions.feeIncrementPercentage,
+            );
+            setWalletFees(increasedFee);
+
+            try {
+              final userOpRetry = await wallet.executeBatch(calls);
+
+              return await client.sendUserOperation(userOpRetry);
+            } catch (e) {
+              rethrow;
+            }
+          } else {
+            rethrow;
+          }
         }
-      } else {
-        rethrow;
-      }
-    }
+      },
+    );
   }
 
   /// Approves the [spender] to withdraw or transfer a certain [amount] of tokens on behalf of the user's address.
@@ -636,37 +648,45 @@ class FuseSDK {
     Call call, [
     TxOptions? options,
   ]) async {
-    options ??= defaultTxOptions;
-    final initialFee = BigInt.parse(options.feePerGas);
-    setWalletFees(initialFee);
-
-    if (options.useNonceSequence) {
-      _nonceManager.increment();
-      wallet.nonceKey = _nonceManager.retrieve();
-    }
-
-    try {
-      final userOp = await wallet.execute(call);
-
-      return await client.sendUserOperation(userOp);
-    } on RPCError catch (e) {
-      if (e.message.contains(_feeTooLowError) && options.withRetry) {
-        final increasedFee = _increaseFeeByPercentage(
-          initialFee,
-          options.feeIncrementPercentage,
+    return _nonceLock.synchronized(
+      () async {
+        options ??= defaultTxOptions;
+        final initialFee = BigInt.parse(
+          options?.feePerGas ?? defaultTxOptions.feePerGas,
         );
-        setWalletFees(increasedFee);
+        setWalletFees(initialFee);
+
+        if (options?.useNonceSequence ?? defaultTxOptions.useNonceSequence) {
+          _nonceManager.increment();
+          wallet.nonceKey = _nonceManager.retrieve();
+        }
 
         try {
-          final userOpRetry = await wallet.execute(call);
-          return await client.sendUserOperation(userOpRetry);
-        } catch (e) {
-          rethrow;
+          final userOp = await wallet.execute(call);
+
+          return await client.sendUserOperation(userOp);
+        } on RPCError catch (e) {
+          if ((options?.withRetry ?? defaultTxOptions.withRetry) &&
+              e.message.contains(_feeTooLowError)) {
+            final increasedFee = _increaseFeeByPercentage(
+              initialFee,
+              options?.feeIncrementPercentage ??
+                  defaultTxOptions.feeIncrementPercentage,
+            );
+            setWalletFees(increasedFee);
+
+            try {
+              final userOpRetry = await wallet.execute(call);
+              return await client.sendUserOperation(userOpRetry);
+            } catch (e) {
+              rethrow;
+            }
+          } else {
+            rethrow;
+          }
         }
-      } else {
-        rethrow;
-      }
-    }
+      },
+    );
   }
 
   /// Processes a token operation, either executing it directly or approving and then executing.

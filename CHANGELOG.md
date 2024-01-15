@@ -1,3 +1,8 @@
+## [0.2.13]
+
+### Fixed
+- Use a lock to ensure only one execution accesses the nonce at a time.
+
 ## [0.2.12]
 
 ### Added
