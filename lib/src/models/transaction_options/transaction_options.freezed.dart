@@ -23,6 +23,7 @@ mixin _$TxOptions {
   String get feePerGas => throw _privateConstructorUsedError;
   int get feeIncrementPercentage => throw _privateConstructorUsedError;
   bool get useNonceSequence => throw _privateConstructorUsedError;
+  BigInt? get customNonceKey => throw _privateConstructorUsedError;
   bool get withRetry => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,6 +41,7 @@ abstract class $TxOptionsCopyWith<$Res> {
       {String feePerGas,
       int feeIncrementPercentage,
       bool useNonceSequence,
+      BigInt? customNonceKey,
       bool withRetry});
 }
 
@@ -59,6 +61,7 @@ class _$TxOptionsCopyWithImpl<$Res, $Val extends TxOptions>
     Object? feePerGas = null,
     Object? feeIncrementPercentage = null,
     Object? useNonceSequence = null,
+    Object? customNonceKey = freezed,
     Object? withRetry = null,
   }) {
     return _then(_value.copyWith(
@@ -74,6 +77,10 @@ class _$TxOptionsCopyWithImpl<$Res, $Val extends TxOptions>
           ? _value.useNonceSequence
           : useNonceSequence // ignore: cast_nullable_to_non_nullable
               as bool,
+      customNonceKey: freezed == customNonceKey
+          ? _value.customNonceKey
+          : customNonceKey // ignore: cast_nullable_to_non_nullable
+              as BigInt?,
       withRetry: null == withRetry
           ? _value.withRetry
           : withRetry // ignore: cast_nullable_to_non_nullable
@@ -94,6 +101,7 @@ abstract class _$$TxOptionsImplCopyWith<$Res>
       {String feePerGas,
       int feeIncrementPercentage,
       bool useNonceSequence,
+      BigInt? customNonceKey,
       bool withRetry});
 }
 
@@ -111,6 +119,7 @@ class __$$TxOptionsImplCopyWithImpl<$Res>
     Object? feePerGas = null,
     Object? feeIncrementPercentage = null,
     Object? useNonceSequence = null,
+    Object? customNonceKey = freezed,
     Object? withRetry = null,
   }) {
     return _then(_$TxOptionsImpl(
@@ -126,6 +135,10 @@ class __$$TxOptionsImplCopyWithImpl<$Res>
           ? _value.useNonceSequence
           : useNonceSequence // ignore: cast_nullable_to_non_nullable
               as bool,
+      customNonceKey: freezed == customNonceKey
+          ? _value.customNonceKey
+          : customNonceKey // ignore: cast_nullable_to_non_nullable
+              as BigInt?,
       withRetry: null == withRetry
           ? _value.withRetry
           : withRetry // ignore: cast_nullable_to_non_nullable
@@ -141,6 +154,7 @@ class _$TxOptionsImpl implements _TxOptions {
       {required this.feePerGas,
       this.feeIncrementPercentage = 10,
       this.useNonceSequence = false,
+      this.customNonceKey,
       required this.withRetry});
 
   factory _$TxOptionsImpl.fromJson(Map<String, dynamic> json) =>
@@ -155,11 +169,13 @@ class _$TxOptionsImpl implements _TxOptions {
   @JsonKey()
   final bool useNonceSequence;
   @override
+  final BigInt? customNonceKey;
+  @override
   final bool withRetry;
 
   @override
   String toString() {
-    return 'TxOptions(feePerGas: $feePerGas, feeIncrementPercentage: $feeIncrementPercentage, useNonceSequence: $useNonceSequence, withRetry: $withRetry)';
+    return 'TxOptions(feePerGas: $feePerGas, feeIncrementPercentage: $feeIncrementPercentage, useNonceSequence: $useNonceSequence, customNonceKey: $customNonceKey, withRetry: $withRetry)';
   }
 
   @override
@@ -173,6 +189,8 @@ class _$TxOptionsImpl implements _TxOptions {
                 other.feeIncrementPercentage == feeIncrementPercentage) &&
             (identical(other.useNonceSequence, useNonceSequence) ||
                 other.useNonceSequence == useNonceSequence) &&
+            (identical(other.customNonceKey, customNonceKey) ||
+                other.customNonceKey == customNonceKey) &&
             (identical(other.withRetry, withRetry) ||
                 other.withRetry == withRetry));
   }
@@ -180,7 +198,7 @@ class _$TxOptionsImpl implements _TxOptions {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, feePerGas,
-      feeIncrementPercentage, useNonceSequence, withRetry);
+      feeIncrementPercentage, useNonceSequence, customNonceKey, withRetry);
 
   @JsonKey(ignore: true)
   @override
@@ -201,6 +219,7 @@ abstract class _TxOptions implements TxOptions {
       {required final String feePerGas,
       final int feeIncrementPercentage,
       final bool useNonceSequence,
+      final BigInt? customNonceKey,
       required final bool withRetry}) = _$TxOptionsImpl;
 
   factory _TxOptions.fromJson(Map<String, dynamic> json) =
@@ -212,6 +231,8 @@ abstract class _TxOptions implements TxOptions {
   int get feeIncrementPercentage;
   @override
   bool get useNonceSequence;
+  @override
+  BigInt? get customNonceKey;
   @override
   bool get withRetry;
   @override

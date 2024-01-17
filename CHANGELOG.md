@@ -1,3 +1,8 @@
+## [0.2.14]
+
+### Added
+- Introduced a new property to the `txOptions` object, `customNonceKey`, which gives account holders greater control over the semi-abstracted nonce system.
+
 ## [0.2.13]
 
 ### Fixed

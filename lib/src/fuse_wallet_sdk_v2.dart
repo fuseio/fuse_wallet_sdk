@@ -263,7 +263,7 @@ class FuseSDK {
 
         if (options?.useNonceSequence ?? defaultTxOptions.useNonceSequence) {
           _nonceManager.increment();
-          wallet.nonceKey = _nonceManager.retrieve();
+          wallet.nonceKey = options?.customNonceKey ?? _nonceManager.retrieve();
         }
 
         try {
@@ -658,7 +658,7 @@ class FuseSDK {
 
         if (options?.useNonceSequence ?? defaultTxOptions.useNonceSequence) {
           _nonceManager.increment();
-          wallet.nonceKey = _nonceManager.retrieve();
+          wallet.nonceKey = options?.customNonceKey ?? _nonceManager.retrieve();
         }
 
         try {
