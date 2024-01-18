@@ -31,6 +31,10 @@ class TxOptions with _$TxOptions {
   /// like smart contract wallets, which might need to manage different types of
   /// transactions in different ways.
   ///
+  /// - [customNonceKey]: This parameter is used to specify a custom nonce key for a
+  /// user operation. This is useful for smart contract wallets that need to manage
+  /// multiple transactions in parallel.
+  /// 
   /// - [withRetry]: This flag indicates whether a transaction should be reattempted
   /// if it fails initially. If set to `true`, the transaction fee (or gas price)
   /// will be increased by the [feeIncrementPercentage] before the retry.
@@ -38,6 +42,7 @@ class TxOptions with _$TxOptions {
     required String feePerGas,
     @Default(10) int feeIncrementPercentage,
     @Default(false) bool useNonceSequence,
+    BigInt? customNonceKey,
     required bool withRetry,
   }) = _TxOptions;
 
