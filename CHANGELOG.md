@@ -1,3 +1,8 @@
+## [0.2.15]
+
+### Changed
+- Instead of retrieving the ERC-20 information from the explorer, it now fetches it directly via RPC
+
 ## [0.2.14]
 
 ### Added

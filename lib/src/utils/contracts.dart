@@ -5,6 +5,7 @@ import 'package:web3dart/web3dart.dart';
 
 import 'package:fuse_wallet_sdk/src/constants/abis.dart';
 import 'package:fuse_wallet_sdk/src/constants/variables.dart';
+import 'package:fuse_wallet_sdk/src/models/models.dart';
 import 'package:fuse_wallet_sdk/src/utils/crypto.dart';
 
 /// A utility class providing methods to interact with contracts.
@@ -184,6 +185,45 @@ class ContractsUtils {
       'approve',
       [spender, amount],
     );
+  }
+
+  /// Retrieves detailed information about an ERC20 token.
+  ///
+  /// This method fetches the name, symbol, and decimals of an ERC20 token using its address.
+  /// If the provided [tokenAddress] matches the native token address, it returns a native token with zero amount.
+  ///
+  /// [tokenAddress] is the address of the ERC20 token.
+  ///
+  /// Returns a [TokenDetails] object containing the token's name, symbol, decimals, and other relevant details.
+  static Future<TokenDetails> getERC20TokenDetails(
+    Web3Client web3client,
+    EthereumAddress tokenAddress,
+  ) async {
+    if (tokenAddress.toString().toLowerCase() ==
+        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
+      return TokenDetails.native(amount: BigInt.zero);
+    }
+    final toRead = ['name', 'symbol', 'decimals'];
+    final token = await Future.wait(
+      toRead.map(
+        (function) => ContractsUtils.readFromContract(
+          web3client,
+          'ERC20',
+          tokenAddress,
+          function,
+          [],
+        ),
+      ),
+    );
+
+    return TokenDetails.fromJson({
+      'contractAddress': tokenAddress.toString(),
+      'name': token[0].first,
+      'symbol': token[1].first,
+      'decimals': token[2].first.toString(),
+      'balance': '0',
+      'type': 'ERC-20'
+    });
   }
 
   /// Encodes the data for an ERC721 'approve' operation.

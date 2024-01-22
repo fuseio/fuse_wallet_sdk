@@ -173,7 +173,7 @@ class FuseWalletSDK {
   }
 
   DC<Exception, Stream<SmartWalletEvent>>
-  _handleDioErrorOccurredWhileCreatingWallet(DioException exception) {
+      _handleDioErrorOccurredWhileCreatingWallet(DioException exception) {
     final response = exception.response;
 
     if (response == null) {
@@ -272,15 +272,14 @@ class FuseWalletSDK {
     String transactionData = '0x',
     String? externalId,
   }) async {
-    final tokenDetailsRes = await _explorerModule.getTokenDetails(tokenAddress);
-
-    if (tokenDetailsRes.hasError) {
-      return DC.error(tokenDetailsRes.error!);
-    }
+    final tokenDetailsRes = await ContractsUtils.getERC20TokenDetails(
+      web3client,
+      EthereumAddress.fromHex(tokenAddress),
+    );
 
     final BigInt amount = AmountFormat.toBigInt(
       value,
-      tokenDetailsRes.data!.decimals,
+      tokenDetailsRes.decimals,
     );
 
     final String walletModule = 'TransferManager';
@@ -313,11 +312,11 @@ class FuseWalletSDK {
       "to": recipientAddress,
       "value": amount.toString(),
       'type': 'SEND',
-      "asset": tokenDetailsRes.data?.symbol,
-      'tokenName': tokenDetailsRes.data?.name,
-      "tokenSymbol": tokenDetailsRes.data?.symbol,
-      'tokenDecimal': tokenDetailsRes.data?.decimals,
-      'tokenAddress': tokenDetailsRes.data?.address,
+      "asset": tokenDetailsRes.symbol,
+      'tokenName': tokenDetailsRes.name,
+      "tokenSymbol": tokenDetailsRes.symbol,
+      'tokenDecimal': tokenDetailsRes.decimals,
+      'tokenAddress': tokenDetailsRes.address,
     });
 
     final Relay relayDto = Relay(
@@ -442,15 +441,14 @@ class FuseWalletSDK {
     String value, {
     Map<String, dynamic>? transactionBody,
   }) async {
-    final tokenDetailsRes = await _explorerModule.getTokenDetails(tokenAddress);
-
-    if (tokenDetailsRes.hasError) {
-      return DC.error(tokenDetailsRes.error!);
-    }
+    final tokenDetailsRes = await ContractsUtils.getERC20TokenDetails(
+      web3client,
+      EthereumAddress.fromHex(tokenAddress),
+    );
 
     final BigInt amount = AmountFormat.toBigInt(
       value,
-      tokenDetailsRes.data!.decimals,
+      tokenDetailsRes.decimals,
     );
 
     final String walletModule = 'TransferManager';
@@ -545,17 +543,14 @@ class FuseWalletSDK {
     String encodedData, {
     Map<String, dynamic>? transactionBody,
   }) async {
-    final tokenDetailsRes = await _explorerModule.getTokenDetails(
-      tokenAddress,
+    final tokenDetailsRes = await ContractsUtils.getERC20TokenDetails(
+      web3client,
+      EthereumAddress.fromHex(tokenAddress),
     );
-
-    if (tokenDetailsRes.hasError) {
-      return DC.error(tokenDetailsRes.error!);
-    }
 
     final BigInt amount = AmountFormat.toBigInt(
       value,
-      tokenDetailsRes.data!.decimals,
+      tokenDetailsRes.decimals,
     );
 
     final String walletModule = 'TransferManager';
@@ -626,13 +621,12 @@ class FuseWalletSDK {
         transactionBody: transactionBody,
       );
     } else {
-      final tokenDetailsRes = await _explorerModule.getTokenDetails(
-        tradeRequestBody.currencyIn,
+      final tokenDetailsRes = await ContractsUtils.getERC20TokenDetails(
+        web3client,
+        EthereumAddress.fromHex(
+          tradeRequestBody.currencyIn,
+        ),
       );
-
-      if (tokenDetailsRes.hasError) {
-        return DC.error(tokenDetailsRes.error!);
-      }
 
       return approveTokenAndCallContract(
         credentials,
@@ -640,7 +634,7 @@ class FuseWalletSDK {
         swapCallParameters.data?.rawTxn['to'],
         AmountFormat.formatValue(
           BigInt.parse(swapCallParameters.data!.args.first),
-          tokenDetailsRes.data!.decimals,
+          tokenDetailsRes.decimals,
         ),
         data,
         transactionBody: transactionBody,
@@ -658,17 +652,16 @@ class FuseWalletSDK {
       return DC.error(response.error!);
     }
 
-    final tokenDetailsRes = await _explorerModule.getTokenDetails(
-      stakeRequestBody.tokenAddress,
+    final tokenDetailsRes = await ContractsUtils.getERC20TokenDetails(
+      web3client,
+      EthereumAddress.fromHex(
+        stakeRequestBody.tokenAddress,
+      ),
     );
-
-    if (tokenDetailsRes.hasError) {
-      return DC.error(tokenDetailsRes.error!);
-    }
 
     final BigInt amount = AmountFormat.toBigInt(
       stakeRequestBody.tokenAmount,
-      tokenDetailsRes.data!.decimals,
+      tokenDetailsRes.decimals,
     );
 
     final String data = strip0x(response.data!.encodedABI);
@@ -701,17 +694,16 @@ class FuseWalletSDK {
     if (response.hasError) {
       return DC.error(response.error!);
     }
-    final tokenDetailsRes = await _explorerModule.getTokenDetails(
-      unstakeRequestBody.tokenAddress,
+    final tokenDetailsRes = await ContractsUtils.getERC20TokenDetails(
+      web3client,
+      EthereumAddress.fromHex(
+        unstakeRequestBody.tokenAddress,
+      ),
     );
-
-    if (tokenDetailsRes.hasError) {
-      return DC.error(tokenDetailsRes.error!);
-    }
 
     final BigInt amount = AmountFormat.toBigInt(
       unstakeRequestBody.tokenAmount,
-      tokenDetailsRes.data!.decimals,
+      tokenDetailsRes.decimals,
     );
     final Map<String, dynamic> transactionBody = {
       "status": 'pending',
