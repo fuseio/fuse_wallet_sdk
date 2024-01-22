@@ -1,3 +1,8 @@
+## [0.2.16]
+
+### Changed
+- Upgrade dependencies.
+
 ## [0.2.15]
 
 ### Changed
