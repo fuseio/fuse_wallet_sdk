@@ -425,7 +425,8 @@ class FuseSDK {
 
     final callData = hexToBytes(rawTxn['data']);
 
-    var TokenDetails(:decimals) = await getERC20TokenDetails(
+    var TokenDetails(:decimals) = await ContractsUtils.getERC20TokenDetails(
+      wallet.proxy.client,
       EthereumAddress.fromHex(currencyIn),
     );
 
@@ -460,7 +461,8 @@ class FuseSDK {
 
     var StakeResponseBody(:contractAddress, :encodedABI) = data!;
 
-    var TokenDetails(:decimals) = await getERC20TokenDetails(
+    var TokenDetails(:decimals) = await ContractsUtils.getERC20TokenDetails(
+      wallet.proxy.client,
       EthereumAddress.fromHex(tokenAddress),
     );
 
@@ -502,7 +504,8 @@ class FuseSDK {
 
     var UnstakeResponseBody(:contractAddress, :encodedABI) = data!;
 
-    var TokenDetails(:decimals) = await getERC20TokenDetails(
+    var TokenDetails(:decimals) = await ContractsUtils.getERC20TokenDetails(
+      wallet.proxy.client,
       EthereumAddress.fromHex(unstakeRequestBody.tokenAddress),
     );
 
@@ -580,44 +583,6 @@ class FuseSDK {
         spender,
       ],
     );
-  }
-
-  /// Retrieves detailed information about an ERC20 token.
-  ///
-  /// This method fetches the name, symbol, and decimals of an ERC20 token using its address.
-  /// If the provided [tokenAddress] matches the native token address, it returns a native token with zero amount.
-  ///
-  /// [tokenAddress] is the address of the ERC20 token.
-  ///
-  /// Returns a [TokenDetails] object containing the token's name, symbol, decimals, and other relevant details.
-  Future<TokenDetails> getERC20TokenDetails(
-    EthereumAddress tokenAddress,
-  ) async {
-    if (tokenAddress.toString().toLowerCase() ==
-        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
-      return TokenDetails.native(amount: BigInt.zero);
-    }
-    final toRead = ['name', 'symbol', 'decimals'];
-    final token = await Future.wait(
-      toRead.map(
-        (function) => ContractsUtils.readFromContract(
-          wallet.proxy.client,
-          'ERC20',
-          tokenAddress,
-          function,
-          [],
-        ),
-      ),
-    );
-
-    return TokenDetails.fromJson({
-      'contractAddress': tokenAddress.toString(),
-      'name': token[0].first,
-      'symbol': token[1].first,
-      'decimals': token[2].first.toString(),
-      'balance': '0',
-      'type': 'ERC-20'
-    });
   }
 
   /// Checks if the given [address] is the native token's address.
