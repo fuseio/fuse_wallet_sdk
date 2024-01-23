@@ -524,6 +524,15 @@ class FuseSDK {
     );
   }
 
+  /// Retrieves the native Ether balance for the provided address.
+  ///
+  /// This function fetches the native Ether balance of the provided Ethereum address using
+  /// the web3 client.
+  ///
+  /// Parameters:
+  /// - [address]: The Ethereum address for which the native Ether balance is to be retrieved.
+  ///
+  /// Returns a [BigInt] representing the native Ether balance of the address.
   Future<BigInt> _getNativeBalance(
     EthereumAddress address,
   ) async {
