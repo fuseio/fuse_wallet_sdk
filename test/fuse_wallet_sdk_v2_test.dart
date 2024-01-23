@@ -1,5 +1,8 @@
 import 'package:test/test.dart';
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
+import 'package:mockito/mockito.dart';
+import 'package:web3dart/web3dart.dart';
+import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 
 void main() {
   group('_getNativeBalance', () {
@@ -22,6 +25,9 @@ void main() {
       // Call the _getNativeBalance method with a test address
       final address = EthereumAddress.fromHex('0x1234567890abcdef');
       final balance = await fuseSDK._getNativeBalance(address);
+
+      // Verify that the balance matches the expected balance
+      expect(balance, equals(expectedBalance));
 
       // Verify that the balance matches the expected balance
       expect(balance, equals(expectedBalance));
