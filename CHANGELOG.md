@@ -1,3 +1,8 @@
+## [0.2.17]
+
+### Fixed
+- Get balance for native token.
+
 ## [0.2.16]
 
 ### Changed

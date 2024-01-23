@@ -547,7 +547,7 @@ class FuseSDK {
     EthereumAddress tokenAddress,
     EthereumAddress address,
   ) async {
-    if (_isNativeToken(address.toString())) {
+    if (_isNativeToken(tokenAddress.toString())) {
       return _getNativeBalance(address);
     }
 
