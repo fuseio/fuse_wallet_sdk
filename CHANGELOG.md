@@ -1,3 +1,8 @@
+## [0.2.19]
+
+### Changed
+- Update dependencies.
+
 ## [0.2.18]
 
 ### Changed
