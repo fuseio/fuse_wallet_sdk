@@ -268,6 +268,7 @@ class FuseSDK {
         } on RPCError catch (e) {
           if ((options?.withRetry ?? defaultTxOptions.withRetry) &&
               e.message.contains(_feeTooLowError)) {
+            // Use eip1559GasPrice as soon as it's available on Fuse
             final gasPrices = await legacyGasPrice(wallet.proxy.client);
             final increasedFee = _increaseFeeByPercentage(
               gasPrices['maxFeePerGas'],
@@ -634,6 +635,7 @@ class FuseSDK {
         } on RPCError catch (e) {
           if ((options?.withRetry ?? defaultTxOptions.withRetry) &&
               e.message.contains(_feeTooLowError)) {
+            // Use eip1559GasPrice as soon as it's available on Fuse
             final gasPrices = await legacyGasPrice(wallet.proxy.client);
             final increasedFee = _increaseFeeByPercentage(
               gasPrices['maxFeePerGas'],
