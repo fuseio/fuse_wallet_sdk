@@ -14,10 +14,6 @@ part 'transaction_options.g.dart';
 class TxOptions with _$TxOptions {
   /// Constructs a [TxOptions] instance.
   ///
-  /// - [feePerGas]: Represents the gas price in a tiered fee structure. Typically,
-  /// blockchain transactions have a `maxFeePerGas` & `maxPriorityFeePerGas` to determine
-  /// the cost of a transaction.
-  ///
   /// - [feeIncrementPercentage]: If a transaction needs to be retried, this parameter
   /// dictates how much more expensive the retry should be, in terms of gas. Note: The
   /// protocol generally mandates that the new gas price should be at least 10% higher
@@ -39,7 +35,6 @@ class TxOptions with _$TxOptions {
   /// if it fails initially. If set to `true`, the transaction fee (or gas price)
   /// will be increased by the [feeIncrementPercentage] before the retry.
   factory TxOptions({
-    required String feePerGas,
     @Default(10) int feeIncrementPercentage,
     @Default(false) bool useNonceSequence,
     BigInt? customNonceKey,
