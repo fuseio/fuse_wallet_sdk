@@ -206,7 +206,6 @@ final res = await fuseSDK.transferToken(
     EthereumAddress.fromHex('RECIPIENT_ADDRESS'),
     BigInt.parse('AMOUNT_IN_WEI'),
     FuseSDK.defaultTxOptions.copyWith(
-      feePerGas: '2000000',
       withRetry: true,
       feeIncrementPercentage: 11,
     ),

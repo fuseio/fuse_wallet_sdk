@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:fuse_wallet_sdk/fuse_wallet_sdk.dart';
 
@@ -12,22 +11,31 @@ void main() async {
     credentials,
   );
 
+  final tokenAddress = EthereumAddress.fromHex('TOKEN_ADDRESS');
+  final recipientAddress = EthereumAddress.fromHex('RECIPIENT_ADDRESS');
+  final amountInWei = BigInt.parse('AMOUNT_IN_WEI');
+
+  // Approve and transfer ERC20 token in a single batch transaction
   final res = await fuseSDK.executeBatch(
     [
-      // Transfer Native Token call
+      // Approve ERC20 Token call
       Call(
-        to: EthereumAddress.fromHex('TARGET_ADDRESS'),
-        value: BigInt.parse('AMOUNT_IN_WEI'),
-        data: Uint8List(0),
+        to: tokenAddress,
+        value: BigInt.zero,
+        data: ContractsUtils.encodeERC20ApproveCall(
+          tokenAddress,
+          recipientAddress,
+          amountInWei,
+        ),
       ),
       // Transfer ERC20 Token call
       Call(
-        to: EthereumAddress.fromHex('TOKEN_ADDRESS'),
+        to: tokenAddress,
         value: BigInt.zero,
         data: ContractsUtils.encodeERC20TransferCall(
-          EthereumAddress.fromHex('TOKEN_ADDRESS'),
-          EthereumAddress.fromHex('RECIPIENT_ADDRESS'),
-          BigInt.parse('AMOUNT_IN_WEI'),
+          tokenAddress,
+          recipientAddress,
+          amountInWei,
         ),
       ),
     ],

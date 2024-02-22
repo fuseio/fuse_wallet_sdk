@@ -36,7 +36,6 @@ class FuseSDK {
 
   /// Default transaction options.
   static final TxOptions defaultTxOptions = TxOptions(
-    feePerGas: '10000000000',
     feeIncrementPercentage: 10,
     withRetry: false,
   );
@@ -256,10 +255,6 @@ class FuseSDK {
     return _nonceLock.synchronized(
       () async {
         options ??= defaultTxOptions;
-        final initialFee = BigInt.parse(
-          options?.feePerGas ?? defaultTxOptions.feePerGas,
-        );
-        setWalletFees(initialFee);
 
         if (options?.useNonceSequence ?? defaultTxOptions.useNonceSequence) {
           _nonceManager.increment();
@@ -273,8 +268,9 @@ class FuseSDK {
         } on RPCError catch (e) {
           if ((options?.withRetry ?? defaultTxOptions.withRetry) &&
               e.message.contains(_feeTooLowError)) {
+            final gasPrices = await legacyGasPrice(wallet.proxy.client);
             final increasedFee = _increaseFeeByPercentage(
-              initialFee,
+              gasPrices['maxFeePerGas'],
               options?.feeIncrementPercentage ??
                   defaultTxOptions.feeIncrementPercentage,
             );
@@ -625,10 +621,6 @@ class FuseSDK {
     return _nonceLock.synchronized(
       () async {
         options ??= defaultTxOptions;
-        final initialFee = BigInt.parse(
-          options?.feePerGas ?? defaultTxOptions.feePerGas,
-        );
-        setWalletFees(initialFee);
 
         if (options?.useNonceSequence ?? defaultTxOptions.useNonceSequence) {
           _nonceManager.increment();
@@ -642,8 +634,9 @@ class FuseSDK {
         } on RPCError catch (e) {
           if ((options?.withRetry ?? defaultTxOptions.withRetry) &&
               e.message.contains(_feeTooLowError)) {
+            final gasPrices = await legacyGasPrice(wallet.proxy.client);
             final increasedFee = _increaseFeeByPercentage(
-              initialFee,
+              gasPrices['maxFeePerGas'],
               options?.feeIncrementPercentage ??
                   defaultTxOptions.feeIncrementPercentage,
             );

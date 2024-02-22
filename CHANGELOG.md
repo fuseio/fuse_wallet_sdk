@@ -1,3 +1,9 @@
+## [0.2.20]
+
+### Changed
+- Update dependencies.
+- Removed `feePerGas` from `TxOptions` as it is no longer used. Instead of setting it manually, the SDK now fetches the current gas price from the network.
+
 ## [0.2.19]
 
 ### Changed

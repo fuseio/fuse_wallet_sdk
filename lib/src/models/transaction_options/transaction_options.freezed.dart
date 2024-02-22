@@ -12,7 +12,7 @@ part of 'transaction_options.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TxOptions _$TxOptionsFromJson(Map<String, dynamic> json) {
   return _TxOptions.fromJson(json);
@@ -20,7 +20,6 @@ TxOptions _$TxOptionsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TxOptions {
-  String get feePerGas => throw _privateConstructorUsedError;
   int get feeIncrementPercentage => throw _privateConstructorUsedError;
   bool get useNonceSequence => throw _privateConstructorUsedError;
   BigInt? get customNonceKey => throw _privateConstructorUsedError;
@@ -38,8 +37,7 @@ abstract class $TxOptionsCopyWith<$Res> {
       _$TxOptionsCopyWithImpl<$Res, TxOptions>;
   @useResult
   $Res call(
-      {String feePerGas,
-      int feeIncrementPercentage,
+      {int feeIncrementPercentage,
       bool useNonceSequence,
       BigInt? customNonceKey,
       bool withRetry});
@@ -58,17 +56,12 @@ class _$TxOptionsCopyWithImpl<$Res, $Val extends TxOptions>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? feePerGas = null,
     Object? feeIncrementPercentage = null,
     Object? useNonceSequence = null,
     Object? customNonceKey = freezed,
     Object? withRetry = null,
   }) {
     return _then(_value.copyWith(
-      feePerGas: null == feePerGas
-          ? _value.feePerGas
-          : feePerGas // ignore: cast_nullable_to_non_nullable
-              as String,
       feeIncrementPercentage: null == feeIncrementPercentage
           ? _value.feeIncrementPercentage
           : feeIncrementPercentage // ignore: cast_nullable_to_non_nullable
@@ -98,8 +91,7 @@ abstract class _$$TxOptionsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String feePerGas,
-      int feeIncrementPercentage,
+      {int feeIncrementPercentage,
       bool useNonceSequence,
       BigInt? customNonceKey,
       bool withRetry});
@@ -116,17 +108,12 @@ class __$$TxOptionsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? feePerGas = null,
     Object? feeIncrementPercentage = null,
     Object? useNonceSequence = null,
     Object? customNonceKey = freezed,
     Object? withRetry = null,
   }) {
     return _then(_$TxOptionsImpl(
-      feePerGas: null == feePerGas
-          ? _value.feePerGas
-          : feePerGas // ignore: cast_nullable_to_non_nullable
-              as String,
       feeIncrementPercentage: null == feeIncrementPercentage
           ? _value.feeIncrementPercentage
           : feeIncrementPercentage // ignore: cast_nullable_to_non_nullable
@@ -151,8 +138,7 @@ class __$$TxOptionsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TxOptionsImpl implements _TxOptions {
   _$TxOptionsImpl(
-      {required this.feePerGas,
-      this.feeIncrementPercentage = 10,
+      {this.feeIncrementPercentage = 10,
       this.useNonceSequence = false,
       this.customNonceKey,
       required this.withRetry});
@@ -160,8 +146,6 @@ class _$TxOptionsImpl implements _TxOptions {
   factory _$TxOptionsImpl.fromJson(Map<String, dynamic> json) =>
       _$$TxOptionsImplFromJson(json);
 
-  @override
-  final String feePerGas;
   @override
   @JsonKey()
   final int feeIncrementPercentage;
@@ -175,7 +159,7 @@ class _$TxOptionsImpl implements _TxOptions {
 
   @override
   String toString() {
-    return 'TxOptions(feePerGas: $feePerGas, feeIncrementPercentage: $feeIncrementPercentage, useNonceSequence: $useNonceSequence, customNonceKey: $customNonceKey, withRetry: $withRetry)';
+    return 'TxOptions(feeIncrementPercentage: $feeIncrementPercentage, useNonceSequence: $useNonceSequence, customNonceKey: $customNonceKey, withRetry: $withRetry)';
   }
 
   @override
@@ -183,8 +167,6 @@ class _$TxOptionsImpl implements _TxOptions {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TxOptionsImpl &&
-            (identical(other.feePerGas, feePerGas) ||
-                other.feePerGas == feePerGas) &&
             (identical(other.feeIncrementPercentage, feeIncrementPercentage) ||
                 other.feeIncrementPercentage == feeIncrementPercentage) &&
             (identical(other.useNonceSequence, useNonceSequence) ||
@@ -197,8 +179,8 @@ class _$TxOptionsImpl implements _TxOptions {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, feePerGas,
-      feeIncrementPercentage, useNonceSequence, customNonceKey, withRetry);
+  int get hashCode => Object.hash(runtimeType, feeIncrementPercentage,
+      useNonceSequence, customNonceKey, withRetry);
 
   @JsonKey(ignore: true)
   @override
@@ -216,8 +198,7 @@ class _$TxOptionsImpl implements _TxOptions {
 
 abstract class _TxOptions implements TxOptions {
   factory _TxOptions(
-      {required final String feePerGas,
-      final int feeIncrementPercentage,
+      {final int feeIncrementPercentage,
       final bool useNonceSequence,
       final BigInt? customNonceKey,
       required final bool withRetry}) = _$TxOptionsImpl;
@@ -225,8 +206,6 @@ abstract class _TxOptions implements TxOptions {
   factory _TxOptions.fromJson(Map<String, dynamic> json) =
       _$TxOptionsImpl.fromJson;
 
-  @override
-  String get feePerGas;
   @override
   int get feeIncrementPercentage;
   @override
