@@ -26,3 +26,6 @@ export 'trade/trade_request_body.dart';
 export 'trade/trade.dart';
 export 'wallet_modules/wallet_modules.dart';
 export 'wallet_upgrade/wallet_upgrade.dart';
+export 'user_op/user_op.dart';
+export 'user_op/erc20_transfers.dart';
+export 'user_op/erc721_transfers.dart';

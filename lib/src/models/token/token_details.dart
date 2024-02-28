@@ -28,7 +28,7 @@ BigInt amountFromJson(String? value) {
 
 String addressFromJson(String address) => address.toLowerCase();
 
-int _decimalsFromJson(String? decimals) =>
+int decimalsFromJson(String? decimals) =>
     decimals != null && decimals != '' ? int.parse(decimals) : 0;
 
 /// A class representing token details. It has different constructors for
@@ -150,7 +150,7 @@ class TokenDetails with _$TokenDetails {
     required String name,
     @Default(0)
     @JsonKey(
-      fromJson: _decimalsFromJson,
+      fromJson: decimalsFromJson,
     )
     int decimals,
     @JsonKey(
@@ -181,7 +181,7 @@ class TokenDetails with _$TokenDetails {
     )
     required String name,
     @JsonKey(
-      fromJson: _decimalsFromJson,
+      fromJson: decimalsFromJson,
     )
     required int decimals,
     @JsonKey(

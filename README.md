@@ -237,7 +237,7 @@ As we navigate through the details of this migration, we hope to provide you wit
 
 Before embarking on this migration journey with the new `fuse_wallet_sdk`, the process is made delightfully simple for our users. However, there's a minimal requirement you should be aware of:
 
-- **API Key**: The only prerequisite to utilize the updated SDK is to have a valid API key. If you haven't create one yet or need a new one, don't fret! Simply head over to our Developer's Console at https://developers.fuse.io/ and follow the straightforward steps to obtain your key.
+- **API Key**: The only prerequisite to utilize the updated SDK is to have a valid API key. If you haven't create one yet or need a new one, don't fret! Simply head over to our Developer's Console at https://console.fuse.io/build/ and follow the straightforward steps to obtain your key.
 
 With your API key in hand, you're all set to integrate and experience the enhanced capabilities of the `fuse_wallet_sdk`.
 
