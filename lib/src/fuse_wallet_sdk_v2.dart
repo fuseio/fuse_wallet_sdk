@@ -52,11 +52,15 @@ class FuseSDK {
   late TradeModule _tradeModule;
   late StakingModule _stakingModule;
   late NftModule _nftModule;
+  late GraphQLModule _graphQLModule;
   late final NonceManager _nonceManager;
   late final Lock _nonceLock;
 
   /// Provides access to the explorer module.
   ExplorerModule get explorerModule => _explorerModule;
+
+  /// Provides access to the graphQL module.
+  GraphQLModule get graphQLModule => _graphQLModule;
 
   /// Provides access to the trade module.
   TradeModule get tradeModule => _tradeModule;
@@ -75,6 +79,7 @@ class FuseSDK {
     _explorerModule = ExplorerModule(_dio);
     _stakingModule = StakingModule(_dio);
     _nftModule = NftModule(_dio);
+    _graphQLModule = GraphQLModule(_dio);
   }
 
   /// Initializes the SDK.
@@ -154,7 +159,6 @@ class FuseSDK {
   Future<WalletActionResult> getWalletActions({
     int page = 1,
     int limit = 10,
-    int? updatedAt,
     String? tokenAddress,
   }) async {
     final Map<String, dynamic> queryParameters = {

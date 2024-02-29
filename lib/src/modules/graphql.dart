@@ -3,11 +3,10 @@ import 'package:dio/dio.dart';
 
 import 'package:fuse_wallet_sdk/src/models/models.dart';
 
-@Deprecated('Use GraphQLModule instead')
-class NftModule {
+class GraphQLModule {
   final Dio _dio;
 
-  const NftModule(this._dio);
+  const GraphQLModule(this._dio);
 
   /// Retrieves the collectibles owned by a specified address.
   ///
@@ -35,6 +34,29 @@ class NftModule {
         }
       }
       return DC.error(Exception('Failed to fetch collectibles'));
+    } catch (e) {
+      return DC.error(Exception(e.toString()));
+    }
+  }
+
+  /// Retrieves a list of user operations by sender.
+  ///
+  /// Returns a `Future` that resolves to a `DC` (Data Container) object containing either a list of [UserOp] objects or an [Exception].
+  /// The [sender] parameter specifies the sender of the user operations to retrieve.
+  /// If the operation is successful, the list of user operations is returned.
+  /// If an error occurs, an [Exception] is returned.
+  Future<DC<Exception, List<UserOp>>> getUserOpsBySender(
+    String sender,
+  ) async {
+    try {
+      final Response result = await _dio.get(
+        '/v0/graphql/userops/$sender',
+      );
+      if (result.data?['data']['userOps'] == null) {
+        return DC.data([]);
+      } else {
+        return DC.data(UserOp.opsFromJson(result.data?['data']['userOps']));
+      }
     } catch (e) {
       return DC.error(Exception(e.toString()));
     }

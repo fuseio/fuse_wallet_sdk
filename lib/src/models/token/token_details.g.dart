@@ -95,7 +95,7 @@ _$ERC20Impl _$$ERC20ImplFromJson(Map<String, dynamic> json) => _$ERC20Impl(
       name: nameFromJson(json['name'] as String),
       decimals: json['decimals'] == null
           ? 0
-          : _decimalsFromJson(json['decimals'] as String?),
+          : decimalsFromJson(json['decimals'] as String?),
       address: addressFromJson(json['contractAddress'] as String),
       amount: BigInt.parse(json['balance'] as String),
       $type: json['type'] as String?,
@@ -114,7 +114,7 @@ Map<String, dynamic> _$$ERC20ImplToJson(_$ERC20Impl instance) =>
 _$ERC721Impl _$$ERC721ImplFromJson(Map<String, dynamic> json) => _$ERC721Impl(
       symbol: json['symbol'] as String,
       name: nameFromJson(json['name'] as String),
-      decimals: _decimalsFromJson(json['decimals'] as String?),
+      decimals: decimalsFromJson(json['decimals'] as String?),
       address: addressFromJson(json['contractAddress'] as String),
       amount: BigInt.parse(json['balance'] as String),
       $type: json['type'] as String?,
