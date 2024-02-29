@@ -1,3 +1,11 @@
+## [0.3.0]
+
+### Added
+- Introduced a new module, `GraphQLModule`, for interacting with the subgraphs on Fuse.
+
+### Changes
+- **Breaking Change:** The NFT has been marked as deprecated and will be removed in the next major release.
+
 ## [0.2.20]
 
 ### Changed
