@@ -6,21 +6,22 @@ void main() async {
   final credentials = EthPrivateKey.fromHex('WALLET_PRIVATE_KEY');
   // Create a project: https://console.fuse.io/build
   final publicApiKey = 'YOUR_PUBLIC_API_KEY';
+
   final fuseSDK = await FuseSDK.init(
     publicApiKey,
     credentials,
   );
 
-  final tokenId = 1;
-  final res = await fuseSDK.transferNFT(
-    EthereumAddress.fromHex('NFT_CONTRACT_ADDRESS'),
-    EthereumAddress.fromHex('RECIPIENT_ADDRESS'),
-    tokenId,
+  final userOpsResult = await fuseSDK.graphQLModule.getUserOpsBySender(
+    fuseSDK.wallet.getSender(),
   );
-  print('UserOpHash: ${res.userOpHash}');
+  if (userOpsResult.hasData) {
+    for (final userOp in userOpsResult.data!) {
+      print('https://explorer.fuse.io/tx/${userOp.transactionHash}');
+    }
+  } else {
+    print("Failed to fetch user operations: ${userOpsResult.error}");
+  }
 
-  print('Waiting for transaction...');
-  final ev = await res.wait();
-  print('Transaction hash: ${ev?.transactionHash}');
   exit(1);
 }

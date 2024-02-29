@@ -70,7 +70,7 @@ mixin _$TokenDetails {
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)
@@ -78,7 +78,7 @@ mixin _$TokenDetails {
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)
@@ -114,7 +114,7 @@ mixin _$TokenDetails {
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -122,7 +122,7 @@ mixin _$TokenDetails {
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -158,7 +158,7 @@ mixin _$TokenDetails {
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -166,7 +166,7 @@ mixin _$TokenDetails {
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -411,7 +411,7 @@ class _$NativeImpl extends Native {
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)
@@ -419,7 +419,7 @@ class _$NativeImpl extends Native {
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)
@@ -458,7 +458,7 @@ class _$NativeImpl extends Native {
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -466,7 +466,7 @@ class _$NativeImpl extends Native {
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -505,7 +505,7 @@ class _$NativeImpl extends Native {
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -513,7 +513,7 @@ class _$NativeImpl extends Native {
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -756,7 +756,7 @@ class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)
@@ -764,7 +764,7 @@ class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)
@@ -804,7 +804,7 @@ class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -812,7 +812,7 @@ class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -852,7 +852,7 @@ class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -860,7 +860,7 @@ class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -1104,7 +1104,7 @@ class _$BridgedTokenImpl extends BridgedToken {
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)
@@ -1112,7 +1112,7 @@ class _$BridgedTokenImpl extends BridgedToken {
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)
@@ -1151,7 +1151,7 @@ class _$BridgedTokenImpl extends BridgedToken {
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -1159,7 +1159,7 @@ class _$BridgedTokenImpl extends BridgedToken {
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -1198,7 +1198,7 @@ class _$BridgedTokenImpl extends BridgedToken {
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -1206,7 +1206,7 @@ class _$BridgedTokenImpl extends BridgedToken {
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -1449,7 +1449,7 @@ class _$MiscTokenImpl extends MiscToken {
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)
@@ -1457,7 +1457,7 @@ class _$MiscTokenImpl extends MiscToken {
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)
@@ -1496,7 +1496,7 @@ class _$MiscTokenImpl extends MiscToken {
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -1504,7 +1504,7 @@ class _$MiscTokenImpl extends MiscToken {
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -1543,7 +1543,7 @@ class _$MiscTokenImpl extends MiscToken {
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -1551,7 +1551,7 @@ class _$MiscTokenImpl extends MiscToken {
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -1656,7 +1656,7 @@ abstract class _$$ERC20ImplCopyWith<$Res>
   $Res call(
       {String symbol,
       @JsonKey(fromJson: nameFromJson) String name,
-      @JsonKey(fromJson: _decimalsFromJson) int decimals,
+      @JsonKey(fromJson: decimalsFromJson) int decimals,
       @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
       String address,
       @JsonKey(name: 'balance') BigInt amount});
@@ -1710,7 +1710,7 @@ class _$ERC20Impl extends ERC20 {
   const _$ERC20Impl(
       {required this.symbol,
       @JsonKey(fromJson: nameFromJson) required this.name,
-      @JsonKey(fromJson: _decimalsFromJson) this.decimals = 0,
+      @JsonKey(fromJson: decimalsFromJson) this.decimals = 0,
       @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
       required this.address,
       @JsonKey(name: 'balance') required this.amount,
@@ -1727,7 +1727,7 @@ class _$ERC20Impl extends ERC20 {
   @JsonKey(fromJson: nameFromJson)
   final String name;
   @override
-  @JsonKey(fromJson: _decimalsFromJson)
+  @JsonKey(fromJson: decimalsFromJson)
   final int decimals;
   @override
   @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
@@ -1798,7 +1798,7 @@ class _$ERC20Impl extends ERC20 {
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)
@@ -1806,7 +1806,7 @@ class _$ERC20Impl extends ERC20 {
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)
@@ -1845,7 +1845,7 @@ class _$ERC20Impl extends ERC20 {
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -1853,7 +1853,7 @@ class _$ERC20Impl extends ERC20 {
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -1892,7 +1892,7 @@ class _$ERC20Impl extends ERC20 {
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -1900,7 +1900,7 @@ class _$ERC20Impl extends ERC20 {
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -1968,7 +1968,7 @@ abstract class ERC20 extends TokenDetails implements IToken {
   const factory ERC20(
       {required final String symbol,
       @JsonKey(fromJson: nameFromJson) required final String name,
-      @JsonKey(fromJson: _decimalsFromJson) final int decimals,
+      @JsonKey(fromJson: decimalsFromJson) final int decimals,
       @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
       required final String address,
       @JsonKey(name: 'balance') required final BigInt amount}) = _$ERC20Impl;
@@ -1982,7 +1982,7 @@ abstract class ERC20 extends TokenDetails implements IToken {
   @JsonKey(fromJson: nameFromJson)
   String get name;
   @override
-  @JsonKey(fromJson: _decimalsFromJson)
+  @JsonKey(fromJson: decimalsFromJson)
   int get decimals;
   @override
   @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
@@ -2006,7 +2006,7 @@ abstract class _$$ERC721ImplCopyWith<$Res>
   $Res call(
       {String symbol,
       @JsonKey(fromJson: nameFromJson) String name,
-      @JsonKey(fromJson: _decimalsFromJson) int decimals,
+      @JsonKey(fromJson: decimalsFromJson) int decimals,
       @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
       String address,
       @JsonKey(name: 'balance') BigInt amount});
@@ -2060,7 +2060,7 @@ class _$ERC721Impl extends ERC721 {
   const _$ERC721Impl(
       {required this.symbol,
       @JsonKey(fromJson: nameFromJson) required this.name,
-      @JsonKey(fromJson: _decimalsFromJson) required this.decimals,
+      @JsonKey(fromJson: decimalsFromJson) required this.decimals,
       @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
       required this.address,
       @JsonKey(name: 'balance') required this.amount,
@@ -2077,7 +2077,7 @@ class _$ERC721Impl extends ERC721 {
   @JsonKey(fromJson: nameFromJson)
   final String name;
   @override
-  @JsonKey(fromJson: _decimalsFromJson)
+  @JsonKey(fromJson: decimalsFromJson)
   final int decimals;
   @override
   @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
@@ -2148,7 +2148,7 @@ class _$ERC721Impl extends ERC721 {
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)
@@ -2156,7 +2156,7 @@ class _$ERC721Impl extends ERC721 {
     required TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)
@@ -2195,7 +2195,7 @@ class _$ERC721Impl extends ERC721 {
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -2203,7 +2203,7 @@ class _$ERC721Impl extends ERC721 {
     TResult? Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -2242,7 +2242,7 @@ class _$ERC721Impl extends ERC721 {
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -2250,7 +2250,7 @@ class _$ERC721Impl extends ERC721 {
     TResult Function(
             String symbol,
             @JsonKey(fromJson: nameFromJson) String name,
-            @JsonKey(fromJson: _decimalsFromJson) int decimals,
+            @JsonKey(fromJson: decimalsFromJson) int decimals,
             @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
             String address,
             @JsonKey(name: 'balance') BigInt amount)?
@@ -2318,7 +2318,7 @@ abstract class ERC721 extends TokenDetails implements IToken {
   const factory ERC721(
       {required final String symbol,
       @JsonKey(fromJson: nameFromJson) required final String name,
-      @JsonKey(fromJson: _decimalsFromJson) required final int decimals,
+      @JsonKey(fromJson: decimalsFromJson) required final int decimals,
       @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
       required final String address,
       @JsonKey(name: 'balance') required final BigInt amount}) = _$ERC721Impl;
@@ -2332,7 +2332,7 @@ abstract class ERC721 extends TokenDetails implements IToken {
   @JsonKey(fromJson: nameFromJson)
   String get name;
   @override
-  @JsonKey(fromJson: _decimalsFromJson)
+  @JsonKey(fromJson: decimalsFromJson)
   int get decimals;
   @override
   @JsonKey(name: 'contractAddress', fromJson: addressFromJson)
