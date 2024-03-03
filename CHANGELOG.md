@@ -1,3 +1,8 @@
+## [0.3.1]
+
+### Changed
+- Upgraded to the latest version of `userop`.
+
 ## [0.3.0]
 
 ### Added
