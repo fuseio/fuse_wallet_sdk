@@ -196,7 +196,7 @@ class FuseSDK {
     TxOptions? options,
   ]) async {
     Call call;
-    if (_isNativeToken(tokenAddress.toString())) {
+    if (ContractsUtils.isNativeToken(tokenAddress.toString())) {
       call = Call(
         to: recipientAddress,
         value: amount,
@@ -401,43 +401,32 @@ class FuseSDK {
     return executeBatch(calls, options);
   }
 
-  /// Swaps tokens based on the provided [tradeRequestBody].
+  /// Swaps tokens based on the provided [TradeRequest].
   ///
   /// This method facilitates token swaps by interacting with the trade module.
-  /// [tradeRequestBody] contains details about the token swap, such as the input and output tokens.
+  /// [TradeRequest] contains details about the token swap, such as the input and output tokens.
   /// [options] provides additional transaction options.
   Future<ISendUserOperationResponse> swapTokens(
-    TradeRequestBody tradeRequestBody, [
+    TradeRequest tradeRequest, [
     TxOptions? options,
   ]) async {
-    var DC(:data, :error, :hasError) = await _tradeModule.requestParameters(
-      tradeRequestBody,
+    var DC(:data, :error, :hasError) = await _tradeModule.quoteV1(
+      tradeRequest,
     );
 
     if (hasError) {
       throw error!;
     }
 
-    var TradeCallParameters(:rawTxn) = data!;
+    final spender = EthereumAddress.fromHex(data!.to);
 
-    var TradeRequestBody(:amountIn, :currencyIn) = tradeRequestBody;
-
-    final spender = EthereumAddress.fromHex(rawTxn['to']);
-
-    final callData = hexToBytes(rawTxn['data']);
-
-    var TokenDetails(:decimals) = await ContractsUtils.getERC20TokenDetails(
-      wallet.proxy.client,
-      EthereumAddress.fromHex(currencyIn),
-    );
-
-    final amount = AmountFormat.toBigInt(amountIn, decimals);
+    final callData = hexToBytes(data.data);
 
     return _processOperation(
-      tokenAddress: EthereumAddress.fromHex(currencyIn),
+      tokenAddress: EthereumAddress.fromHex(data.sellTokenAddress),
       spender: spender,
       callData: callData,
-      amount: amount,
+      amount: tradeRequest.inputAmount,
       options: options,
     );
   }
@@ -557,7 +546,7 @@ class FuseSDK {
     EthereumAddress tokenAddress,
     EthereumAddress address,
   ) async {
-    if (_isNativeToken(tokenAddress.toString())) {
+    if (ContractsUtils.isNativeToken(tokenAddress.toString())) {
       return _getNativeBalance(address);
     }
 
@@ -593,12 +582,6 @@ class FuseSDK {
         spender,
       ],
     );
-  }
-
-  /// Checks if the given [address] is the native token's address.
-  bool _isNativeToken(String address) {
-    return address.toLowerCase() ==
-        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase();
   }
 
   /// Increases the transaction fee by a specified [percentage].
@@ -682,7 +665,7 @@ class FuseSDK {
     BigInt? amount,
     TxOptions? options,
   }) async {
-    if (_isNativeToken(tokenAddress.toString())) {
+    if (ContractsUtils.isNativeToken(tokenAddress.toString())) {
       return _executeUserOperation(
         Call(
           to: spender,

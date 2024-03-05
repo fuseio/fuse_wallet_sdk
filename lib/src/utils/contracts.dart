@@ -244,6 +244,12 @@ class ContractsUtils {
     );
   }
 
+  /// Checks if the given [address] is the native token's address.
+  static bool isNativeToken(String address) {
+    return address.toLowerCase() ==
+        Variables.NATIVE_TOKEN_ADDRESS.toLowerCase();
+  }
+
   // Internal helper function to reduce repetitive logic
   static Uint8List _encodeContractCall(
     String contractType,
