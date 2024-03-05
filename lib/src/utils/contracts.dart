@@ -246,6 +246,7 @@ class ContractsUtils {
 
   /// Checks if the given [address] is the native token's address.
   static bool isNativeToken(String address) {
+    return address.toLowerCase() == Variables.NATIVE_TOKEN_ADDRESS.toLowerCase();
     return address.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase();
   }
