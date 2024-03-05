@@ -38,6 +38,27 @@ class TradeModule {
     }
   }
 
+  /// Get a quote for a trade request. 
+  ///
+  /// [tradeRequest] is a [TradeRequest] object containing the parameters for the trade request.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a [Trade] object.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
+  Future<DC<Exception, TradeData>> quoteV1(
+    TradeRequest tradeRequest,
+  ) async {
+    try {
+      final Response response = await _dio.get(
+        '/v1/trade/quote',
+        queryParameters: tradeRequest.getParams(),
+      );
+      return DC.data(TradeData.fromJson(response.data));
+    } catch (e) {
+      return DC.error(Exception(e.toString()));
+    }
+  }
+
   /// Get a quote for a trade request.
   ///
   /// [tradeRequestBody] is a [TradeRequestBody] object containing the parameters for the trade request.
@@ -45,6 +66,7 @@ class TradeModule {
   /// Returns a Future that completes with a [DC] object:
   /// - On success, `DC.data` will be called with a [Trade] object.
   /// - On failure, `DC.error` will be called with an `Exception` object.
+  @Deprecated('Use quoteV1 instead. This method will be removed in the next release.')
   Future<DC<Exception, Trade>> quote(
     TradeRequestBody tradeRequestBody,
   ) async {
