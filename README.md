@@ -78,7 +78,6 @@ Using Fuse Wallet SDK provides several benefits, including:
 The SDK is designed to make it easy for developers to create, manage, and engage with Fuse Wallet SDK in their applications. The SDK provides pre-built functions and utilities, allowing developers to interact with Fuse Wallet SDK securely and efficiently.
 
 ## Migration guides
-
 - [Migrating to v0.2](#migrating-to-v0.2)
 
 ## Instantiation
