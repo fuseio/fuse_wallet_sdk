@@ -180,14 +180,14 @@ Smart Wallet can buy and sell popular cryptocurrencies like Bitcoin and Ethereum
 
 ```dart
 final nativeTokenAddress = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE';
-final usdcTokenAddress = '0x620fd5fa44be6af63715ef4e65ddfa0387ad13f5';
+final usdcTokenAddress = '0x28C3d1cD466Ba22f6cae51b1a4692a831696391A';
 
 final res = await fuseSDK.swapTokens(
-  TradeRequestBody(
-    amountIn: '0.1',
-    currencyIn: nativeTokenAddress,
-    currencyOut: usdcTokenAddress,
-    recipient: fuseSDK.wallet.getSender(),
+  TradeRequest(
+    inputToken: nativeTokenAddress,
+    outputToken: usdcTokenAddress,
+    inputAmount: BigInt.parse('100000000000000000'),
+    exactIn: true,
   ),
 );
 ```
