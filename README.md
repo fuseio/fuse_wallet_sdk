@@ -34,6 +34,33 @@
     - [Introduction](#introduction-1)
     - [Prerequisites](#prerequisites)
     - [Detailed Migration Steps](#detailed-migration-steps)
+- [Sweep Rules](#sweep-rules)
+
+## Sweep Rules
+
+Sweep Rules allow users to automatically sweep funds from their account to a designated address based on predefined conditions. This feature is useful for managing and automating fund transfers within the Fuse Wallet SDK.
+
+To use Sweep Rules, you can follow the example code snippet below:
+
+```dart
+final sweepRule = await fuseSDK.createSweepRule(
+    EthereumAddress.fromHex('TOKEN_ADDRESS'),
+    EthereumAddress.fromHex('DESTINATION_ADDRESS'),
+    BigInt.parse('AMOUNT_IN_WEI'),
+    FuseSDK.defaultTxOptions.copyWith(
+        withRetry: true,
+        feeIncrementPercentage: 11,
+    ),
+);
+print('Sweep Rule ID: ${sweepRule.id}');
+```
+
+This code snippet demonstrates how to create a Sweep Rule using the Fuse Wallet SDK. It specifies the token address, destination address, and amount to be swept. The `defaultTxOptions` parameter allows you to customize the transaction options, such as enabling retries and setting the fee increment percentage.
+
+Please note that Sweep Rules are currently only available on the Fuse & Fuse Sparknet networks.
+
+For more information and examples, please refer to the [Fuse Wallet SDK documentation](https://docs.fuse.io/fuse-sdk/).
+    - [Detailed Migration Steps](#detailed-migration-steps)
 
 ## Introduction
 
@@ -108,7 +135,30 @@ print('UserOpHash: ${res.userOpHash}');
 print('Waiting for transaction...');
 final ev = await res.wait();
 ```
+#### [Sweep Rules](#sweep-rules)
 
+Sweep Rules allow users to automatically sweep funds from their account to a designated address based on predefined conditions. This feature is useful for managing and automating fund transfers within the Fuse Wallet SDK.
+
+To use Sweep Rules, you can follow the example code snippet below:
+
+```dart
+final sweepRule = await fuseSDK.createSweepRule(
+    EthereumAddress.fromHex('TOKEN_ADDRESS'),
+    EthereumAddress.fromHex('DESTINATION_ADDRESS'),
+    BigInt.parse('AMOUNT_IN_WEI'),
+    FuseSDK.defaultTxOptions.copyWith(
+        withRetry: true,
+        feeIncrementPercentage: 11,
+    ),
+);
+print('Sweep Rule ID: ${sweepRule.id}');
+```
+
+This code snippet demonstrates how to create a Sweep Rule using the Fuse Wallet SDK. It specifies the token address, destination address, and amount to be swept. The `defaultTxOptions` parameter allows you to customize the transaction options, such as enabling retries and setting the fee increment percentage.
+
+Please note that Sweep Rules are currently only available on the Fuse & Fuse Sparknet networks.
+
+For more information and examples, please refer to the [Fuse Wallet SDK documentation](https://docs.fuse.io/fuse-sdk/).
 #### Send batch transactions
 
 The process of grouping multiple transactions into a single batch to be processed together. This is often done to optimize processing time and reduce transaction fees.
