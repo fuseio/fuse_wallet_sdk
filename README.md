@@ -28,6 +28,7 @@
     - [Sponsored Transactions](#sponsored-transactions)
     - [Staking](#staking-1)
     - [Trading](#trading-1)
+    - [Sweep Rules](#sweep-rules)
 - [Troubleshooting](#troubleshooting)
 - [Limitations](#limitations)
 - [Migrating to v0.2](#migrating-to-v02)
@@ -49,6 +50,33 @@ Using Fuse Wallet SDK provides several benefits, including:
 ### Purpose of the SDK
 
 The SDK is designed to make it easy for developers to create, manage, and engage with Fuse Wallet SDK in their applications. The SDK provides pre-built functions and utilities, allowing developers to interact with Fuse Wallet SDK securely and efficiently.
+#### Sweep Rules
+
+Sweep Rules allow users to automatically sweep incoming transactions to a specific address. This feature is useful for managing funds and automating certain actions based on incoming transactions.
+
+To set up a sweep rule, use the following command:
+
+```dart
+final sweepRule = await fuseSDK.sweepRules.createSweepRule(
+  EthereumAddress.fromHex('TOKEN_ADDRESS'),
+  EthereumAddress.fromHex('RECIPIENT_ADDRESS'),
+);
+print('Sweep rule created: ${sweepRule.id}');
+```
+
+To get a list of all sweep rules, use the following command:
+
+```dart
+final sweepRules = await fuseSDK.sweepRules.getSweepRules();
+print('Sweep rules: $sweepRules');
+```
+
+To delete a sweep rule, use the following command:
+
+```dart
+await fuseSDK.sweepRules.deleteSweepRule('SWEEP_RULE_ID');
+print('Sweep rule deleted');
+```
 
 ## Migration guides
 
