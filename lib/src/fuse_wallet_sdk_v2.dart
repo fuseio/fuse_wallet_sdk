@@ -196,7 +196,7 @@ class FuseSDK {
     TxOptions? options,
   ]) async {
     Call call;
-    if (ContractsUtils.isNativeToken(tokenAddress.toString())) {
+    if (ContractsUtils.isNativeToken(tokenAddress)) {
       call = Call(
         to: recipientAddress,
         value: amount,
