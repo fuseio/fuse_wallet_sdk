@@ -2,6 +2,9 @@
 
 ### Changed
 - **Breaking Change:** Updated the `swapTokens` method to retrieve quotes through the new API, utilizing Voltage V3, the latest router contract. It now gets `TradeRequest` instead of `TradeRequestBody`, the amount of tokens to swap is now a `BigInt` instead of a `String`.
+- Upgraded to the latest version of `userop`.
+- Upgraded to the latest version of `web3dart`.
+- Downgraded `http` package to `1.2.0`.
 
 ## [0.3.1]
 
