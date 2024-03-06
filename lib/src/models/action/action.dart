@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:fuse_wallet_sdk/src/models/trade/trade.dart';
 
 part 'action.freezed.dart';
 part 'action.g.dart';
@@ -180,7 +179,6 @@ class Action with _$Action implements Comparable<Action> {
     String? txHash,
     required String status,
     @Default(0) int? blockNumber,
-    @JsonKey(name: 'metadata') Trade? tradeInfo,
   }) = Swap;
 
   @FreezedUnionValue('receiveNFT')

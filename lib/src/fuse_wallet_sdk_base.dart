@@ -594,46 +594,49 @@ class FuseWalletSDK {
 
   Future<DC<Exception, Stream<SmartWalletEvent>>> swapTokens(
     EthPrivateKey credentials,
-    TradeRequestBody tradeRequestBody,
+    TradeRequest tradeRequest,
   ) async {
-    final tradeRes = await _tradeModule.quote(
-      tradeRequestBody,
-    );
-    final swapCallParameters = await _tradeModule.requestParameters(
-      tradeRequestBody,
+    final response = await _tradeModule.quote(
+      tradeRequest,
     );
 
-    final String data = strip0x(swapCallParameters.data?.rawTxn['data']);
+    if (response.hasError) {
+      return DC.error(response.error!);
+    }
+
+    final String data = strip0x(response.data!.data);
+    final String spender = response.data!.to;
+    final String sellTokenAddress = response.data!.sellTokenAddress;
+    final String value = response.data!.value;
 
     final Map<String, dynamic> transactionBody = Map.from({
-      "to": tradeRequestBody.recipient,
+      "to": spender,
       "status": 'pending',
       "isSwap": true,
-      "tradeInfo": tradeRes.data?.toJson(),
     });
-    if (tradeRequestBody.currencyIn.toLowerCase() ==
+    if (sellTokenAddress.toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
       return callContract(
         credentials,
-        swapCallParameters.data!.rawTxn['to'],
+        spender,
         data,
-        value: BigInt.parse(swapCallParameters.data!.value),
+        value: BigInt.parse(value),
         transactionBody: transactionBody,
       );
     } else {
       final tokenDetailsRes = await ContractsUtils.getERC20TokenDetails(
         web3client,
         EthereumAddress.fromHex(
-          tradeRequestBody.currencyIn,
+          sellTokenAddress,
         ),
       );
 
       return approveTokenAndCallContract(
         credentials,
-        tradeRequestBody.currencyIn,
-        swapCallParameters.data?.rawTxn['to'],
+        sellTokenAddress,
+        spender,
         AmountFormat.formatValue(
-          BigInt.parse(swapCallParameters.data!.args.first),
+          tradeRequest.inputAmount,
           tokenDetailsRes.decimals,
         ),
         data,
