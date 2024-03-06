@@ -98,14 +98,8 @@ mixin _$Action {
             String tokenSymbol,
             int tokenDecimal)
         receive,
-    required TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)
+    required TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)
         swap,
     required TResult Function(
             int timestamp,
@@ -203,14 +197,8 @@ mixin _$Action {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult? Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult? Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult? Function(
             int timestamp,
@@ -308,14 +296,8 @@ mixin _$Action {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult Function(
             int timestamp,
@@ -647,14 +629,8 @@ class _$CreateWalletImpl extends CreateWallet {
             String tokenSymbol,
             int tokenDecimal)
         receive,
-    required TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)
+    required TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)
         swap,
     required TResult Function(
             int timestamp,
@@ -755,14 +731,8 @@ class _$CreateWalletImpl extends CreateWallet {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult? Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult? Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult? Function(
             int timestamp,
@@ -863,14 +833,8 @@ class _$CreateWalletImpl extends CreateWallet {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult Function(
             int timestamp,
@@ -1278,14 +1242,8 @@ class _$FiatDepositImpl extends FiatDeposit {
             String tokenSymbol,
             int tokenDecimal)
         receive,
-    required TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)
+    required TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)
         swap,
     required TResult Function(
             int timestamp,
@@ -1387,14 +1345,8 @@ class _$FiatDepositImpl extends FiatDeposit {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult? Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult? Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult? Function(
             int timestamp,
@@ -1496,14 +1448,8 @@ class _$FiatDepositImpl extends FiatDeposit {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult Function(
             int timestamp,
@@ -1924,14 +1870,8 @@ class _$SendImpl extends Send {
             String tokenSymbol,
             int tokenDecimal)
         receive,
-    required TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)
+    required TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)
         swap,
     required TResult Function(
             int timestamp,
@@ -2033,14 +1973,8 @@ class _$SendImpl extends Send {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult? Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult? Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult? Function(
             int timestamp,
@@ -2142,14 +2076,8 @@ class _$SendImpl extends Send {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult Function(
             int timestamp,
@@ -2570,14 +2498,8 @@ class _$ReceiveImpl extends Receive {
             String tokenSymbol,
             int tokenDecimal)
         receive,
-    required TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)
+    required TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)
         swap,
     required TResult Function(
             int timestamp,
@@ -2679,14 +2601,8 @@ class _$ReceiveImpl extends Receive {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult? Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult? Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult? Function(
             int timestamp,
@@ -2788,14 +2704,8 @@ class _$ReceiveImpl extends Receive {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult Function(
             int timestamp,
@@ -2965,10 +2875,7 @@ abstract class _$$SwapImplCopyWith<$Res> implements $ActionCopyWith<$Res> {
       String name,
       String? txHash,
       String status,
-      int? blockNumber,
-      @JsonKey(name: 'metadata') Trade? tradeInfo});
-
-  $TradeCopyWith<$Res>? get tradeInfo;
+      int? blockNumber});
 }
 
 /// @nodoc
@@ -2987,7 +2894,6 @@ class __$$SwapImplCopyWithImpl<$Res>
     Object? txHash = freezed,
     Object? status = null,
     Object? blockNumber = freezed,
-    Object? tradeInfo = freezed,
   }) {
     return _then(_$SwapImpl(
       timestamp: null == timestamp
@@ -3014,23 +2920,7 @@ class __$$SwapImplCopyWithImpl<$Res>
           ? _value.blockNumber
           : blockNumber // ignore: cast_nullable_to_non_nullable
               as int?,
-      tradeInfo: freezed == tradeInfo
-          ? _value.tradeInfo
-          : tradeInfo // ignore: cast_nullable_to_non_nullable
-              as Trade?,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TradeCopyWith<$Res>? get tradeInfo {
-    if (_value.tradeInfo == null) {
-      return null;
-    }
-
-    return $TradeCopyWith<$Res>(_value.tradeInfo!, (value) {
-      return _then(_value.copyWith(tradeInfo: value));
-    });
   }
 }
 
@@ -3043,8 +2933,7 @@ class _$SwapImpl extends Swap {
       this.name = 'swapTokens',
       this.txHash,
       required this.status,
-      this.blockNumber = 0,
-      @JsonKey(name: 'metadata') this.tradeInfo})
+      this.blockNumber = 0})
       : super._();
 
   factory _$SwapImpl.fromJson(Map<String, dynamic> json) =>
@@ -3066,13 +2955,10 @@ class _$SwapImpl extends Swap {
   @override
   @JsonKey()
   final int? blockNumber;
-  @override
-  @JsonKey(name: 'metadata')
-  final Trade? tradeInfo;
 
   @override
   String toString() {
-    return 'Action.swap(timestamp: $timestamp, id: $id, name: $name, txHash: $txHash, status: $status, blockNumber: $blockNumber, tradeInfo: $tradeInfo)';
+    return 'Action.swap(timestamp: $timestamp, id: $id, name: $name, txHash: $txHash, status: $status, blockNumber: $blockNumber)';
   }
 
   @override
@@ -3087,15 +2973,13 @@ class _$SwapImpl extends Swap {
             (identical(other.txHash, txHash) || other.txHash == txHash) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.blockNumber, blockNumber) ||
-                other.blockNumber == blockNumber) &&
-            (identical(other.tradeInfo, tradeInfo) ||
-                other.tradeInfo == tradeInfo));
+                other.blockNumber == blockNumber));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, timestamp, id, name, txHash, status, blockNumber, tradeInfo);
+      runtimeType, timestamp, id, name, txHash, status, blockNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -3154,14 +3038,8 @@ class _$SwapImpl extends Swap {
             String tokenSymbol,
             int tokenDecimal)
         receive,
-    required TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)
+    required TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)
         swap,
     required TResult Function(
             int timestamp,
@@ -3208,7 +3086,7 @@ class _$SwapImpl extends Swap {
             int tokenDecimal)
         unstakeTokens,
   }) {
-    return swap(timestamp, id, name, txHash, status, blockNumber, tradeInfo);
+    return swap(timestamp, id, name, txHash, status, blockNumber);
   }
 
   @override
@@ -3262,14 +3140,8 @@ class _$SwapImpl extends Swap {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult? Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult? Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult? Function(
             int timestamp,
@@ -3316,8 +3188,7 @@ class _$SwapImpl extends Swap {
             int tokenDecimal)?
         unstakeTokens,
   }) {
-    return swap?.call(
-        timestamp, id, name, txHash, status, blockNumber, tradeInfo);
+    return swap?.call(timestamp, id, name, txHash, status, blockNumber);
   }
 
   @override
@@ -3371,14 +3242,8 @@ class _$SwapImpl extends Swap {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult Function(
             int timestamp,
@@ -3427,7 +3292,7 @@ class _$SwapImpl extends Swap {
     required TResult orElse(),
   }) {
     if (swap != null) {
-      return swap(timestamp, id, name, txHash, status, blockNumber, tradeInfo);
+      return swap(timestamp, id, name, txHash, status, blockNumber);
     }
     return orElse();
   }
@@ -3496,8 +3361,7 @@ abstract class Swap extends Action {
       final String name,
       final String? txHash,
       required final String status,
-      final int? blockNumber,
-      @JsonKey(name: 'metadata') final Trade? tradeInfo}) = _$SwapImpl;
+      final int? blockNumber}) = _$SwapImpl;
   const Swap._() : super._();
 
   factory Swap.fromJson(Map<String, dynamic> json) = _$SwapImpl.fromJson;
@@ -3515,8 +3379,6 @@ abstract class Swap extends Action {
   String get status;
   @override
   int? get blockNumber;
-  @JsonKey(name: 'metadata')
-  Trade? get tradeInfo;
   @override
   @JsonKey(ignore: true)
   _$$SwapImplCopyWith<_$SwapImpl> get copyWith =>
@@ -3777,14 +3639,8 @@ class _$ReceiveNFTImpl extends ReceiveNFT {
             String tokenSymbol,
             int tokenDecimal)
         receive,
-    required TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)
+    required TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)
         swap,
     required TResult Function(
             int timestamp,
@@ -3886,14 +3742,8 @@ class _$ReceiveNFTImpl extends ReceiveNFT {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult? Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult? Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult? Function(
             int timestamp,
@@ -3995,14 +3845,8 @@ class _$ReceiveNFTImpl extends ReceiveNFT {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult Function(
             int timestamp,
@@ -4423,14 +4267,8 @@ class _$StakeTokensImpl extends StakeTokens {
             String tokenSymbol,
             int tokenDecimal)
         receive,
-    required TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)
+    required TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)
         swap,
     required TResult Function(
             int timestamp,
@@ -4532,14 +4370,8 @@ class _$StakeTokensImpl extends StakeTokens {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult? Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult? Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult? Function(
             int timestamp,
@@ -4641,14 +4473,8 @@ class _$StakeTokensImpl extends StakeTokens {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult Function(
             int timestamp,
@@ -5071,14 +4897,8 @@ class _$UnstakeTokensImpl extends UnstakeTokens {
             String tokenSymbol,
             int tokenDecimal)
         receive,
-    required TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)
+    required TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)
         swap,
     required TResult Function(
             int timestamp,
@@ -5180,14 +5000,8 @@ class _$UnstakeTokensImpl extends UnstakeTokens {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult? Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult? Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult? Function(
             int timestamp,
@@ -5289,14 +5103,8 @@ class _$UnstakeTokensImpl extends UnstakeTokens {
             String tokenSymbol,
             int tokenDecimal)?
         receive,
-    TResult Function(
-            int timestamp,
-            @JsonKey(name: '_id') String id,
-            String name,
-            String? txHash,
-            String status,
-            int? blockNumber,
-            @JsonKey(name: 'metadata') Trade? tradeInfo)?
+    TResult Function(int timestamp, @JsonKey(name: '_id') String id,
+            String name, String? txHash, String status, int? blockNumber)?
         swap,
     TResult Function(
             int timestamp,
