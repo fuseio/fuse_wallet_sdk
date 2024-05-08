@@ -410,7 +410,7 @@ class FuseSDK {
     TradeRequest tradeRequest, [
     TxOptions? options,
   ]) async {
-    var DC(:data, :error, :hasError) = await _tradeModule.quoteV1(
+    var DC(:data, :error, :hasError) = await _tradeModule.quote(
       tradeRequest,
     );
 

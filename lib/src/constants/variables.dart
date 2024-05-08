@@ -7,5 +7,6 @@ class Variables {
   static const String NATIVE_TOKEN_ADDRESS =
       '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'; // For sending native (ETH/FUSE) tokens
   static const BASE_URL = 'api.fuse.io';
-  static const DEFAULT_SOCKET_SERVER_URL = 'wss://ws.fuse.io/connection/websocket';
+  static const DEFAULT_SOCKET_SERVER_URL =
+      'wss://ws.fuse.io/connection/websocket';
 }
