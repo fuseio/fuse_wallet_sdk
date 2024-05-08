@@ -4,6 +4,7 @@
 - **Breaking Change:** `FuseWalletSDK` Updated the `swapTokens` method to retrieve quotes through the new API, utilizing Voltage V3, the latest router contract. It now gets `TradeRequest` instead of `TradeRequestBody`, the amount of tokens to swap is now a `BigInt` instead of a `String`.
 - `TradeRequestBody`, `Trade` & `TradeCallParameters` models have been removed.
 - `Trade` object has been removed from `Action.Swap` type.
+- Update dependencies.
 
 ## [0.3.2]
 
