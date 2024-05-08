@@ -134,9 +134,6 @@ _$SwapImpl _$$SwapImplFromJson(Map<String, dynamic> json) => _$SwapImpl(
       txHash: json['txHash'] as String?,
       status: json['status'] as String,
       blockNumber: json['blockNumber'] as int? ?? 0,
-      tradeInfo: json['metadata'] == null
-          ? null
-          : Trade.fromJson(json['metadata'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$SwapImplToJson(_$SwapImpl instance) =>
@@ -147,7 +144,6 @@ Map<String, dynamic> _$$SwapImplToJson(_$SwapImpl instance) =>
       'txHash': instance.txHash,
       'status': instance.status,
       'blockNumber': instance.blockNumber,
-      'metadata': instance.tradeInfo?.toJson(),
     };
 
 _$ReceiveNFTImpl _$$ReceiveNFTImplFromJson(Map<String, dynamic> json) =>
