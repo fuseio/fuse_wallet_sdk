@@ -10,7 +10,7 @@ _$NativeTokenImpl _$$NativeTokenImplFromJson(Map<String, dynamic> json) =>
     _$NativeTokenImpl(
       symbol: json['symbol'] as String? ?? 'FUSE',
       name: json['name'] as String? ?? 'Fuse Token',
-      decimals: json['decimals'] as int? ?? 18,
+      decimals: (json['decimals'] as num?)?.toInt() ?? 18,
       address: json['address'] as String? ?? Variables.NATIVE_TOKEN_ADDRESS,
       value: amountFromJson(json['value'] as String?),
       to: json['to'] as String?,
@@ -34,7 +34,7 @@ _$ERC20TransferImpl _$$ERC20TransferImplFromJson(Map<String, dynamic> json) =>
     _$ERC20TransferImpl(
       symbol: json['symbol'] as String,
       name: nameFromJson(json['name'] as String),
-      decimals: json['decimals'] as int,
+      decimals: (json['decimals'] as num).toInt(),
       address: addressFromJson(json['address'] as String),
       value: amountFromJson(json['value'] as String?),
       to: json['to'] as String?,
