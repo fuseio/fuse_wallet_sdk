@@ -8,7 +8,7 @@ part of 'trade_data.dart';
 
 _$TradeDataImpl _$$TradeDataImplFromJson(Map<String, dynamic> json) =>
     _$TradeDataImpl(
-      chainId: json['chainId'] as int,
+      chainId: (json['chainId'] as num).toInt(),
       estimatedPriceImpact: json['estimatedPriceImpact'] as String,
       to: json['to'] as String,
       data: json['data'] as String,

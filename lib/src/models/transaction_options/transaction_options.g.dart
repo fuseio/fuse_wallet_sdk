@@ -8,7 +8,8 @@ part of 'transaction_options.dart';
 
 _$TxOptionsImpl _$$TxOptionsImplFromJson(Map<String, dynamic> json) =>
     _$TxOptionsImpl(
-      feeIncrementPercentage: json['feeIncrementPercentage'] as int? ?? 10,
+      feeIncrementPercentage:
+          (json['feeIncrementPercentage'] as num?)?.toInt() ?? 10,
       useNonceSequence: json['useNonceSequence'] as bool? ?? false,
       customNonceKey: json['customNonceKey'] == null
           ? null

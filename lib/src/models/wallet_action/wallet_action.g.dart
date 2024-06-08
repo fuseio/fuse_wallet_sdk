@@ -16,7 +16,7 @@ _$BatchTransactionImpl _$$BatchTransactionImplFromJson(
       name: json['name'] as String? ?? 'batchTransaction',
       txHash: json['txHash'] as String?,
       status: json['status'] as String,
-      blockNumber: json['blockNumber'] as int? ?? 0,
+      blockNumber: (json['blockNumber'] as num?)?.toInt() ?? 0,
       userOpHash: json['userOpHash'] as String,
       description: json['description'] as String,
       sent: (json['sent'] as List<dynamic>?)
@@ -54,7 +54,7 @@ _$TokenTransferImpl _$$TokenTransferImplFromJson(Map<String, dynamic> json) =>
       txHash: json['txHash'] as String?,
       userOpHash: json['userOpHash'] as String,
       status: json['status'] as String,
-      blockNumber: json['blockNumber'] as int? ?? 0,
+      blockNumber: (json['blockNumber'] as num?)?.toInt() ?? 0,
       description: json['description'] as String,
       sent: (json['sent'] as List<dynamic>?)
               ?.map((e) => TokenEvent.fromJson(e as Map<String, dynamic>))
@@ -90,7 +90,7 @@ _$TokenReceiveImpl _$$TokenReceiveImplFromJson(Map<String, dynamic> json) =>
       txHash: json['txHash'] as String?,
       userOpHash: json['userOpHash'] as String?,
       status: json['status'] as String,
-      blockNumber: json['blockNumber'] as int? ?? 0,
+      blockNumber: (json['blockNumber'] as num?)?.toInt() ?? 0,
       description: json['description'] as String,
       sent: (json['sent'] as List<dynamic>?)
               ?.map((e) => TokenEvent.fromJson(e as Map<String, dynamic>))
@@ -126,7 +126,7 @@ _$NftReceiveImpl _$$NftReceiveImplFromJson(Map<String, dynamic> json) =>
       txHash: json['txHash'] as String?,
       userOpHash: json['userOpHash'] as String?,
       status: json['status'] as String,
-      blockNumber: json['blockNumber'] as int? ?? 0,
+      blockNumber: (json['blockNumber'] as num?)?.toInt() ?? 0,
       description: json['description'] as String,
       sent: (json['sent'] as List<dynamic>?)
               ?.map((e) => TokenEvent.fromJson(e as Map<String, dynamic>))
@@ -161,7 +161,7 @@ _$SwapTokensImpl _$$SwapTokensImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String? ?? 'swapTokens',
       txHash: json['txHash'] as String?,
       status: json['status'] as String,
-      blockNumber: json['blockNumber'] as int? ?? 0,
+      blockNumber: (json['blockNumber'] as num?)?.toInt() ?? 0,
       userOpHash: json['userOpHash'] as String,
       description: json['description'] as String,
       sent: (json['sent'] as List<dynamic>?)
@@ -197,7 +197,7 @@ _$NftTransferImpl _$$NftTransferImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String? ?? 'nftTransfer',
       txHash: json['txHash'] as String?,
       status: json['status'] as String,
-      blockNumber: json['blockNumber'] as int? ?? 0,
+      blockNumber: (json['blockNumber'] as num?)?.toInt() ?? 0,
       userOpHash: json['userOpHash'] as String,
       description: json['description'] as String,
       sent: (json['sent'] as List<dynamic>?)
@@ -233,7 +233,7 @@ _$ApproveTokenImpl _$$ApproveTokenImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String? ?? 'approveToken',
       txHash: json['txHash'] as String?,
       status: json['status'] as String,
-      blockNumber: json['blockNumber'] as int? ?? 0,
+      blockNumber: (json['blockNumber'] as num?)?.toInt() ?? 0,
       userOpHash: json['userOpHash'] as String,
       description: json['description'] as String,
       sent: (json['sent'] as List<dynamic>?)
@@ -270,7 +270,7 @@ _$StakeTokensActionImpl _$$StakeTokensActionImplFromJson(
       name: json['name'] as String? ?? 'stakeTokens',
       txHash: json['txHash'] as String?,
       status: json['status'] as String,
-      blockNumber: json['blockNumber'] as int? ?? 0,
+      blockNumber: (json['blockNumber'] as num?)?.toInt() ?? 0,
       userOpHash: json['userOpHash'] as String,
       description: json['description'] as String,
       sent: (json['sent'] as List<dynamic>?)
@@ -308,7 +308,7 @@ _$UnstakeTokensActionImpl _$$UnstakeTokensActionImplFromJson(
       name: json['name'] as String? ?? 'unstakeTokens',
       txHash: json['txHash'] as String?,
       status: json['status'] as String,
-      blockNumber: json['blockNumber'] as int? ?? 0,
+      blockNumber: (json['blockNumber'] as num?)?.toInt() ?? 0,
       userOpHash: json['userOpHash'] as String,
       description: json['description'] as String,
       sent: (json['sent'] as List<dynamic>?)
