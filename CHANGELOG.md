@@ -1,3 +1,11 @@
+## [0.3.4]
+
+### Changed
+- Upgraded all the dependencies to the latest versions.
+
+### Added
+- `WebSocketConnection` is now available in the SDK. It allows you to listen to events in real-time.
+
 ## [0.3.3]
 
 ### Changed

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -39,6 +40,9 @@ class FuseSDK {
     feeIncrementPercentage: 10,
     withRetry: false,
   );
+
+  /// The WebSocket connection used by the Fuse Wallet SDK.
+  WebSocketConnection? webSocketConnection;
 
   late String _jwtToken;
 
@@ -94,6 +98,7 @@ class FuseSDK {
     String publicApiKey,
     EthPrivateKey credentials, {
     String baseUrl = Variables.BASE_URL,
+    String websocketServerURL = Variables.DEFAULT_SOCKET_SERVER_URL,
     bool withPaymaster = false,
     Map<String, dynamic>? paymasterContext,
     IPresetBuilderOpts? opts,
@@ -119,6 +124,11 @@ class FuseSDK {
     );
 
     await fuseSDK.authenticate(credentials);
+
+    fuseSDK.webSocketConnection = await _initWebSocketConnection(
+      fuseSDK._jwtToken,
+      websocketServerURL,
+    );
 
     fuseSDK.client = await Client.init(
       _getBundlerRpc(publicApiKey: publicApiKey, baseUrl: baseUrl),
@@ -755,6 +765,47 @@ class FuseSDK {
         ..nonceKey = opts?.nonceKey
         ..overrideBundlerRpc = opts?.overrideBundlerRpc,
     );
+  }
+
+  /// Initializes a new WebSocket connection to the server.
+  static Future<WebSocketConnection> _initWebSocketConnection(
+    String jwtToken,
+    String websocketServerURL,
+  ) async {
+    return WebSocketConnection.init(
+      jwtToken: jwtToken,
+      websocketServerURL: websocketServerURL,
+    );
+  }
+
+  /// Converts a publication event to a [SmartWalletEvent] stream.
+  SmartWalletEvent _toSmartWalletEventStream(publicationEvent) {
+    return SmartWalletEvent.fromJson(
+      jsonDecode(
+        utf8.decode(
+          publicationEvent.data,
+          allowMalformed: true,
+        ),
+      ),
+    );
+  }
+
+  /// Subscribes to a user operation with the provided [userOpHash].
+  Stream<SmartWalletEvent> subscribeToUserOp(String userOpHash) {
+    return webSocketConnection!.client
+        .newSubscription('transaction:#$userOpHash')
+        .publication
+        .map(_toSmartWalletEventStream);
+  }
+
+  /// Disconnects the WebSocket client.
+  Future<void>? disconnectWebSocketClient() {
+    return webSocketConnection?.client.disconnect();
+  }
+
+  /// Reconnects the WebSocket client.
+  Future<void>? reconnectWebSocketClient() {
+    return webSocketConnection?.client.connect();
   }
 
   /// Retrieves the bundler RPC URL for the provided [publicApiKey].
