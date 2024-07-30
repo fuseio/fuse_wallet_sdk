@@ -55,7 +55,7 @@ class FuseSDK {
   late ExplorerModule _explorerModule;
   late TradeModule _tradeModule;
   late StakingModule _stakingModule;
-  late NftModule _nftModule;
+  late BalancesModule _balancesModule;
   late GraphQLModule _graphQLModule;
   late final NonceManager _nonceManager;
   late final Lock _nonceLock;
@@ -73,7 +73,7 @@ class FuseSDK {
   StakingModule get stakingModule => _stakingModule;
 
   /// Provides access to the NFT module.
-  NftModule get nftModule => _nftModule;
+  BalancesModule get balancesModule => _balancesModule;
 
   /// Initializes the modules.
   void _initializeModules() {
@@ -82,8 +82,7 @@ class FuseSDK {
     _tradeModule = TradeModule(_dio);
     _explorerModule = ExplorerModule(_dio);
     _stakingModule = StakingModule(_dio);
-    _nftModule = NftModule(_dio);
-    _graphQLModule = GraphQLModule(_dio);
+    _balancesModule = BalancesModule(_dio);
   }
 
   /// Initializes the SDK.
