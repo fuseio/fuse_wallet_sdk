@@ -154,8 +154,13 @@ mixin _$TokenEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this TokenEvent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TokenEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TokenEventCopyWith<TokenEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -185,6 +190,8 @@ class _$TokenEventCopyWithImpl<$Res, $Val extends TokenEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TokenEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -250,6 +257,8 @@ class __$$NativeTokenImplCopyWithImpl<$Res>
       _$NativeTokenImpl _value, $Res Function(_$NativeTokenImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TokenEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -355,12 +364,14 @@ class _$NativeTokenImpl extends NativeToken {
             (identical(other.from, from) || other.from == from));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, symbol, name, decimals, address, value, to, from);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TokenEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NativeTokenImplCopyWith<_$NativeTokenImpl> get copyWith =>
@@ -542,8 +553,11 @@ abstract class NativeToken extends TokenEvent {
   String? get to;
   @override
   String? get from;
+
+  /// Create a copy of TokenEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NativeTokenImplCopyWith<_$NativeTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -574,6 +588,8 @@ class __$$ERC20TransferImplCopyWithImpl<$Res>
       _$ERC20TransferImpl _value, $Res Function(_$ERC20TransferImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TokenEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -676,12 +692,14 @@ class _$ERC20TransferImpl extends ERC20Transfer {
             (identical(other.from, from) || other.from == from));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, symbol, name, decimals, address, value, to, from);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TokenEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ERC20TransferImplCopyWith<_$ERC20TransferImpl> get copyWith =>
@@ -865,8 +883,11 @@ abstract class ERC20Transfer extends TokenEvent {
   String? get to;
   @override
   String? get from;
+
+  /// Create a copy of TokenEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ERC20TransferImplCopyWith<_$ERC20TransferImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -897,6 +918,8 @@ class __$$ERC721TransferImplCopyWithImpl<$Res>
       _$ERC721TransferImpl _value, $Res Function(_$ERC721TransferImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TokenEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -998,12 +1021,14 @@ class _$ERC721TransferImpl extends ERC721Transfer {
             (identical(other.from, from) || other.from == from));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, symbol, name, address, value, tokenId, to, from);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TokenEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ERC721TransferImplCopyWith<_$ERC721TransferImpl> get copyWith =>
@@ -1188,8 +1213,11 @@ abstract class ERC721Transfer extends TokenEvent {
   String? get to;
   @override
   String? get from;
+
+  /// Create a copy of TokenEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ERC721TransferImplCopyWith<_$ERC721TransferImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

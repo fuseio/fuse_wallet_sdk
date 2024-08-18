@@ -25,8 +25,12 @@ mixin _$TradeRequest {
   BigInt get inputAmount => throw _privateConstructorUsedError;
   bool get exactIn => throw _privateConstructorUsedError;
 
+  /// Serializes this TradeRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TradeRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TradeRequestCopyWith<TradeRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$TradeRequestCopyWithImpl<$Res, $Val extends TradeRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TradeRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,6 +112,8 @@ class __$$TradeRequestImplCopyWithImpl<$Res>
       _$TradeRequestImpl _value, $Res Function(_$TradeRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TradeRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -176,12 +184,14 @@ class _$TradeRequestImpl extends _TradeRequest {
             (identical(other.exactIn, exactIn) || other.exactIn == exactIn));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, inputToken, outputToken, inputAmount, exactIn);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TradeRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TradeRequestImplCopyWith<_$TradeRequestImpl> get copyWith =>
@@ -214,8 +224,11 @@ abstract class _TradeRequest extends TradeRequest {
   BigInt get inputAmount;
   @override
   bool get exactIn;
+
+  /// Create a copy of TradeRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TradeRequestImplCopyWith<_$TradeRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

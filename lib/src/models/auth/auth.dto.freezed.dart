@@ -25,8 +25,12 @@ mixin _$AuthDto {
   String get signature => throw _privateConstructorUsedError;
   String get hash => throw _privateConstructorUsedError;
 
+  /// Serializes this AuthDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AuthDtoCopyWith<AuthDto> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -52,6 +56,8 @@ class _$AuthDtoCopyWithImpl<$Res, $Val extends AuthDto>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AuthDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -103,6 +109,8 @@ class __$$AuthDtoImplCopyWithImpl<$Res>
       _$AuthDtoImpl _value, $Res Function(_$AuthDtoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -173,12 +181,14 @@ class _$AuthDtoImpl implements _AuthDto {
             (identical(other.hash, hash) || other.hash == hash));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, ownerAddress, smartWalletAddress, signature, hash);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AuthDtoImplCopyWith<_$AuthDtoImpl> get copyWith =>
@@ -209,8 +219,11 @@ abstract class _AuthDto implements AuthDto {
   String get signature;
   @override
   String get hash;
+
+  /// Create a copy of AuthDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthDtoImplCopyWith<_$AuthDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

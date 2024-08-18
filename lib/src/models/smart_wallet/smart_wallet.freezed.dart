@@ -27,8 +27,12 @@ mixin _$SmartWallet {
   String get version => throw _privateConstructorUsedError;
   List<String> get networks => throw _privateConstructorUsedError;
 
+  /// Serializes this SmartWallet to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SmartWallet
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SmartWalletCopyWith<SmartWallet> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -60,6 +64,8 @@ class _$SmartWalletCopyWithImpl<$Res, $Val extends SmartWallet>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SmartWallet
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -98,6 +104,8 @@ class _$SmartWalletCopyWithImpl<$Res, $Val extends SmartWallet>
     ) as $Val);
   }
 
+  /// Create a copy of SmartWallet
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $WalletModulesCopyWith<$Res> get walletModules {
@@ -135,6 +143,8 @@ class __$$SmartWalletImplCopyWithImpl<$Res>
       _$SmartWalletImpl _value, $Res Function(_$SmartWalletImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SmartWallet
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -224,7 +234,7 @@ class _$SmartWalletImpl implements _SmartWallet {
             const DeepCollectionEquality().equals(other.networks, networks));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -235,7 +245,9 @@ class _$SmartWalletImpl implements _SmartWallet {
       version,
       const DeepCollectionEquality().hash(networks));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SmartWallet
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SmartWalletImplCopyWith<_$SmartWalletImpl> get copyWith =>
@@ -273,8 +285,11 @@ abstract class _SmartWallet implements SmartWallet {
   String get version;
   @override
   List<String> get networks;
+
+  /// Create a copy of SmartWallet
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SmartWalletImplCopyWith<_$SmartWalletImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -24,8 +24,12 @@ mixin _$UnstakeRequestBody {
   String get tokenAmount => throw _privateConstructorUsedError;
   String get tokenAddress => throw _privateConstructorUsedError;
 
+  /// Serializes this UnstakeRequestBody to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UnstakeRequestBody
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UnstakeRequestBodyCopyWith<UnstakeRequestBody> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$UnstakeRequestBodyCopyWithImpl<$Res, $Val extends UnstakeRequestBody>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UnstakeRequestBody
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$UnstakeRequestBodyImplCopyWithImpl<$Res>
       $Res Function(_$UnstakeRequestBodyImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UnstakeRequestBody
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -152,12 +160,14 @@ class _$UnstakeRequestBodyImpl implements _UnstakeRequestBody {
                 other.tokenAddress == tokenAddress));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, accountAddress, tokenAmount, tokenAddress);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UnstakeRequestBody
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UnstakeRequestBodyImplCopyWith<_$UnstakeRequestBodyImpl> get copyWith =>
@@ -187,8 +197,11 @@ abstract class _UnstakeRequestBody implements UnstakeRequestBody {
   String get tokenAmount;
   @override
   String get tokenAddress;
+
+  /// Create a copy of UnstakeRequestBody
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UnstakeRequestBodyImplCopyWith<_$UnstakeRequestBodyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -202,8 +215,12 @@ mixin _$UnstakeResponseBody {
   String get contractAddress => throw _privateConstructorUsedError;
   String get encodedABI => throw _privateConstructorUsedError;
 
+  /// Serializes this UnstakeResponseBody to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UnstakeResponseBody
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UnstakeResponseBodyCopyWith<UnstakeResponseBody> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -227,6 +244,8 @@ class _$UnstakeResponseBodyCopyWithImpl<$Res, $Val extends UnstakeResponseBody>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UnstakeResponseBody
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -265,6 +284,8 @@ class __$$UnstakeResponseBodyImplCopyWithImpl<$Res>
       $Res Function(_$UnstakeResponseBodyImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UnstakeResponseBody
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -314,11 +335,13 @@ class _$UnstakeResponseBodyImpl implements _UnstakeResponseBody {
                 other.encodedABI == encodedABI));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, contractAddress, encodedABI);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UnstakeResponseBody
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UnstakeResponseBodyImplCopyWith<_$UnstakeResponseBodyImpl> get copyWith =>
@@ -345,8 +368,11 @@ abstract class _UnstakeResponseBody implements UnstakeResponseBody {
   String get contractAddress;
   @override
   String get encodedABI;
+
+  /// Create a copy of UnstakeResponseBody
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UnstakeResponseBodyImplCopyWith<_$UnstakeResponseBodyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -29,8 +29,12 @@ mixin _$StakingOption {
   double get stakingApr => throw _privateConstructorUsedError;
   double get tvl => throw _privateConstructorUsedError;
 
+  /// Serializes this StakingOption to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of StakingOption
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StakingOptionCopyWith<StakingOption> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -62,6 +66,8 @@ class _$StakingOptionCopyWithImpl<$Res, $Val extends StakingOption>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of StakingOption
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -138,6 +144,8 @@ class __$$StakingOptionImplCopyWithImpl<$Res>
       _$StakingOptionImpl _value, $Res Function(_$StakingOptionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of StakingOption
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -247,12 +255,14 @@ class _$StakingOptionImpl extends _StakingOption {
             (identical(other.tvl, tvl) || other.tvl == tvl));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, tokenAddress, tokenSymbol,
       tokenName, tokenLogoURI, expired, unStakeTokenAddress, stakingApr, tvl);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StakingOption
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StakingOptionImplCopyWith<_$StakingOptionImpl> get copyWith =>
@@ -297,8 +307,11 @@ abstract class _StakingOption extends StakingOption {
   double get stakingApr;
   @override
   double get tvl;
+
+  /// Create a copy of StakingOption
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StakingOptionImplCopyWith<_$StakingOptionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -39,12 +39,17 @@ TokenDetails _$TokenDetailsFromJson(Map<String, dynamic> json) {
 mixin _$TokenDetails {
   String get symbol => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: 18, fromJson: decimalsFromJson)
   int get decimals => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String symbol, String name, int decimals,
-            String address, @JsonKey(fromJson: amountFromJson) BigInt amount)
+    required TResult Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt amount)
         native,
     required TResult Function(
             String symbol,
@@ -87,7 +92,11 @@ mixin _$TokenDetails {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String symbol, String name, int decimals, String address,
+    TResult? Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
             @JsonKey(fromJson: amountFromJson) BigInt amount)?
         native,
     TResult? Function(
@@ -131,7 +140,11 @@ mixin _$TokenDetails {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String symbol, String name, int decimals, String address,
+    TResult Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
             @JsonKey(fromJson: amountFromJson) BigInt amount)?
         native,
     TResult Function(
@@ -205,8 +218,13 @@ mixin _$TokenDetails {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this TokenDetails to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TokenDetailsCopyWith<TokenDetails> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -217,7 +235,11 @@ abstract class $TokenDetailsCopyWith<$Res> {
           TokenDetails value, $Res Function(TokenDetails) then) =
       _$TokenDetailsCopyWithImpl<$Res, TokenDetails>;
   @useResult
-  $Res call({String symbol, String name, int decimals, String address});
+  $Res call(
+      {String symbol,
+      String name,
+      @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+      String address});
 }
 
 /// @nodoc
@@ -230,6 +252,8 @@ class _$TokenDetailsCopyWithImpl<$Res, $Val extends TokenDetails>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -270,7 +294,7 @@ abstract class _$$NativeImplCopyWith<$Res>
   $Res call(
       {String symbol,
       String name,
-      int decimals,
+      @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
       String address,
       @JsonKey(fromJson: amountFromJson) BigInt amount});
 }
@@ -283,6 +307,8 @@ class __$$NativeImplCopyWithImpl<$Res>
       _$NativeImpl _value, $Res Function(_$NativeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -323,7 +349,8 @@ class _$NativeImpl extends Native {
   const _$NativeImpl(
       {this.symbol = 'FUSE',
       this.name = 'Fuse Token',
-      this.decimals = 18,
+      @JsonKey(defaultValue: 18, fromJson: decimalsFromJson)
+      required this.decimals,
       this.address = Variables.NATIVE_TOKEN_ADDRESS,
       @JsonKey(fromJson: amountFromJson) required this.amount,
       final String? $type})
@@ -340,7 +367,7 @@ class _$NativeImpl extends Native {
   @JsonKey()
   final String name;
   @override
-  @JsonKey()
+  @JsonKey(defaultValue: 18, fromJson: decimalsFromJson)
   final int decimals;
   @override
   @JsonKey()
@@ -370,12 +397,14 @@ class _$NativeImpl extends Native {
             (identical(other.amount, amount) || other.amount == amount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, symbol, name, decimals, address, amount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NativeImplCopyWith<_$NativeImpl> get copyWith =>
@@ -384,8 +413,12 @@ class _$NativeImpl extends Native {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String symbol, String name, int decimals,
-            String address, @JsonKey(fromJson: amountFromJson) BigInt amount)
+    required TResult Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt amount)
         native,
     required TResult Function(
             String symbol,
@@ -431,7 +464,11 @@ class _$NativeImpl extends Native {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String symbol, String name, int decimals, String address,
+    TResult? Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
             @JsonKey(fromJson: amountFromJson) BigInt amount)?
         native,
     TResult? Function(
@@ -478,7 +515,11 @@ class _$NativeImpl extends Native {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String symbol, String name, int decimals, String address,
+    TResult Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
             @JsonKey(fromJson: amountFromJson) BigInt amount)?
         native,
     TResult Function(
@@ -581,7 +622,8 @@ abstract class Native extends TokenDetails implements IToken {
   const factory Native(
           {final String symbol,
           final String name,
-          final int decimals,
+          @JsonKey(defaultValue: 18, fromJson: decimalsFromJson)
+          required final int decimals,
           final String address,
           @JsonKey(fromJson: amountFromJson) required final BigInt amount}) =
       _$NativeImpl;
@@ -594,13 +636,17 @@ abstract class Native extends TokenDetails implements IToken {
   @override
   String get name;
   @override
+  @JsonKey(defaultValue: 18, fromJson: decimalsFromJson)
   int get decimals;
   @override
   String get address;
   @JsonKey(fromJson: amountFromJson)
   BigInt get amount;
+
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NativeImplCopyWith<_$NativeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -629,6 +675,8 @@ class __$$LiquidityPoolTokenImplCopyWithImpl<$Res>
       $Res Function(_$LiquidityPoolTokenImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -714,12 +762,14 @@ class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
                 .equals(other.underlyingTokens, underlyingTokens));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, symbol, decimals, name, address,
       const DeepCollectionEquality().hash(underlyingTokens));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LiquidityPoolTokenImplCopyWith<_$LiquidityPoolTokenImpl> get copyWith =>
@@ -729,8 +779,12 @@ class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String symbol, String name, int decimals,
-            String address, @JsonKey(fromJson: amountFromJson) BigInt amount)
+    required TResult Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt amount)
         native,
     required TResult Function(
             String symbol,
@@ -777,7 +831,11 @@ class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String symbol, String name, int decimals, String address,
+    TResult? Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
             @JsonKey(fromJson: amountFromJson) BigInt amount)?
         native,
     TResult? Function(
@@ -825,7 +883,11 @@ class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String symbol, String name, int decimals, String address,
+    TResult Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
             @JsonKey(fromJson: amountFromJson) BigInt amount)?
         native,
     TResult Function(
@@ -949,8 +1011,11 @@ abstract class LiquidityPoolToken extends TokenDetails implements IToken {
   @JsonKey(fromJson: addressFromJson)
   String get address;
   List<LpUnderlyingTokens> get underlyingTokens;
+
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LiquidityPoolTokenImplCopyWith<_$LiquidityPoolTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -979,6 +1044,8 @@ class __$$BridgedTokenImplCopyWithImpl<$Res>
       _$BridgedTokenImpl _value, $Res Function(_$BridgedTokenImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1063,12 +1130,14 @@ class _$BridgedTokenImpl extends BridgedToken {
             (identical(other.address, address) || other.address == address));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, symbol, logoURI, decimals, name, address);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BridgedTokenImplCopyWith<_$BridgedTokenImpl> get copyWith =>
@@ -1077,8 +1146,12 @@ class _$BridgedTokenImpl extends BridgedToken {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String symbol, String name, int decimals,
-            String address, @JsonKey(fromJson: amountFromJson) BigInt amount)
+    required TResult Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt amount)
         native,
     required TResult Function(
             String symbol,
@@ -1124,7 +1197,11 @@ class _$BridgedTokenImpl extends BridgedToken {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String symbol, String name, int decimals, String address,
+    TResult? Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
             @JsonKey(fromJson: amountFromJson) BigInt amount)?
         native,
     TResult? Function(
@@ -1171,7 +1248,11 @@ class _$BridgedTokenImpl extends BridgedToken {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String symbol, String name, int decimals, String address,
+    TResult Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
             @JsonKey(fromJson: amountFromJson) BigInt amount)?
         native,
     TResult Function(
@@ -1294,8 +1375,11 @@ abstract class BridgedToken extends TokenDetails implements IToken {
   @override
   @JsonKey(fromJson: addressFromJson)
   String get address;
+
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BridgedTokenImplCopyWith<_$BridgedTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1324,6 +1408,8 @@ class __$$MiscTokenImplCopyWithImpl<$Res>
       _$MiscTokenImpl _value, $Res Function(_$MiscTokenImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1408,12 +1494,14 @@ class _$MiscTokenImpl extends MiscToken {
             (identical(other.address, address) || other.address == address));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, symbol, logoURI, decimals, name, address);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MiscTokenImplCopyWith<_$MiscTokenImpl> get copyWith =>
@@ -1422,8 +1510,12 @@ class _$MiscTokenImpl extends MiscToken {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String symbol, String name, int decimals,
-            String address, @JsonKey(fromJson: amountFromJson) BigInt amount)
+    required TResult Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt amount)
         native,
     required TResult Function(
             String symbol,
@@ -1469,7 +1561,11 @@ class _$MiscTokenImpl extends MiscToken {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String symbol, String name, int decimals, String address,
+    TResult? Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
             @JsonKey(fromJson: amountFromJson) BigInt amount)?
         native,
     TResult? Function(
@@ -1516,7 +1612,11 @@ class _$MiscTokenImpl extends MiscToken {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String symbol, String name, int decimals, String address,
+    TResult Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
             @JsonKey(fromJson: amountFromJson) BigInt amount)?
         native,
     TResult Function(
@@ -1639,8 +1739,11 @@ abstract class MiscToken extends TokenDetails implements IToken {
   @override
   @JsonKey(fromJson: addressFromJson)
   String get address;
+
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MiscTokenImplCopyWith<_$MiscTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1670,6 +1773,8 @@ class __$$ERC20ImplCopyWithImpl<$Res>
       _$ERC20Impl _value, $Res Function(_$ERC20Impl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1757,12 +1862,14 @@ class _$ERC20Impl extends ERC20 {
             (identical(other.amount, amount) || other.amount == amount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, symbol, name, decimals, address, amount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ERC20ImplCopyWith<_$ERC20Impl> get copyWith =>
@@ -1771,8 +1878,12 @@ class _$ERC20Impl extends ERC20 {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String symbol, String name, int decimals,
-            String address, @JsonKey(fromJson: amountFromJson) BigInt amount)
+    required TResult Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt amount)
         native,
     required TResult Function(
             String symbol,
@@ -1818,7 +1929,11 @@ class _$ERC20Impl extends ERC20 {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String symbol, String name, int decimals, String address,
+    TResult? Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
             @JsonKey(fromJson: amountFromJson) BigInt amount)?
         native,
     TResult? Function(
@@ -1865,7 +1980,11 @@ class _$ERC20Impl extends ERC20 {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String symbol, String name, int decimals, String address,
+    TResult Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
             @JsonKey(fromJson: amountFromJson) BigInt amount)?
         native,
     TResult Function(
@@ -1989,8 +2108,11 @@ abstract class ERC20 extends TokenDetails implements IToken {
   String get address;
   @JsonKey(name: 'balance')
   BigInt get amount;
+
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ERC20ImplCopyWith<_$ERC20Impl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2020,6 +2142,8 @@ class __$$ERC721ImplCopyWithImpl<$Res>
       _$ERC721Impl _value, $Res Function(_$ERC721Impl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2107,12 +2231,14 @@ class _$ERC721Impl extends ERC721 {
             (identical(other.amount, amount) || other.amount == amount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, symbol, name, decimals, address, amount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ERC721ImplCopyWith<_$ERC721Impl> get copyWith =>
@@ -2121,8 +2247,12 @@ class _$ERC721Impl extends ERC721 {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String symbol, String name, int decimals,
-            String address, @JsonKey(fromJson: amountFromJson) BigInt amount)
+    required TResult Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
+            @JsonKey(fromJson: amountFromJson) BigInt amount)
         native,
     required TResult Function(
             String symbol,
@@ -2168,7 +2298,11 @@ class _$ERC721Impl extends ERC721 {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String symbol, String name, int decimals, String address,
+    TResult? Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
             @JsonKey(fromJson: amountFromJson) BigInt amount)?
         native,
     TResult? Function(
@@ -2215,7 +2349,11 @@ class _$ERC721Impl extends ERC721 {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String symbol, String name, int decimals, String address,
+    TResult Function(
+            String symbol,
+            String name,
+            @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
+            String address,
             @JsonKey(fromJson: amountFromJson) BigInt amount)?
         native,
     TResult Function(
@@ -2339,8 +2477,11 @@ abstract class ERC721 extends TokenDetails implements IToken {
   String get address;
   @JsonKey(name: 'balance')
   BigInt get amount;
+
+  /// Create a copy of TokenDetails
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ERC721ImplCopyWith<_$ERC721Impl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -96,7 +96,7 @@ class ExplorerModule {
     try {
       if (contractAddress.toLowerCase() ==
           Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
-        return DC.data(Native(amount: BigInt.zero));
+        return DC.data(Native(amount: BigInt.zero, decimals: 18));
       }
       final Response response = await _dio.get(
         '/v0/explorer?module=token&action=getToken&contractaddress=$contractAddress',

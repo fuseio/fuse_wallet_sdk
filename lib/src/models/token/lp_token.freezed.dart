@@ -26,8 +26,12 @@ mixin _$LpUnderlyingTokens {
   @JsonKey(fromJson: addressFromJson)
   String get address => throw _privateConstructorUsedError;
 
+  /// Serializes this LpUnderlyingTokens to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of LpUnderlyingTokens
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LpUnderlyingTokensCopyWith<LpUnderlyingTokens> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$LpUnderlyingTokensCopyWithImpl<$Res, $Val extends LpUnderlyingTokens>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of LpUnderlyingTokens
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -100,6 +106,8 @@ class __$$LpUnderlyingTokensImplCopyWithImpl<$Res>
       $Res Function(_$LpUnderlyingTokensImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LpUnderlyingTokens
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -159,11 +167,13 @@ class _$LpUnderlyingTokensImpl implements _LpUnderlyingTokens {
             (identical(other.address, address) || other.address == address));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, symbol, name, address);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LpUnderlyingTokens
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LpUnderlyingTokensImplCopyWith<_$LpUnderlyingTokensImpl> get copyWith =>
@@ -196,8 +206,11 @@ abstract class _LpUnderlyingTokens implements LpUnderlyingTokens, IToken {
   @override
   @JsonKey(fromJson: addressFromJson)
   String get address;
+
+  /// Create a copy of LpUnderlyingTokens
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LpUnderlyingTokensImplCopyWith<_$LpUnderlyingTokensImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

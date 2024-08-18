@@ -25,8 +25,12 @@ mixin _$SmartWalletEvent {
   @JsonKey(name: 'eventData')
   Map<String, dynamic> get data => throw _privateConstructorUsedError;
 
+  /// Serializes this SmartWalletEvent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SmartWalletEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SmartWalletEventCopyWith<SmartWalletEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$SmartWalletEventCopyWithImpl<$Res, $Val extends SmartWalletEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SmartWalletEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$SmartWalletEventImplCopyWithImpl<$Res>
       $Res Function(_$SmartWalletEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SmartWalletEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,12 +150,14 @@ class _$SmartWalletEventImpl implements _SmartWalletEvent {
             const DeepCollectionEquality().equals(other.data, data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, name, const DeepCollectionEquality().hash(data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SmartWalletEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SmartWalletEventImplCopyWith<_$SmartWalletEventImpl> get copyWith =>
@@ -177,8 +187,11 @@ abstract class _SmartWalletEvent implements SmartWalletEvent {
   @override
   @JsonKey(name: 'eventData')
   Map<String, dynamic> get data;
+
+  /// Create a copy of SmartWalletEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SmartWalletEventImplCopyWith<_$SmartWalletEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

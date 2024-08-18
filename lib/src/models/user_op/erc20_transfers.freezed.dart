@@ -31,8 +31,12 @@ mixin _$Erc20Transfers {
   @JsonKey(fromJson: decimalsFromJson)
   int get decimals => throw _privateConstructorUsedError;
 
+  /// Serializes this Erc20Transfers to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Erc20Transfers
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $Erc20TransfersCopyWith<Erc20Transfers> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,6 +68,8 @@ class _$Erc20TransfersCopyWithImpl<$Res, $Val extends Erc20Transfers>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Erc20Transfers
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -140,6 +146,8 @@ class __$$Erc20TransfersImplCopyWithImpl<$Res>
       _$Erc20TransfersImpl _value, $Res Function(_$Erc20TransfersImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Erc20Transfers
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -246,12 +254,14 @@ class _$Erc20TransfersImpl implements _Erc20Transfers {
                 other.decimals == decimals));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, from, to, value,
       contractAddress, name, symbol, decimals);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Erc20Transfers
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$Erc20TransfersImplCopyWith<_$Erc20TransfersImpl> get copyWith =>
@@ -299,8 +309,11 @@ abstract class _Erc20Transfers implements Erc20Transfers {
   @override
   @JsonKey(fromJson: decimalsFromJson)
   int get decimals;
+
+  /// Create a copy of Erc20Transfers
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$Erc20TransfersImplCopyWith<_$Erc20TransfersImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

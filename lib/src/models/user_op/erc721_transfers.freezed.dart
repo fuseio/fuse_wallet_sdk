@@ -28,8 +28,12 @@ mixin _$Erc721Transfers {
   String get name => throw _privateConstructorUsedError;
   String get symbol => throw _privateConstructorUsedError;
 
+  /// Serializes this Erc721Transfers to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Erc721Transfers
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $Erc721TransfersCopyWith<Erc721Transfers> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -60,6 +64,8 @@ class _$Erc721TransfersCopyWithImpl<$Res, $Val extends Erc721Transfers>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Erc721Transfers
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -130,6 +136,8 @@ class __$$Erc721TransfersImplCopyWithImpl<$Res>
       _$Erc721TransfersImpl _value, $Res Function(_$Erc721TransfersImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Erc721Transfers
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -224,12 +232,14 @@ class _$Erc721TransfersImpl implements _Erc721Transfers {
             (identical(other.symbol, symbol) || other.symbol == symbol));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, from, to, contractAddress, tokenId, name, symbol);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Erc721Transfers
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$Erc721TransfersImplCopyWith<_$Erc721TransfersImpl> get copyWith =>
@@ -271,8 +281,11 @@ abstract class _Erc721Transfers implements Erc721Transfers {
   String get name;
   @override
   String get symbol;
+
+  /// Create a copy of Erc721Transfers
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$Erc721TransfersImplCopyWith<_$Erc721TransfersImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

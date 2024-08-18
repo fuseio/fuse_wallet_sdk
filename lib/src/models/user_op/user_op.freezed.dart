@@ -37,8 +37,12 @@ mixin _$UserOp {
   List<Erc721Transfers> get erc721Transfers =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this UserOp to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserOp
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserOpCopyWith<UserOp> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -75,6 +79,8 @@ class _$UserOpCopyWithImpl<$Res, $Val extends UserOp>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserOp
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -192,6 +198,8 @@ class __$$UserOpImplCopyWithImpl<$Res>
       _$UserOpImpl _value, $Res Function(_$UserOpImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserOp
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -370,7 +378,7 @@ class _$UserOpImpl implements _UserOp {
                 .equals(other.erc721Transfers, erc721Transfers));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -390,7 +398,9 @@ class _$UserOpImpl implements _UserOp {
       const DeepCollectionEquality().hash(erc20Transfers),
       const DeepCollectionEquality().hash(erc721Transfers));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserOp
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserOpImplCopyWith<_$UserOpImpl> get copyWith =>
@@ -454,8 +464,11 @@ abstract class _UserOp implements UserOp {
   List<Erc20Transfers> get erc20Transfers;
   @override
   List<Erc721Transfers> get erc721Transfers;
+
+  /// Create a copy of UserOp
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserOpImplCopyWith<_$UserOpImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
