@@ -25,8 +25,12 @@ mixin _$TxOptions {
   BigInt? get customNonceKey => throw _privateConstructorUsedError;
   bool get withRetry => throw _privateConstructorUsedError;
 
+  /// Serializes this TxOptions to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TxOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TxOptionsCopyWith<TxOptions> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +57,8 @@ class _$TxOptionsCopyWithImpl<$Res, $Val extends TxOptions>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TxOptions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -105,6 +111,8 @@ class __$$TxOptionsImplCopyWithImpl<$Res>
       _$TxOptionsImpl _value, $Res Function(_$TxOptionsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TxOptions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -177,12 +185,14 @@ class _$TxOptionsImpl implements _TxOptions {
                 other.withRetry == withRetry));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, feeIncrementPercentage,
       useNonceSequence, customNonceKey, withRetry);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TxOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TxOptionsImplCopyWith<_$TxOptionsImpl> get copyWith =>
@@ -214,8 +224,11 @@ abstract class _TxOptions implements TxOptions {
   BigInt? get customNonceKey;
   @override
   bool get withRetry;
+
+  /// Create a copy of TxOptions
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TxOptionsImplCopyWith<_$TxOptionsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

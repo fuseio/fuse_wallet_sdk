@@ -51,7 +51,11 @@ class TokenDetails with _$TokenDetails {
   const factory TokenDetails.native({
     @Default('FUSE') String symbol,
     @Default('Fuse Token') String name,
-    @Default(18) int decimals,
+    @JsonKey(
+      defaultValue: 18,
+      fromJson: decimalsFromJson,
+    )
+    required int decimals,
     @Default(Variables.NATIVE_TOKEN_ADDRESS) String address,
     @JsonKey(
       fromJson: amountFromJson,

@@ -9,7 +9,9 @@ part of 'token_details.dart';
 _$NativeImpl _$$NativeImplFromJson(Map<String, dynamic> json) => _$NativeImpl(
       symbol: json['symbol'] as String? ?? 'FUSE',
       name: json['name'] as String? ?? 'Fuse Token',
-      decimals: (json['decimals'] as num?)?.toInt() ?? 18,
+      decimals: json['decimals'] == null
+          ? 18
+          : decimalsFromJson(json['decimals'] as String?),
       address: json['address'] as String? ?? Variables.NATIVE_TOKEN_ADDRESS,
       amount: amountFromJson(json['amount'] as String?),
       $type: json['type'] as String?,
@@ -29,7 +31,9 @@ _$LiquidityPoolTokenImpl _$$LiquidityPoolTokenImplFromJson(
         Map<String, dynamic> json) =>
     _$LiquidityPoolTokenImpl(
       symbol: json['symbol'] as String,
-      decimals: (json['decimals'] as num).toInt(),
+      decimals: json['decimals'] == null
+          ? 18
+          : decimalsFromJson(json['decimals'] as String?),
       name: nameFromJson(json['name'] as String),
       address: addressFromJson(json['address'] as String),
       underlyingTokens: (json['underlyingTokens'] as List<dynamic>)
@@ -54,7 +58,9 @@ _$BridgedTokenImpl _$$BridgedTokenImplFromJson(Map<String, dynamic> json) =>
     _$BridgedTokenImpl(
       symbol: json['symbol'] as String,
       logoURI: json['logoURI'] as String,
-      decimals: (json['decimals'] as num).toInt(),
+      decimals: json['decimals'] == null
+          ? 18
+          : decimalsFromJson(json['decimals'] as String?),
       name: nameFromJson(json['name'] as String),
       address: addressFromJson(json['address'] as String),
       $type: json['type'] as String?,
@@ -74,7 +80,9 @@ _$MiscTokenImpl _$$MiscTokenImplFromJson(Map<String, dynamic> json) =>
     _$MiscTokenImpl(
       symbol: json['symbol'] as String,
       logoURI: json['logoURI'] as String,
-      decimals: (json['decimals'] as num).toInt(),
+      decimals: json['decimals'] == null
+          ? 18
+          : decimalsFromJson(json['decimals'] as String?),
       name: nameFromJson(json['name'] as String),
       address: addressFromJson(json['address'] as String),
       $type: json['type'] as String?,

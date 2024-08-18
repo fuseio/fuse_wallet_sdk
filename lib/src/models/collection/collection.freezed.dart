@@ -27,8 +27,12 @@ mixin _$Collection {
   @JsonKey(name: 'collectionAddress')
   String get address => throw _privateConstructorUsedError;
 
+  /// Serializes this Collection to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Collection
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CollectionCopyWith<Collection> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$CollectionCopyWithImpl<$Res, $Val extends Collection>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Collection
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -101,6 +107,8 @@ class __$$CollectionImplCopyWithImpl<$Res>
       _$CollectionImpl _value, $Res Function(_$CollectionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Collection
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -161,11 +169,13 @@ class _$CollectionImpl implements _Collection {
             (identical(other.address, address) || other.address == address));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, name, symbol, address);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Collection
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CollectionImplCopyWith<_$CollectionImpl> get copyWith =>
@@ -198,8 +208,11 @@ abstract class _Collection implements Collection {
   @override
   @JsonKey(name: 'collectionAddress')
   String get address;
+
+  /// Create a copy of Collection
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CollectionImplCopyWith<_$CollectionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

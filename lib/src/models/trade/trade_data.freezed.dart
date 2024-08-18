@@ -31,8 +31,12 @@ mixin _$TradeData {
   String get sellAmount => throw _privateConstructorUsedError;
   String get allowanceTarget => throw _privateConstructorUsedError;
 
+  /// Serializes this TradeData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TradeData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TradeDataCopyWith<TradeData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -65,6 +69,8 @@ class _$TradeDataCopyWithImpl<$Res, $Val extends TradeData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TradeData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -153,6 +159,8 @@ class __$$TradeDataImplCopyWithImpl<$Res>
       _$TradeDataImpl _value, $Res Function(_$TradeDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TradeData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -279,7 +287,7 @@ class _$TradeDataImpl implements _TradeData {
                 other.allowanceTarget == allowanceTarget));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -294,7 +302,9 @@ class _$TradeDataImpl implements _TradeData {
       sellAmount,
       allowanceTarget);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TradeData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TradeDataImplCopyWith<_$TradeDataImpl> get copyWith =>
@@ -344,8 +354,11 @@ abstract class _TradeData implements TradeData {
   String get sellAmount;
   @override
   String get allowanceTarget;
+
+  /// Create a copy of TradeData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TradeDataImplCopyWith<_$TradeDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

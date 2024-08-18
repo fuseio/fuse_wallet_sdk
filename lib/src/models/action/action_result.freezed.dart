@@ -30,8 +30,12 @@ mixin _$ActionResult {
   @JsonKey(name: 'docs')
   List<Action> get actions => throw _privateConstructorUsedError;
 
+  /// Serializes this ActionResult to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ActionResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ActionResultCopyWith<ActionResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -62,6 +66,8 @@ class _$ActionResultCopyWithImpl<$Res, $Val extends ActionResult>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ActionResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,6 +138,8 @@ class __$$ActionResultImplCopyWithImpl<$Res>
       _$ActionResultImpl _value, $Res Function(_$ActionResultImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ActionResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -232,7 +240,7 @@ class _$ActionResultImpl implements _ActionResult {
             const DeepCollectionEquality().equals(other.actions, actions));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -244,7 +252,9 @@ class _$ActionResultImpl implements _ActionResult {
       totalPages,
       const DeepCollectionEquality().hash(actions));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ActionResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ActionResultImplCopyWith<_$ActionResultImpl> get copyWith =>
@@ -289,8 +299,11 @@ abstract class _ActionResult implements ActionResult {
   @ActionsConverter()
   @JsonKey(name: 'docs')
   List<Action> get actions;
+
+  /// Create a copy of ActionResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ActionResultImplCopyWith<_$ActionResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

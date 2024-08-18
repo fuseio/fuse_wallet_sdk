@@ -25,8 +25,12 @@ mixin _$IntervalStats {
   double get previousPrice => throw _privateConstructorUsedError;
   double get currentPrice => throw _privateConstructorUsedError;
 
+  /// Serializes this IntervalStats to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of IntervalStats
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $IntervalStatsCopyWith<IntervalStats> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$IntervalStatsCopyWithImpl<$Res, $Val extends IntervalStats>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of IntervalStats
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,6 +112,8 @@ class __$$IntervalStatsImplCopyWithImpl<$Res>
       _$IntervalStatsImpl _value, $Res Function(_$IntervalStatsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of IntervalStats
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -176,12 +184,14 @@ class _$IntervalStatsImpl implements _IntervalStats {
                 other.currentPrice == currentPrice));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, timestamp, priceChange, previousPrice, currentPrice);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of IntervalStats
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$IntervalStatsImplCopyWith<_$IntervalStatsImpl> get copyWith =>
@@ -213,8 +223,11 @@ abstract class _IntervalStats implements IntervalStats {
   double get previousPrice;
   @override
   double get currentPrice;
+
+  /// Create a copy of IntervalStats
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$IntervalStatsImplCopyWith<_$IntervalStatsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
