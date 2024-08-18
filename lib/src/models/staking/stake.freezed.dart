@@ -24,8 +24,12 @@ mixin _$StakeRequestBody {
   String get tokenAmount => throw _privateConstructorUsedError;
   String get tokenAddress => throw _privateConstructorUsedError;
 
+  /// Serializes this StakeRequestBody to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of StakeRequestBody
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StakeRequestBodyCopyWith<StakeRequestBody> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$StakeRequestBodyCopyWithImpl<$Res, $Val extends StakeRequestBody>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of StakeRequestBody
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$StakeRequestBodyImplCopyWithImpl<$Res>
       $Res Function(_$StakeRequestBodyImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of StakeRequestBody
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -152,12 +160,14 @@ class _$StakeRequestBodyImpl implements _StakeRequestBody {
                 other.tokenAddress == tokenAddress));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, accountAddress, tokenAmount, tokenAddress);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StakeRequestBody
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StakeRequestBodyImplCopyWith<_$StakeRequestBodyImpl> get copyWith =>
@@ -187,8 +197,11 @@ abstract class _StakeRequestBody implements StakeRequestBody {
   String get tokenAmount;
   @override
   String get tokenAddress;
+
+  /// Create a copy of StakeRequestBody
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StakeRequestBodyImplCopyWith<_$StakeRequestBodyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -202,8 +215,12 @@ mixin _$StakeResponseBody {
   String get contractAddress => throw _privateConstructorUsedError;
   String get encodedABI => throw _privateConstructorUsedError;
 
+  /// Serializes this StakeResponseBody to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of StakeResponseBody
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StakeResponseBodyCopyWith<StakeResponseBody> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -227,6 +244,8 @@ class _$StakeResponseBodyCopyWithImpl<$Res, $Val extends StakeResponseBody>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of StakeResponseBody
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -265,6 +284,8 @@ class __$$StakeResponseBodyImplCopyWithImpl<$Res>
       $Res Function(_$StakeResponseBodyImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of StakeResponseBody
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -314,11 +335,13 @@ class _$StakeResponseBodyImpl implements _StakeResponseBody {
                 other.encodedABI == encodedABI));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, contractAddress, encodedABI);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StakeResponseBody
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StakeResponseBodyImplCopyWith<_$StakeResponseBodyImpl> get copyWith =>
@@ -345,8 +368,11 @@ abstract class _StakeResponseBody implements StakeResponseBody {
   String get contractAddress;
   @override
   String get encodedABI;
+
+  /// Create a copy of StakeResponseBody
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StakeResponseBodyImplCopyWith<_$StakeResponseBodyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

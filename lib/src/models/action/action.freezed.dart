@@ -383,8 +383,13 @@ mixin _$Action {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this Action to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ActionCopyWith<Action> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -412,6 +417,8 @@ class _$ActionCopyWithImpl<$Res, $Val extends Action>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -476,6 +483,8 @@ class __$$CreateWalletImplCopyWithImpl<$Res>
       _$CreateWalletImpl _value, $Res Function(_$CreateWalletImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -567,12 +576,14 @@ class _$CreateWalletImpl extends CreateWallet {
                 other.blockNumber == blockNumber));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, timestamp, id, name, txHash, status, blockNumber);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateWalletImplCopyWith<_$CreateWalletImpl> get copyWith =>
@@ -971,8 +982,11 @@ abstract class CreateWallet extends Action {
   String get status;
   @override
   int? get blockNumber;
+
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CreateWalletImplCopyWith<_$CreateWalletImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1009,6 +1023,8 @@ class __$$FiatDepositImplCopyWithImpl<$Res>
       _$FiatDepositImpl _value, $Res Function(_$FiatDepositImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1167,7 +1183,7 @@ class _$FiatDepositImpl extends FiatDeposit {
                 other.tokenDecimal == tokenDecimal));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1185,7 +1201,9 @@ class _$FiatDepositImpl extends FiatDeposit {
       tokenSymbol,
       tokenDecimal);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FiatDepositImplCopyWith<_$FiatDepositImpl> get copyWith =>
@@ -1601,8 +1619,11 @@ abstract class FiatDeposit extends Action {
   String get tokenName;
   String get tokenSymbol;
   int get tokenDecimal;
+
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FiatDepositImplCopyWith<_$FiatDepositImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1637,6 +1658,8 @@ class __$$SendImplCopyWithImpl<$Res>
   __$$SendImplCopyWithImpl(_$SendImpl _value, $Res Function(_$SendImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1795,7 +1818,7 @@ class _$SendImpl extends Send {
                 other.tokenDecimal == tokenDecimal));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1813,7 +1836,9 @@ class _$SendImpl extends Send {
       tokenSymbol,
       tokenDecimal);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SendImplCopyWith<_$SendImpl> get copyWith =>
@@ -2228,8 +2253,11 @@ abstract class Send extends Action {
   String get tokenName;
   String get tokenSymbol;
   int get tokenDecimal;
+
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SendImplCopyWith<_$SendImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2265,6 +2293,8 @@ class __$$ReceiveImplCopyWithImpl<$Res>
       _$ReceiveImpl _value, $Res Function(_$ReceiveImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2423,7 +2453,7 @@ class _$ReceiveImpl extends Receive {
                 other.tokenDecimal == tokenDecimal));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -2441,7 +2471,9 @@ class _$ReceiveImpl extends Receive {
       tokenSymbol,
       tokenDecimal);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ReceiveImplCopyWith<_$ReceiveImpl> get copyWith =>
@@ -2856,8 +2888,11 @@ abstract class Receive extends Action {
   String get tokenName;
   String get tokenSymbol;
   int get tokenDecimal;
+
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReceiveImplCopyWith<_$ReceiveImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2885,6 +2920,8 @@ class __$$SwapImplCopyWithImpl<$Res>
   __$$SwapImplCopyWithImpl(_$SwapImpl _value, $Res Function(_$SwapImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2976,12 +3013,14 @@ class _$SwapImpl extends Swap {
                 other.blockNumber == blockNumber));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, timestamp, id, name, txHash, status, blockNumber);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SwapImplCopyWith<_$SwapImpl> get copyWith =>
@@ -3379,8 +3418,11 @@ abstract class Swap extends Action {
   String get status;
   @override
   int? get blockNumber;
+
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SwapImplCopyWith<_$SwapImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3416,6 +3458,8 @@ class __$$ReceiveNFTImplCopyWithImpl<$Res>
       _$ReceiveNFTImpl _value, $Res Function(_$ReceiveNFTImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3565,7 +3609,7 @@ class _$ReceiveNFTImpl extends ReceiveNFT {
                 other.tokenDecimal == tokenDecimal));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -3582,7 +3626,9 @@ class _$ReceiveNFTImpl extends ReceiveNFT {
       tokenSymbol,
       tokenDecimal);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ReceiveNFTImplCopyWith<_$ReceiveNFTImpl> get copyWith =>
@@ -3996,8 +4042,11 @@ abstract class ReceiveNFT extends Action {
   String get tokenName;
   String get tokenSymbol;
   int get tokenDecimal;
+
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReceiveNFTImplCopyWith<_$ReceiveNFTImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -4034,6 +4083,8 @@ class __$$StakeTokensImplCopyWithImpl<$Res>
       _$StakeTokensImpl _value, $Res Function(_$StakeTokensImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -4192,7 +4243,7 @@ class _$StakeTokensImpl extends StakeTokens {
                 other.tokenDecimal == tokenDecimal));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -4210,7 +4261,9 @@ class _$StakeTokensImpl extends StakeTokens {
       tokenSymbol,
       tokenDecimal);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StakeTokensImplCopyWith<_$StakeTokensImpl> get copyWith =>
@@ -4626,8 +4679,11 @@ abstract class StakeTokens extends Action {
   String get tokenName;
   String get tokenSymbol;
   int get tokenDecimal;
+
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StakeTokensImplCopyWith<_$StakeTokensImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -4664,6 +4720,8 @@ class __$$UnstakeTokensImplCopyWithImpl<$Res>
       _$UnstakeTokensImpl _value, $Res Function(_$UnstakeTokensImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -4822,7 +4880,7 @@ class _$UnstakeTokensImpl extends UnstakeTokens {
                 other.tokenDecimal == tokenDecimal));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -4840,7 +4898,9 @@ class _$UnstakeTokensImpl extends UnstakeTokens {
       tokenSymbol,
       tokenDecimal);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UnstakeTokensImplCopyWith<_$UnstakeTokensImpl> get copyWith =>
@@ -5256,8 +5316,11 @@ abstract class UnstakeTokens extends Action {
   String get tokenName;
   String get tokenSymbol;
   int get tokenDecimal;
+
+  /// Create a copy of Action
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UnstakeTokensImplCopyWith<_$UnstakeTokensImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -41,8 +41,12 @@ mixin _$WalletModules {
   @JsonKey(name: 'NftTransfer')
   String? get nftTransfer => throw _privateConstructorUsedError;
 
+  /// Serializes this WalletModules to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WalletModules
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WalletModulesCopyWith<WalletModules> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -76,6 +80,8 @@ class _$WalletModulesCopyWithImpl<$Res, $Val extends WalletModules>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WalletModules
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -164,6 +170,8 @@ class __$$WalletModulesImplCopyWithImpl<$Res>
       _$WalletModulesImpl _value, $Res Function(_$WalletModulesImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WalletModules
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -305,7 +313,7 @@ class _$WalletModulesImpl implements _WalletModules {
                 other.nftTransfer == nftTransfer));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -320,7 +328,9 @@ class _$WalletModulesImpl implements _WalletModules {
       transferManager,
       nftTransfer);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WalletModules
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WalletModulesImplCopyWith<_$WalletModulesImpl> get copyWith =>
@@ -382,8 +392,11 @@ abstract class _WalletModules implements WalletModules {
   @override
   @JsonKey(name: 'NftTransfer')
   String? get nftTransfer;
+
+  /// Create a copy of WalletModules
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WalletModulesImplCopyWith<_$WalletModulesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

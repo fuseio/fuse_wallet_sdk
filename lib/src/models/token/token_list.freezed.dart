@@ -24,8 +24,12 @@ mixin _$TokenList {
   String get status => throw _privateConstructorUsedError;
   List<TokenDetails> get result => throw _privateConstructorUsedError;
 
+  /// Serializes this TokenList to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TokenList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TokenListCopyWith<TokenList> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$TokenListCopyWithImpl<$Res, $Val extends TokenList>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TokenList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,6 +97,8 @@ class __$$TokenListImplCopyWithImpl<$Res>
       _$TokenListImpl _value, $Res Function(_$TokenListImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TokenList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,12 +154,14 @@ class _$TokenListImpl implements _TokenList {
             const DeepCollectionEquality().equals(other.result, result));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, message, status,
       const DeepCollectionEquality().hash(result));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TokenList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TokenListImplCopyWith<_$TokenListImpl> get copyWith =>
@@ -180,8 +190,11 @@ abstract class _TokenList implements TokenList {
   String get status;
   @override
   List<TokenDetails> get result;
+
+  /// Create a copy of TokenList
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TokenListImplCopyWith<_$TokenListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

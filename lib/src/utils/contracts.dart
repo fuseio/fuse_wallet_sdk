@@ -201,7 +201,7 @@ class ContractsUtils {
   ) async {
     if (tokenAddress.toString().toLowerCase() ==
         Variables.NATIVE_TOKEN_ADDRESS.toLowerCase()) {
-      return TokenDetails.native(amount: BigInt.zero);
+      return TokenDetails.native(amount: BigInt.zero, decimals: 18);
     }
     final toRead = ['name', 'symbol', 'decimals'];
     final token = await Future.wait(

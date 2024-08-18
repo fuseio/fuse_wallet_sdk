@@ -433,8 +433,13 @@ mixin _$WalletAction {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this WalletAction to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WalletActionCopyWith<WalletAction> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -468,6 +473,8 @@ class _$WalletActionCopyWithImpl<$Res, $Val extends WalletAction>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -556,6 +563,8 @@ class __$$BatchTransactionImplCopyWithImpl<$Res>
       $Res Function(_$BatchTransactionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -688,7 +697,7 @@ class _$BatchTransactionImpl extends BatchTransaction {
             const DeepCollectionEquality().equals(other.received, received));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -703,7 +712,9 @@ class _$BatchTransactionImpl extends BatchTransaction {
       const DeepCollectionEquality().hash(sent),
       const DeepCollectionEquality().hash(received));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BatchTransactionImplCopyWith<_$BatchTransactionImpl> get copyWith =>
@@ -1162,8 +1173,11 @@ abstract class BatchTransaction extends WalletAction {
   List<TokenEvent> get sent;
   @override
   List<TokenEvent> get received;
+
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BatchTransactionImplCopyWith<_$BatchTransactionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1197,6 +1211,8 @@ class __$$TokenTransferImplCopyWithImpl<$Res>
       _$TokenTransferImpl _value, $Res Function(_$TokenTransferImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1329,7 +1345,7 @@ class _$TokenTransferImpl extends TokenTransfer {
             const DeepCollectionEquality().equals(other.received, received));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1344,7 +1360,9 @@ class _$TokenTransferImpl extends TokenTransfer {
       const DeepCollectionEquality().hash(sent),
       const DeepCollectionEquality().hash(received));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TokenTransferImplCopyWith<_$TokenTransferImpl> get copyWith =>
@@ -1802,8 +1820,11 @@ abstract class TokenTransfer extends WalletAction {
   List<TokenEvent> get sent;
   @override
   List<TokenEvent> get received;
+
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TokenTransferImplCopyWith<_$TokenTransferImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1837,6 +1858,8 @@ class __$$TokenReceiveImplCopyWithImpl<$Res>
       _$TokenReceiveImpl _value, $Res Function(_$TokenReceiveImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1969,7 +1992,7 @@ class _$TokenReceiveImpl extends TokenReceive {
             const DeepCollectionEquality().equals(other.received, received));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1984,7 +2007,9 @@ class _$TokenReceiveImpl extends TokenReceive {
       const DeepCollectionEquality().hash(sent),
       const DeepCollectionEquality().hash(received));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TokenReceiveImplCopyWith<_$TokenReceiveImpl> get copyWith =>
@@ -2442,8 +2467,11 @@ abstract class TokenReceive extends WalletAction {
   List<TokenEvent> get sent;
   @override
   List<TokenEvent> get received;
+
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TokenReceiveImplCopyWith<_$TokenReceiveImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2477,6 +2505,8 @@ class __$$NftReceiveImplCopyWithImpl<$Res>
       _$NftReceiveImpl _value, $Res Function(_$NftReceiveImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2609,7 +2639,7 @@ class _$NftReceiveImpl extends NftReceive {
             const DeepCollectionEquality().equals(other.received, received));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -2624,7 +2654,9 @@ class _$NftReceiveImpl extends NftReceive {
       const DeepCollectionEquality().hash(sent),
       const DeepCollectionEquality().hash(received));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NftReceiveImplCopyWith<_$NftReceiveImpl> get copyWith =>
@@ -3082,8 +3114,11 @@ abstract class NftReceive extends WalletAction {
   List<TokenEvent> get sent;
   @override
   List<TokenEvent> get received;
+
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NftReceiveImplCopyWith<_$NftReceiveImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3117,6 +3152,8 @@ class __$$SwapTokensImplCopyWithImpl<$Res>
       _$SwapTokensImpl _value, $Res Function(_$SwapTokensImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3249,7 +3286,7 @@ class _$SwapTokensImpl extends SwapTokens {
             const DeepCollectionEquality().equals(other.received, received));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -3264,7 +3301,9 @@ class _$SwapTokensImpl extends SwapTokens {
       const DeepCollectionEquality().hash(sent),
       const DeepCollectionEquality().hash(received));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SwapTokensImplCopyWith<_$SwapTokensImpl> get copyWith =>
@@ -3722,8 +3761,11 @@ abstract class SwapTokens extends WalletAction {
   List<TokenEvent> get sent;
   @override
   List<TokenEvent> get received;
+
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SwapTokensImplCopyWith<_$SwapTokensImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3757,6 +3799,8 @@ class __$$NftTransferImplCopyWithImpl<$Res>
       _$NftTransferImpl _value, $Res Function(_$NftTransferImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3889,7 +3933,7 @@ class _$NftTransferImpl extends NftTransfer {
             const DeepCollectionEquality().equals(other.received, received));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -3904,7 +3948,9 @@ class _$NftTransferImpl extends NftTransfer {
       const DeepCollectionEquality().hash(sent),
       const DeepCollectionEquality().hash(received));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NftTransferImplCopyWith<_$NftTransferImpl> get copyWith =>
@@ -4362,8 +4408,11 @@ abstract class NftTransfer extends WalletAction {
   List<TokenEvent> get sent;
   @override
   List<TokenEvent> get received;
+
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NftTransferImplCopyWith<_$NftTransferImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -4397,6 +4446,8 @@ class __$$ApproveTokenImplCopyWithImpl<$Res>
       _$ApproveTokenImpl _value, $Res Function(_$ApproveTokenImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -4529,7 +4580,7 @@ class _$ApproveTokenImpl extends ApproveToken {
             const DeepCollectionEquality().equals(other.received, received));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -4544,7 +4595,9 @@ class _$ApproveTokenImpl extends ApproveToken {
       const DeepCollectionEquality().hash(sent),
       const DeepCollectionEquality().hash(received));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ApproveTokenImplCopyWith<_$ApproveTokenImpl> get copyWith =>
@@ -5002,8 +5055,11 @@ abstract class ApproveToken extends WalletAction {
   List<TokenEvent> get sent;
   @override
   List<TokenEvent> get received;
+
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ApproveTokenImplCopyWith<_$ApproveTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -5037,6 +5093,8 @@ class __$$StakeTokensActionImplCopyWithImpl<$Res>
       $Res Function(_$StakeTokensActionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -5169,7 +5227,7 @@ class _$StakeTokensActionImpl extends StakeTokensAction {
             const DeepCollectionEquality().equals(other.received, received));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -5184,7 +5242,9 @@ class _$StakeTokensActionImpl extends StakeTokensAction {
       const DeepCollectionEquality().hash(sent),
       const DeepCollectionEquality().hash(received));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StakeTokensActionImplCopyWith<_$StakeTokensActionImpl> get copyWith =>
@@ -5643,8 +5703,11 @@ abstract class StakeTokensAction extends WalletAction {
   List<TokenEvent> get sent;
   @override
   List<TokenEvent> get received;
+
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StakeTokensActionImplCopyWith<_$StakeTokensActionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -5678,6 +5741,8 @@ class __$$UnstakeTokensActionImplCopyWithImpl<$Res>
       $Res Function(_$UnstakeTokensActionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -5810,7 +5875,7 @@ class _$UnstakeTokensActionImpl extends UnstakeTokensAction {
             const DeepCollectionEquality().equals(other.received, received));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -5825,7 +5890,9 @@ class _$UnstakeTokensActionImpl extends UnstakeTokensAction {
       const DeepCollectionEquality().hash(sent),
       const DeepCollectionEquality().hash(received));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UnstakeTokensActionImplCopyWith<_$UnstakeTokensActionImpl> get copyWith =>
@@ -6284,8 +6351,11 @@ abstract class UnstakeTokensAction extends WalletAction {
   List<TokenEvent> get sent;
   @override
   List<TokenEvent> get received;
+
+  /// Create a copy of WalletAction
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UnstakeTokensActionImplCopyWith<_$UnstakeTokensActionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

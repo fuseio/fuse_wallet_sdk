@@ -33,8 +33,12 @@ mixin _$WalletActionResult {
   @JsonKey(name: 'docs')
   List<WalletAction> get actions => throw _privateConstructorUsedError;
 
+  /// Serializes this WalletActionResult to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WalletActionResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WalletActionResultCopyWith<WalletActionResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -70,6 +74,8 @@ class _$WalletActionResultCopyWithImpl<$Res, $Val extends WalletActionResult>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WalletActionResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -160,6 +166,8 @@ class __$$WalletActionResultImplCopyWithImpl<$Res>
       $Res Function(_$WalletActionResultImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WalletActionResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -289,7 +297,7 @@ class _$WalletActionResultImpl implements _WalletActionResult {
             const DeepCollectionEquality().equals(other.actions, actions));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -304,7 +312,9 @@ class _$WalletActionResultImpl implements _WalletActionResult {
       pagingCounter,
       const DeepCollectionEquality().hash(actions));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WalletActionResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WalletActionResultImplCopyWith<_$WalletActionResultImpl> get copyWith =>
@@ -359,8 +369,11 @@ abstract class _WalletActionResult implements WalletActionResult {
   @WalletActionsConverter()
   @JsonKey(name: 'docs')
   List<WalletAction> get actions;
+
+  /// Create a copy of WalletActionResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WalletActionResultImplCopyWith<_$WalletActionResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

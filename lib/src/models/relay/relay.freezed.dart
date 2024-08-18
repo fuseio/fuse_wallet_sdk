@@ -34,8 +34,12 @@ mixin _$Relay {
   String get walletModule => throw _privateConstructorUsedError;
   String? get externalId => throw _privateConstructorUsedError;
 
+  /// Serializes this Relay to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Relay
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $RelayCopyWith<Relay> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -69,6 +73,8 @@ class _$RelayCopyWithImpl<$Res, $Val extends Relay>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Relay
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -168,6 +174,8 @@ class __$$RelayImplCopyWithImpl<$Res>
       _$RelayImpl _value, $Res Function(_$RelayImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Relay
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -319,7 +327,7 @@ class _$RelayImpl implements _Relay {
                 other.externalId == externalId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -336,7 +344,9 @@ class _$RelayImpl implements _Relay {
       walletModule,
       externalId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Relay
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RelayImplCopyWith<_$RelayImpl> get copyWith =>
@@ -391,8 +401,11 @@ abstract class _Relay implements Relay {
   String get walletModule;
   @override
   String? get externalId;
+
+  /// Create a copy of Relay
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RelayImplCopyWith<_$RelayImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -30,8 +30,12 @@ mixin _$StakedToken {
   double get earnedAmountUSD => throw _privateConstructorUsedError;
   double get stakingApr => throw _privateConstructorUsedError;
 
+  /// Serializes this StakedToken to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of StakedToken
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StakedTokenCopyWith<StakedToken> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,6 +68,8 @@ class _$StakedTokenCopyWithImpl<$Res, $Val extends StakedToken>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of StakedToken
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,6 +152,8 @@ class __$$StakedTokenImplCopyWithImpl<$Res>
       _$StakedTokenImpl _value, $Res Function(_$StakedTokenImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of StakedToken
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -266,7 +274,7 @@ class _$StakedTokenImpl implements _StakedToken {
                 other.stakingApr == stakingApr));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -280,7 +288,9 @@ class _$StakedTokenImpl implements _StakedToken {
       earnedAmountUSD,
       stakingApr);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StakedToken
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StakedTokenImplCopyWith<_$StakedTokenImpl> get copyWith =>
@@ -327,8 +337,11 @@ abstract class _StakedToken implements StakedToken {
   double get earnedAmountUSD;
   @override
   double get stakingApr;
+
+  /// Create a copy of StakedToken
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StakedTokenImplCopyWith<_$StakedTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -343,8 +356,12 @@ mixin _$StakedTokenResponse {
   double get totalEarnedAmountUSD => throw _privateConstructorUsedError;
   List<StakedToken> get stakedTokens => throw _privateConstructorUsedError;
 
+  /// Serializes this StakedTokenResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of StakedTokenResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StakedTokenResponseCopyWith<StakedTokenResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -371,6 +388,8 @@ class _$StakedTokenResponseCopyWithImpl<$Res, $Val extends StakedTokenResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of StakedTokenResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -417,6 +436,8 @@ class __$$StakedTokenResponseImplCopyWithImpl<$Res>
       $Res Function(_$StakedTokenResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of StakedTokenResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -477,12 +498,14 @@ class _$StakedTokenResponseImpl implements _StakedTokenResponse {
                 .equals(other.stakedTokens, stakedTokens));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, totalStakedAmountUSD,
       totalEarnedAmountUSD, const DeepCollectionEquality().hash(stakedTokens));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StakedTokenResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StakedTokenResponseImplCopyWith<_$StakedTokenResponseImpl> get copyWith =>
@@ -513,8 +536,11 @@ abstract class _StakedTokenResponse implements StakedTokenResponse {
   double get totalEarnedAmountUSD;
   @override
   List<StakedToken> get stakedTokens;
+
+  /// Create a copy of StakedTokenResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StakedTokenResponseImplCopyWith<_$StakedTokenResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

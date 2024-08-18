@@ -31,8 +31,12 @@ mixin _$Collectible {
   Address get owner => throw _privateConstructorUsedError;
   Address get creator => throw _privateConstructorUsedError;
 
+  /// Serializes this Collectible to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Collectible
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CollectibleCopyWith<Collectible> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -69,6 +73,8 @@ class _$CollectibleCopyWithImpl<$Res, $Val extends Collectible>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Collectible
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +128,8 @@ class _$CollectibleCopyWithImpl<$Res, $Val extends Collectible>
     ) as $Val);
   }
 
+  /// Create a copy of Collectible
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CollectionCopyWith<$Res> get collection {
@@ -130,6 +138,8 @@ class _$CollectibleCopyWithImpl<$Res, $Val extends Collectible>
     });
   }
 
+  /// Create a copy of Collectible
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AddressCopyWith<$Res> get owner {
@@ -138,6 +148,8 @@ class _$CollectibleCopyWithImpl<$Res, $Val extends Collectible>
     });
   }
 
+  /// Create a copy of Collectible
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AddressCopyWith<$Res> get creator {
@@ -182,6 +194,8 @@ class __$$CollectibleImplCopyWithImpl<$Res>
       _$CollectibleImpl _value, $Res Function(_$CollectibleImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Collectible
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -300,12 +314,14 @@ class _$CollectibleImpl extends _Collectible {
             (identical(other.creator, creator) || other.creator == creator));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, description, name, imageURL,
       descriptorUri, createdAt, tokenId, collection, owner, creator);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Collectible
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CollectibleImplCopyWith<_$CollectibleImpl> get copyWith =>
@@ -354,8 +370,11 @@ abstract class _Collectible extends Collectible {
   Address get owner;
   @override
   Address get creator;
+
+  /// Create a copy of Collectible
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CollectibleImplCopyWith<_$CollectibleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
