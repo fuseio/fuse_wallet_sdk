@@ -51,7 +51,7 @@ void main() async {
     );
 
     final intervalData =
-        await fuseWalletSDK.tradeModule.interval(tokenAddress, TimeFrame.day);
+        await fuseWalletSDK.tradeModule.interval(tokenAddress, TimeFrame.week);
     intervalData.pick(
       onData: (List<IntervalStats> stats) {
         print('stats');
