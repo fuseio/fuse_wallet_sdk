@@ -1,3 +1,13 @@
+## [0.3.7]
+
+### Changed
+- Updated `TimeFrame` enum:
+  - Removed: `hour`, `day`, and `all` values
+  - Added: `year` value
+
+### Breaking Changes
+- The removal of `hour`, `day`, and `all` from the `TimeFrame` enum may affect existing code that relies on these values.
+
 ## [0.3.6]
 
 ### Fixed
