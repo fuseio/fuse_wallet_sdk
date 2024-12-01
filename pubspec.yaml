@@ -21,7 +21,7 @@ dependencies:
   http: ^1.2.2
   json_annotation: ^4.9.0
   synchronized: ^3.3.0+3
-  userop: ^0.3.0
+  userop: ^0.3.1
   web3dart: ^2.7.3
 
 dev_dependencies:
