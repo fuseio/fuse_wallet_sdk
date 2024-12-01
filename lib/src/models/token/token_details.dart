@@ -58,6 +58,7 @@ class TokenDetails with _$TokenDetails {
     required int decimals,
     @Default(Variables.NATIVE_TOKEN_ADDRESS) String address,
     @JsonKey(
+      name: 'balance',
       fromJson: amountFromJson,
     )
     required BigInt amount,

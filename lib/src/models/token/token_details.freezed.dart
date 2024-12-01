@@ -49,7 +49,7 @@ mixin _$TokenDetails {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)
         native,
     required TResult Function(
             String symbol,
@@ -97,7 +97,7 @@ mixin _$TokenDetails {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)?
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)?
         native,
     TResult? Function(
             String symbol,
@@ -145,7 +145,7 @@ mixin _$TokenDetails {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)?
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)?
         native,
     TResult Function(
             String symbol,
@@ -296,7 +296,7 @@ abstract class _$$NativeImplCopyWith<$Res>
       String name,
       @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
       String address,
-      @JsonKey(fromJson: amountFromJson) BigInt amount});
+      @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount});
 }
 
 /// @nodoc
@@ -352,7 +352,7 @@ class _$NativeImpl extends Native {
       @JsonKey(defaultValue: 18, fromJson: decimalsFromJson)
       required this.decimals,
       this.address = Variables.NATIVE_TOKEN_ADDRESS,
-      @JsonKey(fromJson: amountFromJson) required this.amount,
+      @JsonKey(name: 'balance', fromJson: amountFromJson) required this.amount,
       final String? $type})
       : $type = $type ?? 'native',
         super._();
@@ -373,7 +373,7 @@ class _$NativeImpl extends Native {
   @JsonKey()
   final String address;
   @override
-  @JsonKey(fromJson: amountFromJson)
+  @JsonKey(name: 'balance', fromJson: amountFromJson)
   final BigInt amount;
 
   @JsonKey(name: 'type')
@@ -418,7 +418,7 @@ class _$NativeImpl extends Native {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)
         native,
     required TResult Function(
             String symbol,
@@ -469,7 +469,7 @@ class _$NativeImpl extends Native {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)?
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)?
         native,
     TResult? Function(
             String symbol,
@@ -520,7 +520,7 @@ class _$NativeImpl extends Native {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)?
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)?
         native,
     TResult Function(
             String symbol,
@@ -620,13 +620,13 @@ class _$NativeImpl extends Native {
 
 abstract class Native extends TokenDetails implements IToken {
   const factory Native(
-          {final String symbol,
-          final String name,
-          @JsonKey(defaultValue: 18, fromJson: decimalsFromJson)
-          required final int decimals,
-          final String address,
-          @JsonKey(fromJson: amountFromJson) required final BigInt amount}) =
-      _$NativeImpl;
+      {final String symbol,
+      final String name,
+      @JsonKey(defaultValue: 18, fromJson: decimalsFromJson)
+      required final int decimals,
+      final String address,
+      @JsonKey(name: 'balance', fromJson: amountFromJson)
+      required final BigInt amount}) = _$NativeImpl;
   const Native._() : super._();
 
   factory Native.fromJson(Map<String, dynamic> json) = _$NativeImpl.fromJson;
@@ -640,7 +640,7 @@ abstract class Native extends TokenDetails implements IToken {
   int get decimals;
   @override
   String get address;
-  @JsonKey(fromJson: amountFromJson)
+  @JsonKey(name: 'balance', fromJson: amountFromJson)
   BigInt get amount;
 
   /// Create a copy of TokenDetails
@@ -784,7 +784,7 @@ class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)
         native,
     required TResult Function(
             String symbol,
@@ -836,7 +836,7 @@ class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)?
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)?
         native,
     TResult? Function(
             String symbol,
@@ -888,7 +888,7 @@ class _$LiquidityPoolTokenImpl extends LiquidityPoolToken {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)?
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)?
         native,
     TResult Function(
             String symbol,
@@ -1151,7 +1151,7 @@ class _$BridgedTokenImpl extends BridgedToken {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)
         native,
     required TResult Function(
             String symbol,
@@ -1202,7 +1202,7 @@ class _$BridgedTokenImpl extends BridgedToken {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)?
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)?
         native,
     TResult? Function(
             String symbol,
@@ -1253,7 +1253,7 @@ class _$BridgedTokenImpl extends BridgedToken {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)?
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)?
         native,
     TResult Function(
             String symbol,
@@ -1515,7 +1515,7 @@ class _$MiscTokenImpl extends MiscToken {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)
         native,
     required TResult Function(
             String symbol,
@@ -1566,7 +1566,7 @@ class _$MiscTokenImpl extends MiscToken {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)?
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)?
         native,
     TResult? Function(
             String symbol,
@@ -1617,7 +1617,7 @@ class _$MiscTokenImpl extends MiscToken {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)?
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)?
         native,
     TResult Function(
             String symbol,
@@ -1883,7 +1883,7 @@ class _$ERC20Impl extends ERC20 {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)
         native,
     required TResult Function(
             String symbol,
@@ -1934,7 +1934,7 @@ class _$ERC20Impl extends ERC20 {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)?
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)?
         native,
     TResult? Function(
             String symbol,
@@ -1985,7 +1985,7 @@ class _$ERC20Impl extends ERC20 {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)?
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)?
         native,
     TResult Function(
             String symbol,
@@ -2252,7 +2252,7 @@ class _$ERC721Impl extends ERC721 {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)
         native,
     required TResult Function(
             String symbol,
@@ -2303,7 +2303,7 @@ class _$ERC721Impl extends ERC721 {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)?
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)?
         native,
     TResult? Function(
             String symbol,
@@ -2354,7 +2354,7 @@ class _$ERC721Impl extends ERC721 {
             String name,
             @JsonKey(defaultValue: 18, fromJson: decimalsFromJson) int decimals,
             String address,
-            @JsonKey(fromJson: amountFromJson) BigInt amount)?
+            @JsonKey(name: 'balance', fromJson: amountFromJson) BigInt amount)?
         native,
     TResult Function(
             String symbol,

@@ -13,7 +13,7 @@ _$NativeImpl _$$NativeImplFromJson(Map<String, dynamic> json) => _$NativeImpl(
           ? 18
           : decimalsFromJson(json['decimals'] as String?),
       address: json['address'] as String? ?? Variables.NATIVE_TOKEN_ADDRESS,
-      amount: amountFromJson(json['amount'] as String?),
+      amount: amountFromJson(json['balance'] as String?),
       $type: json['type'] as String?,
     );
 
@@ -23,7 +23,7 @@ Map<String, dynamic> _$$NativeImplToJson(_$NativeImpl instance) =>
       'name': instance.name,
       'decimals': instance.decimals,
       'address': instance.address,
-      'amount': instance.amount.toString(),
+      'balance': instance.amount.toString(),
       'type': instance.$type,
     };
 
