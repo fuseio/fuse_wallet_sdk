@@ -60,9 +60,7 @@ class BalancesModule {
         }
       }
       return DC.error(Exception('Failed to fetch collectibles'));
-    } catch (e, s) {
-      print('error: $e');
-      print('stack trace: $s');
+    } catch (e) {
       return DC.error(Exception(e.toString()));
     }
   }
