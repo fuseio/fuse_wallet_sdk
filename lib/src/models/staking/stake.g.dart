@@ -12,6 +12,7 @@ _$StakeRequestBodyImpl _$$StakeRequestBodyImplFromJson(
       accountAddress: json['accountAddress'] as String,
       tokenAmount: json['tokenAmount'] as String,
       tokenAddress: json['tokenAddress'] as String,
+      isSimpleStaking: json['isSimpleStaking'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$StakeRequestBodyImplToJson(
@@ -20,6 +21,7 @@ Map<String, dynamic> _$$StakeRequestBodyImplToJson(
       'accountAddress': instance.accountAddress,
       'tokenAmount': instance.tokenAmount,
       'tokenAddress': instance.tokenAddress,
+      'isSimpleStaking': instance.isSimpleStaking,
     };
 
 _$StakeResponseBodyImpl _$$StakeResponseBodyImplFromJson(
