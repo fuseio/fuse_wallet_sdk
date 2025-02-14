@@ -114,11 +114,14 @@ class StakingModule {
   /// - On success, `DC.data` will be called with a [StakedTokenResponse] object.
   /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, StakedTokenResponse>> getStakedTokens(
-    String walletAddress,
-  ) async {
+    String walletAddress, {
+    bool isSimpleStaking = false,
+  }) async {
     try {
+      final version = isSimpleStaking ? 'v2' : 'v0';
+
       final Response response = await _dio.get(
-        '/v0/staking/staked_tokens/$walletAddress',
+        '/$version/staking/staked_tokens/$walletAddress',
       );
       if (response.statusCode == 200) {
         return DC.data(StakedTokenResponse.fromJson(response.data));
