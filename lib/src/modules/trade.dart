@@ -57,6 +57,42 @@ class TradeModule {
     }
   }
 
+  /// Retrieves the current prices for multiple token addresses.
+  ///
+  /// Parameters:
+  /// - [tokenAddresses]: A `List<String>` representing the token addresses.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a `Map<String, String>` object where keys are token addresses and values are prices.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
+  Future<DC<Exception, Map<String, String>>> prices(
+    List<String> tokenAddresses,
+  ) async {
+    try {
+      final addresses = tokenAddresses.join(',');
+
+      final response = await _dio.get(
+        '/v0/trade/prices/$addresses',
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> prices =
+            response.data['data']['prices'] ?? {};
+
+        final Map<String, String> result = {};
+
+        prices.forEach((key, value) {
+          result[key] = value.toString();
+        });
+
+        return DC.data(result);
+      }
+      return DC.error(Exception('Failed to get prices for tokens'));
+    } catch (e) {
+      return DC.error(Exception(e.toString()));
+    }
+  }
+
   /// Fetches the price change for a given token address.
   ///
   /// [tokenAddress] is the address of the token to fetch the price change for.
