@@ -12,10 +12,12 @@ class StakeRequestBody with _$StakeRequestBody {
   /// - [accountAddress] – The address of the account to be staked.
   /// - [tokenAmount] – The amount of tokens to be staked.
   /// - [tokenAddress] – The address of the token to be staked.
+  /// - [isSimpleStaking] – Whether the staking is a simple staking.
   factory StakeRequestBody({
     required String accountAddress,
     required String tokenAmount,
     required String tokenAddress,
+    @Default(false) bool isSimpleStaking,
   }) = _StakeRequestBody;
 
   /// Creates a StakeRequestBody instance from a JSON object.

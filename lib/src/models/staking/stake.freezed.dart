@@ -23,6 +23,7 @@ mixin _$StakeRequestBody {
   String get accountAddress => throw _privateConstructorUsedError;
   String get tokenAmount => throw _privateConstructorUsedError;
   String get tokenAddress => throw _privateConstructorUsedError;
+  bool get isSimpleStaking => throw _privateConstructorUsedError;
 
   /// Serializes this StakeRequestBody to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +41,11 @@ abstract class $StakeRequestBodyCopyWith<$Res> {
           StakeRequestBody value, $Res Function(StakeRequestBody) then) =
       _$StakeRequestBodyCopyWithImpl<$Res, StakeRequestBody>;
   @useResult
-  $Res call({String accountAddress, String tokenAmount, String tokenAddress});
+  $Res call(
+      {String accountAddress,
+      String tokenAmount,
+      String tokenAddress,
+      bool isSimpleStaking});
 }
 
 /// @nodoc
@@ -61,6 +66,7 @@ class _$StakeRequestBodyCopyWithImpl<$Res, $Val extends StakeRequestBody>
     Object? accountAddress = null,
     Object? tokenAmount = null,
     Object? tokenAddress = null,
+    Object? isSimpleStaking = null,
   }) {
     return _then(_value.copyWith(
       accountAddress: null == accountAddress
@@ -75,6 +81,10 @@ class _$StakeRequestBodyCopyWithImpl<$Res, $Val extends StakeRequestBody>
           ? _value.tokenAddress
           : tokenAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      isSimpleStaking: null == isSimpleStaking
+          ? _value.isSimpleStaking
+          : isSimpleStaking // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -87,7 +97,11 @@ abstract class _$$StakeRequestBodyImplCopyWith<$Res>
       __$$StakeRequestBodyImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String accountAddress, String tokenAmount, String tokenAddress});
+  $Res call(
+      {String accountAddress,
+      String tokenAmount,
+      String tokenAddress,
+      bool isSimpleStaking});
 }
 
 /// @nodoc
@@ -106,6 +120,7 @@ class __$$StakeRequestBodyImplCopyWithImpl<$Res>
     Object? accountAddress = null,
     Object? tokenAmount = null,
     Object? tokenAddress = null,
+    Object? isSimpleStaking = null,
   }) {
     return _then(_$StakeRequestBodyImpl(
       accountAddress: null == accountAddress
@@ -120,6 +135,10 @@ class __$$StakeRequestBodyImplCopyWithImpl<$Res>
           ? _value.tokenAddress
           : tokenAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      isSimpleStaking: null == isSimpleStaking
+          ? _value.isSimpleStaking
+          : isSimpleStaking // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -130,7 +149,8 @@ class _$StakeRequestBodyImpl implements _StakeRequestBody {
   _$StakeRequestBodyImpl(
       {required this.accountAddress,
       required this.tokenAmount,
-      required this.tokenAddress});
+      required this.tokenAddress,
+      this.isSimpleStaking = false});
 
   factory _$StakeRequestBodyImpl.fromJson(Map<String, dynamic> json) =>
       _$$StakeRequestBodyImplFromJson(json);
@@ -141,10 +161,13 @@ class _$StakeRequestBodyImpl implements _StakeRequestBody {
   final String tokenAmount;
   @override
   final String tokenAddress;
+  @override
+  @JsonKey()
+  final bool isSimpleStaking;
 
   @override
   String toString() {
-    return 'StakeRequestBody(accountAddress: $accountAddress, tokenAmount: $tokenAmount, tokenAddress: $tokenAddress)';
+    return 'StakeRequestBody(accountAddress: $accountAddress, tokenAmount: $tokenAmount, tokenAddress: $tokenAddress, isSimpleStaking: $isSimpleStaking)';
   }
 
   @override
@@ -157,13 +180,15 @@ class _$StakeRequestBodyImpl implements _StakeRequestBody {
             (identical(other.tokenAmount, tokenAmount) ||
                 other.tokenAmount == tokenAmount) &&
             (identical(other.tokenAddress, tokenAddress) ||
-                other.tokenAddress == tokenAddress));
+                other.tokenAddress == tokenAddress) &&
+            (identical(other.isSimpleStaking, isSimpleStaking) ||
+                other.isSimpleStaking == isSimpleStaking));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, accountAddress, tokenAmount, tokenAddress);
+  int get hashCode => Object.hash(
+      runtimeType, accountAddress, tokenAmount, tokenAddress, isSimpleStaking);
 
   /// Create a copy of StakeRequestBody
   /// with the given fields replaced by the non-null parameter values.
@@ -186,7 +211,8 @@ abstract class _StakeRequestBody implements StakeRequestBody {
   factory _StakeRequestBody(
       {required final String accountAddress,
       required final String tokenAmount,
-      required final String tokenAddress}) = _$StakeRequestBodyImpl;
+      required final String tokenAddress,
+      final bool isSimpleStaking}) = _$StakeRequestBodyImpl;
 
   factory _StakeRequestBody.fromJson(Map<String, dynamic> json) =
       _$StakeRequestBodyImpl.fromJson;
@@ -197,6 +223,8 @@ abstract class _StakeRequestBody implements StakeRequestBody {
   String get tokenAmount;
   @override
   String get tokenAddress;
+  @override
+  bool get isSimpleStaking;
 
   /// Create a copy of StakeRequestBody
   /// with the given fields replaced by the non-null parameter values.

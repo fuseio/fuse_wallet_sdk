@@ -23,6 +23,7 @@ mixin _$UnstakeRequestBody {
   String get accountAddress => throw _privateConstructorUsedError;
   String get tokenAmount => throw _privateConstructorUsedError;
   String get tokenAddress => throw _privateConstructorUsedError;
+  bool get isSimpleUnstake => throw _privateConstructorUsedError;
 
   /// Serializes this UnstakeRequestBody to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +41,11 @@ abstract class $UnstakeRequestBodyCopyWith<$Res> {
           UnstakeRequestBody value, $Res Function(UnstakeRequestBody) then) =
       _$UnstakeRequestBodyCopyWithImpl<$Res, UnstakeRequestBody>;
   @useResult
-  $Res call({String accountAddress, String tokenAmount, String tokenAddress});
+  $Res call(
+      {String accountAddress,
+      String tokenAmount,
+      String tokenAddress,
+      bool isSimpleUnstake});
 }
 
 /// @nodoc
@@ -61,6 +66,7 @@ class _$UnstakeRequestBodyCopyWithImpl<$Res, $Val extends UnstakeRequestBody>
     Object? accountAddress = null,
     Object? tokenAmount = null,
     Object? tokenAddress = null,
+    Object? isSimpleUnstake = null,
   }) {
     return _then(_value.copyWith(
       accountAddress: null == accountAddress
@@ -75,6 +81,10 @@ class _$UnstakeRequestBodyCopyWithImpl<$Res, $Val extends UnstakeRequestBody>
           ? _value.tokenAddress
           : tokenAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      isSimpleUnstake: null == isSimpleUnstake
+          ? _value.isSimpleUnstake
+          : isSimpleUnstake // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -87,7 +97,11 @@ abstract class _$$UnstakeRequestBodyImplCopyWith<$Res>
       __$$UnstakeRequestBodyImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String accountAddress, String tokenAmount, String tokenAddress});
+  $Res call(
+      {String accountAddress,
+      String tokenAmount,
+      String tokenAddress,
+      bool isSimpleUnstake});
 }
 
 /// @nodoc
@@ -106,6 +120,7 @@ class __$$UnstakeRequestBodyImplCopyWithImpl<$Res>
     Object? accountAddress = null,
     Object? tokenAmount = null,
     Object? tokenAddress = null,
+    Object? isSimpleUnstake = null,
   }) {
     return _then(_$UnstakeRequestBodyImpl(
       accountAddress: null == accountAddress
@@ -120,6 +135,10 @@ class __$$UnstakeRequestBodyImplCopyWithImpl<$Res>
           ? _value.tokenAddress
           : tokenAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      isSimpleUnstake: null == isSimpleUnstake
+          ? _value.isSimpleUnstake
+          : isSimpleUnstake // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -130,7 +149,8 @@ class _$UnstakeRequestBodyImpl implements _UnstakeRequestBody {
   _$UnstakeRequestBodyImpl(
       {required this.accountAddress,
       required this.tokenAmount,
-      required this.tokenAddress});
+      required this.tokenAddress,
+      this.isSimpleUnstake = false});
 
   factory _$UnstakeRequestBodyImpl.fromJson(Map<String, dynamic> json) =>
       _$$UnstakeRequestBodyImplFromJson(json);
@@ -141,10 +161,13 @@ class _$UnstakeRequestBodyImpl implements _UnstakeRequestBody {
   final String tokenAmount;
   @override
   final String tokenAddress;
+  @override
+  @JsonKey()
+  final bool isSimpleUnstake;
 
   @override
   String toString() {
-    return 'UnstakeRequestBody(accountAddress: $accountAddress, tokenAmount: $tokenAmount, tokenAddress: $tokenAddress)';
+    return 'UnstakeRequestBody(accountAddress: $accountAddress, tokenAmount: $tokenAmount, tokenAddress: $tokenAddress, isSimpleUnstake: $isSimpleUnstake)';
   }
 
   @override
@@ -157,13 +180,15 @@ class _$UnstakeRequestBodyImpl implements _UnstakeRequestBody {
             (identical(other.tokenAmount, tokenAmount) ||
                 other.tokenAmount == tokenAmount) &&
             (identical(other.tokenAddress, tokenAddress) ||
-                other.tokenAddress == tokenAddress));
+                other.tokenAddress == tokenAddress) &&
+            (identical(other.isSimpleUnstake, isSimpleUnstake) ||
+                other.isSimpleUnstake == isSimpleUnstake));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, accountAddress, tokenAmount, tokenAddress);
+  int get hashCode => Object.hash(
+      runtimeType, accountAddress, tokenAmount, tokenAddress, isSimpleUnstake);
 
   /// Create a copy of UnstakeRequestBody
   /// with the given fields replaced by the non-null parameter values.
@@ -186,7 +211,8 @@ abstract class _UnstakeRequestBody implements UnstakeRequestBody {
   factory _UnstakeRequestBody(
       {required final String accountAddress,
       required final String tokenAmount,
-      required final String tokenAddress}) = _$UnstakeRequestBodyImpl;
+      required final String tokenAddress,
+      final bool isSimpleUnstake}) = _$UnstakeRequestBodyImpl;
 
   factory _UnstakeRequestBody.fromJson(Map<String, dynamic> json) =
       _$UnstakeRequestBodyImpl.fromJson;
@@ -197,6 +223,8 @@ abstract class _UnstakeRequestBody implements UnstakeRequestBody {
   String get tokenAmount;
   @override
   String get tokenAddress;
+  @override
+  bool get isSimpleUnstake;
 
   /// Create a copy of UnstakeRequestBody
   /// with the given fields replaced by the non-null parameter values.
