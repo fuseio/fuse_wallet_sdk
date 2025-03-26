@@ -440,6 +440,25 @@ class FuseSDK {
     );
   }
 
+  Future<ISendUserOperationResponse> swapTokensUsingQuote(
+    String to,
+    String data,
+    BigInt value,
+    String sellTokenAddress, [
+    TxOptions? options,
+  ]) async {
+    final spender = EthereumAddress.fromHex(to);
+    final callData = hexToBytes(data);
+
+    return _processOperation(
+      tokenAddress: EthereumAddress.fromHex(sellTokenAddress),
+      spender: spender,
+      callData: callData,
+      amount: value,
+      options: options,
+    );
+  }
+
   /// Stakes tokens based on the provided [stakeRequestBody].
   ///
   /// This method facilitates token staking by interacting with the staking module.
