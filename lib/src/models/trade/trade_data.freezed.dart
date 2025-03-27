@@ -21,7 +21,7 @@ TradeData _$TradeDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TradeData {
   int get chainId => throw _privateConstructorUsedError;
-  String get estimatedPriceImpact => throw _privateConstructorUsedError;
+  String? get estimatedPriceImpact => throw _privateConstructorUsedError;
   String get to => throw _privateConstructorUsedError;
   String get data => throw _privateConstructorUsedError;
   String get value => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ abstract class $TradeDataCopyWith<$Res> {
   @useResult
   $Res call(
       {int chainId,
-      String estimatedPriceImpact,
+      String? estimatedPriceImpact,
       String to,
       String data,
       String value,
@@ -75,7 +75,7 @@ class _$TradeDataCopyWithImpl<$Res, $Val extends TradeData>
   @override
   $Res call({
     Object? chainId = null,
-    Object? estimatedPriceImpact = null,
+    Object? estimatedPriceImpact = freezed,
     Object? to = null,
     Object? data = null,
     Object? value = null,
@@ -90,10 +90,10 @@ class _$TradeDataCopyWithImpl<$Res, $Val extends TradeData>
           ? _value.chainId
           : chainId // ignore: cast_nullable_to_non_nullable
               as int,
-      estimatedPriceImpact: null == estimatedPriceImpact
+      estimatedPriceImpact: freezed == estimatedPriceImpact
           ? _value.estimatedPriceImpact
           : estimatedPriceImpact // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       to: null == to
           ? _value.to
           : to // ignore: cast_nullable_to_non_nullable
@@ -140,7 +140,7 @@ abstract class _$$TradeDataImplCopyWith<$Res>
   @useResult
   $Res call(
       {int chainId,
-      String estimatedPriceImpact,
+      String? estimatedPriceImpact,
       String to,
       String data,
       String value,
@@ -165,7 +165,7 @@ class __$$TradeDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? chainId = null,
-    Object? estimatedPriceImpact = null,
+    Object? estimatedPriceImpact = freezed,
     Object? to = null,
     Object? data = null,
     Object? value = null,
@@ -180,10 +180,10 @@ class __$$TradeDataImplCopyWithImpl<$Res>
           ? _value.chainId
           : chainId // ignore: cast_nullable_to_non_nullable
               as int,
-      estimatedPriceImpact: null == estimatedPriceImpact
+      estimatedPriceImpact: freezed == estimatedPriceImpact
           ? _value.estimatedPriceImpact
           : estimatedPriceImpact // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       to: null == to
           ? _value.to
           : to // ignore: cast_nullable_to_non_nullable
@@ -241,7 +241,7 @@ class _$TradeDataImpl implements _TradeData {
   @override
   final int chainId;
   @override
-  final String estimatedPriceImpact;
+  final String? estimatedPriceImpact;
   @override
   final String to;
   @override
@@ -321,7 +321,7 @@ class _$TradeDataImpl implements _TradeData {
 abstract class _TradeData implements TradeData {
   const factory _TradeData(
       {required final int chainId,
-      required final String estimatedPriceImpact,
+      required final String? estimatedPriceImpact,
       required final String to,
       required final String data,
       required final String value,
@@ -337,7 +337,7 @@ abstract class _TradeData implements TradeData {
   @override
   int get chainId;
   @override
-  String get estimatedPriceImpact;
+  String? get estimatedPriceImpact;
   @override
   String get to;
   @override

@@ -20,7 +20,7 @@ class TradeData with _$TradeData {
   /// which is the address authorized to spend the tokens.
   const factory TradeData({
     required int chainId,
-    required String estimatedPriceImpact,
+    required String? estimatedPriceImpact,
     required String to,
     required String data,
     required String value,
