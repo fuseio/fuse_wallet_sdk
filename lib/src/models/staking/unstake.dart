@@ -16,6 +16,7 @@ class UnstakeRequestBody with _$UnstakeRequestBody {
     required String accountAddress,
     required String tokenAmount,
     required String tokenAddress,
+    @Default(false) bool isSimpleUnstake,
   }) = _UnstakeRequestBody;
 
   /// Creates an UnstakeRequestBody instance from a JSON object.

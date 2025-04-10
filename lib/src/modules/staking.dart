@@ -34,6 +34,25 @@ class StakingModule {
     }
   }
 
+  /// Retrieves the v2 staking options available on the platform.
+  ///
+  /// Returns a Future that completes with a [DC] object:
+  /// - On success, `DC.data` will be called with a list of [StakingOption] object.
+  /// - On failure, `DC.error` will be called with an `Exception` object.
+  Future<DC<Exception, List<StakingOption>>> getStakingOptionsV2() async {
+    try {
+      final Response response = await _dio.get(
+        '/v2/staking/staking_options',
+      );
+      if (response.statusCode == 200) {
+        return DC.data(StakingOption.optionsFromJson(response.data));
+      }
+      return DC.error(Exception('Failed to staking options'));
+    } catch (e) {
+      return DC.error(Exception(e.toString()));
+    }
+  }
+
   /// A function that returns encoded data for the staking contract call.
   ///
   /// Returns a Future that completes with a [DC] object:
@@ -43,8 +62,10 @@ class StakingModule {
     StakeRequestBody stakeRequestBody,
   ) async {
     try {
+      final version = stakeRequestBody.isSimpleStaking ? 'v2' : 'v0';
+
       final Response response = await _dio.post(
-        '/v0/staking/stake',
+        '/$version/staking/stake',
         data: stakeRequestBody.toJson(),
       );
       if (response.statusCode == 201) {
@@ -71,8 +92,10 @@ class StakingModule {
     UnstakeRequestBody unstakeRequestBody,
   ) async {
     try {
+      final version = unstakeRequestBody.isSimpleUnstake ? 'v2' : 'v0';
+
       final Response response = await _dio.post(
-        '/v0/staking/unstake',
+        '/$version/staking/unstake',
         data: unstakeRequestBody.toJson(),
       );
       if (response.statusCode == 201) {
@@ -91,11 +114,14 @@ class StakingModule {
   /// - On success, `DC.data` will be called with a [StakedTokenResponse] object.
   /// - On failure, `DC.error` will be called with an `Exception` object.
   Future<DC<Exception, StakedTokenResponse>> getStakedTokens(
-    String walletAddress,
-  ) async {
+    String walletAddress, {
+    bool isSimpleStaking = false,
+  }) async {
     try {
+      final version = isSimpleStaking ? 'v2' : 'v0';
+
       final Response response = await _dio.get(
-        '/v0/staking/staked_tokens/$walletAddress',
+        '/$version/staking/staked_tokens/$walletAddress',
       );
       if (response.statusCode == 200) {
         return DC.data(StakedTokenResponse.fromJson(response.data));

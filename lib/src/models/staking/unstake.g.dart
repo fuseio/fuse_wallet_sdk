@@ -12,6 +12,7 @@ _$UnstakeRequestBodyImpl _$$UnstakeRequestBodyImplFromJson(
       accountAddress: json['accountAddress'] as String,
       tokenAmount: json['tokenAmount'] as String,
       tokenAddress: json['tokenAddress'] as String,
+      isSimpleUnstake: json['isSimpleUnstake'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$UnstakeRequestBodyImplToJson(
@@ -20,6 +21,7 @@ Map<String, dynamic> _$$UnstakeRequestBodyImplToJson(
       'accountAddress': instance.accountAddress,
       'tokenAmount': instance.tokenAmount,
       'tokenAddress': instance.tokenAddress,
+      'isSimpleUnstake': instance.isSimpleUnstake,
     };
 
 _$UnstakeResponseBodyImpl _$$UnstakeResponseBodyImplFromJson(
